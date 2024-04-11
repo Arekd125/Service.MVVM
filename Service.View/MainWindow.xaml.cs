@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using Service.ViewModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,14 +21,6 @@ namespace Service.View
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void CreateOrderAndPrintButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void CreateOrdertButton_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }
