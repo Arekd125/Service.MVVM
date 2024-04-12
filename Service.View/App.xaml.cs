@@ -10,5 +10,4 @@ namespace Service.View
     public partial class App : Application
     {
     }
-
 }

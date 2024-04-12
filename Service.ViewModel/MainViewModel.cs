@@ -1,4 +1,5 @@
-﻿using Servis.Models.OrderBuilder;
+﻿using Service.ViewModel.Commands;
+using Servis.Models.OrderBuilder;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -23,21 +24,23 @@ public class MainViewModel : ViewModelBase
     {
         _orders = new ObservableCollection<OrdersViewModel>();
 
-        OrderBuilder orderBuilder = new OrderBuilder();
-        ContactBuilder contactBuilder = new ContactBuilder("ContactNameTextBox", "ContactPhoneNumberTextBox");
-        ModelBuilder modelBuilder = new ModelBuilder("DeviceModelNameComboBox.Text");
-        DeviceBuilder deviceBuilder = new DeviceBuilder("DeviceNameComboBox.Text", modelBuilder.Build());
+        SaveButton = new SaveOrderCommand();
 
-        orderBuilder.SetContact(contactBuilder.Build());
-        orderBuilder.SetDevice(deviceBuilder.Build());
-        orderBuilder.SetOrderNo(321);
-        orderBuilder.SetStartDate(DateTime.Now);
+        //OrderBuilder orderBuilder = new OrderBuilder();
+        //ContactBuilder contactBuilder = new ContactBuilder("ContactNameTextBox", "ContactPhoneNumberTextBox");
+        //ModelBuilder modelBuilder = new ModelBuilder("DeviceModelNameComboBox.Text");
+        //DeviceBuilder deviceBuilder = new DeviceBuilder("DeviceNameComboBox.Text", modelBuilder.Build());
 
-        var ordersbild = orderBuilder.Build();
-        var ordersViewModel = new OrdersViewModel(ordersbild);
-        _orders.Add(ordersViewModel);
-        _orders.Add(ordersViewModel);
-        _orders.Add(ordersViewModel);
+        //orderBuilder.SetContact(contactBuilder.Build());
+        //orderBuilder.SetDevice(deviceBuilder.Build());
+        //orderBuilder.SetOrderNo(321);
+        //orderBuilder.SetStartDate(DateTime.Now);
+
+        //var ordersbild = orderBuilder.Build();
+        //var ordersViewModel = new OrdersViewModel(ordersbild);
+        //_orders.Add(ordersViewModel);
+        //_orders.Add(ordersViewModel);
+        //_orders.Add(ordersViewModel);
     }
 
     private int _orderNo;
