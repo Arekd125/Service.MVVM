@@ -62,7 +62,7 @@
 
                     <WrapPanel>
                         <mah:NumericUpDown
-                            Value="{Binding OrderNoNumericUpDown}"
+                            Value="{Binding OrderNoNumericUpDown, UpdateSourceTrigger=PropertyChanged}"
                             NumericInputMode="Numbers"
                             Margin="3,0,0,0"
                             Height="20"
@@ -71,7 +71,7 @@
                             Maximum="10000"
                             Interval="1" />
                         <DatePicker
-                            SelectedDate="{Binding StartDateDatePicker}"
+                            SelectedDate="{Binding StartDateDatePicker, UpdateSourceTrigger=PropertyChanged}"
                             Margin="3"
                             Width="150" />
                         <!--  SelectedDate="{x:Static sys:DateTime.Now}" -->
@@ -89,7 +89,7 @@
                             mah:TextBoxHelper.UseFloatingWatermark="True">
                         </TextBox>
                         <TextBox
-                            Text="{Binding ContactPhoneNumberTextBox}"
+                            Text="{Binding ContactPhoneNumberTextBox, UpdateSourceTrigger=PropertyChanged}"
                             Margin="3"
                             mah:TextBoxHelper.Watermark="Telefon"
                             mah:TextBoxHelper.UseFloatingWatermark="True"></TextBox>
@@ -102,7 +102,7 @@
 
                     <StackPanel>
                         <ComboBox
-                            ItemsSource="{Binding DeviceNameComboBox}"
+                            ItemsSource="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}"
                             Margin="3"
                             mah:TextBoxHelper.Watermark="Marka"
                             mah:TextBoxHelper.UseFloatingWatermark="True"
@@ -110,7 +110,7 @@
                             IsTextSearchEnabled="True" />
 
                         <ComboBox
-                            ItemsSource="{Binding DeviceModelNameComboBox}"
+                            ItemsSource="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}"
                             Margin="3"
                             mah:TextBoxHelper.Watermark="Model"
                             mah:TextBoxHelper.UseFloatingWatermark="True"
@@ -131,7 +131,7 @@
                             mah:TextBoxHelper.Watermark="Opis usterki"
                             mah:TextBoxHelper.UseFloatingWatermark="True"></TextBox>
                         <TextBox
-                            Text="{Binding ToDoTextBox}"
+                            Text="{Binding ToDoTextBox, UpdateSourceTrigger=PropertyChanged}"
                             Height="80"
                             Margin="3"
                             mah:TextBoxHelper.Watermark="Zakres naprawy"
