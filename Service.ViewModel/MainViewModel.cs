@@ -16,34 +16,11 @@ namespace Service.ViewModel;
 public class MainViewModel : ViewModelBase
 
 {
-    private ObservableCollection<OrdersViewModel> _orders;
+    private ObservableCollection<OrdersViewModel> _ordersViewModel;
 
-    public IEnumerable<OrdersViewModel> Orders => _orders;
+    public IEnumerable<OrdersViewModel> ordersViewModel => _ordersViewModel;
 
-    public MainViewModel()
-    {
-        _orders = new ObservableCollection<OrdersViewModel>();
-
-        SaveButton = new SaveOrderCommand();
-
-        //OrderBuilder orderBuilder = new OrderBuilder();
-        //ContactBuilder contactBuilder = new ContactBuilder("ContactNameTextBox", "ContactPhoneNumberTextBox");
-        //ModelBuilder modelBuilder = new ModelBuilder("DeviceModelNameComboBox.Text");
-        //DeviceBuilder deviceBuilder = new DeviceBuilder("DeviceNameComboBox.Text", modelBuilder.Build());
-
-        //orderBuilder.SetContact(contactBuilder.Build());
-        //orderBuilder.SetDevice(deviceBuilder.Build());
-        //orderBuilder.SetOrderNo(321);
-        //orderBuilder.SetStartDate(DateTime.Now);
-
-        //var ordersbild = orderBuilder.Build();
-        //var ordersViewModel = new OrdersViewModel(ordersbild);
-        //_orders.Add(ordersViewModel);
-        //_orders.Add(ordersViewModel);
-        //_orders.Add(ordersViewModel);
-    }
-
-    private int _orderNo;
+    private int _orderNo = 1;
 
     public int OrderNoNumericUpDown
     {
@@ -58,7 +35,7 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    private DateTime _StartDate;
+    private DateTime _StartDate = DateTime.Now;
 
     public DateTime StartDateDatePicker
     {
@@ -181,4 +158,11 @@ public class MainViewModel : ViewModelBase
     public ICommand CreateOrderAndPrintButton { get; }
     public ICommand SaveButton { get; }
     public ICommand CancleButton { get; }
+
+    public MainViewModel(List<Order> orders)
+    {
+        _ordersViewModel = new ObservableCollection<OrdersViewModel>();
+
+        SaveButton = new SaveOrderCommand(this, orders);
+    }
 }

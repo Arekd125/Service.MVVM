@@ -32,7 +32,7 @@
             <!--DATA GRID-->
             <DataGrid
                 Grid.Column="1"
-                ItemsSource="{Binding Orders}"
+                ItemsSource="{Binding ordersViewModel}"
                 BorderThickness="1"
                 CanUserAddRows="False"
                 SelectionMode="Single"
@@ -102,7 +102,7 @@
 
                     <StackPanel>
                         <ComboBox
-                            ItemsSource="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}"
                             Margin="3"
                             mah:TextBoxHelper.Watermark="Marka"
                             mah:TextBoxHelper.UseFloatingWatermark="True"
@@ -110,8 +110,8 @@
                             IsTextSearchEnabled="True" />
 
                         <ComboBox
-                            ItemsSource="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}"
                             Margin="3"
+                            Text="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}"
                             mah:TextBoxHelper.Watermark="Model"
                             mah:TextBoxHelper.UseFloatingWatermark="True"
                             IsEditable="True"
