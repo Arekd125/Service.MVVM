@@ -1,7 +1,7 @@
-﻿using Serwis.Models.OrderModels;
+﻿using Servis.Models.OrderModels;
 using System.Data;
 
-namespace Servis.Model.OrderBuilder
+namespace Servis.Models.OrderBuilder
 {
     public class OrderBuilder
     {

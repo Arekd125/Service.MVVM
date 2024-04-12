@@ -20,6 +20,8 @@ namespace Service.View
     {
         public MainWindow()
         {
+            MainViewModel mainViewModel = new MainViewModel();
+            this.DataContext = mainViewModel;
             InitializeComponent();
         }
     }

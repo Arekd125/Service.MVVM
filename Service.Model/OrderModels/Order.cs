@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Serwis.Models.OrderModels
+namespace Servis.Models.OrderModels
 {
     public class Order
     {

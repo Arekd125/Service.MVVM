@@ -5,6 +5,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 xmlns:viewmodel="clr-namespace:Service.ViewModel;assembly=Service.ViewModel"
                  mc:Ignorable="d"
                  Title="Zlecenia"
                  TitleCharacterCasing="Normal"
@@ -31,19 +32,21 @@
             <!--DATA GRID-->
             <DataGrid
                 Grid.Column="1"
-                x:Name="OrderDataGrid"
+                ItemsSource="{Binding Orders}"
                 BorderThickness="1"
                 CanUserAddRows="False"
                 SelectionMode="Single"
                 AutoGenerateColumns="False"
-                Margin="10">
+                Margin="10"
+                IsReadOnly="True">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="DataGridNo" Header="nr zlecenie"  Binding="{Binding Path=OrderName}" />
-                    <DataGridTextColumn Header="Imię i nazwisko"  Binding="{Binding Path=Contact.Name}" />
-                    <DataGridTextColumn Header="telefon"  Binding="{Binding Path=Contact.PhoneNumber}" />
-                    <DataGridTextColumn Header="marka"  Binding="{Binding Path=Device.Name}" />
-                    <DataGridTextColumn Header="model"  Binding="{Binding Path=Device.Model.Name}" />
+                    <DataGridTextColumn  Header="nr zlecenie"  Binding="{Binding Path=OrderName}" />
+                    <DataGridTextColumn Header="Data"  Binding="{Binding Path=StartData}" />
+                    <DataGridTextColumn Header="Imię i nazwisko"  Binding="{Binding Path=ContactName}" />
+                    <DataGridTextColumn Header="telefon"  Binding="{Binding Path=ContactPhoneNumber}" />
+                    <DataGridTextColumn Header="marka"  Binding="{Binding Path=DeviceName}" />
+                    <DataGridTextColumn Header="model"  Binding="{Binding Path=DeviceModelName}" />
                 </DataGrid.Columns>
             </DataGrid>
 

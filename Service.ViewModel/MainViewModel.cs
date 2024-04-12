@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Servis.Models.OrderBuilder;
+using Servis.Models.OrderModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -10,7 +13,33 @@ using System.Windows.Input;
 namespace Service.ViewModel;
 
 public class MainViewModel : ViewModelBase
+
 {
+    private ObservableCollection<OrdersViewModel> _orders;
+
+    public IEnumerable<OrdersViewModel> Orders => _orders;
+
+    public MainViewModel()
+    {
+        _orders = new ObservableCollection<OrdersViewModel>();
+
+        OrderBuilder orderBuilder = new OrderBuilder();
+        ContactBuilder contactBuilder = new ContactBuilder("ContactNameTextBox", "ContactPhoneNumberTextBox");
+        ModelBuilder modelBuilder = new ModelBuilder("DeviceModelNameComboBox.Text");
+        DeviceBuilder deviceBuilder = new DeviceBuilder("DeviceNameComboBox.Text", modelBuilder.Build());
+
+        orderBuilder.SetContact(contactBuilder.Build());
+        orderBuilder.SetDevice(deviceBuilder.Build());
+        orderBuilder.SetOrderNo(321);
+        orderBuilder.SetStartDate(DateTime.Now);
+
+        var ordersbild = orderBuilder.Build();
+        var ordersViewModel = new OrdersViewModel(ordersbild);
+        _orders.Add(ordersViewModel);
+        _orders.Add(ordersViewModel);
+        _orders.Add(ordersViewModel);
+    }
+
     private int _orderNo;
 
     public int OrderNoNumericUpDown

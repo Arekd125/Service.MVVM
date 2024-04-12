@@ -1,11 +1,11 @@
-﻿using Serwis.Models.OrderModels;
+﻿using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servis.Model.OrderBuilder
+namespace Servis.Models.OrderBuilder
 {
     public class ContactBuilder
     {
