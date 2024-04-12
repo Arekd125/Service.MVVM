@@ -2,6 +2,7 @@
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Service.ViewModel.Commands
 {
     public class SaveOrderCommand : CommandBase
     {
+        private readonly ObservableCollection<OrdersViewModel> _ordersViewModel;
         private readonly MainViewModel _mainViewModel;
         private readonly List<Order> _orders;
 
@@ -33,8 +35,9 @@ namespace Service.ViewModel.Commands
             }
         }
 
-        public SaveOrderCommand(MainViewModel mainViewModel, List<Order> order)
+        public SaveOrderCommand(MainViewModel mainViewModel, ObservableCollection<OrdersViewModel> ordersViewModel, List<Order> order)
         {
+            _ordersViewModel = ordersViewModel;
             _mainViewModel = mainViewModel;
             _orders = order;
             _mainViewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -61,6 +64,9 @@ namespace Service.ViewModel.Commands
                 .SetAccessories(_mainViewModel.AccessoriesTexBox);
 
             Order order = orderBuilder.Build();
+
+            var OrdersViewModel = new OrdersViewModel(order);
+            _ordersViewModel.Add(OrdersViewModel);
             _orders.Add(order);
         }
     }

@@ -163,6 +163,6 @@ public class MainViewModel : ViewModelBase
     {
         _ordersViewModel = new ObservableCollection<OrdersViewModel>();
 
-        SaveButton = new SaveOrderCommand(this, orders);
+        SaveButton = new SaveOrderCommand(this, _ordersViewModel, orders);
     }
 }

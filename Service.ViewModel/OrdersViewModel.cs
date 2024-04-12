@@ -14,7 +14,7 @@ namespace Service.ViewModel
         public string OrderName => _order.OrderName;
         public string StartData => _order.StartDate.ToString("g");
         public string ContactName => _order.Contact.Name;
-        public string ConatactPhoneNumber => _order.Contact.PhoneNumber;
+        public string ContactPhoneNumber => _order.Contact.PhoneNumber;
         public string DeviceName => _order.Device.Name;
         public string DeviceModelName => _order.Device.Model.Name;
 
