@@ -30,10 +30,10 @@
                 <ColumnDefinition Width="280" />
             </Grid.ColumnDefinitions>
             <!--  DATA GRID  -->
-            <views:OrdersListingView  Grid.Column="1" />
+            <views:OrdersListingView Grid.Column="1" DataContext="{Binding ordersListingViewModel}" />
 
             <!--  ADD DATA  -->
-            <views:CreatingOrderView Grid.Column="2" />
+            <views:CreatingOrderView Grid.Column="2" DataContext="{Binding creatingOrderViewModel}" />
         </Grid>
 
         <!--  STATUSBAR  -->
