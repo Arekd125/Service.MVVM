@@ -1,4 +1,5 @@
-﻿using Servis.Models.OrderBuilder;
+﻿using Service.ViewModel.ViewModels;
+using Servis.Models.OrderBuilder;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
