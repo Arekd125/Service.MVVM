@@ -9,15 +9,15 @@ namespace Servis.Models.OrderBuilder
 {
     public class DeviceBuilder
     {
-        private Device _device = new Device();
+        private DeviceList _device = new DeviceList();
 
-        public DeviceBuilder(string deviceName, Model model)
+        public DeviceBuilder(string deviceName, List<ModelList> model)
         {
             _device.Name = deviceName;
-            _device.Model = model;
+            _device.ModelLists = model;
         }
 
-        public Device Build()
+        public DeviceList Build()
         {
             return _device;
         }

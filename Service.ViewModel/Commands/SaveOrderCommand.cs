@@ -53,11 +53,10 @@ namespace Service.ViewModel.Commands
         {
             OrderBuilder orderBuilder = new OrderBuilder();
             ContactBuilder contactBuilder = new ContactBuilder(_creatingOrderViewModel.ContactNameTextBox, _creatingOrderViewModel.ContactPhoneNumberTextBox);
-            ModelBuilder modelBuilder = new ModelBuilder(_creatingOrderViewModel.DeviceModelNameComboBox);
-            DeviceBuilder deviceBuilder = new DeviceBuilder(_creatingOrderViewModel.DeviceNameComboBox, modelBuilder.Build());
 
             orderBuilder.SetContact(contactBuilder.Build())
-                .SetDevice(deviceBuilder.Build())
+                .SetDevice(_creatingOrderViewModel.DeviceNameComboBox)
+                .SetModel(_creatingOrderViewModel.DeviceModelNameComboBox)
                 .SetOrderNo((int)_creatingOrderViewModel.OrderNoNumericUpDown)
                 .SetStartDate((DateTime)_creatingOrderViewModel.StartDateDatePicker)
                 .SetDescription(_creatingOrderViewModel.DescriptionTextBox)

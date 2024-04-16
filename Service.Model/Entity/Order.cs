@@ -15,7 +15,8 @@ namespace Servis.Models.OrderModels
         public DateTime StartDate { get; set; }
         public Contact Contact { get; set; }
         public int ContactId { get; set; }
-        public Device Device { get; set; }
+        public string Device { get; set; }
+        public string Model { get; set; }
         public string Description { get; set; }
         public string ToDo { get; set; }
         public string Accessories { get; set; }

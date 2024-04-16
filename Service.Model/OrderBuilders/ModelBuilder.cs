@@ -9,14 +9,14 @@ namespace Servis.Models.OrderBuilder
 {
     public class ModelBuilder
     {
-        private Model _model = new Model();
+        private ModelList _model = new ModelList();
 
         public ModelBuilder(string modelName)
         {
             _model.Name = modelName;
         }
 
-        public Model Build()
+        public ModelList Build()
         {
             return _model;
         }

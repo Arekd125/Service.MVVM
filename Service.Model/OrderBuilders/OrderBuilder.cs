@@ -30,9 +30,15 @@ namespace Servis.Models.OrderBuilder
             return this;
         }
 
-        public OrderBuilder SetDevice(Device device)
+        public OrderBuilder SetDevice(string device)
         {
             _order.Device = device;
+            return this;
+        }
+
+        public OrderBuilder SetModel(string model)
+        {
+            _order.Model = model;
             return this;
         }
 
