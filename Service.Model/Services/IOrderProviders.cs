@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Servis.Models.OrderModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Service.Model.Services
 {
-    internal interface IDataService<T>
+    public interface IOrderProviders
     {
+        Task<IEnumerable<Order>> GetAllOrders();
     }
 }
