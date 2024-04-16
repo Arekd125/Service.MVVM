@@ -15,7 +15,7 @@
         BorderThickness="1"
         CanUserAddRows="False"
         IsReadOnly="True"
-        ItemsSource="{Binding ordersViewModel}"
+        ItemsSource="{Binding ordersViewModelColection}"
         SelectionMode="Single">
 
         <DataGrid.Columns>

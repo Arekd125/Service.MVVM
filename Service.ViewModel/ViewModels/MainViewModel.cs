@@ -21,6 +21,6 @@ public class MainViewModel : ViewModelBase
     public MainViewModel(List<Order> _orders)
     {
         ordersListingViewModel = new OrdersListingViewModel();
-        creatingOrderViewModel = new CreatingOrderViewModel(_orders);
+        creatingOrderViewModel = new CreatingOrderViewModel(_orders, ordersListingViewModel);
     }
 }

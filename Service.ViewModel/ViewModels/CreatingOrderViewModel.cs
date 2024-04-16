@@ -152,9 +152,9 @@ namespace Service.ViewModel.ViewModels
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
 
-        public CreatingOrderViewModel(List<Order> orders)
+        public CreatingOrderViewModel(List<Order> orders, OrdersListingViewModel ordersListingViewModel)
         {
-            SaveButton = new SaveOrderCommand(this, orders);
+            SaveButton = new SaveOrderCommand(this, orders, ordersListingViewModel);
         }
     }
 }

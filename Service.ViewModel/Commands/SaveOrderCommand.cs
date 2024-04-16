@@ -15,6 +15,7 @@ namespace Service.ViewModel.Commands
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
         private readonly List<Order> _orders;
+        private readonly OrdersListingViewModel _ordersListingViewModel;
 
         private bool CanExecuteValidator()
         {
@@ -35,10 +36,11 @@ namespace Service.ViewModel.Commands
             }
         }
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, List<Order> order)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, List<Order> order, OrdersListingViewModel ordersListingViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
             _orders = order;
+            _ordersListingViewModel = ordersListingViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
@@ -64,6 +66,8 @@ namespace Service.ViewModel.Commands
 
             Order order = orderBuilder.Build();
             _orders.Add(order);
+
+            _ordersListingViewModel.Add(order);
         }
     }
 }
