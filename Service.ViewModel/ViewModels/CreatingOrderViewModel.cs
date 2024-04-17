@@ -157,5 +157,16 @@ namespace Service.ViewModel.ViewModels
         {
             SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
         }
+
+        public void Clear()
+        {
+            ContactNameTextBox = string.Empty;
+            ContactPhoneNumberTextBox = string.Empty;
+            DeviceNameComboBox = string.Empty;
+            DeviceModelNameComboBox = string.Empty;
+            DescriptionTextBox = string.Empty;
+            ToDoTextBox = string.Empty;
+            AccessoriesTexBox = string.Empty;
+        }
     }
 }

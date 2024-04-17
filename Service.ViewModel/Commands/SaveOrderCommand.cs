@@ -67,6 +67,7 @@ namespace Service.ViewModel.Commands
             Order order = orderBuilder.Build();
             _orderCreator.CreateOrder(order);
             _ordersListingViewModel.Add(order);
+            _creatingOrderViewModel.Clear();
         }
     }
 }
