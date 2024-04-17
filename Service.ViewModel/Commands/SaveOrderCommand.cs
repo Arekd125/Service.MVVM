@@ -1,4 +1,5 @@
-﻿using Service.ViewModel.ViewModels;
+﻿using Service.Model.Services;
+using Service.ViewModel.ViewModels;
 using Servis.Models.OrderBuilder;
 using Servis.Models.OrderModels;
 using System;
@@ -14,7 +15,7 @@ namespace Service.ViewModel.Commands
     public class SaveOrderCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
-        private readonly List<Order> _orders;
+        private readonly DatabaseOrderCreator _orderCreator;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
         private bool CanExecuteValidator()
@@ -36,10 +37,10 @@ namespace Service.ViewModel.Commands
             }
         }
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, List<Order> order, OrdersListingViewModel ordersListingViewModel)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
-            _orders = order;
+            _orderCreator = orderCreator;
             _ordersListingViewModel = ordersListingViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -64,8 +65,7 @@ namespace Service.ViewModel.Commands
                 .SetAccessories(_creatingOrderViewModel.AccessoriesTexBox);
 
             Order order = orderBuilder.Build();
-            _orders.Add(order);
-
+            _orderCreator.CreateOrder(order);
             _ordersListingViewModel.Add(order);
         }
     }

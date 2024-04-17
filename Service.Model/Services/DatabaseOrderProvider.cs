@@ -23,7 +23,7 @@ namespace Service.Model.Services
         {
             using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
             {
-                IEnumerable<Order> orders = await context.Orders.ToListAsync();
+                IEnumerable<Order> orders = await context.Orders.Include(o => o.Contact).ToListAsync();
 
                 return orders;
             }

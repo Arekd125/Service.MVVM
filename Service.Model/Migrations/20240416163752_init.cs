@@ -17,7 +17,7 @@ namespace Service.Model.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
                     PhoneNumber = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -48,11 +48,11 @@ namespace Service.Model.Migrations
                     OrderName = table.Column<string>(type: "TEXT", nullable: false),
                     StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ContactId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Device = table.Column<string>(type: "TEXT", nullable: false),
-                    Model = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    ToDo = table.Column<string>(type: "TEXT", nullable: false),
-                    Accessories = table.Column<string>(type: "TEXT", nullable: false)
+                    Device = table.Column<string>(type: "TEXT", nullable: true),
+                    Model = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    ToDo = table.Column<string>(type: "TEXT", nullable: true),
+                    Accessories = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

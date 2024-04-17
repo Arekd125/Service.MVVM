@@ -21,7 +21,8 @@ namespace Service.Model.Services
         {
             using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
             {
-                await context.AddAsync(order);
+                context.Orders.Add(order);
+                await context.SaveChangesAsync();
             }
         }
     }

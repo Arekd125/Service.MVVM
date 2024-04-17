@@ -13,7 +13,7 @@ namespace Service.ViewModel.ViewModels
 
         public string OrderName => _order.OrderName;
         public string StartData => _order.StartDate.ToString("g");
-        public string ContactName => _order.Contact.Name;
+        public string? ContactName => _order.Contact.Name;
         public string ContactPhoneNumber => _order.Contact.PhoneNumber;
         public string DeviceName => _order.Device;
         public string DeviceModelName => _order.Model;

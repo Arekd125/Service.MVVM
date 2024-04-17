@@ -1,4 +1,5 @@
-﻿using Service.ViewModel.Commands;
+﻿using Service.Model.Services;
+using Service.ViewModel.Commands;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -152,9 +153,9 @@ namespace Service.ViewModel.ViewModels
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
 
-        public CreatingOrderViewModel(List<Order> orders, OrdersListingViewModel ordersListingViewModel)
+        public CreatingOrderViewModel(DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel)
         {
-            SaveButton = new SaveOrderCommand(this, orders, ordersListingViewModel);
+            SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
         }
     }
 }

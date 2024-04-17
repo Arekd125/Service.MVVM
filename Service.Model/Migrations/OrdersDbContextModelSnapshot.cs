@@ -24,7 +24,6 @@ namespace Service.Model.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
@@ -78,22 +77,18 @@ namespace Service.Model.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Accessories")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ContactId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Device")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Model")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OrderName")
@@ -107,7 +102,6 @@ namespace Service.Model.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ToDo")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

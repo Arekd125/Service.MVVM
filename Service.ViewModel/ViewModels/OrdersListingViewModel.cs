@@ -26,5 +26,13 @@ namespace Service.ViewModel.ViewModels
 
             _ordersViewModelColection.Add(OrdersViewModel);
         }
+
+        public void Add(IEnumerable<Order> orders)
+        {
+            foreach (var o in orders)
+            {
+                Add(o);
+            }
+        }
     }
 }
