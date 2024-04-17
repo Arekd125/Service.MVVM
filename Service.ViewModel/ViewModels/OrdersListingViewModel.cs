@@ -1,4 +1,5 @@
-﻿using Servis.Models.OrderModels;
+﻿using Microsoft.VisualBasic;
+using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ namespace Service.ViewModel.ViewModels
     public class OrdersListingViewModel : ViewModelBase
     {
         private ObservableCollection<OrdersViewModel> _ordersViewModelColection;
+
         public IEnumerable<OrdersViewModel> ordersViewModelColection => _ordersViewModelColection;
 
         public OrdersListingViewModel()
@@ -24,7 +26,7 @@ namespace Service.ViewModel.ViewModels
         {
             OrdersViewModel OrdersViewModel = new OrdersViewModel(order);
 
-            _ordersViewModelColection.Add(OrdersViewModel);
+            _ordersViewModelColection.Insert(0, OrdersViewModel);
         }
 
         public void Add(IEnumerable<Order> orders)

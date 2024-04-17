@@ -30,10 +30,10 @@ namespace Service.View
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            //using (OrdersDbContext dbContext = _ordersDbContextFactory.CreateDbContext())
-            //{
-            //    dbContext.Database.Migrate();
-            //}
+            using (OrdersDbContext dbContext = _ordersDbContextFactory.CreateDbContext())
+            {
+                dbContext.Database.Migrate();
+            }
 
             MainWindow = new MainWindow()
             {
