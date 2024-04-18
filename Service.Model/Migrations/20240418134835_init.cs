@@ -26,7 +26,7 @@ namespace Service.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Devices",
+                name: "DeviceState",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -35,7 +35,7 @@ namespace Service.Model.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Devices", x => x.Id);
+                    table.PrimaryKey("PK_DeviceState", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,29 +66,34 @@ namespace Service.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Models",
+                name: "ModelState",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    DeviceListId = table.Column<int>(type: "INTEGER", nullable: false)
+                    DeviceStateId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Models", x => x.Id);
+                    table.PrimaryKey("PK_ModelState", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Models_Devices_DeviceListId",
-                        column: x => x.DeviceListId,
-                        principalTable: "Devices",
+                        name: "FK_ModelState_DeviceState_DeviceStateId",
+                        column: x => x.DeviceStateId,
+                        principalTable: "DeviceState",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "DeviceState",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "G50" });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Models_DeviceListId",
-                table: "Models",
-                column: "DeviceListId");
+                name: "IX_ModelState_DeviceStateId",
+                table: "ModelState",
+                column: "DeviceStateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_ContactId",
@@ -100,13 +105,13 @@ namespace Service.Model.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Models");
+                name: "ModelState");
 
             migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Devices");
+                name: "DeviceState");
 
             migrationBuilder.DropTable(
                 name: "Contacts");

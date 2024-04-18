@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Servis.Models.OrderBuilder
 {
-    public class DeviceBuilder
+    public class DeviceStateBuilder
     {
-        private DeviceList _device = new DeviceList();
+        private DeviceState _device = new DeviceState();
 
-        public DeviceBuilder(string deviceName, List<ModelList> model)
+        public DeviceStateBuilder(string deviceName, List<ModelState> model)
         {
             _device.Name = deviceName;
             _device.ModelLists = model;
         }
 
-        public DeviceList Build()
+        public DeviceState Build()
         {
             return _device;
         }

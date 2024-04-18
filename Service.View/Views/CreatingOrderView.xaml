@@ -61,11 +61,13 @@
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
                     <ComboBox
+
                         Margin="3"
                         mah:TextBoxHelper.UseFloatingWatermark="True"
                         mah:TextBoxHelper.Watermark="Marka"
                         IsEditable="True"
                         IsTextSearchEnabled="True"
+                        ItemsSource="{Binding  Path=DeviceStateNameComboBox}"
                         Text="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
                         Grid.Column="1"

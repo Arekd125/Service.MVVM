@@ -1,5 +1,8 @@
-﻿using Service.Model.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Service.Model.Services;
+using Service.Model.Services.ServicesDevice;
 using Service.ViewModel.Commands;
+using Service.ViewModel.Service;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -13,6 +16,12 @@ namespace Service.ViewModel.ViewModels
 {
     public class CreatingOrderViewModel : ViewModelBase
     {
+        private readonly ServiceDeviceState _serviceDeviceState;
+
+        public IEnumerable<String> DeviceStateNameComboBox =>
+
+          _serviceDeviceState.GetDeviceName();
+
         private int _orderNo = 1;
 
         public int OrderNoNumericUpDown
@@ -152,10 +161,16 @@ namespace Service.ViewModel.ViewModels
 
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
+        public ICommand AddDeviceButton { get; }
+        public ICommand RemoveDeviceButton { get; }
+        public ICommand DeleteDeviceButton { get; }
+        public ICommand EditDeviceButton { get; }
 
-        public CreatingOrderViewModel(DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel)
+        public CreatingOrderViewModel(DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
         {
             SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
+            AddDeviceButton = new AddDeviceCommand(this);
+            _serviceDeviceState = new ServiceDeviceState(deviceProvider);
         }
 
         public void Clear()

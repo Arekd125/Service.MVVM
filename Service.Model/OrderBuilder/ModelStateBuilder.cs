@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Servis.Models.OrderBuilder
 {
-    public class ModelBuilder
+    public class ModelStateBuilder
     {
-        private ModelList _model = new ModelList();
+        private ModelState _model = new ModelState();
 
-        public ModelBuilder(string modelName)
+        public ModelStateBuilder(string modelName)
         {
             _model.Name = modelName;
         }
 
-        public ModelList Build()
+        public ModelState Build()
         {
             return _model;
         }

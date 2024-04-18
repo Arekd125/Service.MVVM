@@ -6,19 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Model.Services
+namespace Service.Model.Services.ServicesDevice
 {
-    public class DatabaseOrderCreator : DatabaseServiceBase, IOrderCreator
+    public class DatabaseDeviceCreator : DatabaseServiceBase, IDeviceCreator
     {
-        public DatabaseOrderCreator(OrdersDbContextFactory dbContextFactory) : base(dbContextFactory)
+        public DatabaseDeviceCreator(OrdersDbContextFactory dbContextFactory) : base(dbContextFactory)
         {
         }
 
-        public async Task CreateOrder(Order order)
+        public async Task CreateDevice(DeviceState deviceState)
         {
             using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
             {
-                context.Orders.Add(order);
+                context.DeviceState.Add(deviceState);
                 await context.SaveChangesAsync();
             }
         }

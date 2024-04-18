@@ -10,13 +10,10 @@ using System.Threading.Tasks;
 
 namespace Service.Model.Services
 {
-    public class DatabaseOrderProvider : IOrderProviders
+    public class DatabaseOrderProvider : DatabaseServiceBase, IOrderProviders
     {
-        private readonly OrdersDbContextFactory _dbContextFactory;
-
-        public DatabaseOrderProvider(OrdersDbContextFactory dbContextFactory)
+        public DatabaseOrderProvider(OrdersDbContextFactory dbContextFactory) : base(dbContextFactory)
         {
-            _dbContextFactory = dbContextFactory;
         }
 
         public async Task<IEnumerable<Order>> GetAllOrders()

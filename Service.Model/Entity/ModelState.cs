@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Servis.Models.OrderModels
 {
-    public class DeviceList
+    public class ModelState
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<ModelList> ModelLists { get; set; } = new List<ModelList>();
+        public DeviceState DeviceState { get; set; }
+        public int DeviceStateId { get; set; }
     }
 }

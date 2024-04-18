@@ -18,6 +18,14 @@ namespace Service.ViewModel.Commands
         private readonly DatabaseOrderCreator _orderCreator;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel)
+        {
+            _creatingOrderViewModel = creatingOrderViewModel;
+            _orderCreator = orderCreator;
+            _ordersListingViewModel = ordersListingViewModel;
+            _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
+        }
+
         private bool CanExecuteValidator()
         {
             return (!string.IsNullOrEmpty(_creatingOrderViewModel.ContactPhoneNumberTextBox) &&
@@ -35,14 +43,6 @@ namespace Service.ViewModel.Commands
             {
                 OnCanExecutedChanged();
             }
-        }
-
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel)
-        {
-            _creatingOrderViewModel = creatingOrderViewModel;
-            _orderCreator = orderCreator;
-            _ordersListingViewModel = ordersListingViewModel;
-            _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         public override bool CanExecute(object? parameter)

@@ -11,8 +11,8 @@ using Service.Model.DbContexts;
 namespace Service.Model.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240416163752_init")]
-    partial class init
+    [Migration("20240418135418_init2")]
+    partial class init2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace Service.Model.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("Servis.Models.OrderModels.DeviceList", b =>
+            modelBuilder.Entity("Servis.Models.OrderModels.DeviceState", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,16 +50,23 @@ namespace Service.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Devices");
+                    b.ToTable("DeviceState");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Name = "Lenovo"
+                        });
                 });
 
-            modelBuilder.Entity("Servis.Models.OrderModels.ModelList", b =>
+            modelBuilder.Entity("Servis.Models.OrderModels.ModelState", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DeviceListId")
+                    b.Property<int>("DeviceStateId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -68,9 +75,17 @@ namespace Service.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeviceListId");
+                    b.HasIndex("DeviceStateId");
 
-                    b.ToTable("Models");
+                    b.ToTable("ModelState");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DeviceStateId = 2,
+                            Name = "G503"
+                        });
                 });
 
             modelBuilder.Entity("Servis.Models.OrderModels.Order", b =>
@@ -114,15 +129,15 @@ namespace Service.Model.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Servis.Models.OrderModels.ModelList", b =>
+            modelBuilder.Entity("Servis.Models.OrderModels.ModelState", b =>
                 {
-                    b.HasOne("Servis.Models.OrderModels.DeviceList", "DeviceList")
+                    b.HasOne("Servis.Models.OrderModels.DeviceState", "DeviceState")
                         .WithMany("ModelLists")
-                        .HasForeignKey("DeviceListId")
+                        .HasForeignKey("DeviceStateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DeviceList");
+                    b.Navigation("DeviceState");
                 });
 
             modelBuilder.Entity("Servis.Models.OrderModels.Order", b =>
@@ -141,7 +156,7 @@ namespace Service.Model.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("Servis.Models.OrderModels.DeviceList", b =>
+            modelBuilder.Entity("Servis.Models.OrderModels.DeviceState", b =>
                 {
                     b.Navigation("ModelLists");
                 });

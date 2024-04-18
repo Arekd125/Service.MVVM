@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Service.Model.DbContexts;
 using Service.Model.Services;
+using Service.Model.Services.ServicesDevice;
 using Service.ViewModel.ViewModels;
 using Servis.Models.OrderModels;
 using System.Windows;
@@ -18,6 +19,8 @@ namespace Service.View
         private readonly OrdersDbContextFactory _ordersDbContextFactory;
 
         private readonly DatabaseOrderCreator _orderCreator;
+        private readonly IDeviceCreator _deviceCreator;
+        private readonly IDeviceProvider _deviceProvider;
         private readonly IOrderProviders _orderProviders;
         private const string CONNECTION_STRING = "Data Source=serviceDB.db";
 
@@ -26,6 +29,8 @@ namespace Service.View
             _ordersDbContextFactory = new OrdersDbContextFactory(CONNECTION_STRING);
             _orderCreator = new DatabaseOrderCreator(_ordersDbContextFactory);
             _orderProviders = new DatabaseOrderProvider(_ordersDbContextFactory);
+            _deviceCreator = new DatabaseDeviceCreator(_ordersDbContextFactory);
+            _deviceProvider = new DatabaseDeviceProvider(_ordersDbContextFactory);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -37,7 +42,7 @@ namespace Service.View
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_orderCreator, _orderProviders)
+                DataContext = new MainViewModel(_orderCreator, _orderProviders, _deviceProvider, _deviceCreator)
             };
             MainWindow.Show();
 

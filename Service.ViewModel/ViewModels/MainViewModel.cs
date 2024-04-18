@@ -1,4 +1,6 @@
-﻿using Service.Model.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Service.Model.Services;
+using Service.Model.Services.ServicesDevice;
 using Service.ViewModel.Commands;
 using Servis.Models.OrderBuilder;
 using Servis.Models.OrderModels;
@@ -18,13 +20,12 @@ public class MainViewModel : ViewModelBase
 {
     public OrdersListingViewModel ordersListingViewModel { get; set; }
     public CreatingOrderViewModel creatingOrderViewModel { get; set; }
-
     private List<Order> AllOrders { get; set; }
 
-    public MainViewModel(DatabaseOrderCreator orderCreator, IOrderProviders orderProviders)
+    public MainViewModel(DatabaseOrderCreator orderCreator, IOrderProviders orderProviders, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
     {
         ordersListingViewModel = new OrdersListingViewModel();
-        creatingOrderViewModel = new CreatingOrderViewModel(orderCreator, ordersListingViewModel);
+        creatingOrderViewModel = new CreatingOrderViewModel(orderCreator, ordersListingViewModel, deviceProvider, deviceCreator);
 
         var getAllOrders = orderProviders.GetAllOrders().Result;
 
