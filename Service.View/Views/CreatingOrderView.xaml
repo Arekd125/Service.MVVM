@@ -1,34 +1,36 @@
-﻿<UserControl x:Class="Service.View.Views.CreatingOrderView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Service.View.Views"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="Service.View.Views.CreatingOrderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Service.View.Views"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <StackPanel
-    x:Name="AddDataStackPanel"
-    Grid.Row="0"
-    Grid.Column="2"
-    Margin="10,10,0,10">
+        x:Name="AddDataStackPanel"
+        Grid.Row="0"
+        Grid.Column="2"
+        Margin="10,10,0,10">
 
         <GroupBox Margin="0,0,10,0" Header="Zlecenia">
 
             <WrapPanel>
                 <mah:NumericUpDown
-                Width="80"
-                Height="20"
-                Margin="3,0,0,0"
-                Interval="1"
-                Maximum="10000"
-                Minimum="1"
-                NumericInputMode="Numbers"
-                Value="{Binding OrderNoNumericUpDown, UpdateSourceTrigger=PropertyChanged}" />
+                    Width="80"
+                    Height="20"
+                    Margin="3,0,0,0"
+                    Interval="1"
+                    Maximum="10000"
+                    Minimum="1"
+                    NumericInputMode="Numbers"
+                    Value="{Binding OrderNoNumericUpDown, UpdateSourceTrigger=PropertyChanged}" />
                 <DatePicker
-                Width="150"
-                Margin="3"
-                SelectedDate="{Binding StartDateDatePicker, UpdateSourceTrigger=PropertyChanged}" />
+                    Width="150"
+                    Margin="3"
+                    SelectedDate="{Binding StartDateDatePicker, UpdateSourceTrigger=PropertyChanged}" />
                 <!--  SelectedDate="{x:Static sys:DateTime.Now}"  -->
             </WrapPanel>
         </GroupBox>
@@ -37,36 +39,62 @@
 
             <StackPanel>
                 <TextBox
-                Margin="3"
-                mah:TextBoxHelper.UseFloatingWatermark="True"
-                mah:TextBoxHelper.Watermark="Imię i Nazwisko"
-                Text="{Binding ContactNameTextBox}" />
+                    Margin="3"
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Imię i Nazwisko"
+                    Text="{Binding ContactNameTextBox}" />
                 <TextBox
-                Margin="3"
-                mah:TextBoxHelper.UseFloatingWatermark="True"
-                mah:TextBoxHelper.Watermark="Telefon"
-                Text="{Binding ContactPhoneNumberTextBox, UpdateSourceTrigger=PropertyChanged}" />
+                    Margin="3"
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Telefon"
+                    Text="{Binding ContactPhoneNumberTextBox, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </GroupBox>
 
         <GroupBox Margin="0,0,10,0" Header="Urządzenie">
 
             <StackPanel>
-                <ComboBox
-                Margin="3"
-                mah:TextBoxHelper.UseFloatingWatermark="True"
-                mah:TextBoxHelper.Watermark="Marka"
-                IsEditable="True"
-                IsTextSearchEnabled="True"
-                Text="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox
+                        Margin="3"
+                        mah:TextBoxHelper.UseFloatingWatermark="True"
+                        mah:TextBoxHelper.Watermark="Marka"
+                        IsEditable="True"
+                        IsTextSearchEnabled="True"
+                        Text="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button
+                        Margin="2"
+                        Grid.Column="1"
+                        Width="40"
+                        mah:ControlsHelper.ContentCharacterCasing="Upper"
+                        Command="{Binding Path=AddDeviceButton}"
+                        Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                        <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" />
+                    </Button>
+
+                    <Button Margin="2"
+                        Grid.Column="2"
+                        Width="40"
+                        mah:ControlsHelper.ContentCharacterCasing="Upper"
+                        Background="Red"
+                        Command="{Binding Path=DeleteDeviceButton}"
+                        Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                        <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
+                    </Button>
+                </Grid>
 
                 <ComboBox
-                Margin="3"
-                mah:TextBoxHelper.UseFloatingWatermark="True"
-                mah:TextBoxHelper.Watermark="Model"
-                IsEditable="True"
-                IsTextSearchEnabled="True"
-                Text="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                    Margin="3"
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Model"
+                    IsEditable="True"
+                    IsTextSearchEnabled="True"
+                    Text="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </GroupBox>
 
@@ -74,33 +102,33 @@
 
             <StackPanel>
                 <TextBox
-                Height="80"
-                Margin="3"
-                mah:TextBoxHelper.UseFloatingWatermark="True"
-                mah:TextBoxHelper.Watermark="Opis usterki"
-                AcceptsReturn="True"
-                Text="{Binding DescriptionTextBox}" />
+                    Height="80"
+                    Margin="3"
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Opis usterki"
+                    AcceptsReturn="True"
+                    Text="{Binding DescriptionTextBox}" />
                 <TextBox
-                Height="80"
-                Margin="3"
-                mah:TextBoxHelper.UseFloatingWatermark="True"
-                mah:TextBoxHelper.Watermark="Zakres naprawy"
-                Text="{Binding ToDoTextBox, UpdateSourceTrigger=PropertyChanged}" />
+                    Height="80"
+                    Margin="3"
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Zakres naprawy"
+                    Text="{Binding ToDoTextBox, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
-                Margin="3"
-                mah:TextBoxHelper.UseFloatingWatermark="True"
-                mah:TextBoxHelper.Watermark="Dołączone akcesoria"
-                Text="{Binding AccessoriesTexBox}" />
+                    Margin="3"
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Dołączone akcesoria"
+                    Text="{Binding AccessoriesTexBox}" />
             </StackPanel>
         </GroupBox>
         <!--  BUTTONS  -->
         <Button
-        Height="60"
-        Margin="0,3,10,0"
-        mah:ControlsHelper.ContentCharacterCasing="Upper"
-        Command="{Binding CreateOrderAndPrintButton}"
-        Content="Zapisz i drukuj"
-        Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+            Height="60"
+            Margin="0,3,10,0"
+            mah:ControlsHelper.ContentCharacterCasing="Upper"
+            Command="{Binding CreateOrderAndPrintButton}"
+            Content="Zapisz i drukuj"
+            Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -109,35 +137,35 @@
             </Grid.ColumnDefinitions>
 
             <Button
-            Grid.Column="0"
-            Margin="0,2,3,4"
-            mah:ControlsHelper.ContentCharacterCasing="Upper"
-            Command="{Binding Path=SaveButton}"
-            Content="Zapisz"
-            Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+                Grid.Column="0"
+                Margin="0,2,3,4"
+                mah:ControlsHelper.ContentCharacterCasing="Upper"
+                Command="{Binding Path=SaveButton}"
+                Content="Zapisz"
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
             <Button
-            Grid.Column="1"
-            Height="60"
-            Margin="1,3,10,3"
-            mah:ControlsHelper.ContentCharacterCasing="Upper"
-            Command="{Binding Path=CancleButton}"
-            Content="Anuluj"
-            Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+                Grid.Column="1"
+                Height="60"
+                Margin="1,3,10,3"
+                mah:ControlsHelper.ContentCharacterCasing="Upper"
+                Command="{Binding Path=CancleButton}"
+                Content="Anuluj"
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
         </Grid>
         <!--  FLYOUT  -->
         <mah:FlyoutsControl>
             <mah:Flyout
-            x:Name="InfoFlout"
-            Width="270"
-            AutoCloseInterval="3000"
-            CloseButtonVisibility="Hidden"
-            IsAutoCloseEnabled="True"
-            Position="Right">
+                x:Name="InfoFlout"
+                Width="270"
+                AutoCloseInterval="3000"
+                CloseButtonVisibility="Hidden"
+                IsAutoCloseEnabled="True"
+                Position="Right">
                 <Label
-                Margin="0,-70,0,0"
-                Padding="10"
-                HorizontalAlignment="Center"
-                FontSize="28">
+                    Margin="0,-70,0,0"
+                    Padding="10"
+                    HorizontalAlignment="Center"
+                    FontSize="28">
                     ZAPISYWANIE
                 </Label>
             </mah:Flyout>
