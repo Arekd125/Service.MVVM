@@ -68,18 +68,19 @@
                         IsTextSearchEnabled="True"
                         Text="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
-                        Margin="2"
                         Grid.Column="1"
                         Width="40"
+                        Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Command="{Binding Path=AddDeviceButton}"
                         Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
                         <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" />
                     </Button>
 
-                    <Button Margin="2"
+                    <Button
                         Grid.Column="2"
                         Width="40"
+                        Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Background="Red"
                         Command="{Binding Path=DeleteDeviceButton}"
@@ -87,14 +88,39 @@
                         <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
                     </Button>
                 </Grid>
-
-                <ComboBox
-                    Margin="3"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    mah:TextBoxHelper.Watermark="Model"
-                    IsEditable="True"
-                    IsTextSearchEnabled="True"
-                    Text="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox
+                        Margin="3"
+                        mah:TextBoxHelper.UseFloatingWatermark="True"
+                        mah:TextBoxHelper.Watermark="Model"
+                        IsEditable="True"
+                        IsTextSearchEnabled="True"
+                        Text="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button
+                        Grid.Column="1"
+                        Width="40"
+                        Margin="2"
+                        mah:ControlsHelper.ContentCharacterCasing="Upper"
+                        Command="{Binding Path=AddModelButton}"
+                        Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                        <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;" />
+                    </Button>
+                    <Button
+                        Grid.Column="2"
+                        Width="40"
+                        Margin="2"
+                        mah:ControlsHelper.ContentCharacterCasing="Upper"
+                        Background="Red"
+                        Command="{Binding Path=DeleteModelButton}"
+                        Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                        <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
+                    </Button>
+                </Grid>
             </StackPanel>
         </GroupBox>
 
