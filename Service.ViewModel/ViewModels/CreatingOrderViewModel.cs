@@ -7,6 +7,7 @@ using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,10 @@ namespace Service.ViewModel.ViewModels
 
         public IEnumerable<String> DeviceStateNameComboBox =>
 
-          _serviceDeviceState.GetDeviceName();
+          _serviceDeviceState.GetAllDeviceName();
+
+        public IEnumerable<String> ModelStateNameComboBox =>
+            _serviceDeviceState.GetAllModelName("Lenovo");
 
         private int _orderNo = 1;
 

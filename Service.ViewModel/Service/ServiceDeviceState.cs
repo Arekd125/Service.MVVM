@@ -1,10 +1,4 @@
 ﻿using Service.Model.Services.ServicesDevice;
-using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Service
 {
@@ -17,9 +11,21 @@ namespace Service.ViewModel.Service
             _deviceProvider = deviceProvider;
         }
 
-        public IEnumerable<String> GetDeviceName()
+        public IEnumerable<String> GetAllDeviceName()
         {
-            return _deviceProvider.GetAllDevice().Result.Select(p => p.Name);
+            var allDevice = _deviceProvider.GetAllDevice().Result.Select(p => p.Name);
+            return allDevice;
+        }
+
+        public IEnumerable<String> GetAllModelName(string deviceName)
+
+        {
+            if (!string.IsNullOrEmpty(deviceName))
+            {
+                var device = _deviceProvider.GetDevice(deviceName).Result;
+                return device.ModelLists.Select(p => p.Name);
+            }
+            return Enumerable.Empty<String>();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Service.Model.Services.ServicesDevice
     {
         Task<DeviceState> GetDevice(int id);
 
+        Task<DeviceState> GetDevice(string deviceName);
+
         Task<IEnumerable<DeviceState>> GetAllDevice();
     }
 }

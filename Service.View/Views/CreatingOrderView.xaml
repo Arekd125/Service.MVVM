@@ -60,6 +60,7 @@
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
+                    <!--Marka -->
                     <ComboBox
 
                         Margin="3"
@@ -90,6 +91,7 @@
                         <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
                     </Button>
                 </Grid>
+                <!--Model -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -102,6 +104,7 @@
                         mah:TextBoxHelper.Watermark="Model"
                         IsEditable="True"
                         IsTextSearchEnabled="True"
+                        ItemsSource="{Binding  Path=ModelStateNameComboBox, UpdateSourceTrigger=PropertyChanged}"
                         Text="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
                         Grid.Column="1"
