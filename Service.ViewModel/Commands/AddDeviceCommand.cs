@@ -27,10 +27,10 @@ namespace Service.ViewModel.Commands
         private bool CanExecuteValidator()
         {
             return (!string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox)) && _creatingOrderViewModel.DeviceNameComboBox.Length > 1
-                && (_creatingOrderViewModel.DeviceStateSelectedItem == null) && !IfExist(_creatingOrderViewModel.DeviceNameComboBox.TrimEnd());
+                && (_creatingOrderViewModel.DeviceStateSelectedItem == null) && !IfExists(_creatingOrderViewModel.DeviceNameComboBox.TrimEnd());
         }
 
-        private bool IfExist(string deviceName)
+        private bool IfExists(string deviceName)
         {
             var devices = _serviceDeviceState.GetAllDeviceName();
             return devices.Any(p => p == deviceName);
