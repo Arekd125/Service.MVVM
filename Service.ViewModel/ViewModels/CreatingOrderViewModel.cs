@@ -19,12 +19,40 @@ namespace Service.ViewModel.ViewModels
     {
         private readonly ServiceDeviceState _serviceDeviceState;
 
-        public IEnumerable<String> DeviceStateNameComboBox =>
+        public IEnumerable<string> DeviceStateNameComboBox =>
 
           _serviceDeviceState.GetAllDeviceName();
 
-        public IEnumerable<String> ModelStateNameComboBox =>
-            _serviceDeviceState.GetAllModelName("Lenovo");
+        private IEnumerable<string> _modelStateNameComboBox;
+
+        public IEnumerable<string> ModelStateNameComboBox
+        {
+            get
+            {
+                return _modelStateNameComboBox;
+            }
+            set
+            {
+                _modelStateNameComboBox = value;
+                OnPropertyChanged(nameof(ModelStateNameComboBox));
+            }
+        }
+
+        private string _deviceStateSelectedItem;
+
+        public string DeviceStateSelectedItem
+        {
+            get
+            {
+                return _deviceStateSelectedItem;
+            }
+            set
+            {
+                _deviceStateSelectedItem = value;
+                OnPropertyChanged(nameof(DeviceStateSelectedItem));
+                ModelStateNameComboBox = _serviceDeviceState.GetAllModelName(DeviceStateSelectedItem);
+            }
+        }
 
         private int _orderNo = 1;
 

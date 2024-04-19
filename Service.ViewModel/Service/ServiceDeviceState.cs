@@ -11,13 +11,13 @@ namespace Service.ViewModel.Service
             _deviceProvider = deviceProvider;
         }
 
-        public IEnumerable<String> GetAllDeviceName()
+        public IEnumerable<string> GetAllDeviceName()
         {
             var allDevice = _deviceProvider.GetAllDevice().Result.Select(p => p.Name);
             return allDevice;
         }
 
-        public IEnumerable<String> GetAllModelName(string deviceName)
+        public IEnumerable<string> GetAllModelName(string deviceName)
 
         {
             if (!string.IsNullOrEmpty(deviceName))
@@ -25,7 +25,7 @@ namespace Service.ViewModel.Service
                 var device = _deviceProvider.GetDevice(deviceName).Result;
                 return device.ModelLists.Select(p => p.Name);
             }
-            return Enumerable.Empty<String>();
+            return Enumerable.Empty<string>();
         }
     }
 }

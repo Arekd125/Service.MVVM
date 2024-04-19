@@ -68,6 +68,7 @@
                         mah:TextBoxHelper.Watermark="Marka"
                         IsEditable="True"
                         IsTextSearchEnabled="True"
+                        SelectedItem="{Binding Path=DeviceStateSelectedItem}"
                         ItemsSource="{Binding  Path=DeviceStateNameComboBox}"
                         Text="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
