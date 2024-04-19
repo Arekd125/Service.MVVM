@@ -1,14 +1,17 @@
 ﻿using Service.Model.Services.ServicesDevice;
+using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.Service
 {
     public class ServiceDeviceState
     {
         private readonly IDeviceProvider _deviceProvider;
+        private readonly IDeviceCreator _deviceCreator;
 
-        public ServiceDeviceState(IDeviceProvider deviceProvider)
+        public ServiceDeviceState(IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
         {
             _deviceProvider = deviceProvider;
+            _deviceCreator = deviceCreator;
         }
 
         public IEnumerable<string> GetAllDeviceName()
@@ -26,6 +29,11 @@ namespace Service.ViewModel.Service
                 return device.ModelLists.Select(p => p.Name);
             }
             return Enumerable.Empty<string>();
+        }
+
+        public void CreateDevice(DeviceState deviceName)
+        {
+            _deviceCreator.CreateDevice(deviceName);
         }
     }
 }

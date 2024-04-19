@@ -1,6 +1,8 @@
 ﻿using Service.Model.Services.ServicesDevice;
+using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
 using Servis.Models.OrderBuilder;
+using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,12 +14,12 @@ namespace Service.ViewModel.Commands
 {
     public class AddDeviceCommand : CommandBase
     {
-        private readonly IDeviceCreator _deviceCreator;
+        private readonly ServiceDeviceState _serviceDeviceState;
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
-        public AddDeviceCommand(CreatingOrderViewModel creatingOrderViewModel, IDeviceCreator deviceCreator)
+        public AddDeviceCommand(CreatingOrderViewModel creatingOrderViewModel, ServiceDeviceState serviceDeviceState)
         {
-            _deviceCreator = deviceCreator;
+            _serviceDeviceState = serviceDeviceState;
             _creatingOrderViewModel = creatingOrderViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -25,12 +27,20 @@ namespace Service.ViewModel.Commands
         private bool CanExecuteValidator()
         {
             return (!string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox)) && _creatingOrderViewModel.DeviceNameComboBox.Length > 1
-                && (_creatingOrderViewModel.DeviceStateSelectedItem == null);
+                && (_creatingOrderViewModel.DeviceStateSelectedItem == null) && !IfExist(_creatingOrderViewModel.DeviceNameComboBox);
+        }
+
+        private bool IfExist(string deviceName)
+        {
+            var devices = _serviceDeviceState.GetAllDeviceName();
+            return devices.Any(p => p == deviceName);
         }
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox) ||
+            if (e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateNameComboBox) ||
+                e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateSelectedItem) ||
+                e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox) ||
                 e.PropertyName == nameof(CreatingOrderViewModel.DeviceModelNameComboBox))
 
             {
@@ -47,7 +57,9 @@ namespace Service.ViewModel.Commands
         {
             DeviceStateBuilder deviceStateBuilder = new DeviceStateBuilder(_creatingOrderViewModel.DeviceNameComboBox);
 
-            _deviceCreator.CreateDevice(deviceStateBuilder.Build());
+            DeviceState deviceState = deviceStateBuilder.Build();
+            _serviceDeviceState.CreateDevice(deviceState);
+            _creatingOrderViewModel.DeviceStateNameComboBox = _serviceDeviceState.GetAllDeviceName();
         }
     }
 }

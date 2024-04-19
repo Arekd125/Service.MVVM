@@ -213,8 +213,8 @@ namespace Service.ViewModel.ViewModels
         public CreatingOrderViewModel(DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
         {
             SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
-            AddDeviceButton = new AddDeviceCommand(this, deviceCreator);
-            _serviceDeviceState = new ServiceDeviceState(deviceProvider);
+            _serviceDeviceState = new ServiceDeviceState(deviceProvider, deviceCreator);
+            AddDeviceButton = new AddDeviceCommand(this, _serviceDeviceState);
         }
 
         public void Clear()
