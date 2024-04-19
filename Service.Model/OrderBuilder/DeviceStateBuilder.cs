@@ -17,6 +17,11 @@ namespace Servis.Models.OrderBuilder
             _device.ModelLists = model;
         }
 
+        public DeviceStateBuilder(string deviceName)
+        {
+            _device.Name = deviceName;
+        }
+
         public DeviceState Build()
         {
             return _device;

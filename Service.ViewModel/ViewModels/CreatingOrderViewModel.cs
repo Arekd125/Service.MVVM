@@ -19,9 +19,21 @@ namespace Service.ViewModel.ViewModels
     {
         private readonly ServiceDeviceState _serviceDeviceState;
 
-        public IEnumerable<string> DeviceStateNameComboBox =>
+        private IEnumerable<string> _deviceStateNameComboBox;
 
-          _serviceDeviceState.GetAllDeviceName();
+        public IEnumerable<string> DeviceStateNameComboBox
+        {
+            get
+            {
+                _deviceStateNameComboBox = _serviceDeviceState.GetAllDeviceName();
+                return _deviceStateNameComboBox;
+            }
+            set
+            {
+                _deviceStateNameComboBox = value;
+                OnPropertyChanged(nameof(DeviceStateNameComboBox));
+            }
+        }
 
         private IEnumerable<string> _modelStateNameComboBox;
 
@@ -201,7 +213,7 @@ namespace Service.ViewModel.ViewModels
         public CreatingOrderViewModel(DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
         {
             SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
-            AddDeviceButton = new AddDeviceCommand(this);
+            AddDeviceButton = new AddDeviceCommand(this, deviceCreator);
             _serviceDeviceState = new ServiceDeviceState(deviceProvider);
         }
 
