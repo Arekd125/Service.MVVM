@@ -15,10 +15,10 @@ namespace Service.ViewModel.Commands
     public class SaveOrderCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
-        private readonly DatabaseOrderCreator _orderCreator;
+        private readonly IOrderCreator _orderCreator;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, DatabaseOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, IOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
             _orderCreator = orderCreator;

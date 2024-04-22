@@ -88,7 +88,12 @@ namespace Service.Model.Migrations
             migrationBuilder.InsertData(
                 table: "DeviceState",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "G50" });
+                values: new object[] { 2, "Lenovo" });
+
+            migrationBuilder.InsertData(
+                table: "ModelState",
+                columns: new[] { "Id", "DeviceStateId", "Name" },
+                values: new object[] { 1, 2, "G503" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ModelState_DeviceStateId",

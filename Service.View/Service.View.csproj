@@ -12,6 +12,20 @@
     <None Remove="Images\main_icon.png" />
   </ItemGroup>
 
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	
+	
+	
+	
+	
   <ItemGroup>
     <Content Include="Images\main_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -20,10 +34,17 @@
 
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Service.ViewModel\Service.ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -22,7 +22,7 @@ public class MainViewModel : ViewModelBase
     public CreatingOrderViewModel creatingOrderViewModel { get; set; }
     private List<Order> AllOrders { get; set; }
 
-    public MainViewModel(DatabaseOrderCreator orderCreator, IOrderProviders orderProviders, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
+    public MainViewModel(IOrderCreator orderCreator, IOrderProviders orderProviders, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
     {
         ordersListingViewModel = new OrdersListingViewModel();
         creatingOrderViewModel = new CreatingOrderViewModel(orderCreator, ordersListingViewModel, deviceProvider, deviceCreator);

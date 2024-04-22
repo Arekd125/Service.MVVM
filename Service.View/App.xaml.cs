@@ -1,10 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
 using Service.Model.Services;
 using Service.Model.Services.ServicesDevice;
 using Service.ViewModel.ViewModels;
 using Servis.Models.OrderModels;
 using System.Windows;
+using Service.Model.Extensions;
+using System.Configuration;
 
 namespace Service.View
 {
@@ -13,37 +18,40 @@ namespace Service.View
     /// </summary>
     public partial class App : Application
     {
-        //private readonly IOrderCreator _orderCreator;
-
-        // private readonly List<Order> _orders;
-        private readonly OrdersDbContextFactory _ordersDbContextFactory;
-
-        private readonly DatabaseOrderCreator _orderCreator;
-        private readonly IDeviceCreator _deviceCreator;
-        private readonly IDeviceProvider _deviceProvider;
-        private readonly IOrderProviders _orderProviders;
-        private const string CONNECTION_STRING = "Data Source=serviceDB.db";
+        private readonly IHost _host;
 
         public App()
         {
-            _ordersDbContextFactory = new OrdersDbContextFactory(CONNECTION_STRING);
-            _orderCreator = new DatabaseOrderCreator(_ordersDbContextFactory);
-            _orderProviders = new DatabaseOrderProvider(_ordersDbContextFactory);
-            _deviceCreator = new DatabaseDeviceCreator(_ordersDbContextFactory);
-            _deviceProvider = new DatabaseDeviceProvider(_ordersDbContextFactory);
+            _host = Host.CreateDefaultBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddDbConnection(hostContext.Configuration);
+
+                    services.AddSingleton<IOrderCreator, DatabaseOrderCreator>();
+                    services.AddSingleton<IOrderProviders, DatabaseOrderProvider>();
+                    services.AddSingleton<IDeviceCreator, DatabaseDeviceCreator>();
+                    services.AddSingleton<IDeviceProvider, DatabaseDeviceProvider>();
+
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton(s => new MainWindow()
+                    {
+                        DataContext = s.GetRequiredService<MainViewModel>()
+                    });
+                }).Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            _host.Start();
+
+            OrdersDbContextFactory _ordersDbContextFactory = _host.Services.GetRequiredService<OrdersDbContextFactory>();
             using (OrdersDbContext dbContext = _ordersDbContextFactory.CreateDbContext())
             {
                 dbContext.Database.Migrate();
             }
 
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_orderCreator, _orderProviders, _deviceProvider, _deviceCreator)
-            };
+            MainWindow = _host.Services.GetRequiredService<MainWindow>();
+
             MainWindow.Show();
 
             base.OnStartup(e);
