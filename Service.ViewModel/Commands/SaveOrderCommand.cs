@@ -54,20 +54,6 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            //OrderBuilder orderBuilder = new OrderBuilder();
-            //ContactBuilder contactBuilder = new ContactBuilder(_creatingOrderViewModel.ContactNameTextBox, _creatingOrderViewModel.ContactPhoneNumberTextBox);
-
-            //orderBuilder.SetContact(contactBuilder.Build())
-            //    .SetDevice(_creatingOrderViewModel.DeviceNameComboBox)
-            //    .SetModel(_creatingOrderViewModel.DeviceModelNameComboBox)
-            //    .SetOrderNo((int)_creatingOrderViewModel.OrderNoNumericUpDown)
-            //    .SetStartDate((DateTime)_creatingOrderViewModel.StartDateDatePicker)
-            //    .SetDescription(_creatingOrderViewModel.DescriptionTextBox)
-            //    .SetToDo(_creatingOrderViewModel.ToDoTextBox)
-            //    .SetAccessories(_creatingOrderViewModel.AccessoriesTexBox);
-
-            //Order order = orderBuilder.Build();
-
             CreateOrderDto orderdto = new CreateOrderDto()
             {
                 ContactName = _creatingOrderViewModel.ContactNameTextBox,

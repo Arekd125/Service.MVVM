@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Service.Model.DbContexts;
 using Servis.Models.OrderModels;
 using System;
@@ -9,10 +10,13 @@ using System.Threading.Tasks;
 
 namespace Service.Model.Services.ServicesDevice
 {
-    public class DatabaseDeviceProvider : DatabaseServiceBase, IDeviceProvider
+    public class DatabaseDeviceProvider : IDeviceProvider
     {
-        public DatabaseDeviceProvider(OrdersDbContextFactory dbContextFactory) : base(dbContextFactory)
+        private readonly OrdersDbContextFactory _dbContextFactory;
+
+        public DatabaseDeviceProvider(OrdersDbContextFactory dbContextFactory)
         {
+            _dbContextFactory = dbContextFactory;
         }
 
         public async Task<DeviceState> GetDevice(int id)

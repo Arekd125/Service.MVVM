@@ -32,8 +32,6 @@ namespace Service.View
                     services.AddModel();
                     services.AddViewModel();
 
-                    services.AddSingleton<IOrderCreator, DatabaseOrderCreator>();
-                    services.AddSingleton<IOrderProviders, DatabaseOrderProvider>();
                     services.AddSingleton<IDeviceCreator, DatabaseDeviceCreator>();
                     services.AddSingleton<IDeviceProvider, DatabaseDeviceProvider>();
 

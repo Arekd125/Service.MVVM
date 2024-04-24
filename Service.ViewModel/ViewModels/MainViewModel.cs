@@ -23,16 +23,9 @@ public class MainViewModel : ViewModelBase
     public OrdersListingViewModel ordersListingViewModel { get; set; }
     public CreatingOrderViewModel creatingOrderViewModel { get; set; }
 
-    public MainViewModel(IOrderService orderService, IOrderProviders orderProviders, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
+    public MainViewModel(IOrderService orderService, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
     {
         ordersListingViewModel = new OrdersListingViewModel(orderService);
         creatingOrderViewModel = new CreatingOrderViewModel(orderService, ordersListingViewModel, deviceProvider, deviceCreator);
-
-        var getAllOrders = orderService.GetAllOrders().Result;
-
-        if (getAllOrders != null)
-        {
-            ordersListingViewModel.Add(getAllOrders);
-        }
     }
 }

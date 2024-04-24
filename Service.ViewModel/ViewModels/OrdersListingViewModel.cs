@@ -24,6 +24,8 @@ namespace Service.ViewModel.ViewModels
         {
             _ordersViewModelColection = new ObservableCollection<DisplayOrderDto>();
             _orderService = orderService;
+
+            AllOrders();
         }
 
         public void AddLast()
@@ -38,9 +40,11 @@ namespace Service.ViewModel.ViewModels
             _ordersViewModelColection.Insert(0, displayOrderDto);
         }
 
-        public void Add(IEnumerable<DisplayOrderDto> displayOrdersDto)
+        private void AllOrders()
         {
-            foreach (var o in displayOrdersDto)
+            var getAllOrders = _orderService.GetAllOrders().Result;
+
+            foreach (var o in getAllOrders)
             {
                 Add(o);
             }

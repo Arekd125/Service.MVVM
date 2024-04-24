@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace Service.Model.Services.ServicesDevice
 {
-    public class DatabaseDeviceCreator : DatabaseServiceBase, IDeviceCreator
+    public class DatabaseDeviceCreator : IDeviceCreator
     {
-        public DatabaseDeviceCreator(OrdersDbContextFactory dbContextFactory) : base(dbContextFactory)
+        private readonly OrdersDbContextFactory _dbContextFactory;
+
+        public DatabaseDeviceCreator(OrdersDbContextFactory dbContextFactory)
         {
+            _dbContextFactory = dbContextFactory;
         }
 
         public async Task CreateDevice(DeviceState deviceState)
