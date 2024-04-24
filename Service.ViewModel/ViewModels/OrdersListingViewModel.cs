@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualBasic;
+using Service.ViewModel.Dtos;
+using Service.ViewModel.Service;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -13,25 +15,32 @@ namespace Service.ViewModel.ViewModels
 {
     public class OrdersListingViewModel : ViewModelBase
     {
-        private ObservableCollection<OrdersViewModel> _ordersViewModelColection;
+        private ObservableCollection<DisplayOrderDto> _ordersViewModelColection;
+        private readonly IOrderService _orderService;
 
-        public IEnumerable<OrdersViewModel> ordersViewModelColection => _ordersViewModelColection;
+        public IEnumerable<DisplayOrderDto> ordersViewModelColection => _ordersViewModelColection;
 
-        public OrdersListingViewModel()
+        public OrdersListingViewModel(IOrderService orderService)
         {
-            _ordersViewModelColection = new ObservableCollection<OrdersViewModel>();
+            _ordersViewModelColection = new ObservableCollection<DisplayOrderDto>();
+            _orderService = orderService;
         }
 
-        public void Add(Order order)
+        public void AddLast()
         {
-            OrdersViewModel OrdersViewModel = new OrdersViewModel(order);
+            var displayOrderDto = _orderService.GetLastOrder().Result;
 
-            _ordersViewModelColection.Insert(0, OrdersViewModel);
+            Add(displayOrderDto);
         }
 
-        public void Add(IEnumerable<Order> orders)
+        private void Add(DisplayOrderDto displayOrderDto)
         {
-            foreach (var o in orders)
+            _ordersViewModelColection.Insert(0, displayOrderDto);
+        }
+
+        public void Add(IEnumerable<DisplayOrderDto> displayOrdersDto)
+        {
+            foreach (var o in displayOrdersDto)
             {
                 Add(o);
             }

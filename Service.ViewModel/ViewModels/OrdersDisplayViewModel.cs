@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.ViewModels
 {
-    public class OrdersViewModel : ViewModelBase
+    public class OrdersDisplayViewModel : ViewModelBase
     {
         private readonly Order _order;
 
@@ -18,7 +18,7 @@ namespace Service.ViewModel.ViewModels
         public string DeviceName => _order.Device;
         public string DeviceModelName => _order.Model;
 
-        public OrdersViewModel(Order order)
+        public OrdersDisplayViewModel(Order order)
         {
             _order = order;
         }

@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Model.DbContexts;
+using Service.Model.Interfaces;
+using Service.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +19,13 @@ namespace Service.Model.Extensions
         {
             string connectionString = configuration.GetConnectionString("Default");
 
-            //services.AddDbContext<OrdersDbContext>(options => options.UseSqlite(connectionString));
-
             services.AddSingleton(new OrdersDbContextFactory(connectionString));
+        }
+
+        public static void AddModel(this IServiceCollection services)
+
+        {
+            services.AddScoped<IOrderRepository, OrderRepository>();
         }
     }
 }

@@ -101,9 +101,11 @@ namespace Service.Model.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Device")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OrderName")

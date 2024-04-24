@@ -210,7 +210,7 @@ namespace Service.ViewModel.ViewModels
         public ICommand DeleteDeviceButton { get; }
         public ICommand EditDeviceButton { get; }
 
-        public CreatingOrderViewModel(IOrderCreator orderCreator, OrdersListingViewModel ordersListingViewModel, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
+        public CreatingOrderViewModel(IOrderService orderCreator, OrdersListingViewModel ordersListingViewModel, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
         {
             SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
             _serviceDeviceState = new ServiceDeviceState(deviceProvider, deviceCreator);

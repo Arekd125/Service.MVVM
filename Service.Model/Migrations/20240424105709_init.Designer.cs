@@ -11,7 +11,7 @@ using Service.Model.DbContexts;
 namespace Service.Model.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240422140528_init")]
+    [Migration("20240424105709_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -104,9 +104,11 @@ namespace Service.Model.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Device")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OrderName")

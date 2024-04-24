@@ -23,8 +23,8 @@
             <DataGridTextColumn Binding="{Binding Path=StartData}" Header="Data" />
             <DataGridTextColumn Binding="{Binding Path=ContactName}" Header="Imię i nazwisko" />
             <DataGridTextColumn Binding="{Binding Path=ContactPhoneNumber}" Header="telefon" />
-            <DataGridTextColumn Binding="{Binding Path=DeviceName}" Header="marka" />
-            <DataGridTextColumn Binding="{Binding Path=DeviceModelName}" Header="model" />
+            <DataGridTextColumn Binding="{Binding Path=Device}" Header="marka" />
+            <DataGridTextColumn Binding="{Binding Path=Model}" Header="model" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

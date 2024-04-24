@@ -48,8 +48,8 @@ namespace Service.Model.Migrations
                     OrderName = table.Column<string>(type: "TEXT", nullable: false),
                     StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ContactId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Device = table.Column<string>(type: "TEXT", nullable: true),
-                    Model = table.Column<string>(type: "TEXT", nullable: true),
+                    Device = table.Column<string>(type: "TEXT", nullable: false),
+                    Model = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     ToDo = table.Column<string>(type: "TEXT", nullable: true),
                     Accessories = table.Column<string>(type: "TEXT", nullable: true)

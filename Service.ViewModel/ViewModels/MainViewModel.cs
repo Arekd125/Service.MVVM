@@ -2,6 +2,8 @@
 using Service.Model.Services;
 using Service.Model.Services.ServicesDevice;
 using Service.ViewModel.Commands;
+using Service.ViewModel.Dtos;
+using Service.ViewModel.Service;
 using Servis.Models.OrderBuilder;
 using Servis.Models.OrderModels;
 using System;
@@ -20,19 +22,17 @@ public class MainViewModel : ViewModelBase
 {
     public OrdersListingViewModel ordersListingViewModel { get; set; }
     public CreatingOrderViewModel creatingOrderViewModel { get; set; }
-    private List<Order> AllOrders { get; set; }
 
-    public MainViewModel(IOrderCreator orderCreator, IOrderProviders orderProviders, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
+    public MainViewModel(IOrderService orderService, IOrderProviders orderProviders, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
     {
-        ordersListingViewModel = new OrdersListingViewModel();
-        creatingOrderViewModel = new CreatingOrderViewModel(orderCreator, ordersListingViewModel, deviceProvider, deviceCreator);
+        ordersListingViewModel = new OrdersListingViewModel(orderService);
+        creatingOrderViewModel = new CreatingOrderViewModel(orderService, ordersListingViewModel, deviceProvider, deviceCreator);
 
-        var getAllOrders = orderProviders.GetAllOrders().Result;
+        var getAllOrders = orderService.GetAllOrders().Result;
 
         if (getAllOrders != null)
         {
-            AllOrders = new List<Order>(getAllOrders);
-            ordersListingViewModel.Add(AllOrders);
+            ordersListingViewModel.Add(getAllOrders);
         }
     }
 }

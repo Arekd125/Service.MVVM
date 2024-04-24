@@ -10,6 +10,9 @@ using Servis.Models.OrderModels;
 using System.Windows;
 using Service.Model.Extensions;
 using System.Configuration;
+using Service.ViewModel.Extensions;
+using Service.Model.Interfaces;
+using Service.Model.Repositories;
 
 namespace Service.View
 {
@@ -26,13 +29,16 @@ namespace Service.View
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddDbConnection(hostContext.Configuration);
+                    services.AddModel();
+                    services.AddViewModel();
 
                     services.AddSingleton<IOrderCreator, DatabaseOrderCreator>();
                     services.AddSingleton<IOrderProviders, DatabaseOrderProvider>();
                     services.AddSingleton<IDeviceCreator, DatabaseDeviceCreator>();
                     services.AddSingleton<IDeviceProvider, DatabaseDeviceProvider>();
 
-                    services.AddSingleton<MainViewModel>();
+                    services.AddScoped<MainViewModel>();
+
                     services.AddSingleton(s => new MainWindow()
                     {
                         DataContext = s.GetRequiredService<MainViewModel>()
