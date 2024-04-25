@@ -66,9 +66,9 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private int _orderNo = 1;
+        private int _orderNo;
 
-        public int OrderNoNumericUpDown
+        public int OrderNo
         {
             get
             {
@@ -77,22 +77,23 @@ namespace Service.ViewModel.ViewModels
             set
             {
                 _orderNo = value;
-                OnPropertyChanged(nameof(OrderNoNumericUpDown));
+                OnPropertyChanged(nameof(OrderNo));
             }
         }
 
-        private DateTime _StartDate = DateTime.Now;
+        private string _OrderName;
 
-        public DateTime StartDateDatePicker
+        public string OrderNameTextBlock
         {
             get
             {
-                return _StartDate;
+                _OrderName = SetOrderName();
+                return _OrderName;
             }
             set
             {
-                _StartDate = value;
-                OnPropertyChanged(nameof(StartDateDatePicker));
+                _OrderName = value;
+                OnPropertyChanged(nameof(OrderNameTextBlock));
             }
         }
 
@@ -203,6 +204,8 @@ namespace Service.ViewModel.ViewModels
 
         public ICommand CreateOrderAndPrintButton { get; }
 
+        private readonly IOrderService _orderCreator;
+
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
         public ICommand AddDeviceButton { get; }
@@ -212,6 +215,7 @@ namespace Service.ViewModel.ViewModels
 
         public CreatingOrderViewModel(IOrderService orderCreator, OrdersListingViewModel ordersListingViewModel, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
         {
+            _orderCreator = orderCreator;
             SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
             _serviceDeviceState = new ServiceDeviceState(deviceProvider, deviceCreator);
             AddDeviceButton = new AddDeviceCommand(this, _serviceDeviceState);
@@ -226,6 +230,14 @@ namespace Service.ViewModel.ViewModels
             DescriptionTextBox = string.Empty;
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
+            OrderNameTextBlock = SetOrderName();
+        }
+
+        private string SetOrderName()
+        {
+            OrderNo = _orderCreator.GetOrderNumber().Result;
+
+            return "Z/" + OrderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
         }
     }
 }

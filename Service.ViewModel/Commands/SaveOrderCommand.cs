@@ -56,6 +56,8 @@ namespace Service.ViewModel.Commands
         {
             CreateOrderDto orderdto = new CreateOrderDto()
             {
+                OrderNo = _creatingOrderViewModel.OrderNo,
+                OrderName = _creatingOrderViewModel.OrderNameTextBlock,
                 ContactName = _creatingOrderViewModel.ContactNameTextBox,
                 ContactPhoneNumber = _creatingOrderViewModel.ContactPhoneNumberTextBox,
                 Device = _creatingOrderViewModel.DeviceNameComboBox,

@@ -15,14 +15,14 @@ namespace Service.ViewModel.ViewModels
 {
     public class OrdersListingViewModel : ViewModelBase
     {
-        private ObservableCollection<DisplayOrderDto> _ordersViewModelColection;
+        private ObservableCollection<DisplayOrderDto> _ordersViewModelCollection;
         private readonly IOrderService _orderService;
 
-        public IEnumerable<DisplayOrderDto> ordersViewModelColection => _ordersViewModelColection;
+        public IEnumerable<DisplayOrderDto> ordersViewModelCollection => _ordersViewModelCollection;
 
         public OrdersListingViewModel(IOrderService orderService)
         {
-            _ordersViewModelColection = new ObservableCollection<DisplayOrderDto>();
+            _ordersViewModelCollection = new ObservableCollection<DisplayOrderDto>();
             _orderService = orderService;
 
             AllOrders();
@@ -37,7 +37,7 @@ namespace Service.ViewModel.ViewModels
 
         private void Add(DisplayOrderDto displayOrderDto)
         {
-            _ordersViewModelColection.Insert(0, displayOrderDto);
+            _ordersViewModelCollection.Insert(0, displayOrderDto);
         }
 
         private void AllOrders()

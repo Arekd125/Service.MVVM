@@ -20,16 +20,5 @@ namespace Servis.Models.OrderModels
         public string? Description { get; set; }
         public string? ToDo { get; set; }
         public string? Accessories { get; set; }
-
-        public void SetOrderNo(int number)
-        {
-            SetOrderName();
-            OrderNo = number;
-        }
-
-        private void SetOrderName()
-        {
-            OrderName = "Z/" + OrderNo + "/" + StartDate.ToString("MM") + "/" + StartDate.ToString("yyyy");
-        }
     }
 }

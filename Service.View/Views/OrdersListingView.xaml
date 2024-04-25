@@ -15,16 +15,16 @@
         BorderThickness="1"
         CanUserAddRows="False"
         IsReadOnly="True"
-        ItemsSource="{Binding ordersViewModelColection}"
+        ItemsSource="{Binding ordersViewModelCollection}"
         SelectionMode="Single">
 
         <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding Path=OrderName}" Header="nr zlecenie" />
-            <DataGridTextColumn Binding="{Binding Path=StartData}" Header="Data" />
-            <DataGridTextColumn Binding="{Binding Path=ContactName}" Header="Imię i nazwisko" />
-            <DataGridTextColumn Binding="{Binding Path=ContactPhoneNumber}" Header="telefon" />
-            <DataGridTextColumn Binding="{Binding Path=Device}" Header="marka" />
-            <DataGridTextColumn Binding="{Binding Path=Model}" Header="model" />
+            <DataGridTextColumn Width="*" Binding="{Binding Path=OrderName}" Header="nr zlecenie" />
+            <DataGridTextColumn Width="*" Binding="{Binding Path=StartData}" Header="Data" />
+            <DataGridTextColumn Width="*" Binding="{Binding Path=ContactName}" Header="Imię i nazwisko" />
+            <DataGridTextColumn Width="*" Binding="{Binding Path=ContactPhoneNumber}" Header="telefon" />
+            <DataGridTextColumn Width="*" Binding="{Binding Path=Device}" Header="marka" />
+            <DataGridTextColumn Width="*" Binding="{Binding Path=Model}" Header="model" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

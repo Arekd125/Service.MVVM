@@ -25,8 +25,6 @@ namespace Service.ViewModel.Service
         {
             var order = _mapper.Map<Order>(createOrderDto);
 
-            order.SetOrderNo(1);
-
             await _orderRepository.Create(order);
         }
 
@@ -45,6 +43,19 @@ namespace Service.ViewModel.Service
             var diplsyOrderDto = _mapper.Map<DisplayOrderDto>(order);
 
             return diplsyOrderDto;
+        }
+
+        public async Task<int> GetOrderNumber()
+        {
+            var order = _orderRepository.GetLastOrder().Result;
+            var lastOrderData = order.StartDate;
+
+            if (lastOrderData.Month == DateTime.Now.Month)
+            {
+                return order.OrderNo + 1;
+            }
+
+            return 1;
         }
     }
 }
