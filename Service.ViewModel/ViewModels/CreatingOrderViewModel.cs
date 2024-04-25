@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Service.Model.Migrations;
 using Service.Model.Services;
 using Service.Model.Services.ServicesDevice;
 using Service.ViewModel.Commands;
@@ -8,10 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Service.ViewModel.ViewModels
 {
@@ -122,7 +126,8 @@ namespace Service.ViewModel.ViewModels
             }
             set
             {
-                _contactPhoneNumber = value;
+                _contactPhoneNumber = PhoneValisation(value);
+
                 OnPropertyChanged(nameof(ContactPhoneNumberTextBox));
             }
         }
@@ -238,6 +243,27 @@ namespace Service.ViewModel.ViewModels
             OrderNo = _orderCreator.GetOrderNumber().Result;
 
             return "Z/" + OrderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
+        }
+
+        private string PhoneValisation(string PhoneNumber)
+        {
+            if (PhoneNumber.Length > 11)
+            {
+                return PhoneNumber.Substring(0, 11);
+            }
+
+            string cleanedPhoneNumber = Regex.Replace(PhoneNumber, "[^0-9]+", "");
+            string formattedNumber = "";
+
+            for (int i = 0; i < cleanedPhoneNumber.Length; i++)
+            {
+                if (i > 0 && i % 3 == 0)  // Dodawanie spacji co trzy znaki
+                {
+                    formattedNumber += " ";
+                }
+                formattedNumber += cleanedPhoneNumber[i];
+            }
+            return formattedNumber;
         }
     }
 }

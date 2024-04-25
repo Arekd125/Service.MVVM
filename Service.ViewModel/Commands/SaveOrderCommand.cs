@@ -31,7 +31,7 @@ namespace Service.ViewModel.Commands
         private bool CanExecuteValidator()
         {
             return (!string.IsNullOrEmpty(_creatingOrderViewModel.ContactPhoneNumberTextBox) &&
-                    _creatingOrderViewModel.ContactPhoneNumberTextBox.Length > 8 &&
+                    _creatingOrderViewModel.ContactPhoneNumberTextBox.Length > 10 &&
                    !string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox) &&
                    !string.IsNullOrEmpty(_creatingOrderViewModel.DeviceModelNameComboBox));
         }
