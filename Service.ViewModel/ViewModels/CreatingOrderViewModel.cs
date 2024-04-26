@@ -245,25 +245,21 @@ namespace Service.ViewModel.ViewModels
             return "Z/" + OrderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
         }
 
-        private string PhoneValisation(string PhoneNumber)
+        private string PhoneValisation(string phoneNumber)
         {
-            if (PhoneNumber.Length > 11)
+            if (phoneNumber.Length > 11)
             {
-                return PhoneNumber.Substring(0, 11);
+                return phoneNumber.Substring(0, 11);
             }
 
-            string cleanedPhoneNumber = Regex.Replace(PhoneNumber, "[^0-9]+", "");
-            string formattedNumber = "";
-
-            for (int i = 0; i < cleanedPhoneNumber.Length; i++)
+            var isNotNumber = new Regex("[^0-9 ]").IsMatch(phoneNumber);
+            if (isNotNumber)
             {
-                if (i > 0 && i % 3 == 0)  // Dodawanie spacji co trzy znaki
-                {
-                    formattedNumber += " ";
-                }
-                formattedNumber += cleanedPhoneNumber[i];
+                var result = phoneNumber.Substring(0, phoneNumber.Length - 1);
+                return result;
             }
-            return formattedNumber;
+
+            return Regex.Replace(phoneNumber, "(\\d{3})(?=\\d)", "$1 "); ;
         }
     }
 }

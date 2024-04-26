@@ -67,7 +67,7 @@ namespace Service.ViewModel.Commands
                 Accessories = _creatingOrderViewModel.AccessoriesTexBox
             };
 
-            _orderCreator.Create(orderdto);
+            _orderCreator.CreateOrder(orderdto);
             _ordersListingViewModel.AddLast();
             _creatingOrderViewModel.Clear();
         }

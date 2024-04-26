@@ -21,7 +21,7 @@ namespace Service.ViewModel.Service
             _mapper = mapper;
         }
 
-        public async Task Create(CreateOrderDto createOrderDto)
+        public async Task CreateOrder(CreateOrderDto createOrderDto)
         {
             var order = _mapper.Map<Order>(createOrderDto);
 
