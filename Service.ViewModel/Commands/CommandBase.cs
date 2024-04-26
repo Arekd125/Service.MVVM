@@ -1,10 +1,5 @@
 ﻿using Service.ViewModel.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Service.ViewModel.Commands

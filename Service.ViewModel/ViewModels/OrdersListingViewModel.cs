@@ -1,15 +1,6 @@
-﻿using Microsoft.VisualBasic;
-using Service.ViewModel.Dtos;
+﻿using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
-using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.ViewModels
 {

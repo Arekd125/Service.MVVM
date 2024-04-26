@@ -1,17 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
-
-using Service.ViewModel.ViewModels;
-using Servis.Models.OrderModels;
-using System.Windows;
 using Service.Model.Extensions;
-using System.Configuration;
 using Service.ViewModel.Extensions;
-
-using Service.Model.Repositories;
+using Service.ViewModel.ViewModels;
+using System.Windows;
 
 namespace Service.View
 {

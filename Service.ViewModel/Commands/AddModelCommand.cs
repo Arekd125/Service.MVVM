@@ -1,8 +1,6 @@
 ﻿using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
 using Servis.Models.OrderModels;
-using System.ComponentModel;
-using System.Windows.Input;
 
 namespace Service.ViewModel.Commands
 {
@@ -27,7 +25,7 @@ namespace Service.ViewModel.Commands
            && !IfExists(_creatingOrderViewModel.ModelNameComboBox.TrimEnd());
         }
 
-        
+
         private bool IfExists(string modelStateName)
         {
 
@@ -35,10 +33,10 @@ namespace Service.ViewModel.Commands
             return devices.Any(p => p == modelStateName);
         }
 
-        private IEnumerable<string > AllModelStateName ()
+        private IEnumerable<string> AllModelStateName()
         {
-            
-          return   _deviceStateService.GetAllModelName(_creatingOrderViewModel.DeviceStateSelectedItem).Result;
+
+            return _deviceStateService.GetAllModelName(_creatingOrderViewModel.DeviceStateSelectedItem).Result;
         }
 
 

@@ -1,15 +1,7 @@
-﻿using Service.Model.Repositories;
-
-using Service.ViewModel.Service;
+﻿using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
 
 using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands
 {

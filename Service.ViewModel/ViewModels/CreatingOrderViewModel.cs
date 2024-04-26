@@ -1,21 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Service.Model.Migrations;
-using Service.Model.Repositories;
-
-using Service.ViewModel.Commands;
+﻿using Service.ViewModel.Commands;
 using Service.ViewModel.Service;
-using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Service.ViewModel.ViewModels
 {

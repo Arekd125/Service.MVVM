@@ -1,13 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Service.Model.DbContexts;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Extensions
 {

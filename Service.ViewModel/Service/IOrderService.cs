@@ -1,5 +1,4 @@
 ﻿using Service.ViewModel.Dtos;
-using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.Service
 {
