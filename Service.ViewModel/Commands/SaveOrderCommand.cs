@@ -1,7 +1,7 @@
 ﻿using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
-using Servis.Models.OrderBuilder;
+
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -16,13 +16,13 @@ namespace Service.ViewModel.Commands
     public class SaveOrderCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
-        private readonly IOrderService _orderCreator;
+        private readonly IOrderService _orderService;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, IOrderService orderCreator, OrdersListingViewModel ordersListingViewModel)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, IOrderService orderService, OrdersListingViewModel ordersListingViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
-            _orderCreator = orderCreator;
+            _orderService = orderService;
             _ordersListingViewModel = ordersListingViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -32,13 +32,13 @@ namespace Service.ViewModel.Commands
             return (!string.IsNullOrEmpty(_creatingOrderViewModel.ContactPhoneNumberTextBox) &&
                     _creatingOrderViewModel.ContactPhoneNumberTextBox.Length > 10 &&
                    !string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox) &&
-                   !string.IsNullOrEmpty(_creatingOrderViewModel.DeviceModelNameComboBox));
+                   !string.IsNullOrEmpty(_creatingOrderViewModel.ModelNameComboBox));
         }
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(CreatingOrderViewModel.ContactPhoneNumberTextBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceModelNameComboBox) ||
+                e.PropertyName == nameof(CreatingOrderViewModel.ModelNameComboBox) ||
                 e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox))
 
             {
@@ -60,13 +60,13 @@ namespace Service.ViewModel.Commands
                 ContactName = _creatingOrderViewModel.ContactNameTextBox,
                 ContactPhoneNumber = _creatingOrderViewModel.ContactPhoneNumberTextBox,
                 Device = _creatingOrderViewModel.DeviceNameComboBox,
-                Model = _creatingOrderViewModel.DeviceModelNameComboBox,
+                Model = _creatingOrderViewModel.ModelNameComboBox,
                 Description = _creatingOrderViewModel.DescriptionTextBox,
                 ToDo = _creatingOrderViewModel.ToDoTextBox,
                 Accessories = _creatingOrderViewModel.AccessoriesTexBox
             };
 
-            _orderCreator.CreateOrder(orderdto);
+            _orderService.CreateOrder(orderdto);
             _ordersListingViewModel.AddLast();
             _creatingOrderViewModel.Clear();
         }

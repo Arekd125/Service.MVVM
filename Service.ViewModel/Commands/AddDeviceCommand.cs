@@ -2,7 +2,7 @@
 
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
-using Servis.Models.OrderBuilder;
+
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -27,26 +27,16 @@ namespace Service.ViewModel.Commands
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox)) && _creatingOrderViewModel.DeviceNameComboBox.Length > 1
-                && (_creatingOrderViewModel.DeviceStateSelectedItem == null) && !IfExists(_creatingOrderViewModel.DeviceNameComboBox.TrimEnd());
+            return (!string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox))
+                && _creatingOrderViewModel.DeviceNameComboBox.Length > 1
+                && (string.IsNullOrEmpty(_creatingOrderViewModel.DeviceStateSelectedItem))
+                && !IfExists(_creatingOrderViewModel.DeviceNameComboBox.TrimEnd());
         }
 
         private bool IfExists(string deviceName)
         {
             var devices = _deviceStateService.GetAllDeviceName();
             return devices.Any(p => p == deviceName);
-        }
-
-        private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateNameComboBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateSelectedItem) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceModelNameComboBox))
-
-            {
-                OnCanExecutedChanged();
-            }
         }
 
         public override bool CanExecute(object? parameter)
@@ -56,11 +46,14 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            DeviceStateBuilder deviceStateBuilder = new DeviceStateBuilder(_creatingOrderViewModel.DeviceNameComboBox);
+            DeviceState deviceState = new DeviceState
+            {
+                Name = _creatingOrderViewModel.DeviceNameComboBox
+            };
 
-            DeviceState deviceState = deviceStateBuilder.Build();
             _deviceStateService.CreateDevice(deviceState);
-            _creatingOrderViewModel.DeviceStateNameComboBox = _deviceStateService.GetAllDeviceName();
+            _creatingOrderViewModel.DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName();
+            _creatingOrderViewModel.DeviceStateSelectedItem = _creatingOrderViewModel.DeviceNameComboBox;
         }
     }
 }

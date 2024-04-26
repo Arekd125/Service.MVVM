@@ -34,5 +34,10 @@ namespace Service.ViewModel.Service
         {
             _deviceRepository.CreateDevice(deviceName);
         }
+
+        public void CreateModel(ModelState modelState, string deviceStateSelectedItem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

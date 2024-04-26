@@ -20,35 +20,39 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Service.ViewModel.ViewModels
 {
     public class CreatingOrderViewModel : ViewModelBase
-    {
-        private IEnumerable<string> _deviceStateNameComboBox;
 
-        public IEnumerable<string> DeviceStateNameComboBox
+    {
+        private readonly IOrderService _orderService;
+        private readonly IDeviceStateService _deviceStateService;
+
+        private IEnumerable<string> _deviceStateNameItemsSource;
+
+        public IEnumerable<string> DeviceStateNameItemsSource
         {
             get
             {
-                _deviceStateNameComboBox = _deviceStateService.GetAllDeviceName();
-                return _deviceStateNameComboBox;
+                _deviceStateNameItemsSource = _deviceStateService.GetAllDeviceName();
+                return _deviceStateNameItemsSource;
             }
             set
             {
-                _deviceStateNameComboBox = value;
-                OnPropertyChanged(nameof(DeviceStateNameComboBox));
+                _deviceStateNameItemsSource = value;
+                OnPropertyChanged(nameof(DeviceStateNameItemsSource));
             }
         }
 
-        private IEnumerable<string> _modelStateNameComboBox;
+        private IEnumerable<string> _modelStateNameItemSorceComboBox;
 
-        public IEnumerable<string> ModelStateNameComboBox
+        public IEnumerable<string> ModelStateNameItemSorce
         {
             get
             {
-                return _modelStateNameComboBox;
+                return _modelStateNameItemSorceComboBox;
             }
             set
             {
-                _modelStateNameComboBox = value;
-                OnPropertyChanged(nameof(ModelStateNameComboBox));
+                _modelStateNameItemSorceComboBox = value;
+                OnPropertyChanged(nameof(ModelStateNameItemSorce));
             }
         }
 
@@ -64,7 +68,22 @@ namespace Service.ViewModel.ViewModels
             {
                 _deviceStateSelectedItem = value;
                 OnPropertyChanged(nameof(DeviceStateSelectedItem));
-                ModelStateNameComboBox = _deviceStateService.GetAllModelName(DeviceStateSelectedItem);
+                ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem);
+            }
+        }
+
+        private string _modelStateSelectedItem;
+
+        public string ModelStateSelectedItem
+        {
+            get
+            {
+                return _modelStateSelectedItem;
+            }
+            set
+            {
+                _modelStateSelectedItem = value;
+                OnPropertyChanged(nameof(ModelStateSelectedItem));
             }
         }
 
@@ -145,18 +164,18 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _deviceModelName;
+        private string _ModelName;
 
-        public string DeviceModelNameComboBox
+        public string ModelNameComboBox
         {
             get
             {
-                return _deviceModelName;
+                return _ModelName;
             }
             set
             {
-                _deviceModelName = value;
-                OnPropertyChanged(nameof(DeviceModelNameComboBox));
+                _ModelName = value;
+                OnPropertyChanged(nameof(ModelNameComboBox));
             }
         }
 
@@ -205,25 +224,24 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
+        public ICommand AddDeviceButton { get; }
+        public ICommand DeleteDeviceButton { get; }
+
+        public ICommand AddModelButton { get; }
+        public ICommand DeleteModelButton { get; }
+
         public ICommand CreateOrderAndPrintButton { get; }
-
-        private readonly IOrderService _orderService;
-        private readonly IDeviceStateService _deviceStateService;
-
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
-        public ICommand AddDeviceButton { get; }
-        public ICommand RemoveDeviceButton { get; }
-        public ICommand DeleteDeviceButton { get; }
-        public ICommand EditDeviceButton { get; }
 
         public CreatingOrderViewModel(OrdersListingViewModel ordersListingViewModel, IOrderService orderService, IDeviceStateService deviceStateService)
         {
             _orderService = orderService;
             _deviceStateService = deviceStateService;
-            SaveButton = new SaveOrderCommand(this, orderService, ordersListingViewModel);
-
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
+            AddModelButton = new AddModelCommand(this, deviceStateService);
+
+            SaveButton = new SaveOrderCommand(this, orderService, ordersListingViewModel);
         }
 
         public void Clear()
@@ -231,7 +249,7 @@ namespace Service.ViewModel.ViewModels
             ContactNameTextBox = string.Empty;
             ContactPhoneNumberTextBox = string.Empty;
             DeviceNameComboBox = string.Empty;
-            DeviceModelNameComboBox = string.Empty;
+            ModelNameComboBox = string.Empty;
             DescriptionTextBox = string.Empty;
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;

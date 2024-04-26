@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Service.ViewModel.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,18 @@ namespace Service.ViewModel.Commands
         protected void OnCanExecutedChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
+
+        protected void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateNameItemsSource) ||
+                e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateSelectedItem) ||
+                e.PropertyName == nameof(CreatingOrderViewModel.ModelStateSelectedItem) ||
+                e.PropertyName == nameof(CreatingOrderViewModel.ModelNameComboBox) ||
+                e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox))
+            {
+                OnCanExecutedChanged();
+            }
         }
     }
 }

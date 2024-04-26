@@ -52,7 +52,7 @@
                         mah:TextBoxHelper.Watermark="Marka"
                         IsEditable="True"
                         IsTextSearchEnabled="True"
-                        ItemsSource="{Binding Path=DeviceStateNameComboBox}"
+                        ItemsSource="{Binding Path=DeviceStateNameItemsSource}"
                         SelectedItem="{Binding Path=DeviceStateSelectedItem}"
                         Text="{Binding DeviceNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
@@ -89,8 +89,9 @@
                         mah:TextBoxHelper.Watermark="Model"
                         IsEditable="True"
                         IsTextSearchEnabled="True"
-                        ItemsSource="{Binding Path=ModelStateNameComboBox, UpdateSourceTrigger=PropertyChanged}"
-                        Text="{Binding DeviceModelNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                        SelectedItem="{Binding Path=ModelStateSelectedItem}"
+                        ItemsSource="{Binding Path=ModelStateNameItemSorce, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding ModelNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
                     <Button
                         Grid.Column="1"
                         Width="40"

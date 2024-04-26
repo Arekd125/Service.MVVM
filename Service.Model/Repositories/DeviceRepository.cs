@@ -27,16 +27,6 @@ namespace Service.Model.Repositories
             }
         }
 
-        public async Task<DeviceState> GetDevice(int id)
-        {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
-            {
-                var device = await context.DeviceState.FirstAsync(u => u.Id == id);
-
-                return device;
-            }
-        }
-
         public async Task<DeviceState>? GetDevice(string deviceName)
         {
             using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
