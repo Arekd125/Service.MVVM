@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Model.Interfaces
+namespace Service.Model.Repositories
 {
     public interface IOrderRepository
     {

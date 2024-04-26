@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Model.DbContexts;
-using Service.Model.Interfaces;
+
 using Service.Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -26,6 +26,7 @@ namespace Service.Model.Extensions
 
         {
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IDeviceRepository, DeviceRepository>();
         }
     }
 }

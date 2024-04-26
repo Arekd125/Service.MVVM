@@ -1,4 +1,5 @@
-﻿using Service.Model.Services.ServicesDevice;
+﻿using Service.Model.Repositories;
+
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
 using Servis.Models.OrderBuilder;
@@ -14,12 +15,12 @@ namespace Service.ViewModel.Commands
 {
     public class AddDeviceCommand : CommandBase
     {
-        private readonly ServiceDeviceState _serviceDeviceState;
+        private readonly IDeviceStateService _deviceStateService;
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
-        public AddDeviceCommand(CreatingOrderViewModel creatingOrderViewModel, ServiceDeviceState serviceDeviceState)
+        public AddDeviceCommand(CreatingOrderViewModel creatingOrderViewModel, IDeviceStateService deviceStateService)
         {
-            _serviceDeviceState = serviceDeviceState;
+            _deviceStateService = deviceStateService;
             _creatingOrderViewModel = creatingOrderViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -32,7 +33,7 @@ namespace Service.ViewModel.Commands
 
         private bool IfExists(string deviceName)
         {
-            var devices = _serviceDeviceState.GetAllDeviceName();
+            var devices = _deviceStateService.GetAllDeviceName();
             return devices.Any(p => p == deviceName);
         }
 
@@ -58,8 +59,8 @@ namespace Service.ViewModel.Commands
             DeviceStateBuilder deviceStateBuilder = new DeviceStateBuilder(_creatingOrderViewModel.DeviceNameComboBox);
 
             DeviceState deviceState = deviceStateBuilder.Build();
-            _serviceDeviceState.CreateDevice(deviceState);
-            _creatingOrderViewModel.DeviceStateNameComboBox = _serviceDeviceState.GetAllDeviceName();
+            _deviceStateService.CreateDevice(deviceState);
+            _creatingOrderViewModel.DeviceStateNameComboBox = _deviceStateService.GetAllDeviceName();
         }
     }
 }

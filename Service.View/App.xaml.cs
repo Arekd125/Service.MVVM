@@ -3,15 +3,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
-using Service.Model.Services;
-using Service.Model.Services.ServicesDevice;
+
 using Service.ViewModel.ViewModels;
 using Servis.Models.OrderModels;
 using System.Windows;
 using Service.Model.Extensions;
 using System.Configuration;
 using Service.ViewModel.Extensions;
-using Service.Model.Interfaces;
+
 using Service.Model.Repositories;
 
 namespace Service.View
@@ -31,9 +30,6 @@ namespace Service.View
                     services.AddDbConnection(hostContext.Configuration);
                     services.AddModel();
                     services.AddViewModel();
-
-                    services.AddSingleton<IDeviceCreator, DatabaseDeviceCreator>();
-                    services.AddSingleton<IDeviceProvider, DatabaseDeviceProvider>();
 
                     services.AddScoped<MainViewModel>();
 

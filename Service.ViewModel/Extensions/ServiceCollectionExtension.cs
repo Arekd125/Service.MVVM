@@ -16,8 +16,9 @@ namespace Service.ViewModel.Extensions
         public static void AddViewModel(this IServiceCollection services)
 
         {
-            services.AddTransient<IOrderService, OrderService>();
             services.AddAutoMapper(typeof(OrderMappingProfile));
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IDeviceStateService, DeviceStateService>();
         }
     }
 }

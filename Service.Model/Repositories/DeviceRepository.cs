@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Service.Model.DbContexts;
 using Servis.Models.OrderModels;
 using System;
@@ -8,15 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Model.Services.ServicesDevice
+namespace Service.Model.Repositories
 {
-    public class DatabaseDeviceProvider : IDeviceProvider
+    public class DeviceRepository : IDeviceRepository
     {
         private readonly OrdersDbContextFactory _dbContextFactory;
 
-        public DatabaseDeviceProvider(OrdersDbContextFactory dbContextFactory)
+        public DeviceRepository(OrdersDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
+        }
+
+        public async Task CreateDevice(DeviceState deviceState)
+        {
+            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            {
+                context.DeviceState.Add(deviceState);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task<DeviceState> GetDevice(int id)

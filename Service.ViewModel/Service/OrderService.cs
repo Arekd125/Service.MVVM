@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Service.Model.Interfaces;
+using Service.Model.Repositories;
 using Service.ViewModel.Dtos;
 using Servis.Models.OrderModels;
 using System;

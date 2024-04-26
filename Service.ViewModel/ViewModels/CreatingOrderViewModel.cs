@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Service.Model.Migrations;
-using Service.Model.Services;
-using Service.Model.Services.ServicesDevice;
+using Service.Model.Repositories;
+
 using Service.ViewModel.Commands;
 using Service.ViewModel.Service;
 using Servis.Models.OrderModels;
@@ -21,15 +21,13 @@ namespace Service.ViewModel.ViewModels
 {
     public class CreatingOrderViewModel : ViewModelBase
     {
-        private readonly ServiceDeviceState _serviceDeviceState;
-
         private IEnumerable<string> _deviceStateNameComboBox;
 
         public IEnumerable<string> DeviceStateNameComboBox
         {
             get
             {
-                _deviceStateNameComboBox = _serviceDeviceState.GetAllDeviceName();
+                _deviceStateNameComboBox = _deviceStateService.GetAllDeviceName();
                 return _deviceStateNameComboBox;
             }
             set
@@ -66,7 +64,7 @@ namespace Service.ViewModel.ViewModels
             {
                 _deviceStateSelectedItem = value;
                 OnPropertyChanged(nameof(DeviceStateSelectedItem));
-                ModelStateNameComboBox = _serviceDeviceState.GetAllModelName(DeviceStateSelectedItem);
+                ModelStateNameComboBox = _deviceStateService.GetAllModelName(DeviceStateSelectedItem);
             }
         }
 
@@ -209,7 +207,8 @@ namespace Service.ViewModel.ViewModels
 
         public ICommand CreateOrderAndPrintButton { get; }
 
-        private readonly IOrderService _orderCreator;
+        private readonly IOrderService _orderService;
+        private readonly IDeviceStateService _deviceStateService;
 
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
@@ -218,12 +217,13 @@ namespace Service.ViewModel.ViewModels
         public ICommand DeleteDeviceButton { get; }
         public ICommand EditDeviceButton { get; }
 
-        public CreatingOrderViewModel(IOrderService orderCreator, OrdersListingViewModel ordersListingViewModel, IDeviceProvider deviceProvider, IDeviceCreator deviceCreator)
+        public CreatingOrderViewModel(OrdersListingViewModel ordersListingViewModel, IOrderService orderService, IDeviceStateService deviceStateService)
         {
-            _orderCreator = orderCreator;
-            SaveButton = new SaveOrderCommand(this, orderCreator, ordersListingViewModel);
-            _serviceDeviceState = new ServiceDeviceState(deviceProvider, deviceCreator);
-            AddDeviceButton = new AddDeviceCommand(this, _serviceDeviceState);
+            _orderService = orderService;
+            _deviceStateService = deviceStateService;
+            SaveButton = new SaveOrderCommand(this, orderService, ordersListingViewModel);
+
+            AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
         }
 
         public void Clear()
@@ -240,7 +240,7 @@ namespace Service.ViewModel.ViewModels
 
         private string SetOrderName()
         {
-            OrderNo = _orderCreator.GetOrderNumber().Result;
+            OrderNo = _orderService.GetOrderNumber().Result;
 
             return "Z/" + OrderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
         }

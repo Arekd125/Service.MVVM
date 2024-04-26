@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Service.Model.DbContexts;
-using Service.Model.Interfaces;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -42,12 +41,12 @@ namespace Service.Model.Repositories
         {
             using (OrdersDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
-                Order orders = await dbContext.Orders
+                Order order = await dbContext.Orders
                     .Include(o => o.Contact)
                     .OrderByDescending(o => o.Id)
-                    .FirstOrDefaultAsync();
+                    .FirstAsync();
 
-                return orders;
+                return order;
             }
         }
     }
