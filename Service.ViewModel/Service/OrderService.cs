@@ -25,7 +25,7 @@ namespace Service.ViewModel.Service
 
         public async Task<IEnumerable<DisplayOrderDto>> GetAllOrders()
         {
-            var orders = _orderRepository.GetAllOrders().Result;
+            var orders = await _orderRepository.GetAllOrders();
 
             var displayOrderDto = _mapper.Map<IEnumerable<DisplayOrderDto>>(orders);
 
@@ -34,7 +34,7 @@ namespace Service.ViewModel.Service
 
         public async Task<DisplayOrderDto> GetLastOrder()
         {
-            var order = _orderRepository.GetLastOrder().Result;
+            var order = await _orderRepository.GetLastOrder();
             var diplsyOrderDto = _mapper.Map<DisplayOrderDto>(order);
 
             return diplsyOrderDto;
@@ -44,7 +44,7 @@ namespace Service.ViewModel.Service
         {
 
 
-            var order = _orderRepository.GetLastOrder().Result;
+            var order = await _orderRepository.GetLastOrder();
             if (order != null)
             {
                 var lastOrderData = order.StartDate;

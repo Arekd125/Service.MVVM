@@ -46,7 +46,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
-                DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstOrDefaultAsync(u => u.Name == deviceStateName);
+                DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == deviceStateName);
 
                 if (device != null)
                 {

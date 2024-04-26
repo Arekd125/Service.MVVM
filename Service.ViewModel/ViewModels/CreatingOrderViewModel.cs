@@ -42,7 +42,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _deviceStateSelectedItem;
+        private string _deviceStateSelectedItem = string.Empty;
 
         public string DeviceStateSelectedItem
         {
@@ -58,7 +58,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _modelStateSelectedItem;
+        private string _modelStateSelectedItem = string.Empty;
 
         public string ModelStateSelectedItem
         {
@@ -88,7 +88,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _OrderName;
+        private string _OrderName =string.Empty;
 
         public string OrderNameTextBlock
         {
@@ -104,7 +104,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _contactName;
+        private string _contactName = string.Empty;
 
         public string ContactNameTextBox
         {
@@ -119,7 +119,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _contactPhoneNumber;
+        private string _contactPhoneNumber =string.Empty;
 
         public string ContactPhoneNumberTextBox
         {
@@ -135,7 +135,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _deviceName;
+        private string _deviceName = string.Empty;
 
         public string DeviceNameComboBox
         {
@@ -150,7 +150,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _ModelName;
+        private string _ModelName = string.Empty;
 
         public string ModelNameComboBox
         {
@@ -165,7 +165,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _description;
+        private string _description = string.Empty;
 
         public string DescriptionTextBox
         {
@@ -180,7 +180,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _toDo;
+        private string _toDo = string.Empty;
 
         public string ToDoTextBox
         {
@@ -195,7 +195,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private string _accessories;
+        private string _accessories = string.Empty;
 
         public string AccessoriesTexBox
         {

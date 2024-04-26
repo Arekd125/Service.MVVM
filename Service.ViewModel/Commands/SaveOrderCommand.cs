@@ -45,7 +45,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            CreateOrderDto orderdto = new CreateOrderDto()
+            CreateOrderDto orderdto = new()
             {
                 OrderNo = _creatingOrderViewModel.OrderNo,
                 OrderName = _creatingOrderViewModel.OrderNameTextBlock,
