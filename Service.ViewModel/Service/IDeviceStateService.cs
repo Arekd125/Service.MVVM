@@ -4,9 +4,12 @@ namespace Service.ViewModel.Service
 {
     public interface IDeviceStateService
     {
-        void CreateDevice(DeviceState deviceName);
-        void CreateModel(ModelState modelState, string deviceStateSelectedItem);
-        IEnumerable<string> GetAllDeviceName();
-        IEnumerable<string> GetAllModelName(string deviceName);
+        Task CreateDevice(DeviceState deviceName);
+
+        Task AddModel(ModelState modelState, string deviceStateSelectedItem);
+
+        Task<IEnumerable<string>> GetAllDeviceName();
+
+        Task<IEnumerable<string>> GetAllModelName(string deviceName);
     }
 }

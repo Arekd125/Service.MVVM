@@ -11,8 +11,10 @@ namespace Service.Model.Repositories
     {
         public Task CreateDevice(DeviceState deviceState);
 
-        Task<DeviceState> GetDevice(string deviceName);
+        public Task<DeviceState> GetDevice(string deviceName);
 
-        Task<IEnumerable<DeviceState>> GetAllDevice();
+        public Task<IEnumerable<DeviceState>> GetAllDevice();
+
+        public Task AddModel(ModelState modelState, string deviceStateName);
     }
 }

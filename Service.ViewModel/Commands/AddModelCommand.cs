@@ -37,8 +37,10 @@ namespace Service.ViewModel.Commands
             {
                 Name = _creatingOrderViewModel.ModelNameComboBox
             };
-
-            _deviceStateService.CreateModel(modelState, _creatingOrderViewModel.DeviceStateSelectedItem);
+            var deviceStateName = _creatingOrderViewModel.DeviceStateSelectedItem;
+            _deviceStateService.AddModel(modelState, deviceStateName);
+            _creatingOrderViewModel.ModelStateNameItemSorce = _deviceStateService.GetAllModelName(deviceStateName).Result;
+            _creatingOrderViewModel.ModelStateSelectedItem = _creatingOrderViewModel.ModelNameComboBox;
         }
     }
 }

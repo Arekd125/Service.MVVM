@@ -31,7 +31,7 @@ namespace Service.ViewModel.ViewModels
         {
             get
             {
-                _deviceStateNameItemsSource = _deviceStateService.GetAllDeviceName();
+                _deviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
                 return _deviceStateNameItemsSource;
             }
             set
@@ -68,7 +68,7 @@ namespace Service.ViewModel.ViewModels
             {
                 _deviceStateSelectedItem = value;
                 OnPropertyChanged(nameof(DeviceStateSelectedItem));
-                ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem);
+                ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
             }
         }
 

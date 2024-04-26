@@ -13,31 +13,31 @@ namespace Service.ViewModel.Service
             _deviceRepository = deviceRepository;
         }
 
-        public IEnumerable<string> GetAllDeviceName()
+        public async Task<IEnumerable<string>> GetAllDeviceName()
         {
-            var allDevice = _deviceRepository.GetAllDevice().Result.Select(p => p.Name);
-            return allDevice;
+            var allDevice = await _deviceRepository.GetAllDevice();
+            return allDevice.Select(p => p.Name);
         }
 
-        public IEnumerable<string> GetAllModelName(string deviceName)
+        public async Task<IEnumerable<string>> GetAllModelName(string deviceName)
 
         {
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = _deviceRepository.GetDevice(deviceName).Result;
+                var device = await _deviceRepository.GetDevice(deviceName);
                 return device.ModelLists.Select(p => p.Name);
             }
             return Enumerable.Empty<string>();
         }
 
-        public void CreateDevice(DeviceState deviceName)
+        public async Task CreateDevice(DeviceState deviceName)
         {
-            _deviceRepository.CreateDevice(deviceName);
+            await _deviceRepository.CreateDevice(deviceName);
         }
 
-        public void CreateModel(ModelState modelState, string deviceStateSelectedItem)
+        public async Task AddModel(ModelState modelState, string deviceStateName)
         {
-            throw new NotImplementedException();
+            await _deviceRepository.AddModel(modelState, deviceStateName);
         }
     }
 }

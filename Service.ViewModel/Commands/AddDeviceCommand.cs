@@ -35,7 +35,7 @@ namespace Service.ViewModel.Commands
 
         private bool IfExists(string deviceName)
         {
-            var devices = _deviceStateService.GetAllDeviceName();
+            var devices = _deviceStateService.GetAllDeviceName().Result;
             return devices.Any(p => p == deviceName);
         }
 
@@ -52,7 +52,7 @@ namespace Service.ViewModel.Commands
             };
 
             _deviceStateService.CreateDevice(deviceState);
-            _creatingOrderViewModel.DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName();
+            _creatingOrderViewModel.DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
             _creatingOrderViewModel.DeviceStateSelectedItem = _creatingOrderViewModel.DeviceNameComboBox;
         }
     }
