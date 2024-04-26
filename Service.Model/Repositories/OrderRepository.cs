@@ -37,14 +37,14 @@ namespace Service.Model.Repositories
             }
         }
 
-        public async Task<Order> GetLastOrder()
+        public async Task<Order?> GetLastOrder()
         {
             using (OrdersDbContext dbContext = _dbContextFactory.CreateDbContext())
             {
-                Order order = await dbContext.Orders
+                Order? order = await dbContext.Orders
                     .Include(o => o.Contact)
                     .OrderByDescending(o => o.Id)
-                    .FirstAsync();
+                    .FirstOrDefaultAsync();
 
                 return order;
             }

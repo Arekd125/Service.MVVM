@@ -33,10 +33,10 @@ namespace Service.ViewModel.Commands
                 && !IfExists(_creatingOrderViewModel.DeviceNameComboBox.TrimEnd());
         }
 
-        private bool IfExists(string deviceName)
+        private bool IfExists(string deviceStateName)
         {
             var devices = _deviceStateService.GetAllDeviceName().Result;
-            return devices.Any(p => p == deviceName);
+            return devices.Any(p => p == deviceStateName);
         }
 
         public override bool CanExecute(object? parameter)

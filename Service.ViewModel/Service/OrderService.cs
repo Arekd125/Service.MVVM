@@ -47,12 +47,17 @@ namespace Service.ViewModel.Service
 
         public async Task<int> GetOrderNumber()
         {
-            var order = _orderRepository.GetLastOrder().Result;
-            var lastOrderData = order.StartDate;
 
-            if (lastOrderData.Month == DateTime.Now.Month)
+
+            var order = _orderRepository.GetLastOrder().Result;
+            if (order != null)
             {
-                return order.OrderNo + 1;
+                var lastOrderData = order.StartDate;
+
+                if (lastOrderData.Month == DateTime.Now.Month)
+                {
+                    return order.OrderNo + 1;
+                }
             }
 
             return 1;
