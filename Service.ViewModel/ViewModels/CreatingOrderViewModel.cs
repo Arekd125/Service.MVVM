@@ -253,13 +253,13 @@ namespace Service.ViewModel.ViewModels
         {
             if (phoneNumber.Length > 11)
             {
-                return phoneNumber.Substring(0, 11);
+                return phoneNumber[0..11];
             }
 
             var isNotNumber = new Regex("[^0-9 ]").IsMatch(phoneNumber);
             if (isNotNumber)
             {
-                var result = phoneNumber.Substring(0, phoneNumber.Length - 1);
+                var result = phoneNumber[0..^1];
                 return result;
             }
 

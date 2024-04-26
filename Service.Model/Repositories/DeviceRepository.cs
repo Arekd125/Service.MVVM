@@ -15,18 +15,18 @@ namespace Service.Model.Repositories
 
         public async Task CreateDevice(DeviceState deviceState)
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
                 context.DeviceState.Add(deviceState);
                 await context.SaveChangesAsync();
             }
         }
 
-        public async Task<DeviceState>? GetDevice(string devicestateName)
+        public async Task<DeviceState> GetDevice(string devicestateName)
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
-                var device = await context.DeviceState.Include(o => o.ModelLists).FirstOrDefaultAsync(u => u.Name == devicestateName);
+                var device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == devicestateName);
 
                 return device;
             }
@@ -34,7 +34,7 @@ namespace Service.Model.Repositories
 
         public async Task<IEnumerable<DeviceState>> GetAllDevice()
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
                 IEnumerable<DeviceState> DeviceStates = await context.DeviceState.Include(o => o.ModelLists).ToListAsync();
 
@@ -44,7 +44,7 @@ namespace Service.Model.Repositories
 
         public async Task AddModel(ModelState modelState, string deviceStateName)
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
                 DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstOrDefaultAsync(u => u.Name == deviceStateName);
 

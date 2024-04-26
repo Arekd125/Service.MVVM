@@ -47,7 +47,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            ModelState modelState = new ModelState()
+            ModelState modelState = new()
             {
                 Name = _creatingOrderViewModel.ModelNameComboBox
             };

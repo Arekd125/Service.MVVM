@@ -38,7 +38,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            DeviceState deviceState = new DeviceState
+            DeviceState deviceState = new()
             {
                 Name = _creatingOrderViewModel.DeviceNameComboBox
             };
