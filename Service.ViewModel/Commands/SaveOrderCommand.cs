@@ -1,6 +1,7 @@
 ﻿using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
+using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using System.ComponentModel;
 
 namespace Service.ViewModel.Commands
@@ -27,16 +28,16 @@ namespace Service.ViewModel.Commands
                    !string.IsNullOrEmpty(_creatingOrderViewModel.ModelNameComboBox));
         }
 
-        private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CreatingOrderViewModel.ContactPhoneNumberTextBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.ModelNameComboBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox))
+        //private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName == nameof(CreatingOrderViewModel.ContactPhoneNumberTextBox) ||
+        //        e.PropertyName == nameof(CreatingOrderViewModel.ModelNameComboBox) ||
+        //        e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox))
 
-            {
-                OnCanExecutedChanged();
-            }
-        }
+        //    {
+        //        OnCanExecutedChanged();
+        //    }
+        //}
 
         public override bool CanExecute(object? parameter)
         {

@@ -3,13 +3,63 @@ using Service.ViewModel.Service;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 
-namespace Service.ViewModel.ViewModels
+namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
     public class CreatingOrderViewModel : ViewModelBase
 
     {
+
+
+
+
+
+
         private readonly IOrderService _orderService;
         private readonly IDeviceStateService _deviceStateService;
+        private readonly NameOrderViewModel _nameOrderViewModel;
+
+
+        public int OrderNo => _nameOrderViewModel.SetOrderNo();
+        public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
+
+
+        private string _contactName = string.Empty;
+
+        public string ContactNameTextBox
+        {
+            get
+            {
+                return _contactName;
+            }
+            set
+            {
+                _contactName = value;
+                OnPropertyChanged(nameof(ContactNameTextBox));
+            }
+        }
+
+        private string _contactPhoneNumber = string.Empty;
+
+        public string ContactPhoneNumberTextBox
+        {
+            get
+            {
+                return _contactPhoneNumber;
+            }
+            set
+            {
+                _contactPhoneNumber = PhoneValisation(value);
+
+                OnPropertyChanged(nameof(ContactPhoneNumberTextBox));
+            }
+        }
+
+
+
+
+
+
+
 
         private IEnumerable<string> _deviceStateNameItemsSource;
 
@@ -73,67 +123,38 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private int _orderNo;
+        //private int _orderNo;
 
-        public int OrderNo
-        {
-            get
-            {
-                return _orderNo;
-            }
-            set
-            {
-                _orderNo = value;
-                OnPropertyChanged(nameof(OrderNo));
-            }
-        }
+        //public int OrderNo
+        //{
+        //    get
+        //    {
+        //        return _orderNo;
+        //    }
+        //    set
+        //    {
+        //        _orderNo = value;
+        //        OnPropertyChanged(nameof(OrderNo));
+        //    }
+        //}
 
-        private string _OrderName =string.Empty;
+        //private string _OrderName = string.Empty;
 
-        public string OrderNameTextBlock
-        {
-            get
-            {
-                _OrderName = SetOrderName();
-                return _OrderName;
-            }
-            set
-            {
-                _OrderName = value;
-                OnPropertyChanged(nameof(OrderNameTextBlock));
-            }
-        }
+        //public string OrderNameTextBlock
+        //{
+        //    get
+        //    {
+        //        _OrderName =  SetOrderName();
+        //        return _OrderName;
+        //    }
+        //    set
+        //    {
+        //        _OrderName = value;
+        //        OnPropertyChanged(nameof(OrderNameTextBlock));
+        //    }
+        //}
 
-        private string _contactName = string.Empty;
-
-        public string ContactNameTextBox
-        {
-            get
-            {
-                return _contactName;
-            }
-            set
-            {
-                _contactName = value;
-                OnPropertyChanged(nameof(ContactNameTextBox));
-            }
-        }
-
-        private string _contactPhoneNumber =string.Empty;
-
-        public string ContactPhoneNumberTextBox
-        {
-            get
-            {
-                return _contactPhoneNumber;
-            }
-            set
-            {
-                _contactPhoneNumber = PhoneValisation(value);
-
-                OnPropertyChanged(nameof(ContactPhoneNumberTextBox));
-            }
-        }
+      
 
         private string _deviceName = string.Empty;
 
@@ -224,6 +245,9 @@ namespace Service.ViewModel.ViewModels
         {
             _orderService = orderService;
             _deviceStateService = deviceStateService;
+
+             _nameOrderViewModel = new NameOrderViewModel(this, orderService);
+
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
             AddModelButton = new AddModelCommand(this, deviceStateService);
 
@@ -239,15 +263,16 @@ namespace Service.ViewModel.ViewModels
             DescriptionTextBox = string.Empty;
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
-            OrderNameTextBlock = SetOrderName();
+            OnPropertyChanged(nameof(OrderNameTextBlock));
+            
         }
 
-        private string SetOrderName()
-        {
-            OrderNo = _orderService.GetOrderNumber().Result;
+        //private string SetOrderName()
+        //{
+        //    OrderNo = _orderService.GetOrderNumber().Result;
 
-            return "Z/" + OrderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
-        }
+        //    return "Z/" + OrderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
+        //}
 
         private string PhoneValisation(string phoneNumber)
         {

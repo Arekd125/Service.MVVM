@@ -2,6 +2,7 @@
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
+using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
 namespace Service.ViewModel.Extensions
 {

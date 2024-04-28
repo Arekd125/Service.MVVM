@@ -49,7 +49,7 @@ namespace Service.ViewModel.Service
             {
                 var lastOrderData = order.StartDate;
 
-                if (lastOrderData.Month == DateTime.Now.Month)
+                if (lastOrderData.Month == DateTime.Now.Month && lastOrderData.Year == DateTime.Now.Year )
                 {
                     return order.OrderNo + 1;
                 }

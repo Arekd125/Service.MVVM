@@ -1,6 +1,5 @@
 ﻿using Service.ViewModel.Service;
-using Service.ViewModel.ViewModels;
-
+using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.Commands
