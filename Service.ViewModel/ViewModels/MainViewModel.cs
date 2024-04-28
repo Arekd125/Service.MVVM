@@ -7,9 +7,9 @@ public class MainViewModel : ViewModelBase
     public OrdersListingViewModel ordersListingViewModel { get; set; }
     public CreatingOrderViewModel creatingOrderViewModel { get; set; }
 
-    public MainViewModel(IOrderService orderService, IDeviceStateService deviceStateService)
+    public MainViewModel(OrdersListingViewModel _ordersListingViewModel, CreatingOrderViewModel _creatingOrderViewModel)
     {
-        ordersListingViewModel = new OrdersListingViewModel(orderService);
-        creatingOrderViewModel = new CreatingOrderViewModel(ordersListingViewModel, orderService, deviceStateService);
+        ordersListingViewModel = _ordersListingViewModel;
+        creatingOrderViewModel = _creatingOrderViewModel;
     }
-}
+} 
