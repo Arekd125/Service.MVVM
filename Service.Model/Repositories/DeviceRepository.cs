@@ -27,11 +27,11 @@ namespace Service.Model.Repositories
             }
         }
 
-        public async Task<DeviceState>? GetDevice(string devicestateName)
+        public async Task<DeviceState> GetDevice(string devicestateName)
         {
             using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
             {
-                var device = await context.DeviceState.Include(o => o.ModelLists).FirstOrDefaultAsync(u => u.Name == devicestateName);
+                var device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == devicestateName);
 
                 return device;
             }
@@ -51,7 +51,7 @@ namespace Service.Model.Repositories
         {
             using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
             {
-                DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstOrDefaultAsync(u => u.Name == deviceStateName);
+                DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == deviceStateName);
 
                 if (device != null)
                 {
