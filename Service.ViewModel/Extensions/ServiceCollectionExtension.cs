@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Extensions.DependencyInjection;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service;
@@ -18,6 +19,11 @@ namespace Service.ViewModel.Extensions
 
             services.AddSingleton<OrdersListingViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();
+            services.AddScoped<MainViewModel>(s => new MainViewModel(
+                                                   s.GetRequiredService<IDialogCoordinator>(),
+                                                   s.GetRequiredService<OrdersListingViewModel>(),
+                                                   s.GetRequiredService<CreatingOrderViewModel>()
+                                                    ));
         }
     }
 }

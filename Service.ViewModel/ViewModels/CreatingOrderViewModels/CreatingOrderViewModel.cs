@@ -1,4 +1,5 @@
-﻿using Service.ViewModel.Commands;
+﻿using MahApps.Metro.Controls.Dialogs;
+using Service.ViewModel.Commands;
 using Service.ViewModel.Service;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -12,13 +13,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly IDeviceStateService _deviceStateService;
         private readonly NameOrderViewModel _nameOrderViewModel;
         private readonly ContactViewModel _contactViewModel;
-
-        public event EventHandler<string> ShowMessageBoxRequested;
-
-        public void ShowMessage()
-        {
-            ShowMessageBoxRequested?.Invoke(this, "Message to display");
-        }
+        private IDialogCoordinator dialogCoordinator;
 
         public int OrderNo => _nameOrderViewModel.SetOrderNo();
         public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
@@ -201,12 +196,14 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
 
-        public CreatingOrderViewModel(OrdersListingViewModel ordersListingViewModel, IOrderService orderService
-             , IDeviceStateService deviceStateService)
+        public CreatingOrderViewModel(IDialogCoordinator instance
+                , OrdersListingViewModel ordersListingViewModel
+                , IOrderService orderService
+                , IDeviceStateService deviceStateService)
         {
             _orderService = orderService;
             _deviceStateService = deviceStateService;
-
+            dialogCoordinator = instance;
             _nameOrderViewModel = new NameOrderViewModel(this, orderService);
             _contactViewModel = new ContactViewModel(this, orderService);
 
@@ -229,6 +226,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
             OnPropertyChanged(nameof(OrderNameTextBlock));
+        }
+
+        public async void ShowMessage()
+        {
+            await dialogCoordinator.ShowMessageAsync(this, "HEADER", "MESSAGE");
         }
     }
 }

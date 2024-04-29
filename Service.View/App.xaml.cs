@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
 using Service.Model.Extensions;
-using Service.ViewModel.Commands;
 using Service.ViewModel.Extensions;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
@@ -28,8 +27,7 @@ namespace Service.View
                     services.AddDbConnection(hostContext.Configuration);
                     services.AddModel();
                     services.AddViewModel();
-
-                    services.AddScoped<MainViewModel>();
+                    services.AddSingleton<IDialogCoordinator>(s => DialogCoordinator.Instance);
 
                     services.AddSingleton(s => new MainWindow()
                     {
@@ -49,13 +47,6 @@ namespace Service.View
             }
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
-
-            var viewModel = _host.Services.GetRequiredService<CreatingOrderViewModel>();
-
-            viewModel.ShowMessageBoxRequested += (sender, message) =>
-            {
-                dialogCoordinator.ShowMessageAsync(this, "HEADER", "MESSAGE");
-            };
 
             MainWindow.Show();
 
