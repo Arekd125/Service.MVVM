@@ -1,13 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Service.Model.DbContexts;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Service.ViewModel.ViewModels;
+using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
 namespace Service.ViewModel.Extensions
 {
@@ -19,6 +14,9 @@ namespace Service.ViewModel.Extensions
             services.AddAutoMapper(typeof(OrderMappingProfile));
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IDeviceStateService, DeviceStateService>();
+            services.AddSingleton<OrdersListingViewModel>();
+            services.AddSingleton<CreatingOrderViewModel>();
+
         }
     }
 }

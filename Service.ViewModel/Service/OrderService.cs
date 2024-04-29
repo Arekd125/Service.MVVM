@@ -2,11 +2,6 @@
 using Service.Model.Repositories;
 using Service.ViewModel.Dtos;
 using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Service
 {
@@ -30,7 +25,7 @@ namespace Service.ViewModel.Service
 
         public async Task<IEnumerable<DisplayOrderDto>> GetAllOrders()
         {
-            var orders = _orderRepository.GetAllOrders().Result;
+            var orders = await _orderRepository.GetAllOrders();
 
             var displayOrderDto = _mapper.Map<IEnumerable<DisplayOrderDto>>(orders);
 
@@ -39,7 +34,7 @@ namespace Service.ViewModel.Service
 
         public async Task<DisplayOrderDto> GetLastOrder()
         {
-            var order = _orderRepository.GetLastOrder().Result;
+            var order = await _orderRepository.GetLastOrder();
             var diplsyOrderDto = _mapper.Map<DisplayOrderDto>(order);
 
             return diplsyOrderDto;
@@ -47,12 +42,17 @@ namespace Service.ViewModel.Service
 
         public async Task<int> GetOrderNumber()
         {
-            var order = _orderRepository.GetLastOrder().Result;
-            var lastOrderData = order.StartDate;
 
-            if (lastOrderData.Month == DateTime.Now.Month)
+
+            var order = await _orderRepository.GetLastOrder();
+            if (order != null)
             {
-                return order.OrderNo + 1;
+                var lastOrderData = order.StartDate;
+
+                if (lastOrderData.Month == DateTime.Now.Month && lastOrderData.Year == DateTime.Now.Year )
+                {
+                    return order.OrderNo + 1;
+                }
             }
 
             return 1;

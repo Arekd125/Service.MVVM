@@ -1,15 +1,8 @@
 ﻿using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
-
-using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands
 {
@@ -35,16 +28,16 @@ namespace Service.ViewModel.Commands
                    !string.IsNullOrEmpty(_creatingOrderViewModel.ModelNameComboBox));
         }
 
-        private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(CreatingOrderViewModel.ContactPhoneNumberTextBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.ModelNameComboBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox))
+        //private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName == nameof(CreatingOrderViewModel.ContactPhoneNumberTextBox) ||
+        //        e.PropertyName == nameof(CreatingOrderViewModel.ModelNameComboBox) ||
+        //        e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox))
 
-            {
-                OnCanExecutedChanged();
-            }
-        }
+        //    {
+        //        OnCanExecutedChanged();
+        //    }
+        //}
 
         public override bool CanExecute(object? parameter)
         {
@@ -53,7 +46,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            CreateOrderDto orderdto = new CreateOrderDto()
+            CreateOrderDto orderdto = new()
             {
                 OrderNo = _creatingOrderViewModel.OrderNo,
                 OrderName = _creatingOrderViewModel.OrderNameTextBlock,

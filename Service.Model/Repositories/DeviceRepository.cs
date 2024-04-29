@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Service.Model.DbContexts;
 using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Model.Repositories
 {
@@ -20,7 +15,7 @@ namespace Service.Model.Repositories
 
         public async Task CreateDevice(DeviceState deviceState)
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
                 context.DeviceState.Add(deviceState);
                 await context.SaveChangesAsync();
@@ -29,7 +24,7 @@ namespace Service.Model.Repositories
 
         public async Task<DeviceState> GetDevice(string devicestateName)
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
                 var device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == devicestateName);
 
@@ -39,7 +34,7 @@ namespace Service.Model.Repositories
 
         public async Task<IEnumerable<DeviceState>> GetAllDevice()
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
                 IEnumerable<DeviceState> DeviceStates = await context.DeviceState.Include(o => o.ModelLists).ToListAsync();
 
@@ -49,7 +44,7 @@ namespace Service.Model.Repositories
 
         public async Task AddModel(ModelState modelState, string deviceStateName)
         {
-            using (OrdersDbContext context = _dbContextFactory.CreateDbContext())
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
             {
                 DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == deviceStateName);
 

@@ -1,15 +1,6 @@
-﻿using Service.Model.Repositories;
-
-using Service.ViewModel.Service;
-using Service.ViewModel.ViewModels;
-
+﻿using Service.ViewModel.Service;
+using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands
 {
@@ -33,10 +24,10 @@ namespace Service.ViewModel.Commands
                 && !IfExists(_creatingOrderViewModel.DeviceNameComboBox.TrimEnd());
         }
 
-        private bool IfExists(string deviceName)
+        private bool IfExists(string deviceStateName)
         {
             var devices = _deviceStateService.GetAllDeviceName().Result;
-            return devices.Any(p => p == deviceName);
+            return devices.Any(p => p == deviceStateName);
         }
 
         public override bool CanExecute(object? parameter)
@@ -46,7 +37,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            DeviceState deviceState = new DeviceState
+            DeviceState deviceState = new()
             {
                 Name = _creatingOrderViewModel.DeviceNameComboBox
             };
