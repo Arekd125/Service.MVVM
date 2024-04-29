@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MahApps.Metro.Controls.Dialogs;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
 using Service.Model.Extensions;
+using Service.ViewModel.Commands;
 using Service.ViewModel.Extensions;
 using Service.ViewModel.ViewModels;
+using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using System.Windows;
 
 namespace Service.View
@@ -15,6 +18,7 @@ namespace Service.View
     public partial class App : Application
     {
         private readonly IHost _host;
+        private IDialogCoordinator dialogCoordinator;
 
         public App()
         {
@@ -45,6 +49,13 @@ namespace Service.View
             }
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
+
+            var viewModel = _host.Services.GetRequiredService<CreatingOrderViewModel>();
+
+            viewModel.ShowMessageBoxRequested += (sender, message) =>
+            {
+                dialogCoordinator.ShowMessageAsync(this, "HEADER", "MESSAGE");
+            };
 
             MainWindow.Show();
 

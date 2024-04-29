@@ -13,6 +13,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly NameOrderViewModel _nameOrderViewModel;
         private readonly ContactViewModel _contactViewModel;
 
+        public event EventHandler<string> ShowMessageBoxRequested;
+
+        public void ShowMessage()
+        {
+            ShowMessageBoxRequested?.Invoke(this, "Message to display");
+        }
+
         public int OrderNo => _nameOrderViewModel.SetOrderNo();
         public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
 
@@ -194,7 +201,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
 
-        public CreatingOrderViewModel(OrdersListingViewModel ordersListingViewModel, IOrderService orderService, IDeviceStateService deviceStateService)
+        public CreatingOrderViewModel(OrdersListingViewModel ordersListingViewModel, IOrderService orderService
+             , IDeviceStateService deviceStateService)
         {
             _orderService = orderService;
             _deviceStateService = deviceStateService;
@@ -203,9 +211,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _contactViewModel = new ContactViewModel(this, orderService);
 
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
+            DeleteDeviceButton = new DeleteDeviceCommand(this, deviceStateService);
+
             AddModelButton = new AddModelCommand(this, deviceStateService);
 
             SaveButton = new SaveOrderCommand(this, orderService, ordersListingViewModel);
+            CancleButton = new CancleCommand(this);
         }
 
         public void Clear()
