@@ -19,11 +19,7 @@ namespace Service.ViewModel.Extensions
 
             services.AddSingleton<OrdersListingViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();
-            services.AddScoped<MainViewModel>(s => new MainViewModel(
-                                                   s.GetRequiredService<IDialogCoordinator>(),
-                                                   s.GetRequiredService<OrdersListingViewModel>(),
-                                                   s.GetRequiredService<CreatingOrderViewModel>()
-                                                    ));
+            services.AddScoped<MainViewModel>();
         }
     }
 }
