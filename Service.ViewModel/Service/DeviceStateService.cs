@@ -19,25 +19,30 @@ namespace Service.ViewModel.Service
             return allDevice.Select(p => p.Name);
         }
 
-        public async Task<IEnumerable<string>> GetAllModelName(string deviceName)
+        public async Task<IEnumerable<string>> GetAllModelName(string deviceStateName)
 
         {
-            if (!string.IsNullOrEmpty(deviceName))
+            if (!string.IsNullOrEmpty(deviceStateName))
             {
-                var device = await _deviceRepository.GetDevice(deviceName);
+                var device = await _deviceRepository.GetDevice(deviceStateName);
                 return device.ModelLists.Select(p => p.Name);
             }
             return Enumerable.Empty<string>();
         }
 
-        public async Task CreateDevice(DeviceState deviceName)
+        public async Task CreateDevice(DeviceState deviceStateName)
         {
-            await _deviceRepository.CreateDevice(deviceName);
+            await _deviceRepository.CreateDevice(deviceStateName);
         }
 
         public async Task AddModel(ModelState modelState, string deviceStateName)
         {
             await _deviceRepository.AddModel(modelState, deviceStateName);
+        }
+
+        public async Task DeleteDevice(string deviceStateName)
+        {
+            await _deviceRepository.DeleteDevice(deviceStateName);
         }
     }
 }

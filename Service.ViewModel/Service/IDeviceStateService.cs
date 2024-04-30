@@ -10,6 +10,8 @@ namespace Service.ViewModel.Service
 
         Task<IEnumerable<string>> GetAllDeviceName();
 
-        Task<IEnumerable<string>> GetAllModelName(string deviceName);
+        Task<IEnumerable<string>> GetAllModelName(string deviceStateName);
+
+        Task DeleteDevice(string deviceStateName);
     }
 }

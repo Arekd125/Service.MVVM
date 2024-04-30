@@ -33,7 +33,14 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            _creatingOrderViewModel.ShowMessage();
+            if (_creatingOrderViewModel.ModelStateNameItemSorce.Count() != 0)
+            {
+                _creatingOrderViewModel.ShowMessage();
+            }
+            else
+            {
+                _creatingOrderViewModel.DeleteDeviceAndModels();
+            }
         }
     }
 }

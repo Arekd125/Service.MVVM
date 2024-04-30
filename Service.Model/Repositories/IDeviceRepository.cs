@@ -11,5 +11,7 @@ namespace Service.Model.Repositories
         public Task<IEnumerable<DeviceState>> GetAllDevice();
 
         public Task AddModel(ModelState modelState, string deviceStateName);
+
+        public Task DeleteDevice(string deviceStateName);
     }
 }

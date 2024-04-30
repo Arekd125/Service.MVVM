@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using ControlzEx.Theming;
+using MahApps.Metro.Controls.Dialogs;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Service;
 using System.Text.RegularExpressions;
@@ -226,11 +227,48 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
             OnPropertyChanged(nameof(OrderNameTextBlock));
+            ShowMessage();
         }
 
         public async void ShowMessage()
         {
-            await dialogCoordinator.ShowMessageAsync(this, "HEADER", "MESSAGE");
+            var themes = ThemeManager.Current.DetectTheme().Resources;
+            themes["Theme.ThemeInstance"] = ThemeManager.Current.GetTheme("Light.Red");
+
+            var mySettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Tak",
+                NegativeButtonText = "Anuluj",
+                AnimateShow = false,
+                CustomResourceDictionary = themes,
+                ColorScheme = MetroDialogColorScheme.Accented
+            };
+
+            var title = $"Usunąć markę {DeviceStateSelectedItem}?";
+            var models = string.Join(", ", ModelStateNameItemSorce);
+            var message = $"Zostaną również usunięte następujące modele: {models}";
+
+            //await dialogCoordinator.ShowMessageAsync(this, title, message,
+            //    MessageDialogStyle.AffirmativeAndNegative, mySettings);
+
+            MessageDialogResult result = await dialogCoordinator.ShowMessageAsync(
+                                            this,
+                                            title,
+                                            message,
+                                            MessageDialogStyle.AffirmativeAndNegative,
+                                            mySettings);
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                DeleteDeviceAndModels();
+            }
+        }
+
+        public void DeleteDeviceAndModels()
+        {
+            _deviceStateService.DeleteDevice(DeviceStateSelectedItem);
+            DeviceStateSelectedItem = null;
+            DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
         }
     }
 }
