@@ -2,6 +2,7 @@
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
+using Servis.Models.OrderModels;
 using System.ComponentModel;
 
 namespace Service.ViewModel.Commands
@@ -12,11 +13,14 @@ namespace Service.ViewModel.Commands
         private readonly IOrderService _orderService;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, IOrderService orderService, OrdersListingViewModel ordersListingViewModel)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel
+            , IOrderService orderService
+            , OrdersListingViewModel ordersListingViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
             _orderService = orderService;
             _ordersListingViewModel = ordersListingViewModel;
+
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
@@ -49,8 +53,22 @@ namespace Service.ViewModel.Commands
             };
 
             _orderService.CreateOrder(orderdto);
+            AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();
             _creatingOrderViewModel.Clear();
+        }
+
+        private void AddDeviceIfNotExist()
+        {
+            if (_creatingOrderViewModel.DeviceStateSelectedItem == null)
+            {
+                _creatingOrderViewModel.SaveDeviceState();
+            }
+
+            if (_creatingOrderViewModel.ModelStateSelectedItem == null)
+            {
+                _creatingOrderViewModel.SaveModelState();
+            }
         }
     }
 }

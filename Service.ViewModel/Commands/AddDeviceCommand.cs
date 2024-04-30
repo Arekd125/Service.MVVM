@@ -37,14 +37,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            DeviceState deviceState = new()
-            {
-                Name = _creatingOrderViewModel.DeviceNameComboBox
-            };
-
-            _deviceStateService.CreateDevice(deviceState);
-            _creatingOrderViewModel.DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
-            _creatingOrderViewModel.DeviceStateSelectedItem = _creatingOrderViewModel.DeviceNameComboBox;
+            _creatingOrderViewModel.SaveDeviceState();
         }
     }
 }

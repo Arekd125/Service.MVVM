@@ -25,20 +25,11 @@ namespace Service.ViewModel.Commands
            && !IfExists(_creatingOrderViewModel.ModelNameComboBox.TrimEnd());
         }
 
-
         private bool IfExists(string modelStateName)
         {
-
-            var devices = AllModelStateName();
+            var devices = _creatingOrderViewModel.AllModelStateName();
             return devices.Any(p => p == modelStateName);
         }
-
-        private IEnumerable<string> AllModelStateName()
-        {
-
-            return _deviceStateService.GetAllModelName(_creatingOrderViewModel.DeviceStateSelectedItem).Result;
-        }
-
 
         public override bool CanExecute(object? parameter)
         {
@@ -47,14 +38,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            ModelState modelState = new()
-            {
-                Name = _creatingOrderViewModel.ModelNameComboBox
-            };
-            var deviceStateName = _creatingOrderViewModel.DeviceStateSelectedItem;
-            _deviceStateService.AddModel(modelState, deviceStateName);
-            _creatingOrderViewModel.ModelStateNameItemSorce = AllModelStateName();
-            _creatingOrderViewModel.ModelStateSelectedItem = _creatingOrderViewModel.ModelNameComboBox;
+            _creatingOrderViewModel.SaveModelState();
         }
     }
 }

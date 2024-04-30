@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls.Dialogs;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Service;
+using Servis.Models.OrderModels;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 
@@ -228,7 +229,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
             OnPropertyChanged(nameof(OrderNameTextBlock));
-            ShowMessage();
         }
 
         public async void ShowMessage()
@@ -270,6 +270,36 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _deviceStateService.DeleteDevice(DeviceStateSelectedItem);
             DeviceStateSelectedItem = null;
             DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
+        }
+
+        public IEnumerable<string> AllModelStateName()
+        {
+            return _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
+        }
+
+        public async void SaveDeviceState()
+
+        {
+            DeviceState deviceState = new()
+            {
+                Name = DeviceNameComboBox
+            };
+            await _deviceStateService.CreateDevice(deviceState);
+            DeviceStateNameItemsSource = await _deviceStateService.GetAllDeviceName();
+            DeviceStateSelectedItem = DeviceNameComboBox;
+        }
+
+        public async void SaveModelState()
+        {
+            ModelState modelState = new()
+            {
+                Name = ModelNameComboBox
+            };
+
+            var deviceStateName = DeviceStateSelectedItem;
+            await _deviceStateService.AddModel(modelState, deviceStateName);
+            ModelStateNameItemSorce = AllModelStateName();
+            ModelStateSelectedItem = ModelNameComboBox;
         }
     }
 }
