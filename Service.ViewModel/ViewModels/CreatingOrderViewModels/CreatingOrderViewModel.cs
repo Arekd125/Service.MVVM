@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using Service.ViewModel.Commands;
+using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Servis.Models.OrderModels;
 using System.Text.RegularExpressions;
@@ -16,6 +17,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly NameOrderViewModel _nameOrderViewModel;
         private readonly ContactViewModel _contactViewModel;
         private IDialogCoordinator dialogCoordinator;
+        private readonly OrdersListingViewModel _ordersListingViewModel;
 
         public int OrderNo => _nameOrderViewModel.SetOrderNo();
         public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
@@ -206,16 +208,16 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _orderService = orderService;
             _deviceStateService = deviceStateService;
             dialogCoordinator = instance;
+            _ordersListingViewModel = ordersListingViewModel;
+
             _nameOrderViewModel = new NameOrderViewModel(this, orderService);
             _contactViewModel = new ContactViewModel(this, orderService);
 
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
             DeleteDeviceButton = new DeleteDeviceCommand(this);
-
-            AddModelButton = new AddModelCommand(this, deviceStateService);
+            AddModelButton = new AddModelCommand(this);
             DeleteModelButton = new DeleteModelCommand(this, deviceStateService);
-
-            SaveButton = new SaveOrderCommand(this, orderService, ordersListingViewModel);
+            SaveButton = new SaveOrderCommand(this);
             CancleButton = new CancleCommand(this);
         }
 
@@ -300,6 +302,40 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             await _deviceStateService.AddModel(modelState, deviceStateName);
             ModelStateNameItemSorce = AllModelStateName();
             ModelStateSelectedItem = ModelNameComboBox;
+        }
+
+        public async void SaveOrder()
+        {
+            CreateOrderDto orderdto = new()
+            {
+                OrderNo = OrderNo,
+                OrderName = OrderNameTextBlock,
+                ContactName = ContactNameTextBox,
+                ContactPhoneNumber = ContactPhoneNumberTextBox,
+                Device = DeviceNameComboBox,
+                Model = ModelNameComboBox,
+                Description = DescriptionTextBox,
+                ToDo = ToDoTextBox,
+                Accessories = AccessoriesTexBox
+            };
+
+            _orderService.CreateOrder(orderdto);
+            AddDeviceIfNotExist();
+            _ordersListingViewModel.AddLast();
+            Clear();
+        }
+
+        private void AddDeviceIfNotExist()
+        {
+            if (DeviceStateSelectedItem == null)
+            {
+                SaveDeviceState();
+            }
+
+            if (ModelStateSelectedItem == null)
+            {
+                SaveModelState();
+            }
         }
     }
 }

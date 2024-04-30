@@ -6,12 +6,10 @@ namespace Service.ViewModel.Commands
 {
     public class AddModelCommand : CommandBase
     {
-        private readonly IDeviceStateService _deviceStateService;
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
-        public AddModelCommand(CreatingOrderViewModel creatingOrderViewModel, IDeviceStateService deviceStateService)
+        public AddModelCommand(CreatingOrderViewModel creatingOrderViewModel)
         {
-            _deviceStateService = deviceStateService;
             _creatingOrderViewModel = creatingOrderViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }

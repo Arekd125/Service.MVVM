@@ -10,16 +10,10 @@ namespace Service.ViewModel.Commands
     public class SaveOrderCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
-        private readonly IOrderService _orderService;
-        private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel
-            , IOrderService orderService
-            , OrdersListingViewModel ordersListingViewModel)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
-            _orderService = orderService;
-            _ordersListingViewModel = ordersListingViewModel;
 
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -39,36 +33,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            CreateOrderDto orderdto = new()
-            {
-                OrderNo = _creatingOrderViewModel.OrderNo,
-                OrderName = _creatingOrderViewModel.OrderNameTextBlock,
-                ContactName = _creatingOrderViewModel.ContactNameTextBox,
-                ContactPhoneNumber = _creatingOrderViewModel.ContactPhoneNumberTextBox,
-                Device = _creatingOrderViewModel.DeviceNameComboBox,
-                Model = _creatingOrderViewModel.ModelNameComboBox,
-                Description = _creatingOrderViewModel.DescriptionTextBox,
-                ToDo = _creatingOrderViewModel.ToDoTextBox,
-                Accessories = _creatingOrderViewModel.AccessoriesTexBox
-            };
-
-            _orderService.CreateOrder(orderdto);
-            AddDeviceIfNotExist();
-            _ordersListingViewModel.AddLast();
-            _creatingOrderViewModel.Clear();
-        }
-
-        private void AddDeviceIfNotExist()
-        {
-            if (_creatingOrderViewModel.DeviceStateSelectedItem == null)
-            {
-                _creatingOrderViewModel.SaveDeviceState();
-            }
-
-            if (_creatingOrderViewModel.ModelStateSelectedItem == null)
-            {
-                _creatingOrderViewModel.SaveModelState();
-            }
+            _creatingOrderViewModel.SaveOrder();
         }
     }
 }
