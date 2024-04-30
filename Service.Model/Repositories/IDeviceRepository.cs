@@ -13,5 +13,7 @@ namespace Service.Model.Repositories
         public Task AddModel(ModelState modelState, string deviceStateName);
 
         public Task DeleteDevice(string deviceStateName);
+
+        public Task DeleteModel(string deviceStateName, string modeleStateName);
     }
 }

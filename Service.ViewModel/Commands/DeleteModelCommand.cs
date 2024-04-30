@@ -5,23 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Service.ViewModel.Commands
 {
-    public class DeleteDeviceCommand : CommandBase
+    public class DeleteModelCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
-        public DeleteDeviceCommand(CreatingOrderViewModel creatingOrderViewModel)
+        private readonly IDeviceStateService _deviceStateService;
+
+        public DeleteModelCommand(CreatingOrderViewModel creatingOrderViewModel, IDeviceStateService deviceStateService)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
+            _deviceStateService = deviceStateService;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_creatingOrderViewModel.DeviceStateSelectedItem));
+            return (!string.IsNullOrEmpty(_creatingOrderViewModel.ModelStateSelectedItem));
         }
 
         public override bool CanExecute(object? parameter)
@@ -31,14 +33,9 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            if (_creatingOrderViewModel.ModelStateNameItemSorce.Count() != 0)
-            {
-                _creatingOrderViewModel.ShowMessage();
-            }
-            else
-            {
-                _creatingOrderViewModel.DeleteDeviceAndModels();
-            }
+            _deviceStateService.DeleteModel(_creatingOrderViewModel.DeviceStateSelectedItem, _creatingOrderViewModel.ModelStateSelectedItem);
+            _creatingOrderViewModel.ModelStateSelectedItem = null;
+            _creatingOrderViewModel.ModelStateNameItemSorce = _deviceStateService.GetAllModelName(_creatingOrderViewModel.DeviceStateSelectedItem).Result;
         }
     }
 }

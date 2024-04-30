@@ -44,5 +44,10 @@ namespace Service.ViewModel.Service
         {
             await _deviceRepository.DeleteDevice(deviceStateName);
         }
+
+        public async Task DeleteModel(string deviceStateName, string modeleStateName)
+        {
+            await _deviceRepository.DeleteModel(deviceStateName, modeleStateName);
+        }
     }
 }

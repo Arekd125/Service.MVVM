@@ -13,5 +13,7 @@ namespace Service.ViewModel.Service
         Task<IEnumerable<string>> GetAllModelName(string deviceStateName);
 
         Task DeleteDevice(string deviceStateName);
+
+        Task DeleteModel(string deviceStateName, string modeleStateName);
     }
 }

@@ -71,5 +71,19 @@ namespace Service.Model.Repositories
                 }
             }
         }
+
+        public async Task DeleteModel(string deviceStateName, string modeleStateName)
+        {
+            using OrdersDbContext context = _dbContextFactory.CreateDbContext();
+            {
+                DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == deviceStateName);
+
+                ModelState model = device.ModelLists.First(u => u.Name == modeleStateName);
+
+                device.ModelLists.Remove(model);
+
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

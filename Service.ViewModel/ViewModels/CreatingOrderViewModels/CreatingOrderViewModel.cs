@@ -209,9 +209,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _contactViewModel = new ContactViewModel(this, orderService);
 
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
-            DeleteDeviceButton = new DeleteDeviceCommand(this, deviceStateService);
+            DeleteDeviceButton = new DeleteDeviceCommand(this);
 
             AddModelButton = new AddModelCommand(this, deviceStateService);
+            DeleteModelButton = new DeleteModelCommand(this, deviceStateService);
 
             SaveButton = new SaveOrderCommand(this, orderService, ordersListingViewModel);
             CancleButton = new CancleCommand(this);
