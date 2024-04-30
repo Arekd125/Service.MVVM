@@ -38,6 +38,10 @@ namespace Service.ViewModel.Commands
         public override void Execute(object? parameter)
         {
             _creatingOrderViewModel.SaveDeviceState();
+
+            
+
+            
         }
     }
 }

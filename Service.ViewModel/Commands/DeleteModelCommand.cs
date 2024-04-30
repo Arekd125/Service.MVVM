@@ -12,12 +12,11 @@ namespace Service.ViewModel.Commands
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
-        private readonly IDeviceStateService _deviceStateService;
+      
 
-        public DeleteModelCommand(CreatingOrderViewModel creatingOrderViewModel, IDeviceStateService deviceStateService)
+        public DeleteModelCommand(CreatingOrderViewModel creatingOrderViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
-            _deviceStateService = deviceStateService;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
@@ -33,9 +32,10 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            _deviceStateService.DeleteModel(_creatingOrderViewModel.DeviceStateSelectedItem, _creatingOrderViewModel.ModelStateSelectedItem);
-            _creatingOrderViewModel.ModelStateSelectedItem = null;
-            _creatingOrderViewModel.ModelStateNameItemSorce = _deviceStateService.GetAllModelName(_creatingOrderViewModel.DeviceStateSelectedItem).Result;
+            _creatingOrderViewModel.DeleteModel();
+
+
+
         }
     }
 }

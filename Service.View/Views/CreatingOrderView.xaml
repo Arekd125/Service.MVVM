@@ -175,19 +175,18 @@
         <!--  FLYOUT  -->
         <mah:FlyoutsControl>
             <mah:Flyout
-                x:Name="InfoFlout"
                 Width="270"
-                AutoCloseInterval="3000"
                 CloseButtonVisibility="Hidden"
                 IsAutoCloseEnabled="True"
+                IsOpen="{Binding OpenFlyout}"
                 Position="Right">
-                <Label
-                    Margin="0,-70,0,0"
-                    Padding="10"
+                <Label Content ="{Binding MessageFlyout}"
+                    Margin="0,-60,0,0"
+                    Padding="5"
                     HorizontalAlignment="Center"
-                    FontSize="28">
-                    ZAPISYWANIE
-                </Label>
+                    FontSize="22"/>
+
+                
             </mah:Flyout>
         </mah:FlyoutsControl>
     </StackPanel>
