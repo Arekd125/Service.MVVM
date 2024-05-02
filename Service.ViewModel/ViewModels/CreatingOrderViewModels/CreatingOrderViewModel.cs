@@ -271,21 +271,22 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public async void DeleteModel()
         {
-            _deviceStateService.DeleteModel(DeviceStateSelectedItem, ModelStateSelectedItem);
+            await _deviceStateService.DeleteModel(DeviceStateSelectedItem, ModelStateSelectedItem);
             var message = $"Usunięto Modelu {ModelStateSelectedItem}";
-            await FlayoutVewModel.ShowFlyout(message, Colors.Red);
-
             ModelStateSelectedItem = null;
             ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
+
+            await FlayoutVewModel.ShowFlyout(message, Colors.Red);
         }
 
         public async void DeleteDeviceAndModels()
         {
-            _deviceStateService.DeleteDevice(DeviceStateSelectedItem);
+            await _deviceStateService.DeleteDevice(DeviceStateSelectedItem);
             var message = $"Usunięto Markę {DeviceStateSelectedItem}";
-            await FlayoutVewModel.ShowFlyout(message, Colors.Red);
             DeviceStateSelectedItem = null;
             DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
+
+            await FlayoutVewModel.ShowFlyout(message, Colors.Red);
         }
 
         public IEnumerable<string> AllModelStateName()
@@ -321,10 +322,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ModelStateSelectedItem = ModelNameComboBox;
 
             var message = $"Dodano Model {ModelNameComboBox}";
-            FlayoutVewModel.ShowFlyout(message);
+            await FlayoutVewModel.ShowFlyout(message);
         }
 
-        public void SaveOrder()
+        public async void SaveOrder()
         {
             CreateOrderDto orderdto = new()
             {
@@ -340,7 +341,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             };
 
             _orderService.CreateOrder(orderdto);
-            FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
+            await FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
             AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();
             Clear();
