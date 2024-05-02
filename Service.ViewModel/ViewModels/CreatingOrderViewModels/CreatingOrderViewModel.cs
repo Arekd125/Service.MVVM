@@ -6,6 +6,7 @@ using Service.ViewModel.Service;
 using Servis.Models.OrderModels;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
@@ -19,12 +20,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private IDialogCoordinator dialogCoordinator;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
+        public FlayoutVewModel FlayoutVewModel { get; }
 
-
-
-
-
-        
         public int OrderNo => _nameOrderViewModel.SetOrderNo();
         public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
 
@@ -196,43 +193,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private bool _openFlyout = false;
-        public bool OpenFlyout
-        { 
-            get
-            {
-               
-                return _openFlyout;
-            } 
-            set 
-            {
-
-                _openFlyout = value;
-                OnPropertyChanged(nameof(OpenFlyout));
-
-            } 
-        }
-        private string _messageFlyout;
-        public string MessageFlyout
-        {
-            get
-            {
-                
-                return _messageFlyout;
-            }
-            set
-            {
-
-                _messageFlyout = value;
-                OnPropertyChanged(nameof(MessageFlyout));
-
-            }
-        }
-       
-
-
-
-
         public ICommand AddDeviceButton { get; }
         public ICommand DeleteDeviceButton { get; }
 
@@ -262,6 +222,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeleteModelButton = new DeleteModelCommand(this);
             SaveButton = new SaveOrderCommand(this);
             CancleButton = new CancleCommand(this);
+
+            FlayoutVewModel = new FlayoutVewModel();
         }
 
         public void Clear()
@@ -274,9 +236,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
             OnPropertyChanged(nameof(OrderNameTextBlock));
-
-            
-
         }
 
         public async void ShowMessage()
@@ -297,8 +256,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             var models = string.Join(", ", ModelStateNameItemSorce);
             var message = $"Zostaną również usunięte następujące modele: {models}";
 
-            
-
             MessageDialogResult result = await dialogCoordinator.ShowMessageAsync(
                                             this,
                                             title,
@@ -312,24 +269,23 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public  void  DeleteModel()
+        public async void DeleteModel()
         {
-            _deviceStateService.DeleteModel(DeviceStateSelectedItem,ModelStateSelectedItem);
+            _deviceStateService.DeleteModel(DeviceStateSelectedItem, ModelStateSelectedItem);
             var message = $"Usunięto Modelu {ModelStateSelectedItem}";
-            ShowFlyout(message);
+            await FlayoutVewModel.ShowFlyout(message, Colors.Red);
 
             ModelStateSelectedItem = null;
-           ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
+            ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
         }
-        public void DeleteDeviceAndModels()
+
+        public async void DeleteDeviceAndModels()
         {
             _deviceStateService.DeleteDevice(DeviceStateSelectedItem);
             var message = $"Usunięto Markę {DeviceStateSelectedItem}";
-            ShowFlyout(message);
+            await FlayoutVewModel.ShowFlyout(message, Colors.Red);
             DeviceStateSelectedItem = null;
             DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
-            
-            
         }
 
         public IEnumerable<string> AllModelStateName()
@@ -349,8 +305,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceStateSelectedItem = DeviceNameComboBox;
 
             var message = $"Dodano Markę {DeviceNameComboBox}";
-            ShowFlyout(message);
-            
+            await FlayoutVewModel.ShowFlyout(message);
         }
 
         public async void SaveModelState()
@@ -366,7 +321,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ModelStateSelectedItem = ModelNameComboBox;
 
             var message = $"Dodano Model {ModelNameComboBox}";
-            ShowFlyout(message);
+            FlayoutVewModel.ShowFlyout(message);
         }
 
         public void SaveOrder()
@@ -385,7 +340,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             };
 
             _orderService.CreateOrder(orderdto);
-            ShowFlyout("Dodano Zlecenie");
+            FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
             AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();
             Clear();
@@ -393,39 +348,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         private void AddDeviceIfNotExist()
         {
-            if (DeviceStateSelectedItem == null)
+            if (string.IsNullOrEmpty(DeviceStateSelectedItem))
             {
                 SaveDeviceState();
-                
             }
 
-            if (ModelStateSelectedItem == null)
+            if (string.IsNullOrEmpty(ModelStateSelectedItem))
             {
                 SaveModelState();
             }
         }
-
-       
-        private SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
-
-        public async Task ShowFlyout(string flyoutmessage)
-        {
-            await semaphore.WaitAsync(); 
-            try
-            {
-                OpenFlyout = true; 
-                MessageFlyout = flyoutmessage; 
-
-                await Task.Delay(3000);
-
-                OpenFlyout = false;
-            }
-            finally
-            {
-                semaphore.Release(); 
-            }
-        }
-
-
     }
 }

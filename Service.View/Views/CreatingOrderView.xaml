@@ -173,20 +173,21 @@
                 Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
         </Grid>
         <!--  FLYOUT  -->
+
         <mah:FlyoutsControl>
-            <mah:Flyout
+            <mah:Flyout DataContext="{Binding FlayoutVewModel}"
                 Width="270"
                 CloseButtonVisibility="Hidden"
                 IsAutoCloseEnabled="True"
+                Theme="Inverse"
+                Background="{Binding BackgroudColorFlyout}"
                 IsOpen="{Binding OpenFlyout}"
                 Position="Right">
                 <Label Content ="{Binding MessageFlyout}"
                     Margin="0,-60,0,0"
                     Padding="5"
                     HorizontalAlignment="Center"
-                    FontSize="22"/>
-
-                
+                    FontSize="22" />
             </mah:Flyout>
         </mah:FlyoutsControl>
     </StackPanel>
