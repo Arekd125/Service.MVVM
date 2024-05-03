@@ -10,7 +10,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
     public class NameOrderViewModel
     {
-        private readonly CreatingOrderViewModel _creatingOrderViewModel;
         private readonly IOrderService _orderService;
 
 
@@ -20,9 +19,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
 
 
-        public NameOrderViewModel(CreatingOrderViewModel creatingOrderViewModel, IOrderService orderService)
+        public NameOrderViewModel(IOrderService orderService)
         {
-            _creatingOrderViewModel = creatingOrderViewModel;
             _orderService = orderService;
         }
 

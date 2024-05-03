@@ -217,7 +217,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             dialogCoordinator = instance;
             _ordersListingViewModel = ordersListingViewModel;
 
-            NameOrderViewModel = new NameOrderViewModel(this, orderService);
+            NameOrderViewModel = new NameOrderViewModel(orderService);
             _contactViewModel = new ContactViewModel(this, orderService);
 
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
