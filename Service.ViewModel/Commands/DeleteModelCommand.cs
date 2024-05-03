@@ -10,19 +10,19 @@ namespace Service.ViewModel.Commands
 {
     public class DeleteModelCommand : CommandBase
     {
-        private readonly CreatingOrderViewModel _creatingOrderViewModel;
+        private readonly DeviceViewModel _deviceViewModel;
 
       
 
-        public DeleteModelCommand(CreatingOrderViewModel creatingOrderViewModel)
+        public DeleteModelCommand(DeviceViewModel deviceViewModel)
         {
-            _creatingOrderViewModel = creatingOrderViewModel;
-            _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _deviceViewModel = deviceViewModel;
+            _deviceViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_creatingOrderViewModel.ModelStateSelectedItem));
+            return (!string.IsNullOrEmpty(_deviceViewModel.ModelStateSelectedItem));
         }
 
         public override bool CanExecute(object? parameter)
@@ -32,7 +32,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            _creatingOrderViewModel.DeleteModel();
+            _deviceViewModel.DeleteModel();
 
 
 

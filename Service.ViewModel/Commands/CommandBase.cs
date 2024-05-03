@@ -22,11 +22,11 @@ namespace Service.ViewModel.Commands
 
         protected void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateNameItemsSource) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceStateSelectedItem) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.ModelStateSelectedItem) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.ModelNameComboBox) ||
-                e.PropertyName == nameof(CreatingOrderViewModel.DeviceNameComboBox) ||
+            if (e.PropertyName == nameof(DeviceViewModel.DeviceStateNameItemsSource) ||
+                e.PropertyName == nameof(DeviceViewModel.DeviceStateSelectedItem) ||
+                e.PropertyName == nameof(DeviceViewModel.ModelStateSelectedItem) ||
+                e.PropertyName == nameof(DeviceViewModel.ModelNameComboBox) ||
+                e.PropertyName == nameof(DeviceViewModel.DeviceNameComboBox) ||
                 e.PropertyName == nameof(ContactViewModel.ContactPhoneNumberTextBox))
             {
                 OnCanExecutedChanged();

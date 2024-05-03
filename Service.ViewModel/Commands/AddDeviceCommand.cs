@@ -7,21 +7,22 @@ namespace Service.ViewModel.Commands
     public class AddDeviceCommand : CommandBase
     {
         private readonly IDeviceStateService _deviceStateService;
-        private readonly CreatingOrderViewModel _creatingOrderViewModel;
+        private readonly DeviceViewModel _deviceViewModel;
 
-        public AddDeviceCommand(CreatingOrderViewModel creatingOrderViewModel, IDeviceStateService deviceStateService)
+        public AddDeviceCommand(DeviceViewModel deviceViewModel, IDeviceStateService deviceStateService)
         {
+            _deviceViewModel = deviceViewModel;
             _deviceStateService = deviceStateService;
-            _creatingOrderViewModel = creatingOrderViewModel;
-            _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
+
+            _deviceViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox))
-                && _creatingOrderViewModel.DeviceNameComboBox.Length > 1
-                && (string.IsNullOrEmpty(_creatingOrderViewModel.DeviceStateSelectedItem))
-                && !IfExists(_creatingOrderViewModel.DeviceNameComboBox.TrimEnd());
+            return (!string.IsNullOrEmpty(_deviceViewModel.DeviceNameComboBox))
+                && _deviceViewModel.DeviceNameComboBox.Length > 1
+                && (string.IsNullOrEmpty(_deviceViewModel.DeviceStateSelectedItem))
+                && !IfExists(_deviceViewModel.DeviceNameComboBox.TrimEnd());
         }
 
         private bool IfExists(string deviceStateName)
@@ -37,7 +38,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            _creatingOrderViewModel.SaveDeviceState();
+            _deviceViewModel.SaveDeviceState();
 
             
 

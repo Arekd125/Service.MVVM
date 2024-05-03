@@ -6,26 +6,26 @@ namespace Service.ViewModel.Commands
 {
     public class AddModelCommand : CommandBase
     {
-        private readonly CreatingOrderViewModel _creatingOrderViewModel;
+        private readonly DeviceViewModel _deviceViewModel;
 
-        public AddModelCommand(CreatingOrderViewModel creatingOrderViewModel)
+        public AddModelCommand(DeviceViewModel deviceViewModel)
         {
-            _creatingOrderViewModel = creatingOrderViewModel;
-            _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _deviceViewModel = deviceViewModel;
+            _deviceViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_creatingOrderViewModel.DeviceStateSelectedItem))
-           && (string.IsNullOrEmpty(_creatingOrderViewModel.ModelStateSelectedItem))
-           && (!string.IsNullOrEmpty(_creatingOrderViewModel.ModelNameComboBox))
-           && _creatingOrderViewModel.ModelNameComboBox.Length > 1
-           && !IfExists(_creatingOrderViewModel.ModelNameComboBox.TrimEnd());
+            return (!string.IsNullOrEmpty(_deviceViewModel.DeviceStateSelectedItem))
+           && (string.IsNullOrEmpty(_deviceViewModel.ModelStateSelectedItem))
+           && (!string.IsNullOrEmpty(_deviceViewModel.ModelNameComboBox))
+           && _deviceViewModel.ModelNameComboBox.Length > 1
+           && !IfExists(_deviceViewModel.ModelNameComboBox.TrimEnd());
         }
 
         private bool IfExists(string modelStateName)
         {
-            var devices = _creatingOrderViewModel.AllModelStateName();
+            var devices = _deviceViewModel.AllModelStateName();
             return devices.Any(p => p == modelStateName);
         }
 
@@ -36,7 +36,7 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            _creatingOrderViewModel.SaveModelState();
+            _deviceViewModel.SaveModelState();
         }
     }
 }

@@ -11,13 +11,16 @@ namespace Service.ViewModel.Commands
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
         private readonly ContactViewModel _contactViewModel;
+        private readonly DeviceViewModel _deviceViewModel;
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, ContactViewModel contactViewModel)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, ContactViewModel contactViewModel, DeviceViewModel deviceViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
             _contactViewModel = contactViewModel;
+            _deviceViewModel = deviceViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
             _contactViewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _deviceViewModel.PropertyChanged += OnViewModelPropertyChanged;
 
         }
 
@@ -25,8 +28,8 @@ namespace Service.ViewModel.Commands
         {
             return (!string.IsNullOrEmpty(_contactViewModel.ContactPhoneNumberTextBox) &&
                     _contactViewModel.ContactPhoneNumberTextBox.Length > 10 &&
-                   !string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox) &&
-                   !string.IsNullOrEmpty(_creatingOrderViewModel.ModelNameComboBox));
+                   !string.IsNullOrEmpty(_deviceViewModel.DeviceNameComboBox) &&
+                   !string.IsNullOrEmpty(_deviceViewModel.ModelNameComboBox));
         }
 
         public override bool CanExecute(object? parameter)
