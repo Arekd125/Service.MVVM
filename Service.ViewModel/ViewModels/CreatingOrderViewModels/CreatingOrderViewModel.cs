@@ -15,15 +15,19 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     {
         private readonly IOrderService _orderService;
         private readonly IDeviceStateService _deviceStateService;
-        private readonly NameOrderViewModel _nameOrderViewModel;
+        
         private readonly ContactViewModel _contactViewModel;
         private IDialogCoordinator dialogCoordinator;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public FlayoutVewModel FlayoutVewModel { get; }
 
-        public int OrderNo => _nameOrderViewModel.SetOrderNo();
-        public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
+
+
+        public FlayoutVewModel FlayoutVewModel { get; }
+        public NameOrderViewModel NameOrderViewModel { get; }
+
+        //public int OrderNo => _nameOrderViewModel.SetOrderNo();
+        //public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
 
         private string _contactName = string.Empty;
 
@@ -213,7 +217,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             dialogCoordinator = instance;
             _ordersListingViewModel = ordersListingViewModel;
 
-            _nameOrderViewModel = new NameOrderViewModel(this, orderService);
+            NameOrderViewModel = new NameOrderViewModel(this, orderService);
             _contactViewModel = new ContactViewModel(this, orderService);
 
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
@@ -235,7 +239,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DescriptionTextBox = string.Empty;
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
-            OnPropertyChanged(nameof(OrderNameTextBlock));
+            OnPropertyChanged(nameof(NameOrderViewModel));
         }
 
         public async void ShowMessage()
@@ -329,8 +333,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             CreateOrderDto orderdto = new()
             {
-                OrderNo = OrderNo,
-                OrderName = OrderNameTextBlock,
+                OrderNo = NameOrderViewModel.OrderNo,
+                OrderName = NameOrderViewModel.OrderNameTextBlock,
                 ContactName = ContactNameTextBox,
                 ContactPhoneNumber = ContactPhoneNumberTextBox,
                 Device = DeviceNameComboBox,

@@ -13,6 +13,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
         private readonly IOrderService _orderService;
 
+
+        public int OrderNo => SetOrderNo();
+        public string OrderNameTextBlock => SetOrderName(OrderNo);
+
+
+
+
         public NameOrderViewModel(CreatingOrderViewModel creatingOrderViewModel, IOrderService orderService)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
