@@ -16,7 +16,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly IOrderService _orderService;
         private readonly IDeviceStateService _deviceStateService;
         
-        private readonly ContactViewModel _contactViewModel;
+        
         private IDialogCoordinator dialogCoordinator;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
@@ -25,40 +25,41 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public FlayoutVewModel FlayoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
+        public ContactViewModel ContactViewModel { get; }
 
         //public int OrderNo => _nameOrderViewModel.SetOrderNo();
         //public string OrderNameTextBlock => _nameOrderViewModel.SetOrderName(OrderNo);
 
-        private string _contactName = string.Empty;
+        //private string _contactName = string.Empty;
 
-        public string ContactNameTextBox
-        {
-            get
-            {
-                return _contactName;
-            }
-            set
-            {
-                _contactName = value;
-                OnPropertyChanged(nameof(ContactNameTextBox));
-            }
-        }
+        //public string ContactNameTextBox
+        //{
+        //    get
+        //    {
+        //        return _contactName;
+        //    }
+        //    set
+        //    {
+        //        _contactName = value;
+        //        OnPropertyChanged(nameof(ContactNameTextBox));
+        //    }
+        //}
 
-        private string _contactPhoneNumber = string.Empty;
+        //private string _contactPhoneNumber = string.Empty;
 
-        public string ContactPhoneNumberTextBox
-        {
-            get
-            {
-                return _contactPhoneNumber;
-            }
-            set
-            {
-                _contactPhoneNumber = _contactViewModel.PhoneValisation(value);
+        //public string ContactPhoneNumberTextBox
+        //{
+        //    get
+        //    {
+        //        return _contactPhoneNumber;
+        //    }
+        //    set
+        //    {
+        //        _contactPhoneNumber = _contactViewModel.PhoneValisation(value);
 
-                OnPropertyChanged(nameof(ContactPhoneNumberTextBox));
-            }
-        }
+        //        OnPropertyChanged(nameof(ContactPhoneNumberTextBox));
+        //    }
+        //}
 
         private IEnumerable<string> _deviceStateNameItemsSource;
 
@@ -218,13 +219,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _ordersListingViewModel = ordersListingViewModel;
 
             NameOrderViewModel = new NameOrderViewModel(orderService);
-            _contactViewModel = new ContactViewModel(this, orderService);
+            ContactViewModel = new ContactViewModel(this, orderService);
 
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
             DeleteDeviceButton = new DeleteDeviceCommand(this);
             AddModelButton = new AddModelCommand(this);
             DeleteModelButton = new DeleteModelCommand(this);
-            SaveButton = new SaveOrderCommand(this);
+            SaveButton = new SaveOrderCommand(this, ContactViewModel);
             CancleButton = new CancleCommand(this);
 
             FlayoutVewModel = new FlayoutVewModel();
@@ -232,8 +233,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void Clear()
         {
-            ContactNameTextBox = string.Empty;
-            ContactPhoneNumberTextBox = string.Empty;
+            ContactViewModel.ContactNameTextBox = string.Empty;
+            ContactViewModel.ContactPhoneNumberTextBox = string.Empty;
             DeviceNameComboBox = string.Empty;
             ModelNameComboBox = string.Empty;
             DescriptionTextBox = string.Empty;
@@ -298,7 +299,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             return _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
         }
 
-        public async void SaveDeviceState()
+        public async Task SaveDeviceState()
 
         {
             DeviceState deviceState = new()
@@ -313,7 +314,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             await FlayoutVewModel.ShowFlyout(message);
         }
 
-        public async void SaveModelState()
+        public async Task SaveModelState()
         {
             ModelState modelState = new()
             {
@@ -329,14 +330,14 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             await FlayoutVewModel.ShowFlyout(message);
         }
 
-        public async void SaveOrder()
+        public async void  SaveOrder()
         {
             CreateOrderDto orderdto = new()
             {
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
-                ContactName = ContactNameTextBox,
-                ContactPhoneNumber = ContactPhoneNumberTextBox,
+                ContactName = ContactViewModel.ContactNameTextBox,
+                ContactPhoneNumber = ContactViewModel.ContactPhoneNumberTextBox,
                 Device = DeviceNameComboBox,
                 Model = ModelNameComboBox,
                 Description = DescriptionTextBox,
@@ -345,7 +346,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             };
 
             _orderService.CreateOrder(orderdto);
-            await FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
+             FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
             AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();
             Clear();

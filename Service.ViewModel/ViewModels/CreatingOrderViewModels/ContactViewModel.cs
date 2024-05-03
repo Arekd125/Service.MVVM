@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
-    public class ContactViewModel
+    public class ContactViewModel : ViewModelBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
         private readonly IOrderService _orderService;
@@ -18,7 +18,36 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _creatingOrderViewModel = creatingOrderViewModel;
             _orderService = orderService;
         }
+        private string _contactName = string.Empty;
 
+        public string ContactNameTextBox
+        {
+            get
+            {
+                return _contactName;
+            }
+            set
+            {
+                _contactName = value;
+                OnPropertyChanged(nameof(ContactNameTextBox));
+            }
+        }
+
+        private string _contactPhoneNumber = string.Empty;
+
+        public string ContactPhoneNumberTextBox
+        {
+            get
+            {
+                return _contactPhoneNumber;
+            }
+            set
+            {
+                _contactPhoneNumber =  PhoneValisation(value);
+
+                OnPropertyChanged(nameof(ContactPhoneNumberTextBox));
+            }
+        }
         public string PhoneValisation(string phoneNumber)
         {
             if (phoneNumber.Length > 11)

@@ -23,7 +23,7 @@
                        Text="{Binding OrderNameTextBlock }" />
         </GroupBox>
 
-        <GroupBox Margin="0,0,10,0" Header="Kontakt">
+        <GroupBox Margin="0,0,10,0" Header="Kontakt" DataContext="{Binding ContactViewModel}">
 
             <StackPanel>
                 <TextBox

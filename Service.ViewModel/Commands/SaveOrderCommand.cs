@@ -10,18 +10,21 @@ namespace Service.ViewModel.Commands
     public class SaveOrderCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
+        private readonly ContactViewModel _contactViewModel;
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel)
+        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, ContactViewModel contactViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
-
+            _contactViewModel = contactViewModel;
             _creatingOrderViewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _contactViewModel.PropertyChanged += OnViewModelPropertyChanged;
+
         }
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_creatingOrderViewModel.ContactPhoneNumberTextBox) &&
-                    _creatingOrderViewModel.ContactPhoneNumberTextBox.Length > 10 &&
+            return (!string.IsNullOrEmpty(_contactViewModel.ContactPhoneNumberTextBox) &&
+                    _contactViewModel.ContactPhoneNumberTextBox.Length > 10 &&
                    !string.IsNullOrEmpty(_creatingOrderViewModel.DeviceNameComboBox) &&
                    !string.IsNullOrEmpty(_creatingOrderViewModel.ModelNameComboBox));
         }
