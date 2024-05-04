@@ -118,7 +118,7 @@
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Margin="0,0,10,0" Header="Opis">
+        <GroupBox Margin="0,0,10,0" Header="Opis" DataContext="{Binding DescriptionViewModel}">
 
             <StackPanel>
                 <TextBox

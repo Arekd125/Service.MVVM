@@ -20,7 +20,14 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<OrdersListingViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();
             services.AddScoped<MainViewModel>();
-            services.AddTransient<ContactViewModel>();
+
+            services.AddSingleton<NameOrderViewModel>();
+            services.AddSingleton<ContactViewModel>(); 
+            services.AddSingleton<DeviceViewModel>();
+            services.AddSingleton<DescriptionViewModel>();
+            services.AddScoped<FlayoutVewModel>(); 
+
+
         }
     }
 }

@@ -20,52 +20,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public NameOrderViewModel NameOrderViewModel { get; }
         public ContactViewModel ContactViewModel { get; }
         public DeviceViewModel DeviceViewModel { get; }
+        public DescriptionViewModel DescriptionViewModel { get; }
 
-        
-        private string _description = string.Empty;
 
-        public string DescriptionTextBox
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                _description = value;
-                OnPropertyChanged(nameof(DescriptionTextBox));
-            }
-        }
-
-        private string _toDo = string.Empty;
-
-        public string ToDoTextBox
-        {
-            get
-            {
-                return _toDo;
-            }
-            set
-            {
-                _toDo = value;
-                OnPropertyChanged(nameof(ToDoTextBox));
-            }
-        }
-
-        private string _accessories = string.Empty;
-
-        public string AccessoriesTexBox
-        {
-            get
-            {
-                return _accessories;
-            }
-            set
-            {
-                _accessories = value;
-                OnPropertyChanged(nameof(AccessoriesTexBox));
-            }
-        }
+      
 
        
 
@@ -73,24 +31,24 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public ICommand SaveButton { get; }
         public ICommand CancleButton { get; }
 
-        public CreatingOrderViewModel(IDialogCoordinator dialogCoordinator
-                , OrdersListingViewModel ordersListingViewModel
-                , IOrderService orderService
-                , IDeviceStateService deviceStateService
-                , ContactViewModel contactViewModel)
+        public CreatingOrderViewModel(
+            FlayoutVewModel flayoutVewModel,
+            NameOrderViewModel nameOrderViewModel,
+            ContactViewModel contactViewModel,
+            DeviceViewModel deviceViewModel,
+            DescriptionViewModel descriptionViewModel,
+            OrdersListingViewModel ordersListingViewModel, 
+            IOrderService orderService)
         {
             _orderService = orderService;
             _ordersListingViewModel = ordersListingViewModel;
-
-
-            FlayoutVewModel = new FlayoutVewModel();
-
-            NameOrderViewModel = new NameOrderViewModel(orderService);
+            FlayoutVewModel = flayoutVewModel;
+            NameOrderViewModel = nameOrderViewModel;
             ContactViewModel = contactViewModel;
-            DeviceViewModel = new DeviceViewModel(deviceStateService, dialogCoordinator, FlayoutVewModel);
+            DeviceViewModel = deviceViewModel;
+            DescriptionViewModel = descriptionViewModel;
 
-            
-            SaveButton = new SaveOrderCommand(this, ContactViewModel , DeviceViewModel);
+           SaveButton = new SaveOrderCommand(this, ContactViewModel , DeviceViewModel);
             CancleButton = new CancleCommand(this);
 
             
@@ -102,9 +60,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ContactViewModel.ContactPhoneNumberTextBox = string.Empty;
             DeviceViewModel.DeviceNameComboBox = string.Empty;
             DeviceViewModel.ModelNameComboBox = string.Empty;
-            DescriptionTextBox = string.Empty;
-            ToDoTextBox = string.Empty;
-            AccessoriesTexBox = string.Empty;
+            DescriptionViewModel.DescriptionTextBox = string.Empty;
+            DescriptionViewModel.ToDoTextBox = string.Empty;
+            DescriptionViewModel.AccessoriesTexBox = string.Empty;
             NameOrderViewModel.SetNextOrderName();
 
         }
@@ -120,9 +78,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 ContactPhoneNumber = ContactViewModel.ContactPhoneNumberTextBox,
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
-                Description = DescriptionTextBox,
-                ToDo = ToDoTextBox,
-                Accessories = AccessoriesTexBox
+                Description = DescriptionViewModel.DescriptionTextBox,
+                ToDo = DescriptionViewModel.ToDoTextBox,
+                Accessories = DescriptionViewModel.AccessoriesTexBox
             };
 
             _orderService.CreateOrder(orderdto);
