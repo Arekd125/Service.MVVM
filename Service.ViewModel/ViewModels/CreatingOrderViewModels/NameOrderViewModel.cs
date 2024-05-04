@@ -8,31 +8,55 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
-    public class NameOrderViewModel
+    public class NameOrderViewModel : ViewModelBase
     {
         private readonly IOrderService _orderService;
 
 
         public int OrderNo => SetOrderNo();
-        public string OrderNameTextBlock => SetOrderName(OrderNo);
+       
 
+
+        private string _orderNameTextBlock;
+
+        public string OrderNameTextBlock
+        {
+            get
+            {
+                 
+                return _orderNameTextBlock;
+            }
+            set
+            {
+
+                _orderNameTextBlock = value;
+              
+                OnPropertyChanged(nameof(OrderNameTextBlock));
+            }
+        }
 
 
 
         public NameOrderViewModel(IOrderService orderService)
         {
             _orderService = orderService;
+           SetNextOrderName();
         }
-
-        public string SetOrderName(int orderNo)
+        
+      
+        private string SetOrderName(int orderNo)
         {
+
             return "Z/" + orderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
         }
-        public int SetOrderNo()
+        private int SetOrderNo()
         {
             return  _orderService.GetOrderNumber().Result;
         }
-        
+        public void SetNextOrderName()
+        {
+            OrderNameTextBlock = SetOrderName(OrderNo);
 
+        }
     }
 }

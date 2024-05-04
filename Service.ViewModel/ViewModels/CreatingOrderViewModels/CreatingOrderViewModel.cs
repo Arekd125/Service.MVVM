@@ -76,7 +76,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public CreatingOrderViewModel(IDialogCoordinator dialogCoordinator
                 , OrdersListingViewModel ordersListingViewModel
                 , IOrderService orderService
-                , IDeviceStateService deviceStateService)
+                , IDeviceStateService deviceStateService
+                , ContactViewModel contactViewModel)
         {
             _orderService = orderService;
             _ordersListingViewModel = ordersListingViewModel;
@@ -85,7 +86,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             FlayoutVewModel = new FlayoutVewModel();
 
             NameOrderViewModel = new NameOrderViewModel(orderService);
-            ContactViewModel = new ContactViewModel(this, orderService);
+            ContactViewModel = contactViewModel;
             DeviceViewModel = new DeviceViewModel(deviceStateService, dialogCoordinator, FlayoutVewModel);
 
             
@@ -104,7 +105,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DescriptionTextBox = string.Empty;
             ToDoTextBox = string.Empty;
             AccessoriesTexBox = string.Empty;
-            OnPropertyChanged(nameof(NameOrderViewModel));
+            NameOrderViewModel.SetNextOrderName();
+
         }
 
 

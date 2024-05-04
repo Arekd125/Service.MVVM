@@ -10,14 +10,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
     public class ContactViewModel : ViewModelBase
     {
-        private readonly CreatingOrderViewModel _creatingOrderViewModel;
-        private readonly IOrderService _orderService;
-
-        public ContactViewModel(CreatingOrderViewModel creatingOrderViewModel, IOrderService orderService)
-        {
-            _creatingOrderViewModel = creatingOrderViewModel;
-            _orderService = orderService;
-        }
+        
         private string _contactName = string.Empty;
 
         public string ContactNameTextBox

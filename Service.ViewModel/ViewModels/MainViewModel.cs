@@ -8,7 +8,7 @@ public class MainViewModel : ViewModelBase
     public OrdersListingViewModel ordersListingViewModel { get; }
     public CreatingOrderViewModel creatingOrderViewModel { get; }
 
-    public MainViewModel(IDialogCoordinator dialogCoordinator, OrdersListingViewModel _ordersListingViewModel, CreatingOrderViewModel _creatingOrderViewModel)
+    public MainViewModel( OrdersListingViewModel _ordersListingViewModel, CreatingOrderViewModel _creatingOrderViewModel)
     {
         ordersListingViewModel = _ordersListingViewModel;
         creatingOrderViewModel = _creatingOrderViewModel;
