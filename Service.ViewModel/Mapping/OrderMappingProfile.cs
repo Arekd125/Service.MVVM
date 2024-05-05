@@ -20,6 +20,10 @@ namespace Service.ViewModel.Mapping
                 .ForMember(m => m.ContactPhoneNumber, c => c.MapFrom(s => s.Contact.PhoneNumber))
                 .ForMember(m => m.StartData, c => c.MapFrom(s => s.StartDate.ToString("d")));
 
+            CreateMap<Contact, ContactDto>()
+                .ForMember(c =>c.ContactName, z=>z.MapFrom(s=>s.Name));
+
+
             CreateMap<DeviceStateDto, DeviceState>();
             CreateMap<DeviceState, DeviceStateDto>();
         }

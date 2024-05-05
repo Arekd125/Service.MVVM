@@ -11,5 +11,7 @@ namespace Service.ViewModel.Service
         public Task<DisplayOrderDto> GetLastOrder();
 
         public Task<int> GetOrderNumber();
+
+        public Task<IEnumerable<ContactDto>> GetAllContacts();
     }
 }

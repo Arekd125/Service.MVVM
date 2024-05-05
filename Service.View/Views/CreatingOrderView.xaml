@@ -24,18 +24,31 @@
         </GroupBox>
 
         <GroupBox Margin="0,0,10,0" Header="Kontakt" DataContext="{Binding ContactViewModel}">
-
+         <!-- Contact -->
             <StackPanel>
-                <TextBox
+                <ComboBox
                     Margin="3"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Imię i Nazwisko"
-                    Text="{Binding ContactNameTextBox}" />
-                <TextBox
+                  
+                    IsEditable="True"
+                    IsTextSearchEnabled="True"
+                    SelectedItem="{Binding ContactNameSelectedItem}"
+                    ItemsSource="{Binding ContactNameItemSource}"
+                    Text="{Binding ContactNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox
                     Margin="3"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Telefon"
-                    Text="{Binding ContactPhoneNumberTextBox, UpdateSourceTrigger=PropertyChanged}" />
+                     
+                     IsEditable="True"
+                     IsTextSearchEnabled="True"
+                     
+                     SelectedIndex="{Binding  ContactPhoneNumberSelectedIndex}"
+                     SelectedItem="{Binding ContactPhoneNumberSelectedItem, UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"
+                     ItemsSource="{Binding ContactPhoneNumberItemSource, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding ContactPhoneNumberComboBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
             </StackPanel>
         </GroupBox>
 

@@ -26,8 +26,8 @@ namespace Service.ViewModel.Commands
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_contactViewModel.ContactPhoneNumberTextBox) &&
-                    _contactViewModel.ContactPhoneNumberTextBox.Length > 10 &&
+            return (!string.IsNullOrEmpty(_contactViewModel.ContactPhoneNumberComboBox) &&
+                    _contactViewModel.ContactPhoneNumberComboBox.Length > 10 &&
                    !string.IsNullOrEmpty(_deviceViewModel.DeviceNameComboBox) &&
                    !string.IsNullOrEmpty(_deviceViewModel.ModelNameComboBox));
         }

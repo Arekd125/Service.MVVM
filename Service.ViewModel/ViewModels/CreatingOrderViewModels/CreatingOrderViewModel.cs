@@ -16,16 +16,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly IOrderService _orderService;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
+      
+
+
         public FlayoutVewModel FlayoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
         public ContactViewModel ContactViewModel { get; }
         public DeviceViewModel DeviceViewModel { get; }
         public DescriptionViewModel DescriptionViewModel { get; }
 
-
-      
-
-       
 
         public ICommand CreateOrderAndPrintButton { get; }
         public ICommand SaveButton { get; }
@@ -56,8 +55,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void Clear()
         {
-            ContactViewModel.ContactNameTextBox = string.Empty;
-            ContactViewModel.ContactPhoneNumberTextBox = string.Empty;
+            ContactViewModel.ContactNameComboBox = string.Empty;
+            ContactViewModel.ContactPhoneNumberComboBox = string.Empty;
             DeviceViewModel.DeviceNameComboBox = string.Empty;
             DeviceViewModel.ModelNameComboBox = string.Empty;
             DescriptionViewModel.DescriptionTextBox = string.Empty;
@@ -74,8 +73,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             {
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
-                ContactName = ContactViewModel.ContactNameTextBox,
-                ContactPhoneNumber = ContactViewModel.ContactPhoneNumberTextBox,
+                ContactName = ContactViewModel.ContactNameComboBox,
+                ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
                 Description = DescriptionViewModel.DescriptionTextBox,

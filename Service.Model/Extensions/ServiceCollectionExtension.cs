@@ -22,6 +22,7 @@ namespace Service.Model.Extensions
         {
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IDeviceRepository, DeviceRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
         }
     }
 }
