@@ -16,15 +16,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly IOrderService _orderService;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-      
-
-
         public FlayoutVewModel FlayoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
         public ContactViewModel ContactViewModel { get; }
         public DeviceViewModel DeviceViewModel { get; }
         public DescriptionViewModel DescriptionViewModel { get; }
-
 
         public ICommand CreateOrderAndPrintButton { get; }
         public ICommand SaveButton { get; }
@@ -36,7 +32,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ContactViewModel contactViewModel,
             DeviceViewModel deviceViewModel,
             DescriptionViewModel descriptionViewModel,
-            OrdersListingViewModel ordersListingViewModel, 
+            OrdersListingViewModel ordersListingViewModel,
             IOrderService orderService)
         {
             _orderService = orderService;
@@ -47,27 +43,27 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel = deviceViewModel;
             DescriptionViewModel = descriptionViewModel;
 
-           SaveButton = new SaveOrderCommand(this, ContactViewModel , DeviceViewModel);
+            SaveButton = new SaveOrderCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleCommand(this);
-
-            
         }
 
         public void Clear()
         {
             ContactViewModel.ContactNameComboBox = string.Empty;
+            ContactViewModel.ContactNameSelectedItem = string.Empty;
             ContactViewModel.ContactPhoneNumberComboBox = string.Empty;
+            ContactViewModel.ContactPhoneNumberSelectedItem = string.Empty;
             DeviceViewModel.DeviceNameComboBox = string.Empty;
             DeviceViewModel.ModelNameComboBox = string.Empty;
+
             DescriptionViewModel.DescriptionTextBox = string.Empty;
             DescriptionViewModel.ToDoTextBox = string.Empty;
             DescriptionViewModel.AccessoriesTexBox = string.Empty;
+            // ContactViewModel.RefreshContacts();
             NameOrderViewModel.SetNextOrderName();
-
         }
 
-
-        public void  SaveOrder()
+        public void SaveOrder()
         {
             CreateOrderDto orderdto = new()
             {
@@ -83,7 +79,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             };
 
             _orderService.CreateOrder(orderdto);
-             FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
+            FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
             AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();
             Clear();

@@ -1,4 +1,5 @@
-﻿using Service.ViewModel.Service;
+﻿using Service.ViewModel.Dtos;
+using Service.ViewModel.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,28 +14,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     {
         private readonly IOrderService _orderService;
 
-
-        
-
-        private int _contactPhoneNumberSelectedIndex;
-        public int ContactPhoneNumberSelectedIndex
-        {
-            get
-            {
-              
-                return _contactPhoneNumberSelectedIndex;
-            }
-            set
-            {
-             
-               
-                OnPropertyChanged(nameof(ContactPhoneNumberSelectedIndex));
-             
-            }
-        }
-
-
-
+        private IEnumerable<ContactDto> AllContacts;
 
         private string _contactName = string.Empty;
 
@@ -50,12 +30,14 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 OnPropertyChanged(nameof(ContactNameComboBox));
             }
         }
+
         private IEnumerable<string> _contactNameItemSource;
+
         public IEnumerable<string> ContactNameItemSource
         {
             get
             {
-                _contactNameItemSource = _orderService.GetAllContacts().Result.Select(p=>p.ContactName);
+                _contactNameItemSource = AllContacts.Where(p => !string.IsNullOrEmpty(p.ContactName)).Select(p => p.ContactName);
                 return _contactNameItemSource;
             }
             set
@@ -64,7 +46,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 OnPropertyChanged(nameof(ContactNameItemSource));
             }
         }
+
         private string _contactNameSelectedItem;
+
         public string ContactNameSelectedItem
         {
             get
@@ -75,75 +59,74 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             {
                 _contactNameSelectedItem = value;
                 OnPropertyChanged(nameof(ContactNameSelectedItem));
+                //if (string.IsNullOrEmpty(ContactPhoneNumberSelectedItem))
+                //{
+                //    ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem).Select(p => p.PhoneNumber).FirstOrDefault();
+                //    //  ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
+                //}
             }
         }
+
         private string _contactPhoneNumber = "";
+
         public string ContactPhoneNumberComboBox
         {
             get
             {
-
-              
                 return _contactPhoneNumber;
-                
             }
             set
             {
-
-                
                 _contactPhoneNumber = PhoneValisation(value);
-          
+
                 OnPropertyChanged(nameof(ContactPhoneNumberComboBox));
-            
             }
         }
 
         private IEnumerable<string> _contactPhoneNumberItemSource;
+
         public IEnumerable<string> ContactPhoneNumberItemSource
         {
             get
             {
-                _contactPhoneNumberItemSource = _orderService.GetAllContacts().Result.Select(p => p.PhoneNumber);
+                _contactPhoneNumberItemSource = AllContacts.Select(p => p.PhoneNumber);
                 return _contactPhoneNumberItemSource;
-
             }
             set
             {
-                
                 _contactPhoneNumberItemSource = value;
                 OnPropertyChanged(nameof(ContactPhoneNumberItemSource));
-               
-
-
             }
         }
+
         private string _contactPhoneNumberSelectedItem;
+
         public string ContactPhoneNumberSelectedItem
         {
             get
 
             {
-              
-                _contactPhoneNumberSelectedItem = PhoneValisation(_contactPhoneNumberSelectedItem);
                 return _contactPhoneNumberSelectedItem;
-
             }
             set
             {
-               
-                _contactPhoneNumberSelectedItem =value;    
-              
+                _contactPhoneNumberSelectedItem = value;
+
                 OnPropertyChanged(nameof(ContactPhoneNumberSelectedItem));
-              
-
-
+                if (string.IsNullOrEmpty(ContactNameSelectedItem))
+                    ContactNameSelectedItem = AllContacts.FirstOrDefault(p => p.PhoneNumber == ContactPhoneNumberSelectedItem)?.ContactName;
             }
         }
+
         public ContactViewModel(IOrderService orderService)
         {
             _orderService = orderService;
+            RefreshContacts();
+        }
 
-            
+        public void RefreshContacts()
+        {
+            AllContacts = _orderService.GetAllContacts().Result;
         }
 
         //public string PhoneValisation(string phoneNumber)
@@ -164,7 +147,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         //    return Regex.Replace(phoneNumber, "(\\d{3})(?=\\d)", "$1 "); ;
         //}
-
 
         private string PhoneValisation(string PhoneNumber)
         {

@@ -17,7 +17,18 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                dbContext.Orders.Add(order);
+                Contact existingContact = await dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == order.ContactId);
+
+                if (existingContact != null)
+                {
+                    existingContact.Order.Add(order);
+                }
+                else
+                {
+                    Contact newContact = new Contact { Id = order.ContactId };
+                    newContact.Order.Add(order);
+                    dbContext.Contacts.Add(newContact);
+                }
                 await dbContext.SaveChangesAsync();
             }
         }

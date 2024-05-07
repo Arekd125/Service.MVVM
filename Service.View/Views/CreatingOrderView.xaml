@@ -15,7 +15,7 @@
         Grid.Row="0"
         Grid.Column="2"
         Margin="10,10,0,10">
-    
+
         <GroupBox Margin="0,0,10,0" Header="Zlecenia"
                   DataContext="{Binding NameOrderViewModel}">
 
@@ -24,31 +24,30 @@
         </GroupBox>
 
         <GroupBox Margin="0,0,10,0" Header="Kontakt" DataContext="{Binding ContactViewModel}">
-         <!-- Contact -->
+            <!-- Contact -->
             <StackPanel>
                 <ComboBox
                     Margin="3"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Imię i Nazwisko"
-                  
+
                     IsEditable="True"
                     IsTextSearchEnabled="True"
                     SelectedItem="{Binding ContactNameSelectedItem}"
                     ItemsSource="{Binding ContactNameItemSource}"
                     Text="{Binding ContactNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox
+                <ComboBox  x:Name="comboBox"
                     Margin="3"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Telefon"
-                     
+                    mah:ComboBoxHelper.MaxLength="9"
                      IsEditable="True"
                      IsTextSearchEnabled="True"
-                     
-                     SelectedIndex="{Binding  ContactPhoneNumberSelectedIndex}"
-                     SelectedItem="{Binding ContactPhoneNumberSelectedItem, UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"
-                     ItemsSource="{Binding ContactPhoneNumberItemSource, UpdateSourceTrigger=PropertyChanged}"
-                     Text="{Binding ContactPhoneNumberComboBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
+                     SelectedItem="{Binding ContactPhoneNumberSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding ContactPhoneNumberItemSource, UpdateSourceTrigger=PropertyChanged}"
+                     Text="{Binding ContactPhoneNumberComboBox, UpdateSourceTrigger=LostFocus, Mode=TwoWay}">
+                </ComboBox>
             </StackPanel>
         </GroupBox>
 
