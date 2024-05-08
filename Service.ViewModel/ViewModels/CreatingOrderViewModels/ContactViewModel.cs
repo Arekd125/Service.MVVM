@@ -15,6 +15,24 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly IOrderService _orderService;
 
         private IEnumerable<ContactDto> AllContacts;
+        private bool Refresh = true;
+
+        private void SelectContactNameSelectedItem()
+        {
+            if (Refresh)
+            {
+                ContactNameSelectedItem = AllContacts.FirstOrDefault(p => p.PhoneNumber == ContactPhoneNumberSelectedItem)?.ContactName;
+            }
+        }
+
+        private void SelectContactPhoneNumberSelectedItem()
+        {
+            if (Refresh)
+            {
+                ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem).Select(p => p.PhoneNumber).FirstOrDefault();
+                ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
+            }
+        }
 
         private string _contactName = string.Empty;
 
@@ -28,6 +46,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             {
                 _contactName = value;
                 OnPropertyChanged(nameof(ContactNameComboBox));
+                SelectContactPhoneNumberSelectedItem();
             }
         }
 
@@ -37,7 +56,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             get
             {
-                _contactNameItemSource = AllContacts.Where(p => !string.IsNullOrEmpty(p.ContactName)).Select(p => p.ContactName);
                 return _contactNameItemSource;
             }
             set
@@ -47,9 +65,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _contactNameSelectedItem;
+        private string? _contactNameSelectedItem;
 
-        public string ContactNameSelectedItem
+        public string? ContactNameSelectedItem
         {
             get
             {
@@ -59,15 +77,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             {
                 _contactNameSelectedItem = value;
                 OnPropertyChanged(nameof(ContactNameSelectedItem));
-                //if (string.IsNullOrEmpty(ContactPhoneNumberSelectedItem))
-                //{
-                //    ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem).Select(p => p.PhoneNumber).FirstOrDefault();
-                //    //  ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
-                //}
             }
         }
 
-        private string _contactPhoneNumber = "";
+        private string _contactPhoneNumber = string.Empty;
 
         public string ContactPhoneNumberComboBox
         {
@@ -80,6 +93,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 _contactPhoneNumber = PhoneValisation(value);
 
                 OnPropertyChanged(nameof(ContactPhoneNumberComboBox));
+                SelectContactNameSelectedItem();
             }
         }
 
@@ -89,7 +103,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             get
             {
-                _contactPhoneNumberItemSource = AllContacts.Select(p => p.PhoneNumber);
                 return _contactPhoneNumberItemSource;
             }
             set
@@ -99,9 +112,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _contactPhoneNumberSelectedItem;
+        private string? _contactPhoneNumberSelectedItem;
 
-        public string ContactPhoneNumberSelectedItem
+        public string? ContactPhoneNumberSelectedItem
         {
             get
 
@@ -113,20 +126,28 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 _contactPhoneNumberSelectedItem = value;
 
                 OnPropertyChanged(nameof(ContactPhoneNumberSelectedItem));
-                if (string.IsNullOrEmpty(ContactNameSelectedItem))
-                    ContactNameSelectedItem = AllContacts.FirstOrDefault(p => p.PhoneNumber == ContactPhoneNumberSelectedItem)?.ContactName;
             }
         }
 
         public ContactViewModel(IOrderService orderService)
         {
             _orderService = orderService;
-            RefreshContacts();
+            RefreshContactsItemSorce();
         }
 
-        public void RefreshContacts()
+        public void ClearContacts()
+        {
+            Refresh = false;
+            ContactNameComboBox = string.Empty;
+            ContactPhoneNumberComboBox = string.Empty;
+            Refresh = true;
+        }
+
+        public void RefreshContactsItemSorce()
         {
             AllContacts = _orderService.GetAllContacts().Result;
+            ContactNameItemSource = AllContacts.Where(p => !string.IsNullOrEmpty(p.ContactName)).Select(p => p.ContactName);
+            ContactPhoneNumberItemSource = AllContacts.Select(p => p.PhoneNumber);
         }
 
         //public string PhoneValisation(string phoneNumber)

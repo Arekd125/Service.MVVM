@@ -34,7 +34,7 @@
                     IsEditable="True"
                     IsTextSearchEnabled="True"
                     SelectedItem="{Binding ContactNameSelectedItem}"
-                    ItemsSource="{Binding ContactNameItemSource}"
+                    ItemsSource="{Binding ContactNameItemSource, UpdateSourceTrigger=PropertyChanged}"
                     Text="{Binding ContactNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox  x:Name="comboBox"
                     Margin="3"
@@ -44,7 +44,7 @@
                      IsEditable="True"
                      IsTextSearchEnabled="True"
 
-                     SelectedItem="{Binding ContactPhoneNumberSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                     SelectedItem="{Binding ContactPhoneNumberSelectedItem}"
                      ItemsSource="{Binding ContactPhoneNumberItemSource, UpdateSourceTrigger=PropertyChanged}"
                      Text="{Binding ContactPhoneNumberComboBox, UpdateSourceTrigger=LostFocus, Mode=TwoWay}">
                 </ComboBox>

@@ -49,17 +49,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void Clear()
         {
-            ContactViewModel.ContactNameComboBox = string.Empty;
-            ContactViewModel.ContactNameSelectedItem = string.Empty;
-            ContactViewModel.ContactPhoneNumberComboBox = string.Empty;
-            ContactViewModel.ContactPhoneNumberSelectedItem = string.Empty;
             DeviceViewModel.DeviceNameComboBox = string.Empty;
             DeviceViewModel.ModelNameComboBox = string.Empty;
-
             DescriptionViewModel.DescriptionTextBox = string.Empty;
             DescriptionViewModel.ToDoTextBox = string.Empty;
             DescriptionViewModel.AccessoriesTexBox = string.Empty;
-            // ContactViewModel.RefreshContacts();
+            ContactViewModel.RefreshContactsItemSorce();
+            ContactViewModel.ClearContacts();
             NameOrderViewModel.SetNextOrderName();
         }
 
