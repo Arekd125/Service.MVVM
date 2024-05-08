@@ -8,12 +8,12 @@ namespace Service.ViewModel.Mapping
     {
         public OrderMappingProfile()
         {
-            CreateMap<CreateOrderDto, Order>()
-                .ForMember(e => e.Contact, opt => opt.MapFrom(src => new Contact()
-                {
-                    Name = src.ContactName,
-                    PhoneNumber = src.ContactPhoneNumber
-                }));
+            CreateMap<CreateOrderDto, Order>();
+            //.ForMember(e => e.Contact, opt => opt.MapFrom(src => new Contact()
+            //{
+            //    Name = src.ContactName,
+            //    PhoneNumber = src.ContactPhoneNumber
+            //}));
 
             CreateMap<Order, DisplayOrderDto>()
                 .ForMember(m => m.ContactName, c => c.MapFrom(s => s.Contact.Name))
@@ -21,9 +21,9 @@ namespace Service.ViewModel.Mapping
                 .ForMember(m => m.StartData, c => c.MapFrom(s => s.StartDate.ToString("d")));
 
             CreateMap<Contact, ContactDto>()
-                .ForMember(c =>c.ContactName, z=>z.MapFrom(s=>s.Name));
-
-
+                .ForMember(c => c.ContactName, z => z.MapFrom(s => s.Name));
+            CreateMap<ContactDto, Contact>()
+               .ForMember(c => c.Name, z => z.MapFrom(s => s.ContactName));
             CreateMap<DeviceStateDto, DeviceState>();
             CreateMap<DeviceState, DeviceStateDto>();
         }

@@ -9,6 +9,7 @@ namespace Service.Model.Repositories
 {
     public interface IContactRepository
     {
+        public Task<int> Create(Contact contact);
 
         public Task<IEnumerable<Contact>> GetAllContacts();
     }

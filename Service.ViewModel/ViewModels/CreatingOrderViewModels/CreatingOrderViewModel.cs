@@ -65,12 +65,18 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void SaveOrder()
         {
-            CreateOrderDto orderdto = new()
+            ContactDto contactDto = new()
+            {
+                ContactName = ContactViewModel.ContactNameComboBox,
+                PhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
+            };
+
+            int contactId = _orderService.CreateContact(contactDto).Result;
+
+            CreateOrderDto orderDto = new()
             {
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
-                ContactName = ContactViewModel.ContactNameComboBox,
-                ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
                 Description = DescriptionViewModel.DescriptionTextBox,
@@ -78,7 +84,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
 
-            _orderService.CreateOrder(orderdto);
+            _orderService.CreateOrder(orderDto, contactId);
             FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
             AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();

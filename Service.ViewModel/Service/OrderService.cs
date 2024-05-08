@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Service.Model.Repositories;
 using Service.ViewModel.Dtos;
 using Servis.Models.OrderModels;
@@ -11,16 +12,18 @@ namespace Service.ViewModel.Service
         private readonly IContactRepository _contactRepository;
         private readonly IMapper _mapper;
 
-        public OrderService(IOrderRepository orderRepository,IContactRepository contactRepository, IMapper mapper)
+        public OrderService(IOrderRepository orderRepository, IContactRepository contactRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _contactRepository = contactRepository;
             _mapper = mapper;
         }
 
-        public async Task CreateOrder(CreateOrderDto createOrderDto)
+        public async Task CreateOrder(CreateOrderDto createOrderDto, int ContacId)
         {
             var order = _mapper.Map<Order>(createOrderDto);
+
+            order.ContactId = ContacId;
 
             await _orderRepository.Create(order);
         }
@@ -44,20 +47,25 @@ namespace Service.ViewModel.Service
 
         public async Task<int> GetOrderNumber()
         {
-
-
             var order = await _orderRepository.GetLastOrder();
             if (order != null)
             {
                 var lastOrderData = order.StartDate;
 
-                if (lastOrderData.Month == DateTime.Now.Month && lastOrderData.Year == DateTime.Now.Year )
+                if (lastOrderData.Month == DateTime.Now.Month && lastOrderData.Year == DateTime.Now.Year)
                 {
                     return order.OrderNo + 1;
                 }
             }
 
             return 1;
+        }
+
+        public async Task<int> CreateContact(ContactDto contactDto)
+        {
+            var contact = _mapper.Map<Contact>(contactDto);
+
+            return await _contactRepository.Create(contact);
         }
 
         public async Task<IEnumerable<ContactDto>> GetAllContacts()
@@ -68,6 +76,5 @@ namespace Service.ViewModel.Service
 
             return contactsDto;
         }
-
     }
 }
