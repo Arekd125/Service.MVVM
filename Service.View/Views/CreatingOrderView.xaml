@@ -35,7 +35,7 @@
                     IsTextSearchEnabled="True"
                     SelectedItem="{Binding ContactNameSelectedItem}"
                     ItemsSource="{Binding ContactNameItemSource, UpdateSourceTrigger=PropertyChanged}"
-                    Text="{Binding ContactNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding ContactNameComboBox, UpdateSourceTrigger=LostFocus}" />
                 <ComboBox
                     Margin="3"
                     Height="40"
@@ -205,7 +205,7 @@
                 IsOpen="{Binding OpenFlyout}"
                 Position="Right">
                 <Label Content ="{Binding MessageFlyout}"
-                    Margin="0,-60,0,0"
+                    Margin="0,-75,0,0"
                     Padding="5"
                     HorizontalAlignment="Center"
                     FontSize="22" />
