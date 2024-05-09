@@ -30,14 +30,15 @@
                     Margin="3"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Imię i Nazwisko"
-
+                    Height="40"
                     IsEditable="True"
                     IsTextSearchEnabled="True"
                     SelectedItem="{Binding ContactNameSelectedItem}"
                     ItemsSource="{Binding ContactNameItemSource, UpdateSourceTrigger=PropertyChanged}"
                     Text="{Binding ContactNameComboBox, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox  x:Name="comboBox"
+                <ComboBox
                     Margin="3"
+                    Height="40"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Telefon"
                     mah:ComboBoxHelper.MaxLength="9"
@@ -63,6 +64,7 @@
                     <!--  Marka  -->
                     <ComboBox
                         Margin="3"
+                        Height="40"
                         mah:TextBoxHelper.UseFloatingWatermark="True"
                         mah:TextBoxHelper.Watermark="Marka"
                         IsEditable="True"
@@ -73,6 +75,7 @@
                     <Button
                         Grid.Column="1"
                         Width="40"
+                        Height="40"
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Command="{Binding Path=AddDeviceButton}"
@@ -83,6 +86,7 @@
                     <Button
                         Grid.Column="2"
                         Width="40"
+                        Height="40"
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Background="Red"
@@ -100,6 +104,7 @@
                     </Grid.ColumnDefinitions>
                     <ComboBox
                         Margin="3"
+                        Height="40"
                         mah:TextBoxHelper.UseFloatingWatermark="True"
                         mah:TextBoxHelper.Watermark="Model"
                         IsEditable="True"
@@ -110,6 +115,7 @@
                     <Button
                         Grid.Column="1"
                         Width="40"
+                        Height="40"
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Command="{Binding Path=AddModelButton}"
@@ -119,6 +125,7 @@
                     <Button
                         Grid.Column="2"
                         Width="40"
+                        Height="40"
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Background="Red"
@@ -148,6 +155,7 @@
                     Text="{Binding ToDoTextBox, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
                     Margin="3"
+                    Height="40"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Dołączone akcesoria"
                     Text="{Binding AccessoriesTexBox}" />
@@ -189,7 +197,7 @@
 
         <mah:FlyoutsControl>
             <mah:Flyout DataContext="{Binding FlayoutVewModel}"
-                Width="270"
+                Width="300"
                 CloseButtonVisibility="Hidden"
                 IsAutoCloseEnabled="True"
                 Theme="Inverse"

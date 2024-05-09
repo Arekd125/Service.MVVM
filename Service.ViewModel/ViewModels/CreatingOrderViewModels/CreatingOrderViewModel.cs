@@ -81,7 +81,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             };
 
             _orderService.CreateOrder(orderDto, contactId);
-            FlayoutVewModel.ShowFlyout("Dodano Zlecenie");
+            FlayoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();
             Clear();

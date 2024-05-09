@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
-    public  class DeviceViewModel : ViewModelBase
+    public class DeviceViewModel : ViewModelBase
 
     {
         public IDialogCoordinator _dialogCoordinator;
@@ -24,12 +24,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public ICommand AddModelButton { get; }
         public ICommand DeleteModelButton { get; }
-
-       
-
-
-       
-
 
         private IEnumerable<string> _deviceStateNameItemsSource;
 
@@ -109,7 +103,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         }
 
         private string _ModelName = string.Empty;
-       
 
         public string ModelNameComboBox
         {
@@ -124,25 +117,17 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public DeviceViewModel(IDeviceStateService deviceStateService, IDialogCoordinator dialogCoordinator, FlayoutVewModel flayoutVewModel )
+        public DeviceViewModel(IDeviceStateService deviceStateService, IDialogCoordinator dialogCoordinator, FlayoutVewModel flayoutVewModel)
         {
-
             _deviceStateService = deviceStateService;
             _dialogCoordinator = dialogCoordinator;
             _flayoutVewModel = flayoutVewModel;
-
-
 
             AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
             DeleteDeviceButton = new DeleteDeviceCommand(this);
             AddModelButton = new AddModelCommand(this);
             DeleteModelButton = new DeleteModelCommand(this);
-
-
         }
-
-
-
 
         public async void ShowMessage()
         {
@@ -153,7 +138,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             {
                 AffirmativeButtonText = "Tak",
                 NegativeButtonText = "Anuluj",
-                AnimateShow = false,
                 CustomResourceDictionary = themes,
                 ColorScheme = MetroDialogColorScheme.Accented
             };
@@ -178,26 +162,23 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public async void DeleteDeviceAndModels()
         {
             await _deviceStateService.DeleteDevice(DeviceStateSelectedItem);
-            var message = $"Usunięto Markę {DeviceStateSelectedItem}";
+            var message = $"Usunięto markę:\n{DeviceStateSelectedItem}";
             DeviceStateSelectedItem = null;
             DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
 
             await _flayoutVewModel.ShowFlyout(message, Colors.Red);
         }
 
-
-
         public async void DeleteModel()
         {
             await _deviceStateService.DeleteModel(DeviceStateSelectedItem, ModelStateSelectedItem);
-            var message = $"Usunięto Modelu {ModelStateSelectedItem}";
+            var message = $"Usunięto model:\n{ModelStateSelectedItem}";
             ModelStateSelectedItem = null;
             ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
 
-            await 
+            await
                 _flayoutVewModel.ShowFlyout(message, Colors.Red);
         }
-
 
         public IEnumerable<string> AllModelStateName()
         {
@@ -215,7 +196,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceStateNameItemsSource = await _deviceStateService.GetAllDeviceName();
             DeviceStateSelectedItem = DeviceNameComboBox;
 
-            var message = $"Dodano Markę {DeviceNameComboBox}";
+            var message = $"Dodano markę:\n{DeviceNameComboBox}";
             await _flayoutVewModel.ShowFlyout(message);
         }
 
@@ -231,11 +212,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ModelStateNameItemSorce = AllModelStateName();
             ModelStateSelectedItem = ModelNameComboBox;
 
-            var message = $"Dodano Model {ModelNameComboBox}";
+            var message = $"Dodano model:\n{ModelNameComboBox}";
             await _flayoutVewModel.ShowFlyout(message);
         }
-
-
-
     }
 }

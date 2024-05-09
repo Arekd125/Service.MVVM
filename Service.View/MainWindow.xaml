@@ -28,7 +28,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
-                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
             <!--  DATA GRID  -->
             <views:OrdersListingView Grid.Column="1" DataContext="{Binding ordersListingViewModel}" />
