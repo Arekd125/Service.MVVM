@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Service.Model.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class add2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,6 +36,20 @@ namespace Service.Model.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DeviceState", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ToDoState",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ToDoName = table.Column<string>(type: "TEXT", nullable: false),
+                    Prize = table.Column<decimal>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToDoState", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,6 +128,9 @@ namespace Service.Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "ToDoState");
 
             migrationBuilder.DropTable(
                 name: "DeviceState");

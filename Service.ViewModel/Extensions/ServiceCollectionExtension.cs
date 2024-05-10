@@ -19,15 +19,14 @@ namespace Service.ViewModel.Extensions
 
             services.AddSingleton<OrdersListingViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();
+            services.AddSingleton<ToDoListViewModel>();
             services.AddScoped<MainViewModel>();
 
             services.AddSingleton<NameOrderViewModel>();
-            services.AddSingleton<ContactViewModel>(); 
+            services.AddSingleton<ContactViewModel>();
             services.AddSingleton<DeviceViewModel>();
             services.AddSingleton<DescriptionViewModel>();
-            services.AddScoped<FlayoutVewModel>(); 
-
-
+            services.AddScoped<FlayoutVewModel>();
         }
     }
 }

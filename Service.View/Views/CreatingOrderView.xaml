@@ -30,7 +30,7 @@
                     Margin="3"
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Imię i Nazwisko"
-                    Height="40"
+
                     IsEditable="True"
                     IsTextSearchEnabled="True"
                     SelectedItem="{Binding ContactNameSelectedItem}"
@@ -38,7 +38,7 @@
                     Text="{Binding ContactNameComboBox, UpdateSourceTrigger=LostFocus}" />
                 <ComboBox
                     Margin="3"
-                    Height="40"
+
                     mah:TextBoxHelper.UseFloatingWatermark="True"
                     mah:TextBoxHelper.Watermark="Telefon"
                     mah:ComboBoxHelper.MaxLength="9"
@@ -64,7 +64,7 @@
                     <!--  Marka  -->
                     <ComboBox
                         Margin="3"
-                        Height="40"
+
                         mah:TextBoxHelper.UseFloatingWatermark="True"
                         mah:TextBoxHelper.Watermark="Marka"
                         IsEditable="True"
@@ -75,7 +75,7 @@
                     <Button
                         Grid.Column="1"
                         Width="40"
-                        Height="40"
+
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Command="{Binding Path=AddDeviceButton}"
@@ -86,7 +86,7 @@
                     <Button
                         Grid.Column="2"
                         Width="40"
-                        Height="40"
+
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Background="Red"
@@ -104,7 +104,7 @@
                     </Grid.ColumnDefinitions>
                     <ComboBox
                         Margin="3"
-                        Height="40"
+
                         mah:TextBoxHelper.UseFloatingWatermark="True"
                         mah:TextBoxHelper.Watermark="Model"
                         IsEditable="True"
@@ -115,7 +115,7 @@
                     <Button
                         Grid.Column="1"
                         Width="40"
-                        Height="40"
+
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Command="{Binding Path=AddModelButton}"
@@ -125,7 +125,7 @@
                     <Button
                         Grid.Column="2"
                         Width="40"
-                        Height="40"
+
                         Margin="2"
                         mah:ControlsHelper.ContentCharacterCasing="Upper"
                         Background="Red"
@@ -147,12 +147,12 @@
                     mah:TextBoxHelper.Watermark="Opis usterki"
                     AcceptsReturn="True"
                     Text="{Binding DescriptionTextBox}" />
-                <TextBox
-                    Height="80"
-                    Margin="3"
-                    mah:TextBoxHelper.UseFloatingWatermark="True"
-                    mah:TextBoxHelper.Watermark="Zakres naprawy"
-                    Text="{Binding ToDoTextBox, UpdateSourceTrigger=PropertyChanged}" />
+                <ComboBox
+                    ItemsSource="{Binding ToDoItemSource}"
+
+                    Margin="3" />
+                <mah:MultiSelectionComboBox>
+                </mah:MultiSelectionComboBox>
                 <TextBox
                     Margin="3"
                     Height="40"
@@ -205,7 +205,7 @@
                 IsOpen="{Binding OpenFlyout}"
                 Position="Right">
                 <Label Content ="{Binding MessageFlyout}"
-                    Margin="0,-75,0,0"
+                    Margin="-50,-75,0,0"
                     Padding="5"
                     HorizontalAlignment="Center"
                     FontSize="22" />

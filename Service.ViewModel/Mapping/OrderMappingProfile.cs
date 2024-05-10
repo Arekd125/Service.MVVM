@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Service.Model.Entity;
 using Service.ViewModel.Dtos;
 using Servis.Models.OrderModels;
 
@@ -9,11 +10,6 @@ namespace Service.ViewModel.Mapping
         public OrderMappingProfile()
         {
             CreateMap<CreateOrderDto, Order>();
-            //.ForMember(e => e.Contact, opt => opt.MapFrom(src => new Contact()
-            //{
-            //    Name = src.ContactName,
-            //    PhoneNumber = src.ContactPhoneNumber
-            //}));
 
             CreateMap<Order, DisplayOrderDto>()
                 .ForMember(m => m.ContactName, c => c.MapFrom(s => s.Contact.Name))
@@ -24,8 +20,12 @@ namespace Service.ViewModel.Mapping
                 .ForMember(c => c.ContactName, z => z.MapFrom(s => s.Name));
             CreateMap<ContactDto, Contact>()
                .ForMember(c => c.Name, z => z.MapFrom(s => s.ContactName));
+
             CreateMap<DeviceStateDto, DeviceState>();
             CreateMap<DeviceState, DeviceStateDto>();
+
+            CreateMap<ToDoDto, ToDoState>();
+            CreateMap<ToDoState, ToDoDto>();
         }
     }
 }

@@ -15,5 +15,7 @@ namespace Service.ViewModel.Service
         public Task<int> CreateContact(ContactDto contactDto);
 
         public Task<IEnumerable<ContactDto>> GetAllContacts();
+
+        public Task<IEnumerable<ToDoDto>> GetAllToDos();
     }
 }

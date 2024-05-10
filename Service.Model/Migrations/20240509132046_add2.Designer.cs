@@ -11,14 +11,32 @@ using Service.Model.DbContexts;
 namespace Service.Model.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20240424105709_init")]
-    partial class init
+    [Migration("20240509132046_add2")]
+    partial class add2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
+
+            modelBuilder.Entity("Service.Model.Entity.ToDoState", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Prize")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ToDoName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ToDoState");
+                });
 
             modelBuilder.Entity("Servis.Models.OrderModels.Contact", b =>
                 {

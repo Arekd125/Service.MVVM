@@ -10,12 +10,14 @@ namespace Service.ViewModel.Service
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IContactRepository _contactRepository;
+        private readonly IToDoRepository _toDoRepository;
         private readonly IMapper _mapper;
 
-        public OrderService(IOrderRepository orderRepository, IContactRepository contactRepository, IMapper mapper)
+        public OrderService(IOrderRepository orderRepository, IContactRepository contactRepository, IToDoRepository toDoRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _contactRepository = contactRepository;
+            _toDoRepository = toDoRepository;
             _mapper = mapper;
         }
 
@@ -73,6 +75,15 @@ namespace Service.ViewModel.Service
             var contacts = await _contactRepository.GetAllContacts();
 
             var contactsDto = _mapper.Map<IEnumerable<ContactDto>>(contacts);
+
+            return contactsDto;
+        }
+
+        public async Task<IEnumerable<ToDoDto>> GetAllToDos()
+        {
+            var contacts = await _toDoRepository.GetAllToDos();
+
+            var contactsDto = _mapper.Map<IEnumerable<ToDoDto>>(contacts);
 
             return contactsDto;
         }

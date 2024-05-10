@@ -27,11 +27,21 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
+
             <!--  DATA GRID  -->
-            <views:OrdersListingView Grid.Column="1" DataContext="{Binding ordersListingViewModel}" />
+            <views:OrdersListingView Grid.Column="0" DataContext="{Binding ordersListingViewModel}" />
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <!-- TODOLIST DATA GRID -->
+                <views:ToDoListView Grid.Row="0" DataContext="{Binding toDoListViewModel}" />
+            </Grid>
 
             <!--  ADD DATA  -->
             <views:CreatingOrderView Grid.Column="2" DataContext="{Binding creatingOrderViewModel}" />

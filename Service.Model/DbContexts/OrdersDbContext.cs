@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Service.Model.Entity;
 using Servis.Models.OrderModels;
 
 namespace Service.Model.DbContexts
@@ -9,6 +10,7 @@ namespace Service.Model.DbContexts
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<DeviceState> DeviceState { get; set; }
         public DbSet<ModelState> ModelState { get; set; }
+        public DbSet<ToDoState> ToDoState { get; set; }
 
         public OrdersDbContext(DbContextOptions options) : base(options)
         { }

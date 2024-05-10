@@ -7,10 +7,12 @@ public class MainViewModel : ViewModelBase
 {
     public OrdersListingViewModel ordersListingViewModel { get; }
     public CreatingOrderViewModel creatingOrderViewModel { get; }
+    public ToDoListViewModel toDoListViewModel { get; }
 
-    public MainViewModel( OrdersListingViewModel _ordersListingViewModel, CreatingOrderViewModel _creatingOrderViewModel)
+    public MainViewModel(OrdersListingViewModel ordersListingViewModel, CreatingOrderViewModel creatingOrderViewModel, ToDoListViewModel toDoListViewModel)
     {
-        ordersListingViewModel = _ordersListingViewModel;
-        creatingOrderViewModel = _creatingOrderViewModel;
+        this.ordersListingViewModel = ordersListingViewModel;
+        this.creatingOrderViewModel = creatingOrderViewModel;
+        this.toDoListViewModel = toDoListViewModel;
     }
 }
