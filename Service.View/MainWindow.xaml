@@ -10,8 +10,8 @@
     Title="Zlecenia"
     MinWidth="1200"
     MinHeight="870"
-    BorderThickness="5"
-    GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+    BorderThickness="1"
+
     Icon="/Images/main_icon.png"
     ResizeMode="CanResizeWithGrip"
     TitleCharacterCasing="Normal"

@@ -13,7 +13,6 @@
             Grid.Column="1"
             Margin="3"
             AutoGenerateColumns="False"
-            BorderThickness="1"
 
             ItemsSource="{Binding ToDoItemSource}"
             SelectionMode="Single">
@@ -24,7 +23,7 @@
                     Binding="{Binding Path=ToDoName}"
                     Header="Usługi" />
                 <DataGridTextColumn
-                    Width="100"
+                    Width="60"
                     Binding="{Binding Path=Prize}"
                     Header="Cena" />
             </DataGrid.Columns>
