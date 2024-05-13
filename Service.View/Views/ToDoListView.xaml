@@ -16,16 +16,17 @@
             AutoGenerateColumns="False"
             GridLinesVisibility="Horizontal"
             ItemsSource="{Binding ToDoItemSource}"
-            SelectionMode="Single">
+            SelectionMode="Single"
+            RowEditEnding="DataGrid_RowEditEnding">
 
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding Path=ToDoName}"
+                    Binding="{Binding Path=ToDoName, UpdateSourceTrigger=PropertyChanged}"
                     Header="Usługi" />
                 <DataGridTextColumn
                     Width="60"
-                    Binding="{Binding Path=Prize}"
+                    Binding="{Binding Path=Prize, UpdateSourceTrigger=PropertyChanged}"
                     Header="Cena" />
             </DataGrid.Columns>
         </DataGrid>

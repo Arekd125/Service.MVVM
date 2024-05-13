@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
-namespace Service.ViewModel.Commands
+namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
-    public class DeleteDeviceCommand : CommandBase
+    public class DeleteModelCommand : CommandBase
     {
         private readonly DeviceViewModel _deviceViewModel;
 
-        public DeleteDeviceCommand(DeviceViewModel deviceViewModel)
+
+
+        public DeleteModelCommand(DeviceViewModel deviceViewModel)
         {
             _deviceViewModel = deviceViewModel;
             _deviceViewModel.PropertyChanged += OnViewModelPropertyChanged;
@@ -21,7 +22,7 @@ namespace Service.ViewModel.Commands
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_deviceViewModel.DeviceStateSelectedItem));
+            return !string.IsNullOrEmpty(_deviceViewModel.ModelStateSelectedItem);
         }
 
         public override bool CanExecute(object? parameter)
@@ -31,14 +32,10 @@ namespace Service.ViewModel.Commands
 
         public override void Execute(object? parameter)
         {
-            if (_deviceViewModel.ModelStateNameItemSorce.Count() != 0)
-            {
-                _deviceViewModel.ShowMessage();
-            }
-            else
-            {
-                _deviceViewModel.DeleteDeviceAndModels();
-            }
+            _deviceViewModel.DeleteModel();
+
+
+
         }
     }
 }

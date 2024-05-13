@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using Service.ViewModel.Commands;
+using Service.ViewModel.Commands.CreatingOrderCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Servis.Models.OrderModels;

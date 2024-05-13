@@ -1,4 +1,5 @@
 ﻿using Service.Model.Entity;
+using Service.ViewModel.Commands.ToDoListCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Service.ViewModel.ViewModels
 {
@@ -17,14 +19,17 @@ namespace Service.ViewModel.ViewModels
 
         public IEnumerable<ToDoDto> ToDoItemSource => _toDoItemSource;
 
+        public ICommand ToDoListCommand { get; set; }
+
         public ToDoListViewModel(IOrderService orderService)
         {
             _orderService = orderService;
             _toDoItemSource = new ObservableCollection<ToDoDto>();
+            ToDoListCommand = new ToDoListCommand(this, orderService);
             AllToDos();
         }
 
-        private void Add(ToDoDto toDoDto)
+        public void Add(ToDoDto toDoDto)
         {
             _toDoItemSource.Add(toDoDto);
         }

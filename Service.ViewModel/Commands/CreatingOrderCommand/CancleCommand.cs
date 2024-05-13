@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.ViewModel.Commands
+namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
     public class CancleCommand : CommandBase
     {

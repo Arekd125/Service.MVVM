@@ -8,6 +8,7 @@ namespace Service.ViewModel.Dtos
 {
     public class ToDoDto
     {
+        public int Id { get; set; }
         public string ToDoName { get; set; }
         public decimal Prize { get; set; }
     }

@@ -2,7 +2,7 @@
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Servis.Models.OrderModels;
 
-namespace Service.ViewModel.Commands
+namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
     public class AddDeviceCommand : CommandBase
     {
@@ -19,9 +19,9 @@ namespace Service.ViewModel.Commands
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_deviceViewModel.DeviceNameComboBox))
+            return !string.IsNullOrEmpty(_deviceViewModel.DeviceNameComboBox)
                 && _deviceViewModel.DeviceNameComboBox.Length > 1
-                && (string.IsNullOrEmpty(_deviceViewModel.DeviceStateSelectedItem))
+                && string.IsNullOrEmpty(_deviceViewModel.DeviceStateSelectedItem)
                 && !IfExists(_deviceViewModel.DeviceNameComboBox.TrimEnd());
         }
 
@@ -40,9 +40,9 @@ namespace Service.ViewModel.Commands
         {
             _deviceViewModel.SaveDeviceState();
 
-            
 
-            
+
+
         }
     }
 }

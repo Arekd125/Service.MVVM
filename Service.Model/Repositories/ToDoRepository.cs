@@ -28,5 +28,29 @@ namespace Service.Model.Repositories
                 return toDoState;
             }
         }
+
+        public async Task Create(ToDoState toDoState)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                dbContext.ToDoState.Add(toDoState);
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpDate(ToDoState toDoState)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                var toDoStateUpdate = await dbContext.ToDoState.FirstOrDefaultAsync(x => x.Id == toDoState.Id);
+
+                if (toDoStateUpdate != null)
+                {
+                    toDoStateUpdate.ToDoName = toDoState.ToDoName;
+                    toDoStateUpdate.Prize = toDoState.Prize;
+                }
+                await dbContext.SaveChangesAsync();
+            }
+        }
     }
 }

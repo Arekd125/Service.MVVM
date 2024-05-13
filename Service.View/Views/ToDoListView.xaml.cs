@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.ViewModel.Commands.ToDoListCommand;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,27 @@ namespace Service.View.Views
     /// </summary>
     public partial class ToDoListView : UserControl
     {
+        public ICommand AddNewToDoCommand
+        {
+            get { return (ICommand)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("AddNewToDoCommand", typeof(ICommand), typeof(ToDoListView), new PropertyMetadata(null));
+
         public ToDoListView()
         {
             InitializeComponent();
+        }
+
+        private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (AddNewToDoCommand != null)
+            {
+                AddNewToDoCommand.Execute(e.Row.DataContext);
+            }
         }
     }
 }

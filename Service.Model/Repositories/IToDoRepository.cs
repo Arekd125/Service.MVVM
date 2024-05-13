@@ -10,5 +10,9 @@ namespace Service.Model.Repositories
     public interface IToDoRepository
     {
         public Task<IEnumerable<ToDoState>> GetAllToDos();
+
+        public Task Create(ToDoState toDoState);
+
+        public Task UpDate(ToDoState toDoState);
     }
 }

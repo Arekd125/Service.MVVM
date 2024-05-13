@@ -5,7 +5,7 @@ using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Servis.Models.OrderModels;
 using System.ComponentModel;
 
-namespace Service.ViewModel.Commands
+namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
     public class SaveOrderCommand : CommandBase
     {
@@ -26,10 +26,10 @@ namespace Service.ViewModel.Commands
 
         private bool CanExecuteValidator()
         {
-            return (!string.IsNullOrEmpty(_contactViewModel.ContactPhoneNumberComboBox) &&
+            return !string.IsNullOrEmpty(_contactViewModel.ContactPhoneNumberComboBox) &&
                     _contactViewModel.ContactPhoneNumberComboBox.Length > 10 &&
                    !string.IsNullOrEmpty(_deviceViewModel.DeviceNameComboBox) &&
-                   !string.IsNullOrEmpty(_deviceViewModel.ModelNameComboBox));
+                   !string.IsNullOrEmpty(_deviceViewModel.ModelNameComboBox);
         }
 
         public override bool CanExecute(object? parameter)

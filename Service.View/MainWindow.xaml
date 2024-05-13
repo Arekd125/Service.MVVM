@@ -40,7 +40,8 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <!-- TODOLIST DATA GRID -->
-                <views:ToDoListView Grid.Row="0" DataContext="{Binding toDoListViewModel}" />
+                <views:ToDoListView Grid.Row="0" DataContext="{Binding toDoListViewModel}"
+                                    AddNewToDoCommand="{Binding ToDoListCommand}" />
             </Grid>
 
             <!--  ADD DATA  -->

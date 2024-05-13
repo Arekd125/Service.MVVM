@@ -1,4 +1,5 @@
 ﻿using Service.ViewModel.Dtos;
+using System.Threading.Tasks;
 
 namespace Service.ViewModel.Service
 {
@@ -17,5 +18,9 @@ namespace Service.ViewModel.Service
         public Task<IEnumerable<ContactDto>> GetAllContacts();
 
         public Task<IEnumerable<ToDoDto>> GetAllToDos();
+
+        public Task CreateToDoState(ToDoDto toDoDto);
+
+        public Task UpdateToDoState(ToDoDto toDoDto);
     }
 }

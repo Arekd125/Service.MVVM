@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Service.Model.Entity;
 using Service.Model.Repositories;
 using Service.ViewModel.Dtos;
 using Servis.Models.OrderModels;
@@ -81,11 +82,25 @@ namespace Service.ViewModel.Service
 
         public async Task<IEnumerable<ToDoDto>> GetAllToDos()
         {
-            var contacts = await _toDoRepository.GetAllToDos();
+            var toDoState = await _toDoRepository.GetAllToDos();
 
-            var contactsDto = _mapper.Map<IEnumerable<ToDoDto>>(contacts);
+            var toDoDto = _mapper.Map<IEnumerable<ToDoDto>>(toDoState);
 
-            return contactsDto;
+            return toDoDto;
+        }
+
+        public async Task CreateToDoState(ToDoDto toDoDto)
+        {
+            var toDoState = _mapper.Map<ToDoState>(toDoDto);
+
+            await _toDoRepository.Create(toDoState);
+        }
+
+        public async Task UpdateToDoState(ToDoDto toDoDto)
+        {
+            var toDoState = _mapper.Map<ToDoState>(toDoDto);
+
+            await _toDoRepository.UpDate(toDoState);
         }
     }
 }
