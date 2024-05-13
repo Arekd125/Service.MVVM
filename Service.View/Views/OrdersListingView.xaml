@@ -14,17 +14,19 @@
         AutoGenerateColumns="False"
         BorderThickness="1"
         CanUserAddRows="False"
+        GridLinesVisibility="All"
         IsReadOnly="True"
         ItemsSource="{Binding ordersViewModelCollection}"
         SelectionMode="Single">
 
         <DataGrid.Columns>
             <DataGridTextColumn
-                Width="*"
+                Width="100"
+
                 Binding="{Binding Path=OrderName}"
                 Header="nr zlecenie" />
             <DataGridTextColumn
-                Width="*"
+                Width="100"
                 Binding="{Binding Path=StartData}"
                 Header="Data" />
             <DataGridTextColumn
