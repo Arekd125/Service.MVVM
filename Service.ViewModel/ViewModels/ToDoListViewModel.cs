@@ -19,13 +19,15 @@ namespace Service.ViewModel.ViewModels
 
         public IEnumerable<ToDoDto> ToDoItemSource => _toDoItemSource;
 
-        public ICommand ToDoListCommand { get; set; }
+        public ICommand AddNewToDoCommand { get; set; }
+        public ICommand DeleteToDoCommand { get; set; }
 
         public ToDoListViewModel(IOrderService orderService)
         {
             _orderService = orderService;
             _toDoItemSource = new ObservableCollection<ToDoDto>();
-            ToDoListCommand = new ToDoListCommand(this, orderService);
+            AddNewToDoCommand = new AddNewToDoCommand(orderService);
+            DeleteToDoCommand = new DeleteToDoCommand(orderService);
             AllToDos();
         }
 

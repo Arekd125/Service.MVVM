@@ -102,5 +102,10 @@ namespace Service.ViewModel.Service
 
             await _toDoRepository.UpDate(toDoState);
         }
+
+        public async Task DeleteToDoState(int id)
+        {
+            await _toDoRepository.Remove(id);
+        }
     }
 }

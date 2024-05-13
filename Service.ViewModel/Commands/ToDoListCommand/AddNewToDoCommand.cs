@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands.ToDoListCommand
 {
-    public class ToDoListCommand : CommandBase
+    public class AddNewToDoCommand : CommandBase
     {
-        private readonly ToDoListViewModel _toDoListViewModel;
         private readonly IOrderService _orderService;
 
-        public ToDoListCommand(ToDoListViewModel toDoListViewModel, IOrderService orderService)
+        public AddNewToDoCommand(IOrderService orderService)
         {
-            _toDoListViewModel = toDoListViewModel;
             _orderService = orderService;
         }
 

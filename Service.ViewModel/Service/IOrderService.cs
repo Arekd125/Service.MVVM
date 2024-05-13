@@ -22,5 +22,7 @@ namespace Service.ViewModel.Service
         public Task CreateToDoState(ToDoDto toDoDto);
 
         public Task UpdateToDoState(ToDoDto toDoDto);
+
+        public Task DeleteToDoState(int id);
     }
 }

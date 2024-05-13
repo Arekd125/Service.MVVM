@@ -14,5 +14,7 @@ namespace Service.Model.Repositories
         public Task Create(ToDoState toDoState);
 
         public Task UpDate(ToDoState toDoState);
+
+        public Task Remove(int Id);
     }
 }

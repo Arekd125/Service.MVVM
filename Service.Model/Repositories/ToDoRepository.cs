@@ -44,10 +44,24 @@ namespace Service.Model.Repositories
             {
                 var toDoStateUpdate = await dbContext.ToDoState.FirstOrDefaultAsync(x => x.Id == toDoState.Id);
 
-                if (toDoStateUpdate != null)
+                if (toDoStateUpdate != null && !string.IsNullOrEmpty(toDoState.ToDoName))
                 {
                     toDoStateUpdate.ToDoName = toDoState.ToDoName;
                     toDoStateUpdate.Prize = toDoState.Prize;
+                }
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task Remove(int Id)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                var toDoState = await dbContext.ToDoState.FirstOrDefaultAsync(x => x.Id == Id);
+
+                if (toDoState != null)
+                {
+                    dbContext.ToDoState.Remove(toDoState);
                 }
                 await dbContext.SaveChangesAsync();
             }
