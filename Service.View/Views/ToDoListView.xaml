@@ -20,14 +20,16 @@
             RowEditEnding="DataGrid_RowEditEnding">
 
             <DataGrid.Columns>
+
                 <DataGridTextColumn
                     Width="*"
                     Binding="{Binding Path=ToDoName, UpdateSourceTrigger=PropertyChanged}"
                     Header="Usługi" />
                 <DataGridTextColumn
-                    Width="60"
-                    Binding="{Binding Path=Prize, UpdateSourceTrigger=PropertyChanged}"
-                    Header="Cena" />
+                    Width="70"
+                    Binding="{Binding Path=Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:0.##\}}"
+                    Header="Cena"
+                    ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </GroupBox>
