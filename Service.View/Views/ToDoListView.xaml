@@ -25,8 +25,8 @@
 
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding Path=ToDoName, UpdateSourceTrigger=PropertyChanged}"
-                    Header="Usługi" />
+                    Binding='{Binding Path=ToDoName, FallbackValue="                            DODAJ USŁUGĘ", UpdateSourceTrigger=PropertyChanged}'
+                    Header="Usługi" ></DataGridTextColumn>
                 <DataGridTextColumn
                     Width="70"
                     Binding="{Binding Path=Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:F0\} }"
