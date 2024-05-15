@@ -3,13 +3,13 @@ using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
 namespace Service.ViewModel.ViewModels;
 
-public class MainWinodwViewModel : ViewModelBase
+public class MainWindowViewModel : ViewModelBase
 {
     public OrdersListingViewModel ordersListingViewModel { get; }
     public CreatingOrderViewModel creatingOrderViewModel { get; }
     public ToDoListViewModel toDoListViewModel { get; }
 
-    public MainWinodwViewModel(OrdersListingViewModel ordersListingViewModel, CreatingOrderViewModel creatingOrderViewModel, ToDoListViewModel toDoListViewModel)
+    public MainWindowViewModel(OrdersListingViewModel ordersListingViewModel, CreatingOrderViewModel creatingOrderViewModel, ToDoListViewModel toDoListViewModel)
     {
         this.ordersListingViewModel = ordersListingViewModel;
         this.creatingOrderViewModel = creatingOrderViewModel;
