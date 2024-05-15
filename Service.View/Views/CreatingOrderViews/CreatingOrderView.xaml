@@ -1,0 +1,80 @@
+﻿<UserControl
+    x:Class="Service.View.Views.CreatingOrderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:Service.View.Views.CreatingOrderViews"
+    Dialog:DialogParticipation.Register="{Binding DeviceViewModel}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+	<StackPanel
+        x:Name="AddDataStackPanel"
+        Grid.Row="0"
+        Grid.Column="2"
+        Margin="10,10,0,10">
+		<!--  ORDER NAME  -->
+		<views:OrderNameView DataContext="{Binding NameOrderViewModel}" />
+		<!--  CONTACT  -->
+		<views:ContactView DataContext="{Binding ContactViewModel}" />
+		<!--  DEVICE  -->
+		<views:DeviceView DataContext="{Binding DeviceViewModel}" />
+		<!-- DESCRIPTION-->
+		<views:DescriptionView DataContext="{Binding DescriptionViewModel}" />
+		<!--  BUTTONS  -->
+		<Button
+            Height="60"
+            Margin="0,3,10,0"
+            mah:ControlsHelper.ContentCharacterCasing="Upper"
+            Command="{Binding CreateOrderAndPrintButton}"
+            Content="Zapisz i drukuj"
+            Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<Button
+                Grid.Column="0"
+                Margin="0,2,3,4"
+                mah:ControlsHelper.ContentCharacterCasing="Upper"
+                Command="{Binding Path=SaveButton}"
+                Content="Zapisz"
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+			<Button
+                Grid.Column="1"
+                Height="60"
+                Margin="1,3,10,3"
+                mah:ControlsHelper.ContentCharacterCasing="Upper"
+                Background="Red"
+                Command="{Binding Path=CancleButton}"
+                Content="Anuluj"
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+		</Grid>
+		<!--  FLYOUT  -->
+
+		<mah:FlyoutsControl>
+			<mah:Flyout
+                Width="300"
+                Background="{Binding BackgroudColorFlyout}"
+                CloseButtonVisibility="Hidden"
+                DataContext="{Binding FlayoutVewModel}"
+                IsAutoCloseEnabled="True"
+                IsOpen="{Binding OpenFlyout}"
+                Position="Right"
+                Theme="Inverse">
+				<Label
+                    Margin="-50,-75,0,0"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Content="{Binding MessageFlyout}"
+                    FontSize="22" />
+			</mah:Flyout>
+		</mah:FlyoutsControl>
+	</StackPanel>
+</UserControl>

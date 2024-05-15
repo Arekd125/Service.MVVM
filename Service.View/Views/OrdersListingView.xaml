@@ -22,7 +22,6 @@
         <DataGrid.Columns>
             <DataGridTextColumn
                 Width="100"
-
                 Binding="{Binding Path=OrderName}"
                 Header="nr zlecenie" />
             <DataGridTextColumn

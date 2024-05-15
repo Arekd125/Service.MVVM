@@ -31,7 +31,7 @@ namespace Service.View
 
                     services.AddSingleton(s => new MainWindow()
                     {
-                        DataContext = s.GetRequiredService<MainViewModel>()
+                        DataContext = s.GetRequiredService<MainWinodwViewModel>()
                     });
                 }).Build();
         }
