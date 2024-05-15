@@ -7,9 +7,9 @@ using System.Windows.Media;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
-    public class FlayoutVewModel : ViewModelBase
+    public class FlyoutVewModel : ViewModelBase
     {
-        public FlayoutVewModel()
+        public FlyoutVewModel()
         { }
 
         private SolidColorBrush _backgroudColorFlyout;

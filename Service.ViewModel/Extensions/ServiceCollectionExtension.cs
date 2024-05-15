@@ -26,7 +26,7 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<ContactViewModel>();
             services.AddSingleton<DeviceViewModel>();
             services.AddSingleton<DescriptionViewModel>();
-            services.AddScoped<FlayoutVewModel>();
+            services.AddScoped<FlyoutVewModel>();
         }
     }
 }

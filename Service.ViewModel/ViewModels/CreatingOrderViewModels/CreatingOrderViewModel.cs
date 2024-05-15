@@ -17,7 +17,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly IOrderService _orderService;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public FlayoutVewModel FlayoutVewModel { get; }
+        public FlyoutVewModel FlyoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
         public ContactViewModel ContactViewModel { get; }
         public DeviceViewModel DeviceViewModel { get; }
@@ -28,7 +28,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public ICommand CancleButton { get; }
 
         public CreatingOrderViewModel(
-            FlayoutVewModel flayoutVewModel,
+            FlyoutVewModel flayoutVewModel,
             NameOrderViewModel nameOrderViewModel,
             ContactViewModel contactViewModel,
             DeviceViewModel deviceViewModel,
@@ -38,7 +38,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             _orderService = orderService;
             _ordersListingViewModel = ordersListingViewModel;
-            FlayoutVewModel = flayoutVewModel;
+            FlyoutVewModel = flayoutVewModel;
             NameOrderViewModel = nameOrderViewModel;
             ContactViewModel = contactViewModel;
             DeviceViewModel = deviceViewModel;
@@ -82,7 +82,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             };
 
             _orderService.CreateOrder(orderDto, contactId);
-            FlayoutVewModel.ShowFlyout("Dodano zlecenie");
+            FlyoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();
             _ordersListingViewModel.AddLast();
             Clear();

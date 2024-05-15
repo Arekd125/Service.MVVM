@@ -26,7 +26,7 @@
 
                 <DataGridTextColumn
                     Width="*"
-                    Binding="{Binding Path=ToDoName, FallbackValue="                            DODAJ USŁUGĘ", UpdateSourceTrigger=PropertyChanged}"
+                    Binding='{Binding Path=ToDoName, FallbackValue="                            DODAJ USŁUGĘ", UpdateSourceTrigger=PropertyChanged}'
                     Header="Usługi" />
                 <DataGridTextColumn
                     Width="70"

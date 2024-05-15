@@ -18,7 +18,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
     {
         public IDialogCoordinator _dialogCoordinator;
-        private readonly FlayoutVewModel _flayoutVewModel;
+        private readonly FlyoutVewModel _flayoutVewModel;
         private readonly IDeviceStateService _deviceStateService;
         public ICommand AddDeviceButton { get; }
         public ICommand DeleteDeviceButton { get; }
@@ -118,7 +118,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public DeviceViewModel(IDeviceStateService deviceStateService, IDialogCoordinator dialogCoordinator, FlayoutVewModel flayoutVewModel)
+        public DeviceViewModel(IDeviceStateService deviceStateService, IDialogCoordinator dialogCoordinator, FlyoutVewModel flayoutVewModel)
         {
             _deviceStateService = deviceStateService;
             _dialogCoordinator = dialogCoordinator;

@@ -11,21 +11,21 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-	<StackPanel
+    <StackPanel
         x:Name="AddDataStackPanel"
         Grid.Row="0"
         Grid.Column="2"
         Margin="10,10,0,10">
-		<!--  ORDER NAME  -->
-		<views:OrderNameView DataContext="{Binding NameOrderViewModel}" />
-		<!--  CONTACT  -->
-		<views:ContactView DataContext="{Binding ContactViewModel}" />
-		<!--  DEVICE  -->
-		<views:DeviceView DataContext="{Binding DeviceViewModel}" />
-		<!-- DESCRIPTION-->
-		<views:DescriptionView DataContext="{Binding DescriptionViewModel}" />
-		<!--  BUTTONS  -->
-		<Button
+        <!--  ORDER NAME  -->
+        <views:OrderNameView DataContext="{Binding NameOrderViewModel}" />
+        <!--  CONTACT  -->
+        <views:ContactView DataContext="{Binding ContactViewModel}" />
+        <!--  DEVICE  -->
+        <views:DeviceView DataContext="{Binding DeviceViewModel}" />
+        <!-- DESCRIPTION-->
+        <views:DescriptionView DataContext="{Binding DescriptionViewModel}" />
+        <!--  BUTTONS  -->
+        <Button
             Height="60"
             Margin="0,3,10,0"
             mah:ControlsHelper.ContentCharacterCasing="Upper"
@@ -33,20 +33,20 @@
             Content="Zapisz i drukuj"
             Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition />
-				<ColumnDefinition />
-			</Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-			<Button
+            <Button
                 Grid.Column="0"
                 Margin="0,2,3,4"
                 mah:ControlsHelper.ContentCharacterCasing="Upper"
                 Command="{Binding Path=SaveButton}"
                 Content="Zapisz"
                 Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
-			<Button
+            <Button
                 Grid.Column="1"
                 Height="60"
                 Margin="1,3,10,3"
@@ -55,26 +55,8 @@
                 Command="{Binding Path=CancleButton}"
                 Content="Anuluj"
                 Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
-		</Grid>
-		<!--  FLYOUT  -->
-
-		<mah:FlyoutsControl>
-			<mah:Flyout
-                Width="300"
-                Background="{Binding BackgroudColorFlyout}"
-                CloseButtonVisibility="Hidden"
-                DataContext="{Binding FlayoutVewModel}"
-                IsAutoCloseEnabled="True"
-                IsOpen="{Binding OpenFlyout}"
-                Position="Right"
-                Theme="Inverse">
-				<Label
-                    Margin="-50,-75,0,0"
-                    Padding="5"
-                    HorizontalAlignment="Center"
-                    Content="{Binding MessageFlyout}"
-                    FontSize="22" />
-			</mah:Flyout>
-		</mah:FlyoutsControl>
-	</StackPanel>
+        </Grid>
+        <!--  FLYOUT  -->
+        <views:FlyoutView DataContext="{Binding FlyoutVewModel}" />
+    </StackPanel>
 </UserControl>
