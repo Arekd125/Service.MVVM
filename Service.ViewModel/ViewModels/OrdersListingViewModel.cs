@@ -1,5 +1,6 @@
 ﻿using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Stores;
 using System.Collections.ObjectModel;
 
 namespace Service.ViewModel.ViewModels
@@ -8,15 +9,23 @@ namespace Service.ViewModel.ViewModels
     {
         private ObservableCollection<DisplayOrderDto> _ordersViewModelCollection;
         private readonly IOrderService _orderService;
+        private readonly OrderStore _orderStore;
 
         public IEnumerable<DisplayOrderDto> ordersViewModelCollection => _ordersViewModelCollection;
 
-        public OrdersListingViewModel(IOrderService orderService)
+        public OrdersListingViewModel(IOrderService orderService, OrderStore orderStore)
         {
             _ordersViewModelCollection = new ObservableCollection<DisplayOrderDto>();
             _orderService = orderService;
+            _orderStore = orderStore;
+            _orderStore.OrderCreated += OnOrderCreated;
 
             AllOrders();
+        }
+
+        private void OnOrderCreated()
+        {
+            AddLast();
         }
 
         public void AddLast()
@@ -39,6 +48,12 @@ namespace Service.ViewModel.ViewModels
             {
                 Add(o);
             }
+        }
+
+        public override void Dispose()
+        {
+            _orderStore.OrderCreated -= OnOrderCreated;
+            base.Dispose();
         }
     }
 }

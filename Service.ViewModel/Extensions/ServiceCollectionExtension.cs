@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service;
+using Service.ViewModel.Stores;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
@@ -27,6 +28,7 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<DeviceViewModel>();
             services.AddSingleton<DescriptionViewModel>();
             services.AddScoped<FlyoutVewModel>();
+            services.AddSingleton<OrderStore>();
         }
     }
 }

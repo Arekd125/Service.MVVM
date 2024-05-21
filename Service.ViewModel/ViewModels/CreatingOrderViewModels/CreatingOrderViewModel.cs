@@ -4,6 +4,7 @@ using Service.ViewModel.Commands;
 using Service.ViewModel.Commands.CreatingOrderCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Stores;
 using Servis.Models.OrderModels;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -15,7 +16,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
     {
         private readonly IOrderService _orderService;
-        private readonly OrdersListingViewModel _ordersListingViewModel;
+        private readonly OrderStore _orderStore;
 
         public FlyoutVewModel FlyoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
@@ -33,11 +34,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ContactViewModel contactViewModel,
             DeviceViewModel deviceViewModel,
             DescriptionViewModel descriptionViewModel,
-            OrdersListingViewModel ordersListingViewModel,
+            OrderStore orderStore,
             IOrderService orderService)
         {
             _orderService = orderService;
-            _ordersListingViewModel = ordersListingViewModel;
+            _orderStore = orderStore;
             FlyoutVewModel = flayoutVewModel;
             NameOrderViewModel = nameOrderViewModel;
             ContactViewModel = contactViewModel;
@@ -84,7 +85,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _orderService.CreateOrder(orderDto, contactId);
             FlyoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();
-            _ordersListingViewModel.AddLast();
+            _orderStore.AddLastOrder();
             Clear();
         }
 

@@ -10,6 +10,9 @@ public class ViewModelBase : INotifyPropertyChanged
 
     {
         if (PropertyChanged != null)
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    public virtual void Dispose()
+    { }
 }
