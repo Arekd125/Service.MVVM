@@ -19,7 +19,7 @@ namespace Service.ViewModel.Commands.ToDoListCommand
 
         public override void Execute(object? parameter)
         {
-            ToDoStatsDto toDoDto = (ToDoStatsDto)parameter;
+            ToDoStateDto toDoDto = (ToDoStateDto)parameter;
             _orderService.DeleteToDoState(toDoDto.Id);
         }
     }

@@ -1,4 +1,6 @@
-﻿using Service.ViewModel.Service;
+﻿using Service.Model.Entity;
+using Service.ViewModel.Dtos;
+using Service.ViewModel.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,19 +41,35 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<string> _toDoItemSource;
+        private IEnumerable<ToDoStateDto> _toDoItemSource;
 
-        public IEnumerable<string> ToDoItemSource
+        public IEnumerable<ToDoStateDto> ToDoItemSource
         {
             get
             {
-                _toDoItemSource = _orderService.GetAllToDos().Result.Select(p => p.ToDoName);
+                if (_toDoItemSource == null)
+                    _toDoItemSource = _orderService.GetAllToDos().Result;
                 return _toDoItemSource;
             }
             set
             {
                 _toDoItemSource = value;
                 OnPropertyChanged(nameof(ToDoItemSource));
+            }
+        }
+
+        private IEnumerable<ToDoStateDto> _toDoSeletedItem;
+
+        public IEnumerable<ToDoStateDto> ToDoSelectedItem
+        {
+            get
+            {
+                return _toDoSeletedItem;
+            }
+            set
+            {
+                _toDoSeletedItem = value;
+                OnPropertyChanged(nameof(ToDoSelectedItem));
             }
         }
 

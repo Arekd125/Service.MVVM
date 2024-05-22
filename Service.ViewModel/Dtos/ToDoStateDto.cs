@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Dtos
 {
-    public class ToDoStatsDto
+    public class ToDoStateDto
     {
         public int Id { get; set; }
         public string ToDoName { get; set; }

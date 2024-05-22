@@ -20,7 +20,7 @@ namespace Service.ViewModel.Commands.ToDoListCommand
 
         public override void Execute(object? parameter)
         {
-            ToDoStatsDto toDo = parameter as ToDoStatsDto;
+            ToDoStateDto toDo = parameter as ToDoStateDto;
             if (toDo != null)
             {
                 if (toDo.Id == 0)

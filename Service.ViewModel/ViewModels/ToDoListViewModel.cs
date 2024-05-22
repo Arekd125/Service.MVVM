@@ -14,10 +14,10 @@ namespace Service.ViewModel.ViewModels
 {
     public class ToDoListViewModel : ViewModelBase
     {
-        private ObservableCollection<ToDoStatsDto> _toDoItemSource;
+        private ObservableCollection<ToDoStateDto> _toDoItemSource;
         private readonly IOrderService _orderService;
 
-        public IEnumerable<ToDoStatsDto> ToDoItemSource => _toDoItemSource;
+        public IEnumerable<ToDoStateDto> ToDoItemSource => _toDoItemSource;
 
         public ICommand AddNewToDoCommand { get; set; }
         public ICommand DeleteToDoCommand { get; set; }
@@ -25,13 +25,13 @@ namespace Service.ViewModel.ViewModels
         public ToDoListViewModel(IOrderService orderService)
         {
             _orderService = orderService;
-            _toDoItemSource = new ObservableCollection<ToDoStatsDto>();
+            _toDoItemSource = new ObservableCollection<ToDoStateDto>();
             AddNewToDoCommand = new AddNewToDoCommand(orderService);
             DeleteToDoCommand = new DeleteToDoCommand(orderService);
             AllToDos();
         }
 
-        public void Add(ToDoStatsDto toDoDto)
+        public void Add(ToDoStateDto toDoDto)
         {
             _toDoItemSource.Add(toDoDto);
         }

@@ -24,8 +24,8 @@ namespace Service.ViewModel.Mapping
             CreateMap<DeviceStateDto, DeviceState>();
             CreateMap<DeviceState, DeviceStateDto>();
 
-            CreateMap<ToDoStatsDto, ToDoState>();
-            CreateMap<ToDoState, ToDoStatsDto>();
+            CreateMap<ToDoStateDto, ToDoState>();
+            CreateMap<ToDoState, ToDoStateDto>();
         }
     }
 }
