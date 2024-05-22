@@ -10,6 +10,7 @@ namespace Service.Model.DbContexts
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<DeviceState> DeviceState { get; set; }
         public DbSet<ModelState> ModelState { get; set; }
+        public DbSet<ToDo> ToDo { get; set; }
         public DbSet<ToDoState> ToDoState { get; set; }
 
         public OrdersDbContext(DbContextOptions options) : base(options)
@@ -30,6 +31,11 @@ namespace Service.Model.DbContexts
                 .HasMany(ml => ml.ModelLists)
                 .WithOne(dl => dl.DeviceState)
                 .HasForeignKey(k => k.DeviceStateId);
+
+            modelBuilder.Entity<ToDo>()
+                .HasOne(x => x.Order)
+                .WithMany(k => k.ToDo)
+                .HasForeignKey(k => k.OrderId);
 
             var lenovo = new ModelState()
             {

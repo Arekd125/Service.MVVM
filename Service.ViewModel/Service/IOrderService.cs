@@ -17,11 +17,11 @@ namespace Service.ViewModel.Service
 
         public Task<IEnumerable<ContactDto>> GetAllContacts();
 
-        public Task<IEnumerable<ToDoDto>> GetAllToDos();
+        public Task<IEnumerable<ToDoStatsDto>> GetAllToDos();
 
-        public Task CreateToDoState(ToDoDto toDoDto);
+        public Task CreateToDoState(ToDoStatsDto toDoDto);
 
-        public Task UpdateToDoState(ToDoDto toDoDto);
+        public Task UpdateToDoState(ToDoStatsDto toDoDto);
 
         public Task DeleteToDoState(int id);
     }

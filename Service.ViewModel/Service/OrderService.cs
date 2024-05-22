@@ -80,23 +80,23 @@ namespace Service.ViewModel.Service
             return contactsDto;
         }
 
-        public async Task<IEnumerable<ToDoDto>> GetAllToDos()
+        public async Task<IEnumerable<ToDoStatsDto>> GetAllToDos()
         {
             var toDoState = await _toDoRepository.GetAllToDos();
 
-            var toDoDto = _mapper.Map<IEnumerable<ToDoDto>>(toDoState);
+            var toDoDto = _mapper.Map<IEnumerable<ToDoStatsDto>>(toDoState);
 
             return toDoDto;
         }
 
-        public async Task CreateToDoState(ToDoDto toDoDto)
+        public async Task CreateToDoState(ToDoStatsDto toDoDto)
         {
             var toDoState = _mapper.Map<ToDoState>(toDoDto);
 
             await _toDoRepository.Create(toDoState);
         }
 
-        public async Task UpdateToDoState(ToDoDto toDoDto)
+        public async Task UpdateToDoState(ToDoStatsDto toDoDto)
         {
             var toDoState = _mapper.Map<ToDoState>(toDoDto);
 
