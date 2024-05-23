@@ -17,7 +17,7 @@
             CanUserDeleteRows="True"
             GridLinesVisibility="Horizontal"
             IsEnabled="True"
-            ItemsSource="{Binding ToDoItemSource}"
+            ItemsSource="{Binding ToDoItemSource, UpdateSourceTrigger=PropertyChanged}"
             PreviewKeyDown="DataGrid_PreviewKeyDown"
             RowEditEnding="DataGrid_RowEditEnding"
             SelectionMode="Single">

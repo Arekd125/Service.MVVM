@@ -29,6 +29,7 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<DescriptionViewModel>();
             services.AddScoped<FlyoutVewModel>();
             services.AddSingleton<OrderStore>();
+            services.AddSingleton<ToDoStore>();
         }
     }
 }

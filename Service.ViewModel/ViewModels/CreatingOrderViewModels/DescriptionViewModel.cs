@@ -1,6 +1,7 @@
 ﻿using Service.Model.Entity;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         private string _accessories = string.Empty;
         private readonly IOrderService _orderService;
+        private readonly ToDoStore _toDoStore;
 
         public string AccessoriesTexBox
         {
@@ -89,9 +91,16 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public DescriptionViewModel(IOrderService orderService)
+        public DescriptionViewModel(IOrderService orderService, ToDoStore toDoStore)
         {
             _orderService = orderService;
+            _toDoStore = toDoStore;
+            _toDoStore.ToDoAction += OnToDoAction;
+        }
+
+        private void OnToDoAction()
+        {
+            ToDoItemSource = _orderService.GetAllToDos().Result;
         }
     }
 }

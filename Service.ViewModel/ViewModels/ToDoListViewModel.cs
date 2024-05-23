@@ -2,6 +2,7 @@
 using Service.ViewModel.Commands.ToDoListCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,12 +23,12 @@ namespace Service.ViewModel.ViewModels
         public ICommand AddNewToDoCommand { get; set; }
         public ICommand DeleteToDoCommand { get; set; }
 
-        public ToDoListViewModel(IOrderService orderService)
+        public ToDoListViewModel(IOrderService orderService, ToDoStore toDoStore)
         {
             _orderService = orderService;
             _toDoItemSource = new ObservableCollection<ToDoStateDto>();
-            AddNewToDoCommand = new AddNewToDoCommand(orderService);
-            DeleteToDoCommand = new DeleteToDoCommand(orderService);
+            AddNewToDoCommand = new AddNewToDoCommand(orderService, toDoStore);
+            DeleteToDoCommand = new DeleteToDoCommand(orderService, toDoStore);
             AllToDos();
         }
 
