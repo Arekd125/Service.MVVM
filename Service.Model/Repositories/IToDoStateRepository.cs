@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.Model.Repositories
 {
-    public interface IToDoRepository
+    public interface IToDoStateRepository
     {
         public Task<IEnumerable<ToDoState>> GetAllToDos();
 

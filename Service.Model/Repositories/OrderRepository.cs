@@ -13,7 +13,7 @@ namespace Service.Model.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task Create(Order order)
+        public async Task<int> Create(Order order)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
@@ -30,6 +30,7 @@ namespace Service.Model.Repositories
                     dbContext.Contacts.Add(newContact);
                 }
                 await dbContext.SaveChangesAsync();
+                return order.Id;
             }
         }
 

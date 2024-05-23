@@ -26,6 +26,9 @@ namespace Service.ViewModel.Mapping
 
             CreateMap<ToDoStateDto, ToDoState>();
             CreateMap<ToDoState, ToDoStateDto>();
+
+            CreateMap<ToDoStateDto, ToDo>();
+            CreateMap<ToDo, ToDoStateDto>();
         }
     }
 }

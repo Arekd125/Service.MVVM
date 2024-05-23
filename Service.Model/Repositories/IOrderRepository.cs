@@ -4,7 +4,7 @@ namespace Service.Model.Repositories
 {
     public interface IOrderRepository
     {
-        public Task Create(Order order);
+        public Task<int> Create(Order order);
 
         public Task<IEnumerable<Order>> GetAllOrders();
 

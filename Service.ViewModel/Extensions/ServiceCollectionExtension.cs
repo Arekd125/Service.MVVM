@@ -17,6 +17,7 @@ namespace Service.ViewModel.Extensions
             services.AddAutoMapper(typeof(OrderMappingProfile));
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IDeviceStateService, DeviceStateService>();
+            services.AddTransient<IToDoService, ToDoService>();
 
             services.AddSingleton<OrdersListingViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();

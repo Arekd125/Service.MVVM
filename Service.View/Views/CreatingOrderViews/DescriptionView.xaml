@@ -12,11 +12,15 @@
     <GroupBox Margin="0,0,10,0" Header="Opis">
 
         <StackPanel>
+
             <mah:MultiSelectionComboBox
                 Margin="3"
+                SelectionMode="Multiple"
                 mah:TextBoxHelper.UseFloatingWatermark="True"
                 mah:TextBoxHelper.Watermark="Usługi"
                 ItemsSource="{Binding ToDoItemSource}"
+                mah:MultiSelectorHelper.SelectedItems="{Binding ToDoSelectedItems}"
+
                 SelectedItemContainerStyle="{DynamicResource MahApps.Styles.MultiSelectionComboBoxSelectedItem.Removable}">
                 <mah:MultiSelectionComboBox.ItemTemplate>
                     <DataTemplate>

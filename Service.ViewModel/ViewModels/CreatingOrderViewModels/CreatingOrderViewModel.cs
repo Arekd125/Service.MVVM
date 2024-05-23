@@ -7,6 +7,7 @@ using Service.ViewModel.Service;
 using Service.ViewModel.Stores;
 using Servis.Models.OrderModels;
 using System.Text.RegularExpressions;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -17,6 +18,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     {
         private readonly IOrderService _orderService;
         private readonly OrderStore _orderStore;
+        private readonly IToDoService _toDoService;
 
         public FlyoutVewModel FlyoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
@@ -35,10 +37,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel deviceViewModel,
             DescriptionViewModel descriptionViewModel,
             OrderStore orderStore,
-            IOrderService orderService)
+            IOrderService orderService,
+            IToDoService toDoService)
         {
             _orderService = orderService;
             _orderStore = orderStore;
+            _toDoService = toDoService;
             FlyoutVewModel = flayoutVewModel;
             NameOrderViewModel = nameOrderViewModel;
             ContactViewModel = contactViewModel;
@@ -78,11 +82,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
                 Description = DescriptionViewModel.DescriptionTextBox,
-                ToDo = DescriptionViewModel.ToDoTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
 
-            _orderService.CreateOrder(orderDto, contactId);
+            List<ToDoStateDto> toDoStateDtos = new();
+            toDoStateDtos = DescriptionViewModel.ToDoSelectedItems.ToList();
+
+            int orderId = _orderService.CreateOrder(orderDto, contactId).Result;
+            _toDoService.Create(toDoStateDtos, orderId);
+
             FlyoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();
             _orderStore.AddLastOrder();

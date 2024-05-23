@@ -5,7 +5,7 @@ namespace Service.ViewModel.Service
 {
     public interface IOrderService
     {
-        public Task CreateOrder(CreateOrderDto orderDto, int contactId);
+        public Task<int> CreateOrder(CreateOrderDto orderDto, int contactId);
 
         public Task<IEnumerable<DisplayOrderDto>> GetAllOrders();
 

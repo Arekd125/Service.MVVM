@@ -4,6 +4,7 @@ using Service.ViewModel.Service;
 using Service.ViewModel.Stores;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,18 +60,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<ToDoStateDto> _toDoSeletedItem;
+        private ObservableCollection<ToDoStateDto> _toDoSelectedItems;
 
-        public IEnumerable<ToDoStateDto> ToDoSelectedItem
+        public ObservableCollection<ToDoStateDto> ToDoSelectedItems
         {
             get
             {
-                return _toDoSeletedItem;
-            }
-            set
-            {
-                _toDoSeletedItem = value;
-                OnPropertyChanged(nameof(ToDoSelectedItem));
+                return _toDoSelectedItems;
             }
         }
 
@@ -96,6 +92,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _orderService = orderService;
             _toDoStore = toDoStore;
             _toDoStore.ToDoAction += OnToDoAction;
+            _toDoSelectedItems = new ObservableCollection<ToDoStateDto>();
         }
 
         private void OnToDoAction()
