@@ -60,7 +60,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DescriptionViewModel.ToDoTextBox = string.Empty;
             DescriptionViewModel.AccessoriesTexBox = string.Empty;
             ContactViewModel.RefreshContactsItemSorce();
-            ContactViewModel.ClearContacts();
+            ContactViewModel.ContactNameComboBox = string.Empty;
+            ContactViewModel.ContactPhoneNumberComboBox = string.Empty;
             NameOrderViewModel.SetNextOrderName();
         }
 

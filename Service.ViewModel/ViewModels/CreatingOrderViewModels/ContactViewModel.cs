@@ -15,25 +15,18 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly IOrderService _orderService;
 
         private IEnumerable<ContactDto> AllContacts;
-        private bool Refresh = true;
 
         private void SelectContactNameSelectedItem()
         {
-            if (Refresh)
-            {
-                ContactNameSelectedItem = AllContacts.FirstOrDefault(p => p.PhoneNumber == ContactPhoneNumberSelectedItem)?.ContactName;
-            }
+            ContactNameSelectedItem = AllContacts.FirstOrDefault(p => p.PhoneNumber == ContactPhoneNumberSelectedItem)?.ContactName;
         }
 
         private void SelectContactPhoneNumberSelectedItem()
         {
-            if (Refresh)
+            ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem).Select(p => p.PhoneNumber).FirstOrDefault();
+            if (ContactPhoneNumberSelectedItem != null)
             {
-                ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem).Select(p => p.PhoneNumber).FirstOrDefault();
-                if (ContactPhoneNumberSelectedItem != null)
-                {
-                    ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
-                }
+                ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
             }
         }
 
@@ -136,14 +129,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             _orderService = orderService;
             RefreshContactsItemSorce();
-        }
-
-        public void ClearContacts()
-        {
-            Refresh = false;
-            ContactNameComboBox = string.Empty;
-            ContactPhoneNumberComboBox = string.Empty;
-            Refresh = true;
         }
 
         public void RefreshContactsItemSorce()
