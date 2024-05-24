@@ -62,13 +62,6 @@ namespace Service.ViewModel.Service
             return 1;
         }
 
-        public async Task<int> CreateContact(ContactDto contactDto)
-        {
-            var contact = _mapper.Map<Contact>(contactDto);
-
-            return await _contactRepository.Create(contact);
-        }
-
         public async Task<IEnumerable<ContactDto>> GetAllContacts()
         {
             var contacts = await _contactRepository.GetAllContacts();

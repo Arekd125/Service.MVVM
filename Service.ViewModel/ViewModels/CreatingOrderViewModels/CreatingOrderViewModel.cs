@@ -18,7 +18,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     {
         private readonly IOrderService _orderService;
         private readonly OrderStore _orderStore;
-        private readonly IToDoService _toDoService;
 
         public FlyoutVewModel FlyoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
@@ -37,12 +36,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel deviceViewModel,
             DescriptionViewModel descriptionViewModel,
             OrderStore orderStore,
-            IOrderService orderService,
-            IToDoService toDoService)
+            IOrderService orderService
+            )
         {
             _orderService = orderService;
             _orderStore = orderStore;
-            _toDoService = toDoService;
+
             FlyoutVewModel = flayoutVewModel;
             NameOrderViewModel = nameOrderViewModel;
             ContactViewModel = contactViewModel;
@@ -67,8 +66,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void SaveOrder()
         {
-            //int contactId = _orderService.CreateContact(contactDto).Result;
-
             CreateOrderDto orderDto = new()
             {
                 OrderNo = NameOrderViewModel.OrderNo,
@@ -81,9 +78,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Description = DescriptionViewModel.DescriptionTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
-
             _orderService.CreateOrder(orderDto);
-            //_toDoService.Create(toDoStateDtos, orderId);
 
             FlyoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();

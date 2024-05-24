@@ -18,27 +18,6 @@ namespace Service.Model.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<int> Create(Contact contact)
-        {
-            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
-            {
-                var ContactId = dbContext.Contacts.
-                    Where(x => x.Name == contact.Name && x.PhoneNumber == contact.PhoneNumber).
-                    Select(x => x.Id)
-                    .FirstOrDefault();
-
-                if (ContactId != 0)
-                {
-                    return ContactId;
-                }
-
-                dbContext.Contacts.AddAsync(contact);
-
-                dbContext.SaveChanges();
-                return contact.Id;
-            }
-        }
-
         public async Task<IEnumerable<Contact>> GetAllContacts()
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();

@@ -13,8 +13,6 @@ namespace Service.ViewModel.Service
 
         public Task<int> GetOrderNumber();
 
-        public Task<int> CreateContact(ContactDto contactDto);
-
         public Task<IEnumerable<ContactDto>> GetAllContacts();
 
         public Task<IEnumerable<ToDoStateDto>> GetAllToDos();
