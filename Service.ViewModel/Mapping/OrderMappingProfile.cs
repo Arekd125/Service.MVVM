@@ -9,7 +9,13 @@ namespace Service.ViewModel.Mapping
     {
         public OrderMappingProfile()
         {
-            CreateMap<CreateOrderDto, Order>();
+            CreateMap<CreateOrderDto, Order>()
+                .ForMember(dest => dest.Contact, opt => opt.MapFrom(src => new Contact
+                {
+                    Name = src.ContactName,
+                    PhoneNumber = src.ContactPhoneNumber
+                }))
+            .ForMember(dest => dest.ToDo, opt => opt.MapFrom(src => src.ToDo));
 
             CreateMap<Order, DisplayOrderDto>()
                 .ForMember(m => m.ContactName, c => c.MapFrom(s => s.Contact.Name))

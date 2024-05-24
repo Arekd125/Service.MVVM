@@ -22,13 +22,11 @@ namespace Service.ViewModel.Service
             _mapper = mapper;
         }
 
-        public async Task<int> CreateOrder(CreateOrderDto createOrderDto, int ContacId)
+        public async Task CreateOrder(CreateOrderDto createOrderDto)
         {
             var order = _mapper.Map<Order>(createOrderDto);
 
-            order.ContactId = ContacId;
-
-            return await _orderRepository.Create(order);
+            await _orderRepository.Create(order);
         }
 
         public async Task<IEnumerable<DisplayOrderDto>> GetAllOrders()

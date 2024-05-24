@@ -17,7 +17,6 @@ namespace Service.View
     public partial class App : Application
     {
         private readonly IHost _host;
-        private IDialogCoordinator dialogCoordinator;
 
         public App()
         {

@@ -30,7 +30,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             if (Refresh)
             {
                 ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem).Select(p => p.PhoneNumber).FirstOrDefault();
-                ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
+                if (ContactPhoneNumberSelectedItem != null)
+                {
+                    ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
+                }
             }
         }
 

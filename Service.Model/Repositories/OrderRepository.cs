@@ -13,24 +13,21 @@ namespace Service.Model.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<int> Create(Order order)
+        public async Task Create(Order order)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                Contact existingContact = await dbContext.Contacts.FirstOrDefaultAsync(c => c.Id == order.ContactId);
+                var existingContact = dbContext.Contacts
+               .FirstOrDefault(x => x.Name == order.Contact.Name && x.PhoneNumber == order.Contact.PhoneNumber);
 
                 if (existingContact != null)
                 {
-                    existingContact.Order.Add(order);
+                    order.ContactId = existingContact.Id;
+                    order.Contact = existingContact;
                 }
-                else
-                {
-                    Contact newContact = new Contact { Id = order.ContactId };
-                    newContact.Order.Add(order);
-                    dbContext.Contacts.Add(newContact);
-                }
+
+                dbContext.Orders.Add(order);
                 await dbContext.SaveChangesAsync();
-                return order.Id;
             }
         }
 

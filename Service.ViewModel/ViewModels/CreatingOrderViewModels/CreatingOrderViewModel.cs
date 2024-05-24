@@ -67,29 +67,23 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void SaveOrder()
         {
-            ContactDto contactDto = new()
-            {
-                ContactName = ContactViewModel.ContactNameComboBox,
-                PhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
-            };
-
-            int contactId = _orderService.CreateContact(contactDto).Result;
+            //int contactId = _orderService.CreateContact(contactDto).Result;
 
             CreateOrderDto orderDto = new()
             {
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
+                ContactName = ContactViewModel.ContactNameComboBox,
+                ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
+                ToDo = DescriptionViewModel.ToDoSelectedItems.ToList(),
                 Description = DescriptionViewModel.DescriptionTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
 
-            List<ToDoStateDto> toDoStateDtos = new();
-            toDoStateDtos = DescriptionViewModel.ToDoSelectedItems.ToList();
-
-            int orderId = _orderService.CreateOrder(orderDto, contactId).Result;
-            _toDoService.Create(toDoStateDtos, orderId);
+            _orderService.CreateOrder(orderDto);
+            //_toDoService.Create(toDoStateDtos, orderId);
 
             FlyoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();
