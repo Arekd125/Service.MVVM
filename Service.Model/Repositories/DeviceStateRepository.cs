@@ -4,11 +4,11 @@ using Servis.Models.OrderModels;
 
 namespace Service.Model.Repositories
 {
-    public class DeviceRepository : IDeviceRepository
+    public class DeviceStateRepository : IDeviceStateRepository
     {
         private readonly OrdersDbContextFactory _dbContextFactory;
 
-        public DeviceRepository(OrdersDbContextFactory dbContextFactory)
+        public DeviceStateRepository(OrdersDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }

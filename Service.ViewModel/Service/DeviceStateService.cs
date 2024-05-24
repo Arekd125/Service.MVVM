@@ -6,9 +6,9 @@ namespace Service.ViewModel.Service
 {
     public class DeviceStateService : IDeviceStateService
     {
-        private readonly IDeviceRepository _deviceRepository;
+        private readonly IDeviceStateRepository _deviceRepository;
 
-        public DeviceStateService(IDeviceRepository deviceRepository)
+        public DeviceStateService(IDeviceStateRepository deviceRepository)
         {
             _deviceRepository = deviceRepository;
         }

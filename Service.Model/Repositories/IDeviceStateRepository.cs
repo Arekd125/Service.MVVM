@@ -2,7 +2,7 @@
 
 namespace Service.Model.Repositories
 {
-    public interface IDeviceRepository
+    public interface IDeviceStateRepository
     {
         public Task CreateDevice(DeviceState deviceState);
 
