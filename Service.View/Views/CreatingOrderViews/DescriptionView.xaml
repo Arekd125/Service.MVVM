@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    xml:lang="pl-PL"
     mc:Ignorable="d">
     <GroupBox Margin="0,0,10,0" Header="Opis">
 
@@ -30,7 +31,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding ToDoName}" />
-                            <TextBlock Grid.Column="1" Text="{Binding Prize}" />
+                            <TextBlock HorizontalAlignment="Right" Grid.Column="1" Text="{Binding Prize, StringFormat= \{0:C\}}" />
                         </Grid>
                     </DataTemplate>
                 </mah:MultiSelectionComboBox.ItemTemplate>
