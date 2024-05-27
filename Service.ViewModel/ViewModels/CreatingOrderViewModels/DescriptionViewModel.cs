@@ -99,5 +99,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             ToDoItemSource = _orderService.GetAllToDos().Result;
         }
+
+        public override void Dispose()
+        {
+            _toDoStore.ToDoAction -= OnToDoAction;
+            base.Dispose();
+        }
     }
 }

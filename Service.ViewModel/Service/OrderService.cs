@@ -38,7 +38,7 @@ namespace Service.ViewModel.Service
             return displayOrderDto;
         }
 
-        public async Task<DisplayOrderDto> GetLastOrder()
+        public async Task<DisplayOrderDto?> GetLastOrder()
         {
             var order = await _orderRepository.GetLastOrder();
             var diplsyOrderDto = _mapper.Map<DisplayOrderDto>(order);

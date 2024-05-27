@@ -57,7 +57,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel.DeviceNameComboBox = string.Empty;
             DeviceViewModel.ModelNameComboBox = string.Empty;
             DescriptionViewModel.DescriptionTextBox = string.Empty;
-            DescriptionViewModel.ToDoTextBox = string.Empty;
+            DescriptionViewModel.ToDoSelectedItems.Clear();
             DescriptionViewModel.AccessoriesTexBox = string.Empty;
             ContactViewModel.RefreshContactsItemSorce();
             ContactViewModel.ContactNameComboBox = string.Empty;

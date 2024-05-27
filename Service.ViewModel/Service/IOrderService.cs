@@ -9,7 +9,7 @@ namespace Service.ViewModel.Service
 
         public Task<IEnumerable<DisplayOrderDto>> GetAllOrders();
 
-        public Task<DisplayOrderDto> GetLastOrder();
+        public Task<DisplayOrderDto?> GetLastOrder();
 
         public Task<int> GetOrderNumber();
 
