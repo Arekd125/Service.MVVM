@@ -11,7 +11,7 @@ namespace Service.ViewModel.Dtos
         public string? Device { get; set; }
         public string? Model { get; set; }
         public string? Description { get; set; }
-        public List<ToDoStateDto> ToDo { get; set; } = new List<ToDoStateDto>();
+        public List<ToDoDto> ToDo { get; set; } = new List<ToDoDto>();
         public string? Accessories { get; set; }
     }
 }

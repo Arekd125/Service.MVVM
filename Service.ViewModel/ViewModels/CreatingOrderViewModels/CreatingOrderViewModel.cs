@@ -6,6 +6,8 @@ using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Stores;
 using Servis.Models.OrderModels;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -75,7 +77,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
-                ToDo = DescriptionViewModel.ToDoSelectedItems.ToList(),
+                ToDo = ConvertToDoStateDtoToToDo(DescriptionViewModel.ToDoSelectedItems),
                 Description = DescriptionViewModel.DescriptionTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
@@ -85,6 +87,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             AddDeviceIfNotExist();
             _orderStore.AddLastOrder();
             Clear();
+        }
+
+        public List<ToDoDto> ConvertToDoStateDtoToToDo(ObservableCollection<ToDoStateDto> toDoStateDtos)
+        {
+            return toDoStateDtos.Select(toDoStateDto => new ToDoDto
+            {
+                ToDoName = toDoStateDto.ToDoName,
+                Prize = toDoStateDto.Prize
+            }).ToList();
         }
 
         private void AddDeviceIfNotExist()
