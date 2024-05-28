@@ -71,11 +71,20 @@ namespace Service.ViewModel.Service
             return contactsDto;
         }
 
-        public async Task<IEnumerable<ToDoStateDto>> GetAllToDos()
+        public async Task<IEnumerable<ToDoStateDto>> GetAllToDoState()
         {
-            var toDoState = await _toDoRepository.GetAllToDos();
+            var toDoState = await _toDoRepository.GetAllToDoState();
 
             var toDoDto = _mapper.Map<IEnumerable<ToDoStateDto>>(toDoState);
+
+            return toDoDto;
+        }
+
+        public async Task<IEnumerable<ToDoDto>> GetAllToDo()
+        {
+            var toDoState = await _toDoRepository.GetAllToDoState();
+
+            var toDoDto = _mapper.Map<IEnumerable<ToDoDto>>(toDoState);
 
             return toDoDto;
         }

@@ -77,7 +77,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
-                ToDo = ConvertToDoStateDtoToToDo(DescriptionViewModel.ToDoSelectedItems),
+                ToDo = DescriptionViewModel.ToDoSelectedItems.ToList(),
                 Description = DescriptionViewModel.DescriptionTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
@@ -87,15 +87,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             AddDeviceIfNotExist();
             _orderStore.AddLastOrder();
             Clear();
-        }
-
-        public List<ToDoDto> ConvertToDoStateDtoToToDo(ObservableCollection<ToDoStateDto> toDoStateDtos)
-        {
-            return toDoStateDtos.Select(toDoStateDto => new ToDoDto
-            {
-                ToDoName = toDoStateDto.ToDoName,
-                Prize = toDoStateDto.Prize
-            }).ToList();
         }
 
         private void AddDeviceIfNotExist()

@@ -43,14 +43,14 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<ToDoStateDto> _toDoItemSource;
+        private IEnumerable<ToDoDto> _toDoItemSource;
 
-        public IEnumerable<ToDoStateDto> ToDoItemSource
+        public IEnumerable<ToDoDto> ToDoItemSource
         {
             get
             {
                 if (_toDoItemSource == null)
-                    _toDoItemSource = _orderService.GetAllToDos().Result;
+                    _toDoItemSource = _orderService.GetAllToDo().Result;
                 return _toDoItemSource;
             }
             set
@@ -60,9 +60,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private ObservableCollection<ToDoStateDto> _toDoSelectedItems;
+        private ObservableCollection<ToDoDto> _toDoSelectedItems;
 
-        public ObservableCollection<ToDoStateDto> ToDoSelectedItems
+        public ObservableCollection<ToDoDto> ToDoSelectedItems
         {
             get
             {
@@ -92,12 +92,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _orderService = orderService;
             _toDoStore = toDoStore;
             _toDoStore.ToDoAction += OnToDoAction;
-            _toDoSelectedItems = new ObservableCollection<ToDoStateDto>();
+            _toDoSelectedItems = new ObservableCollection<ToDoDto>();
         }
 
         private void OnToDoAction()
         {
-            ToDoItemSource = _orderService.GetAllToDos().Result;
+            ToDoItemSource = _orderService.GetAllToDo().Result;
         }
 
         public override void Dispose()

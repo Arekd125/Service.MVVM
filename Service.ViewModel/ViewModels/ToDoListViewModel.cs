@@ -39,7 +39,7 @@ namespace Service.ViewModel.ViewModels
 
         private void AllToDos()
         {
-            var getAllToDos = _orderService.GetAllToDos().Result;
+            var getAllToDos = _orderService.GetAllToDoState().Result;
 
             foreach (var o in getAllToDos)
             {

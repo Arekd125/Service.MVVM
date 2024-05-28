@@ -15,8 +15,6 @@ namespace Service.ViewModel.Mapping
                     Name = src.ContactName,
                     PhoneNumber = src.ContactPhoneNumber
                 }));
-            // .ForMember(dest => dest.ToDo, opt => opt.MapFrom(src => src.ToDo));
-
             CreateMap<Order, DisplayOrderDto>()
                 .ForMember(m => m.ContactName, c => c.MapFrom(s => s.Contact.Name))
                 .ForMember(m => m.ContactPhoneNumber, c => c.MapFrom(s => s.Contact.PhoneNumber))
@@ -27,9 +25,10 @@ namespace Service.ViewModel.Mapping
             CreateMap<ContactDto, Contact>()
                .ForMember(c => c.Name, z => z.MapFrom(s => s.ContactName));
 
-            CreateMap<DeviceStateDto, DeviceState>().ReverseMap();
-            CreateMap<ToDoStateDto, ToDoState>().ReverseMap();
-            CreateMap<ToDoDto, ToDo>().ReverseMap();
+            CreateMap<DeviceState, DeviceStateDto>().ReverseMap();
+            CreateMap<ToDoState, ToDoStateDto>().ReverseMap();
+            CreateMap<ToDoState, ToDoDto>().ReverseMap();
+            CreateMap<ToDoDto, ToDo>();
         }
     }
 }

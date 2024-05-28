@@ -15,7 +15,9 @@ namespace Service.ViewModel.Service
 
         public Task<IEnumerable<ContactDto>> GetAllContacts();
 
-        public Task<IEnumerable<ToDoStateDto>> GetAllToDos();
+        public Task<IEnumerable<ToDoStateDto>> GetAllToDoState();
+
+        public Task<IEnumerable<ToDoDto>> GetAllToDo();
 
         public Task CreateToDoState(ToDoStateDto toDoDto);
 

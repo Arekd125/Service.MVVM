@@ -19,7 +19,7 @@ namespace Service.Model.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<IEnumerable<ToDoState>> GetAllToDos()
+        public async Task<IEnumerable<ToDoState>> GetAllToDoState()
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {

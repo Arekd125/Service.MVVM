@@ -9,7 +9,7 @@ namespace Service.Model.Repositories
 {
     public interface IToDoStateRepository
     {
-        public Task<IEnumerable<ToDoState>> GetAllToDos();
+        public Task<IEnumerable<ToDoState>> GetAllToDoState();
 
         public Task Create(ToDoState toDoState);
 
