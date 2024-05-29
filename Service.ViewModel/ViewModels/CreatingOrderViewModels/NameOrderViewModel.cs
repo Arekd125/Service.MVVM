@@ -1,4 +1,6 @@
-﻿using Service.ViewModel.Service;
+﻿using MediatR;
+using Service.ViewModel.Service;
+using Service.ViewModel.Service.Queries.GetOrderNumber;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
     public class NameOrderViewModel : ViewModelBase
     {
-        private readonly IOrderService _orderService;
-
+        private readonly IMediator _mediator;
 
         public int OrderNo => SetOrderNo();
-       
-
 
         private string _orderNameTextBlock;
 
@@ -23,40 +22,35 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             get
             {
-                 
                 return _orderNameTextBlock;
             }
             set
             {
-
                 _orderNameTextBlock = value;
-              
+
                 OnPropertyChanged(nameof(OrderNameTextBlock));
             }
         }
 
-
-
-        public NameOrderViewModel(IOrderService orderService)
+        public NameOrderViewModel(IMediator mediator)
         {
-            _orderService = orderService;
-           SetNextOrderName();
+            _mediator = mediator;
+            SetNextOrderName();
         }
-        
-      
+
         private string SetOrderName(int orderNo)
         {
-
             return "Z/" + orderNo + "/" + DateTime.Now.ToString("MM") + "/" + DateTime.Now.ToString("yyyy");
         }
+
         private int SetOrderNo()
         {
-            return  _orderService.GetOrderNumber().Result;
+            return _mediator.Send(new GetOrderNumberQuery()).Result;
         }
+
         public void SetNextOrderName()
         {
             OrderNameTextBlock = SetOrderName(OrderNo);
-
         }
     }
 }

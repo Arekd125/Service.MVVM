@@ -1,6 +1,8 @@
-﻿using Service.Model.Entity;
+﻿using MediatR;
+using Service.Model.Entity;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Queries.GetAllToDo;
 using Service.ViewModel.Stores;
 using System;
 using System.Collections.Generic;
@@ -50,7 +52,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             get
             {
                 if (_toDoItemSource == null)
-                    _toDoItemSource = _orderService.GetAllToDo().Result;
+                    _toDoItemSource = _mediator.Send(new GetAllToDoQuery()).Result;
                 return _toDoItemSource;
             }
             set
@@ -71,7 +73,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         }
 
         private string _accessories = string.Empty;
-        private readonly IOrderService _orderService;
+        private readonly IMediator _mediator;
         private readonly ToDoStore _toDoStore;
 
         public string AccessoriesTexBox
@@ -87,17 +89,17 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public DescriptionViewModel(IOrderService orderService, ToDoStore toDoStore)
+        public DescriptionViewModel(IMediator mediator, ToDoStore toDoStore)
         {
-            _orderService = orderService;
             _toDoStore = toDoStore;
+            _mediator = mediator;
             _toDoStore.ToDoAction += OnToDoAction;
             _toDoSelectedItems = new ObservableCollection<ToDoDto>();
         }
 
         private void OnToDoAction()
         {
-            ToDoItemSource = _orderService.GetAllToDo().Result;
+            ToDoItemSource = _mediator.Send(new GetAllToDoQuery()).Result;
         }
 
         public override void Dispose()

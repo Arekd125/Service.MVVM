@@ -1,6 +1,8 @@
-﻿using Service.Model.Entity;
+﻿using MediatR;
+using Service.Model.Entity;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Commands.DeleteToDoState;
 using Service.ViewModel.Stores;
 using System;
 using System.Collections.Generic;
@@ -13,18 +15,20 @@ namespace Service.ViewModel.Commands.ToDoListCommand
     public class DeleteToDoCommand : CommandBase
     {
         private readonly ToDoStore _toDoStore;
-        private readonly IOrderService _orderService;
+        private readonly IMediator _mediator;
 
-        public DeleteToDoCommand(IOrderService orderService, ToDoStore toDoStore)
+        public DeleteToDoCommand(IMediator mediator, ToDoStore toDoStore)
         {
-            _orderService = orderService;
             _toDoStore = toDoStore;
+            _mediator = mediator;
         }
 
         public override void Execute(object? parameter)
         {
             ToDoStateDto toDoDto = (ToDoStateDto)parameter;
-            _orderService.DeleteToDoState(toDoDto.Id);
+            //  _orderService.DeleteToDoState(toDoDto.Id);
+            _mediator.Send(new DeleteToDoStateCommand(toDoDto.Id));
+
             _toDoStore.DeleteTodo();
         }
     }

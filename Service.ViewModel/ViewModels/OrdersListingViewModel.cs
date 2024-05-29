@@ -1,5 +1,8 @@
-﻿using Service.ViewModel.Dtos;
+﻿using MediatR;
+using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Queries.GetAllOrders;
+using Service.ViewModel.Service.Queries.GetLastOrder;
 using Service.ViewModel.Stores;
 using System.Collections.ObjectModel;
 
@@ -8,16 +11,16 @@ namespace Service.ViewModel.ViewModels
     public class OrdersListingViewModel : ViewModelBase
     {
         private ObservableCollection<DisplayOrderDto> _ordersViewModelCollection;
-        private readonly IOrderService _orderService;
         private readonly OrderStore _orderStore;
+        private readonly IMediator _mediator;
 
         public IEnumerable<DisplayOrderDto> ordersViewModelCollection => _ordersViewModelCollection;
 
-        public OrdersListingViewModel(IOrderService orderService, OrderStore orderStore)
+        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator)
         {
             _ordersViewModelCollection = new ObservableCollection<DisplayOrderDto>();
-            _orderService = orderService;
             _orderStore = orderStore;
+            _mediator = mediator;
             _orderStore.OrderCreated += OnOrderCreated;
 
             AllOrders();
@@ -30,7 +33,7 @@ namespace Service.ViewModel.ViewModels
 
         public void AddLast()
         {
-            var displayOrderDto = _orderService.GetLastOrder().Result;
+            var displayOrderDto = _mediator.Send(new GetLastOrderQuery()).Result;
 
             Add(displayOrderDto);
         }
@@ -42,7 +45,7 @@ namespace Service.ViewModel.ViewModels
 
         private void AllOrders()
         {
-            var getAllOrders = _orderService.GetAllOrders().Result;
+            var getAllOrders = _mediator.Send(new GetAllOrdersQuery()).Result;
 
             foreach (var o in getAllOrders)
             {

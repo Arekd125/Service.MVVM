@@ -1,4 +1,6 @@
-﻿using Service.ViewModel.Service;
+﻿using MediatR;
+using Service.ViewModel.Service;
+using Service.ViewModel.Service.Queries.GetAllDeviceName;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Servis.Models.OrderModels;
 
@@ -6,13 +8,13 @@ namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
     public class AddDeviceCommand : CommandBase
     {
-        private readonly IDeviceStateService _deviceStateService;
         private readonly DeviceViewModel _deviceViewModel;
+        private readonly IMediator _mediator;
 
-        public AddDeviceCommand(DeviceViewModel deviceViewModel, IDeviceStateService deviceStateService)
+        public AddDeviceCommand(DeviceViewModel deviceViewModel, IMediator mediator)
         {
             _deviceViewModel = deviceViewModel;
-            _deviceStateService = deviceStateService;
+            _mediator = mediator;
 
             _deviceViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -27,7 +29,7 @@ namespace Service.ViewModel.Commands.CreatingOrderCommand
 
         private bool IfExists(string deviceStateName)
         {
-            var devices = _deviceStateService.GetAllDeviceName().Result;
+            var devices = _mediator.Send(new GetAllDeviceNameQuery()).Result;
             return devices.Any(p => p == deviceStateName);
         }
 
@@ -39,10 +41,6 @@ namespace Service.ViewModel.Commands.CreatingOrderCommand
         public override void Execute(object? parameter)
         {
             _deviceViewModel.SaveDeviceState();
-
-
-
-
         }
     }
 }

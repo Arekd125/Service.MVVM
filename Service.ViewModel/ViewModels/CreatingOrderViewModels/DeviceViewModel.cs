@@ -1,8 +1,15 @@
 ﻿using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
+using MediatR;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Commands.CreatingOrderCommand;
+using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Commands.CreateDevice;
+using Service.ViewModel.Service.Commands.CreateModelDevice;
+using Service.ViewModel.Service.Commands.DeleteModelDevice;
+using Service.ViewModel.Service.Queries.GetAllDeviceName;
+using Service.ViewModel.Service.Queries.GettAllModelName;
 using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
@@ -19,7 +26,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     {
         public IDialogCoordinator _dialogCoordinator;
         private readonly FlyoutVewModel _flayoutVewModel;
-        private readonly IDeviceStateService _deviceStateService;
+        private readonly IMediator _mediator;
+
         public ICommand AddDeviceButton { get; }
         public ICommand DeleteDeviceButton { get; }
 
@@ -32,7 +40,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             get
             {
-                _deviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
+                _deviceStateNameItemsSource = _mediator.Send(new GetAllDeviceNameQuery()).Result;
                 return _deviceStateNameItemsSource;
             }
             set
@@ -69,7 +77,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             {
                 _deviceStateSelectedItem = value;
                 OnPropertyChanged(nameof(DeviceStateSelectedItem));
-                ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
+                ModelStateNameItemSorce = _mediator.Send(new GetAllModelNameQuery(DeviceStateSelectedItem)).Result;
             }
         }
 
@@ -118,13 +126,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public DeviceViewModel(IDeviceStateService deviceStateService, IDialogCoordinator dialogCoordinator, FlyoutVewModel flayoutVewModel)
+        public DeviceViewModel(IMediator mediator, IDialogCoordinator dialogCoordinator, FlyoutVewModel flayoutVewModel)
         {
-            _deviceStateService = deviceStateService;
+            _mediator = mediator;
             _dialogCoordinator = dialogCoordinator;
             _flayoutVewModel = flayoutVewModel;
 
-            AddDeviceButton = new AddDeviceCommand(this, deviceStateService);
+            AddDeviceButton = new AddDeviceCommand(this, mediator);
             DeleteDeviceButton = new DeleteDeviceCommand(this);
             AddModelButton = new AddModelCommand(this);
             DeleteModelButton = new DeleteModelCommand(this);
@@ -162,20 +170,20 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public async void DeleteDeviceAndModels()
         {
-            await _deviceStateService.DeleteDevice(DeviceStateSelectedItem);
+            await _mediator.Send(new Service.Commands.DeleteDevice.DeleteDeviceCommand(DeviceStateSelectedItem));
             var message = $"Usunięto markę:\n{DeviceStateSelectedItem}";
             DeviceStateSelectedItem = null;
-            DeviceStateNameItemsSource = _deviceStateService.GetAllDeviceName().Result;
+            DeviceStateNameItemsSource = _mediator.Send(new GetAllDeviceNameQuery()).Result;
 
             await _flayoutVewModel.ShowFlyout(message, Colors.Red);
         }
 
         public async void DeleteModel()
         {
-            await _deviceStateService.DeleteModel(DeviceStateSelectedItem, ModelStateSelectedItem);
+            await _mediator.Send(new DeleteModelDeviceCommand(DeviceStateSelectedItem, ModelStateSelectedItem));
             var message = $"Usunięto model:\n{ModelStateSelectedItem}";
             ModelStateSelectedItem = null;
-            ModelStateNameItemSorce = _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
+            ModelStateNameItemSorce = _mediator.Send(new GetAllModelNameQuery(DeviceStateSelectedItem)).Result;
 
             await
                 _flayoutVewModel.ShowFlyout(message, Colors.Red);
@@ -183,18 +191,18 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public IEnumerable<string> AllModelStateName()
         {
-            return _deviceStateService.GetAllModelName(DeviceStateSelectedItem).Result;
+            return _mediator.Send(new GetAllModelNameQuery(DeviceStateSelectedItem)).Result;
         }
 
         public async Task SaveDeviceState()
 
         {
-            DeviceState deviceState = new()
+            CreateDeviceCommand command = new()
             {
                 Name = DeviceNameComboBox
             };
-            await _deviceStateService.CreateDevice(deviceState);
-            DeviceStateNameItemsSource = await _deviceStateService.GetAllDeviceName();
+            await _mediator.Send(command);
+            DeviceStateNameItemsSource = await _mediator.Send(new GetAllDeviceNameQuery());
             DeviceStateSelectedItem = DeviceNameComboBox;
 
             var message = $"Dodano markę:\n{DeviceNameComboBox}";
@@ -203,13 +211,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public async Task SaveModelState()
         {
-            ModelState modelState = new()
+            ModelStateDto modelState = new()
             {
                 Name = ModelNameComboBox
             };
 
             var deviceStateName = DeviceStateSelectedItem;
-            await _deviceStateService.AddModel(modelState, deviceStateName);
+            await _mediator.Send(new CreateModelDeviceCommand(modelState, deviceStateName));
             ModelStateNameItemSorce = AllModelStateName();
             ModelStateSelectedItem = ModelNameComboBox;
 

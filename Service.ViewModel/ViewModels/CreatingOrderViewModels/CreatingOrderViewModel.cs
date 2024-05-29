@@ -1,9 +1,12 @@
-﻿using ControlzEx.Theming;
+﻿using AutoMapper;
+using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
+using MediatR;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Commands.CreatingOrderCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Commands.CreateOrder;
 using Service.ViewModel.Stores;
 using Servis.Models.OrderModels;
 using System.Collections.ObjectModel;
@@ -18,8 +21,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     public class CreatingOrderViewModel : ViewModelBase
 
     {
-        private readonly IOrderService _orderService;
         private readonly OrderStore _orderStore;
+        private readonly IMediator _mediator;
 
         public FlyoutVewModel FlyoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
@@ -38,12 +41,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel deviceViewModel,
             DescriptionViewModel descriptionViewModel,
             OrderStore orderStore,
-            IOrderService orderService
+            IMediator mediator
+
             )
         {
-            _orderService = orderService;
             _orderStore = orderStore;
-
+            _mediator = mediator;
             FlyoutVewModel = flayoutVewModel;
             NameOrderViewModel = nameOrderViewModel;
             ContactViewModel = contactViewModel;
@@ -69,7 +72,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void SaveOrder()
         {
-            CreateOrderDto orderDto = new()
+            CreateOrderCommand command = new()
             {
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
@@ -81,7 +84,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Description = DescriptionViewModel.DescriptionTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
-            _orderService.CreateOrder(orderDto);
+
+            _mediator.Send(command);
 
             FlyoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();

@@ -25,7 +25,8 @@ namespace Service.ViewModel.Mapping
             CreateMap<ContactDto, Contact>()
                .ForMember(c => c.Name, z => z.MapFrom(s => s.ContactName));
 
-            CreateMap<DeviceState, DeviceStateDto>().ReverseMap();
+            CreateMap<DeviceStateDto, DeviceState>();
+            CreateMap<ModelStateDto, ModelState>();
             CreateMap<ToDoState, ToDoStateDto>().ReverseMap();
             CreateMap<ToDoState, ToDoDto>().ReverseMap();
             CreateMap<ToDoDto, ToDo>();

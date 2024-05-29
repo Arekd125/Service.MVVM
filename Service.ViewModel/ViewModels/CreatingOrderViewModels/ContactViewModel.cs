@@ -1,5 +1,7 @@
-﻿using Service.ViewModel.Dtos;
+﻿using MediatR;
+using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Queries.GetAllContacts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
     public class ContactViewModel : ViewModelBase
     {
-        private readonly IOrderService _orderService;
+        private readonly IMediator _mediator;
 
         private IEnumerable<ContactDto> AllContacts;
 
@@ -125,15 +127,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public ContactViewModel(IOrderService orderService)
+        public ContactViewModel(IMediator mediator)
         {
-            _orderService = orderService;
+            _mediator = mediator;
             RefreshContactsItemSorce();
         }
 
         public void RefreshContactsItemSorce()
         {
-            AllContacts = _orderService.GetAllContacts().Result;
+            AllContacts = _mediator.Send(new GetAllContactsQuery()).Result;
             ContactNameItemSource = AllContacts.Where(p => !string.IsNullOrEmpty(p.ContactName)).Select(p => p.ContactName);
             ContactPhoneNumberItemSource = AllContacts.Select(p => p.PhoneNumber);
         }
@@ -169,7 +171,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
             for (int i = 0; i < cleanedPhoneNumber.Length; i++)
             {
-                if (i > 0 && i % 3 == 0)  // Dodawanie spacji co trzy znaki
+                if (i > 0 && i % 3 == 0)
                 {
                     formattedNumber += " ";
                 }

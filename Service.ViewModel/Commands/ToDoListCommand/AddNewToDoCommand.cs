@@ -1,5 +1,8 @@
-﻿using Service.ViewModel.Dtos;
+﻿using MediatR;
+using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Commands.CreateToDoState;
+using Service.ViewModel.Service.Commands.UpdateToDoState;
 using Service.ViewModel.Stores;
 using Service.ViewModel.ViewModels;
 using System;
@@ -13,12 +16,12 @@ namespace Service.ViewModel.Commands.ToDoListCommand
 {
     public class AddNewToDoCommand : CommandBase
     {
-        private readonly IOrderService _orderService;
         private readonly ToDoStore _toDoStore;
+        private readonly IMediator _mediator;
 
-        public AddNewToDoCommand(IOrderService orderService, ToDoStore toDoStore)
+        public AddNewToDoCommand(IMediator mediator, ToDoStore toDoStore)
         {
-            _orderService = orderService;
+            _mediator = mediator;
             _toDoStore = toDoStore;
         }
 
@@ -29,11 +32,13 @@ namespace Service.ViewModel.Commands.ToDoListCommand
             {
                 if (toDo.Id == 0)
                 {
-                    _orderService.CreateToDoState(toDo);
+                    _mediator.Send(new CreateToDoStateCommand(toDo));
+                    //_orderService.CreateToDoState(toDo);
                 }
                 else
                 {
-                    _orderService.UpdateToDoState(toDo);
+                    _mediator.Send(new UpdateToDoStateCommand(toDo));
+                    // _orderService.UpdateToDoState(toDo);
                 }
 
                 _toDoStore.AddTodo();
