@@ -48,12 +48,8 @@ namespace Service.Model.Repositories
             {
                 DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == deviceStateName);
 
-                if (device != null)
-                {
-                    device.ModelLists.Add(modelState);
-
-                    await context.SaveChangesAsync();
-                }
+                device.ModelLists.Add(modelState);
+                await context.SaveChangesAsync();
             }
         }
 
@@ -63,12 +59,8 @@ namespace Service.Model.Repositories
             {
                 DeviceState device = await context.DeviceState.Include(o => o.ModelLists).FirstAsync(u => u.Name == deviceStateName);
 
-                if (device != null)
-                {
-                    context.DeviceState.Remove(device);
-
-                    await context.SaveChangesAsync();
-                }
+                context.DeviceState.Remove(device);
+                await context.SaveChangesAsync();
             }
         }
 

@@ -38,31 +38,28 @@ namespace Service.Model.Repositories
             }
         }
 
+        public async Task<ToDoState> GetById(int id)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                return await dbContext.ToDoState.FirstAsync(x => x.Id == id);
+            }
+        }
+
         public async Task UpDate(ToDoState toDoState)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                var toDoStateUpdate = await dbContext.ToDoState.FirstOrDefaultAsync(x => x.Id == toDoState.Id);
-
-                if (toDoStateUpdate != null && !string.IsNullOrEmpty(toDoState.ToDoName))
-                {
-                    toDoStateUpdate.ToDoName = toDoState.ToDoName;
-                    toDoStateUpdate.Prize = toDoState.Prize;
-                }
+                dbContext.ToDoState.Update(toDoState);
                 await dbContext.SaveChangesAsync();
             }
         }
 
-        public async Task Remove(int Id)
+        public async Task Remove(ToDoState toDoState)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                var toDoState = await dbContext.ToDoState.FirstOrDefaultAsync(x => x.Id == Id);
-
-                if (toDoState != null)
-                {
-                    dbContext.ToDoState.Remove(toDoState);
-                }
+                dbContext.ToDoState.Remove(toDoState);
                 await dbContext.SaveChangesAsync();
             }
         }

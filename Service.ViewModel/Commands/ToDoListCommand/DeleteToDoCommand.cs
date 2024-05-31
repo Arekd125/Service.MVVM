@@ -26,7 +26,6 @@ namespace Service.ViewModel.Commands.ToDoListCommand
         public override void Execute(object? parameter)
         {
             ToDoStateDto toDoDto = (ToDoStateDto)parameter;
-            //  _orderService.DeleteToDoState(toDoDto.Id);
             _mediator.Send(new DeleteToDoStateCommand(toDoDto.Id));
 
             _toDoStore.DeleteTodo();

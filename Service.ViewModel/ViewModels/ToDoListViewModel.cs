@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Service.Model.Entity;
 using Service.ViewModel.Commands.ToDoListCommand;
 using Service.ViewModel.Dtos;
@@ -25,11 +26,11 @@ namespace Service.ViewModel.ViewModels
         public ICommand AddNewToDoCommand { get; set; }
         public ICommand DeleteToDoCommand { get; set; }
 
-        public ToDoListViewModel(IMediator mediator, ToDoStore toDoStore)
+        public ToDoListViewModel(IMediator mediator, IMapper mapper, ToDoStore toDoStore)
         {
             _mediator = mediator;
             _toDoItemSource = new ObservableCollection<ToDoStateDto>();
-            AddNewToDoCommand = new AddNewToDoCommand(mediator, toDoStore);
+            AddNewToDoCommand = new AddNewToDoCommand(mediator, mapper, toDoStore);
             DeleteToDoCommand = new DeleteToDoCommand(mediator, toDoStore);
             AllToDos();
         }

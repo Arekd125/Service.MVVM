@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Service.Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,13 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState
 
         public async Task<Unit> Handle(DeleteToDoStateCommand request, CancellationToken cancellationToken)
         {
-            await _toDoStateRepository.Remove(request.Id);
+            var toDoState = _toDoStateRepository.GetById(request.Id);
+
+            if (toDoState != null)
+            {
+                await _toDoStateRepository.Remove(toDoState.Result);
+            }
+
             return Unit.Value;
         }
     }

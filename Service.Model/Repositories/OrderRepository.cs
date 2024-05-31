@@ -26,9 +26,7 @@ namespace Service.Model.Repositories
                     order.Contact = existingContact;
                 }
 
-                dbContext.ToDo.AddRange(order.ToDo);
                 dbContext.Orders.Add(order);
-
                 await dbContext.SaveChangesAsync();
             }
         }

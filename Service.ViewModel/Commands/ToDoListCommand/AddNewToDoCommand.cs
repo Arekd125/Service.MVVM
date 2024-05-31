@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateToDoState;
@@ -18,27 +19,29 @@ namespace Service.ViewModel.Commands.ToDoListCommand
     {
         private readonly ToDoStore _toDoStore;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public AddNewToDoCommand(IMediator mediator, ToDoStore toDoStore)
+        public AddNewToDoCommand(IMediator mediator, IMapper mapper, ToDoStore toDoStore)
         {
             _mediator = mediator;
+            _mapper = mapper;
             _toDoStore = toDoStore;
         }
 
         public override void Execute(object? parameter)
         {
-            ToDoStateDto toDo = parameter as ToDoStateDto;
-            if (toDo != null)
+            ToDoStateDto toDoStatDto = parameter as ToDoStateDto;
+            if (toDoStatDto != null)
             {
-                if (toDo.Id == 0)
+                if (toDoStatDto.Id == 0)
                 {
-                    _mediator.Send(new CreateToDoStateCommand(toDo));
-                    //_orderService.CreateToDoState(toDo);
+                    CreateToDoStateCommand CreateCommand = _mapper.Map<CreateToDoStateCommand>(toDoStatDto);
+                    _mediator.Send(CreateCommand);
                 }
                 else
                 {
-                    _mediator.Send(new UpdateToDoStateCommand(toDo));
-                    // _orderService.UpdateToDoState(toDo);
+                    UpdateToDoStateCommand UpDateCommand = _mapper.Map<UpdateToDoStateCommand>(toDoStatDto);
+                    _mediator.Send(UpDateCommand);
                 }
 
                 _toDoStore.AddTodo();

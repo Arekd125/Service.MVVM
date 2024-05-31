@@ -10,11 +10,5 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState
 {
     public class UpdateToDoStateCommand : ToDoStateDto, IRequest
     {
-        public UpdateToDoStateCommand(ToDoStateDto toDoStateDto)
-        {
-            Id = toDoStateDto.Id;
-            ToDoName = toDoStateDto.ToDoName;
-            Prize = toDoStateDto.Prize;
-        }
     }
 }

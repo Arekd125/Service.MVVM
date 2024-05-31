@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Service.Model.Entity;
 using Service.ViewModel.Dtos;
+using Service.ViewModel.Service.Commands.CreateToDoState;
+using Service.ViewModel.Service.Commands.UpdateToDoState;
 using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.Mapping
@@ -30,6 +32,11 @@ namespace Service.ViewModel.Mapping
             CreateMap<ToDoState, ToDoStateDto>().ReverseMap();
             CreateMap<ToDoState, ToDoDto>().ReverseMap();
             CreateMap<ToDoDto, ToDo>();
+
+            CreateMap<ToDoStateDto, CreateToDoStateCommand>();
+            CreateMap<ToDoStateDto, UpdateToDoStateCommand>();
+            CreateMap<CreateToDoStateCommand, ToDoState>();
+            CreateMap<UpdateToDoStateCommand, ToDoState>();
         }
     }
 }
