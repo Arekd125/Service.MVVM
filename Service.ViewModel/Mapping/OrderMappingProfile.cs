@@ -35,8 +35,6 @@ namespace Service.ViewModel.Mapping
 
             CreateMap<ToDoStateDto, CreateToDoStateCommand>();
             CreateMap<ToDoStateDto, UpdateToDoStateCommand>();
-            CreateMap<CreateToDoStateCommand, ToDoState>();
-            CreateMap<UpdateToDoStateCommand, ToDoState>();
         }
     }
 }

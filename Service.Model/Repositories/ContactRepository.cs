@@ -18,6 +18,14 @@ namespace Service.Model.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
+        public async Task<Contact> GetContact(Order order)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                return await dbContext.Contacts.FirstOrDefaultAsync(x => x.Name == order.Contact.Name && x.PhoneNumber == order.Contact.PhoneNumber);
+            }
+        }
+
         public async Task<IEnumerable<Contact>> GetAllContacts()
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
