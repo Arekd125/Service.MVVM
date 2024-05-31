@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Model", "Service.Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.ViewModel", "Service.ViewModel\Service.ViewModel.csproj", "{762071D7-135F-4D74-BC71-F2EF1B0001F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.ViewModelTests", "Service.ViewModelTests\Service.ViewModelTests.csproj", "{8E156586-5FA9-4479-B21C-68D62E78BA8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{51DF1D68-7089-430C-904F-6578D1D25035}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{762071D7-135F-4D74-BC71-F2EF1B0001F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{762071D7-135F-4D74-BC71-F2EF1B0001F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{762071D7-135F-4D74-BC71-F2EF1B0001F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E156586-5FA9-4479-B21C-68D62E78BA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E156586-5FA9-4479-B21C-68D62E78BA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E156586-5FA9-4479-B21C-68D62E78BA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E156586-5FA9-4479-B21C-68D62E78BA8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E156586-5FA9-4479-B21C-68D62E78BA8A} = {51DF1D68-7089-430C-904F-6578D1D25035}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF518C97-82F1-47FF-9B64-6057A39D6355}
