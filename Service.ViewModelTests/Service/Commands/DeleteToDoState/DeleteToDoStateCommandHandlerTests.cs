@@ -16,13 +16,13 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
 {
     public class DeleteToDoStateCommandHandlerTests
     {
-        private readonly Mock<IToDoStateRepository> _todoStateRepository;
+        private readonly Mock<IToDoStateRepository> _todoStateRepositoryMock;
         private readonly DeleteToDoStateCommandHandler _handle;
 
        public   DeleteToDoStateCommandHandlerTests()
         {
-            _todoStateRepository = new Mock<IToDoStateRepository>();
-            _handle = new DeleteToDoStateCommandHandler(_todoStateRepository.Object);
+            _todoStateRepositoryMock = new Mock<IToDoStateRepository>();
+            _handle = new DeleteToDoStateCommandHandler(_todoStateRepositoryMock.Object);
         }
 
         [Fact()]
@@ -38,8 +38,8 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
 
             };
 
-            _todoStateRepository.Setup(s => s.GetById(command.Id)).ReturnsAsync(toDoState);
-            _todoStateRepository.Setup(s => s.Remove(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
+            _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync(toDoState);
+            _todoStateRepositoryMock.Setup(s => s.Remove(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
 
             // Act
 
@@ -50,7 +50,7 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
             // Assert
 
             result.Should().Be(Unit.Value);
-            _todoStateRepository.Verify(v => v.Remove(It.IsAny<ToDoState>()), Times.Once);
+            _todoStateRepositoryMock.Verify(v => v.Remove(It.IsAny<ToDoState>()), Times.Once);
 
 
         }
@@ -61,8 +61,8 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
 
             var command = new DeleteToDoStateCommand(1);
 
-            _todoStateRepository.Setup(s => s.GetById(command.Id)).ReturnsAsync((ToDoState) null);
-            _todoStateRepository.Setup(s => s.Remove(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
+            _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync((ToDoState) null);
+            _todoStateRepositoryMock.Setup(s => s.Remove(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
 
             // Act
 
@@ -73,7 +73,7 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
             // Assert
 
             result.Should().Be(Unit.Value);
-            _todoStateRepository.Verify(v => v.Remove(It.IsAny<ToDoState>()), Times.Never);
+            _todoStateRepositoryMock.Verify(v => v.Remove(It.IsAny<ToDoState>()), Times.Never);
 
 
         }

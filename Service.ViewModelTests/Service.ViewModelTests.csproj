@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Service.ViewModel\Service.ViewModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+  </ItemGroup>
+
 </Project>

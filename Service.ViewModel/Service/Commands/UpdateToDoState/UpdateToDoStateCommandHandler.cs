@@ -15,19 +15,19 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState
     public class UpdateToDoStateCommandHandler : IRequestHandler<UpdateToDoStateCommand>
     {
         private readonly IToDoStateRepository _toDoStateRepository;
-        private readonly IMapper _mapper;
-
-        public UpdateToDoStateCommandHandler(IToDoStateRepository toDoStateRepository, IMapper mapper)
+ 
+        public UpdateToDoStateCommandHandler(IToDoStateRepository toDoStateRepository)
         {
             _toDoStateRepository = toDoStateRepository;
-            _mapper = mapper;
+         
         }
 
         public async Task<Unit> Handle(UpdateToDoStateCommand request, CancellationToken cancellationToken)
         {
             var toDoStateUpdate = await _toDoStateRepository.GetById(request.Id);
+            var isEditable = toDoStateUpdate != null && !string.IsNullOrEmpty(request.ToDoName);
 
-            if (toDoStateUpdate != null && !string.IsNullOrEmpty(request.ToDoName))
+            if (isEditable)
             {
                 toDoStateUpdate.ToDoName = request.ToDoName;
                 toDoStateUpdate.Prize = request.Prize;
