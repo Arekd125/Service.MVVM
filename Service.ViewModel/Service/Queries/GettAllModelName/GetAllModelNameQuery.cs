@@ -9,11 +9,11 @@ namespace Service.ViewModel.Service.Queries.GettAllModelName
 {
     public class GetAllModelNameQuery : IRequest<IEnumerable<string>>
     {
-        public string DeviceStateName { get; }
+        public string DeviceName { get; }
 
         public GetAllModelNameQuery(string deviceStateName)
         {
-            DeviceStateName = deviceStateName;
+            DeviceName = deviceStateName;
         }
     }
 }

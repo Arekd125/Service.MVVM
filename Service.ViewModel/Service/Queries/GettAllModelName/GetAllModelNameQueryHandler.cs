@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Service.Queries.GettAllModelName
 {
-    internal class GetAllModelNameQueryHandler : IRequestHandler<GetAllModelNameQuery, IEnumerable<string>>
+    public class GetAllModelNameQueryHandler : IRequestHandler<GetAllModelNameQuery, IEnumerable<string>>
     {
         private readonly IDeviceStateRepository _deviceStateRepository;
 
@@ -20,9 +20,10 @@ namespace Service.ViewModel.Service.Queries.GettAllModelName
 
         public async Task<IEnumerable<string>> Handle(GetAllModelNameQuery request, CancellationToken cancellationToken)
         {
-            if (!string.IsNullOrEmpty(request.DeviceStateName))
+         
+            if (!string.IsNullOrEmpty(request.DeviceName))
             {
-                var device = await _deviceStateRepository.GetDevice(request.DeviceStateName);
+                var device = await _deviceStateRepository.GetDevice(request.DeviceName);
                 return device.ModelLists.Select(p => p.Name);
             }
             return Enumerable.Empty<string>();
