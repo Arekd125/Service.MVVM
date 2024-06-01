@@ -13,7 +13,7 @@ namespace Service.Model.Repositories
 
         public Task Create(ToDoState toDoState);
 
-        public Task<ToDoState> GetById(int id);
+        public Task<ToDoState?> GetById(int id);
 
         public Task UpDate(ToDoState toDoState);
 

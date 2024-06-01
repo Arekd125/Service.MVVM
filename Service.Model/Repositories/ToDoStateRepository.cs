@@ -38,7 +38,7 @@ namespace Service.Model.Repositories
             }
         }
 
-        public async Task<ToDoState> GetById(int id)
+        public async Task<ToDoState?> GetById(int id)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
