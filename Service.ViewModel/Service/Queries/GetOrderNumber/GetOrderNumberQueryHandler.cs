@@ -12,12 +12,10 @@ namespace Service.ViewModel.Service.Queries.GetOrderNumber
     public class GetOrderNumberQueryHandler : IRequestHandler<GetOrderNumberQuery, int>
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly IMapper _mapper;
 
-        public GetOrderNumberQueryHandler(IOrderRepository orderRepository, IMapper mapper)
+        public GetOrderNumberQueryHandler(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
-            _mapper = mapper;
         }
 
         public async Task<int> Handle(GetOrderNumberQuery request, CancellationToken cancellationToken)
@@ -27,7 +25,9 @@ namespace Service.ViewModel.Service.Queries.GetOrderNumber
             {
                 var lastOrderData = order.StartDate;
 
-                if (lastOrderData.Month == DateTime.Now.Month && lastOrderData.Year == DateTime.Now.Year)
+                var isTheSameMonthAndYear = lastOrderData.Month == DateTime.Now.Month && lastOrderData.Year == DateTime.Now.Year;
+
+                if (isTheSameMonthAndYear)
                 {
                     return order.OrderNo + 1;
                 }

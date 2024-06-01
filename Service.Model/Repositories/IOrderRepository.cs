@@ -8,6 +8,6 @@ namespace Service.Model.Repositories
 
         public Task<IEnumerable<Order>> GetAllOrders();
 
-        public Task<Order> GetLastOrder();
+        public Task<Order?> GetLastOrder();
     }
 }
