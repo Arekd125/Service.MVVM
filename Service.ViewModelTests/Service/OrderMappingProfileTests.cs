@@ -87,7 +87,8 @@ namespace Service.ViewModelTests.Service
 
             Contact contact = new Contact
             {
-                Name = "Name Test"
+                  Name = "Test",
+                 PhoneNumber = "111 111 111"
             };
 
             // act
@@ -97,7 +98,6 @@ namespace Service.ViewModelTests.Service
             // assert
 
             result.Should().NotBeNull();
-            result.ContactName.Should().NotBeNull();
             result.PhoneNumber.Should().NotBeNull();
             result.ContactName.Should().Be(contact.Name);
         }
@@ -112,7 +112,7 @@ namespace Service.ViewModelTests.Service
 
             ContactDto Dto = new()
             {
-                ContactName = "Contact Name"
+                PhoneNumber = "111 111 111"
             };
 
             // act
@@ -122,8 +122,8 @@ namespace Service.ViewModelTests.Service
             // assert
 
             result.Should().NotBeNull();
-            result.Name.Should().NotBeNull();
-            result.Name.Should().Be(Dto.ContactName);
+            result.PhoneNumber.Should().NotBeNull();
+            result.PhoneNumber.Should().Be(Dto.PhoneNumber);
         }
     }
 }

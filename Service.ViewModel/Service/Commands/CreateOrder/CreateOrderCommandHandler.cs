@@ -33,7 +33,7 @@ namespace Service.ViewModel.Service.Commands.CreateOrder
             if (existingContact != null)
             {
                 order.ContactId = existingContact.Id;
-                order.Contact = existingContact;
+                order.Contact = null;             
             }
 
             await _orderRepository.Create(order);

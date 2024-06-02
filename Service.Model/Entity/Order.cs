@@ -8,7 +8,7 @@ namespace Servis.Models.OrderModels
         public int OrderNo { get; set; } = default!;
         public string OrderName { get; set; } = default!;
         public DateTime StartDate { get; set; } = DateTime.Now;
-        public Contact Contact { get; set; } = default!;
+        public Contact? Contact { get; set; } = default!;
         public int ContactId { get; set; } = default!;
         public string Device { get; set; } = default!;
         public string Model { get; set; } = default!;

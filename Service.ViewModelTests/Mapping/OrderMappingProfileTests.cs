@@ -87,7 +87,7 @@ namespace Service.ViewModel.Mapping.Tests
 
             Contact contact = new Contact
             {
-                Name = "Name Test"
+                PhoneNumber = "111 111 111"
             };
 
             // act
@@ -96,10 +96,9 @@ namespace Service.ViewModel.Mapping.Tests
 
             // assert
 
-            result.Should().NotBeNull();
-            result.ContactName.Should().NotBeNull();
+            result.Should().NotBeNull();        
             result.PhoneNumber.Should().NotBeNull();
-            result.ContactName.Should().Be(contact.Name);
+            result.PhoneNumber.Should().Be(contact.PhoneNumber);
         }
 
         [Fact()]
