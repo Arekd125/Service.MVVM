@@ -25,7 +25,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState
         public async Task<Unit> Handle(UpdateToDoStateCommand request, CancellationToken cancellationToken)
         {
             var toDoStateUpdate = await _toDoStateRepository.GetById(request.Id);
-            var isEditable = toDoStateUpdate != null && !string.IsNullOrEmpty(request.ToDoName);
+            var isEditable = (toDoStateUpdate != null && !string.IsNullOrEmpty(request.ToDoName));
 
             if (isEditable)
             {

@@ -45,14 +45,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<ToDoDto> _toDoItemSource;
+        private IEnumerable<ToDoDto>? _toDoItemSource;
 
-        public IEnumerable<ToDoDto> ToDoItemSource
+        public IEnumerable<ToDoDto>? ToDoItemSource
         {
             get
-            {
-                if (_toDoItemSource == null)
-                    _toDoItemSource = _mediator.Send(new GetAllToDoQuery()).Result;
+            {           
                 return _toDoItemSource;
             }
             set
@@ -93,8 +91,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             _toDoStore = toDoStore;
             _mediator = mediator;
+            ToDoItemSource = _mediator.Send(new GetAllToDoQuery()).Result;
             _toDoStore.ToDoAction += OnToDoAction;
             _toDoSelectedItems = new ObservableCollection<ToDoDto>();
+            
         }
 
         private void OnToDoAction()

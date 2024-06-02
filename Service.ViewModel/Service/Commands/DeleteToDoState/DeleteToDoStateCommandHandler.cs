@@ -22,7 +22,7 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState
 
         public async Task<Unit> Handle(DeleteToDoStateCommand request, CancellationToken cancellationToken)
         {
-            var toDoState = _toDoStateRepository.GetById(request.Id).Result;
+            var toDoState =  await _toDoStateRepository.GetById(request.Id);
 
             if (toDoState != null)
             {

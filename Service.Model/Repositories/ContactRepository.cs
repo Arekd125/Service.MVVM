@@ -18,7 +18,7 @@ namespace Service.Model.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<Contact> GetContact(Order order)
+        public async Task<Contact?> GetContact(Order order)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {

@@ -34,13 +34,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public ICommand AddModelButton { get; }
         public ICommand DeleteModelButton { get; }
 
-        private IEnumerable<string> _deviceStateNameItemsSource;
+        private IEnumerable<string>? _deviceStateNameItemsSource;
 
-        public IEnumerable<string> DeviceStateNameItemsSource
+        public IEnumerable<string>? DeviceStateNameItemsSource
         {
             get
             {
-                _deviceStateNameItemsSource = _mediator.Send(new GetAllDeviceNameQuery()).Result;
                 return _deviceStateNameItemsSource;
             }
             set
@@ -50,9 +49,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<string> _modelStateNameItemSorceComboBox;
+        private IEnumerable<string>? _modelStateNameItemSorceComboBox;
 
-        public IEnumerable<string> ModelStateNameItemSorce
+        public IEnumerable<string>? ModelStateNameItemSorce
         {
             get
             {
@@ -65,9 +64,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _deviceStateSelectedItem = string.Empty;
+        private string? _deviceStateSelectedItem = default!;
 
-        public string DeviceStateSelectedItem
+        public string? DeviceStateSelectedItem
         {
             get
             {
@@ -81,9 +80,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _modelStateSelectedItem = string.Empty;
+        private string? _modelStateSelectedItem = string.Empty;
 
-        public string ModelStateSelectedItem
+        public string? ModelStateSelectedItem
         {
             get
             {
@@ -96,7 +95,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _deviceName = string.Empty;
+        private string _deviceName = default!;
 
         public string DeviceNameComboBox
         {
@@ -111,7 +110,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _ModelName = string.Empty;
+        private string _ModelName = default!;
 
         public string ModelNameComboBox
         {
@@ -136,6 +135,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeleteDeviceButton = new DeleteDeviceCommand(this);
             AddModelButton = new AddModelCommand(this);
             DeleteModelButton = new DeleteModelCommand(this);
+            DeviceStateNameItemsSource = _mediator.Send(new GetAllDeviceNameQuery()).Result;
         }
 
         public async void ShowMessage()

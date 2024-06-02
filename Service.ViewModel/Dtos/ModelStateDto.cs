@@ -9,6 +9,6 @@ namespace Service.ViewModel.Dtos
 {
     public class ModelStateDto
     {
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = default!;
     }
 }

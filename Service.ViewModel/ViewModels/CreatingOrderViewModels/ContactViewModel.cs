@@ -32,25 +32,25 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _contactName = string.Empty;
+        private string _contactNameComboBox = default!;
 
         public string ContactNameComboBox
         {
             get
             {
-                return _contactName;
+                return _contactNameComboBox;
             }
             set
             {
-                _contactName = value;
+                _contactNameComboBox = value;
                 OnPropertyChanged(nameof(ContactNameComboBox));
                 SelectContactPhoneNumberSelectedItem();
             }
         }
 
-        private IEnumerable<string> _contactNameItemSource;
+        private IEnumerable<string?>? _contactNameItemSource;
 
-        public IEnumerable<string> ContactNameItemSource
+        public IEnumerable<string?>? ContactNameItemSource
         {
             get
             {
@@ -78,7 +78,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _contactPhoneNumber = string.Empty;
+        private string _contactPhoneNumber = default!;
 
         public string ContactPhoneNumberComboBox
         {
@@ -95,9 +95,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<string> _contactPhoneNumberItemSource;
+        private IEnumerable<string>? _contactPhoneNumberItemSource;
 
-        public IEnumerable<string> ContactPhoneNumberItemSource
+        public IEnumerable<string>? ContactPhoneNumberItemSource
         {
             get
             {
@@ -130,6 +130,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public ContactViewModel(IMediator mediator)
         {
             _mediator = mediator;
+            AllContacts = new List<ContactDto>();
             RefreshContactsItemSorce();
         }
 

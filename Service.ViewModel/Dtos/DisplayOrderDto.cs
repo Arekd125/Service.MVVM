@@ -2,11 +2,11 @@
 {
     public class DisplayOrderDto
     {
-        public string? OrderName { get; set; }  
-        public string? StartData { get; set; }  
-        public string? ContactName { get; set; } 
-        public string? ContactPhoneNumber { get; set; }  
-        public string? Device { get; set; } 
-        public string? Model { get; set; }  
+        public string OrderName { get; set; } = default!;  
+        public string StartData { get; set; } = default!;
+        public string? ContactName { get; set; } = default!; 
+        public string ContactPhoneNumber { get; set; } = default!;  
+        public string Device { get; set; } = default!; 
+        public string Model { get; set; } = default!;  
     }
 }

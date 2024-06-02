@@ -42,7 +42,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                return await dbContext.ToDoState.FirstAsync(x => x.Id == id);
+                return await dbContext.ToDoState.FirstOrDefaultAsync(x => x.Id == id);
             }
         }
 
