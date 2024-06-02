@@ -26,13 +26,13 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <!--  DATA GRID  -->
-            <views:OrdersListingView Grid.Column="0" DataContext="{Binding ordersListingViewModel}" />
+            <views:OrdersListingView  Grid.Column="0" DataContext="{Binding ordersListingViewModel}" />
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -46,7 +46,7 @@
             </Grid>
 
             <!--  ADD DATA  -->
-            <views:CreatingOrderView Grid.Column="2" DataContext="{Binding creatingOrderViewModel}" />
+            <views:CreatingOrderView  Grid.Column="2" DataContext="{Binding creatingOrderViewModel}" />
         </Grid>
 
         <!--  STATUSBAR  -->

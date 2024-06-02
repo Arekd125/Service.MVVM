@@ -11,6 +11,7 @@
     mc:Ignorable="d">
     <GroupBox Margin="0,10,0,10" Header="Usługi">
         <DataGrid
+            
             x:Name="ToDoDataGrid"
             Grid.Column="1"
             AutoGenerateColumns="False"

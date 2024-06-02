@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Queries.GetAllOrders;
 using Service.ViewModel.Service.Queries.GetLastOrder;
 using Service.ViewModel.Stores;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Service.ViewModel.ViewModels
 {
@@ -13,8 +15,33 @@ namespace Service.ViewModel.ViewModels
         private ObservableCollection<DisplayOrderDto> _ordersViewModelCollection;
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
+        public ICommand DeleteOrderButton { get; }
 
-        public IEnumerable<DisplayOrderDto> ordersViewModelCollection => _ordersViewModelCollection;
+        public IEnumerable<DisplayOrderDto> OrdersViewModelCollection => _ordersViewModelCollection;
+
+
+        private int _ordersViewModelSelectedIndex= -1;
+
+        public int OrdersViewModelSelectedIndex
+        {
+            get
+            {
+                return _ordersViewModelSelectedIndex;
+            }
+            set
+            {
+                _ordersViewModelSelectedIndex = value;
+                OnPropertyChanged(nameof(OrdersViewModelSelectedIndex));
+            }
+        }
+
+
+        public void DeleteOrder(int index)
+        {
+            if(index!=-1)
+            _ordersViewModelCollection.RemoveAt(index);
+        }
+
 
         public OrdersListingViewModel(OrderStore orderStore, IMediator mediator)
         {
@@ -22,6 +49,8 @@ namespace Service.ViewModel.ViewModels
             _orderStore = orderStore;
             _mediator = mediator;
             _orderStore.OrderCreated += OnOrderCreated;
+
+            DeleteOrderButton = new DeleteOrderCommand(this);
 
             AllOrders();
         }
