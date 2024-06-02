@@ -15,5 +15,6 @@ namespace Servis.Models.OrderModels
         public string? Description { get; set; } = default!;
         public List<ToDo> ToDo { get; set; } = new List<ToDo>();
         public string? Accessories { get; set; } = default!;
+        public decimal? Cost { get; set; } = default!;
     }
 }

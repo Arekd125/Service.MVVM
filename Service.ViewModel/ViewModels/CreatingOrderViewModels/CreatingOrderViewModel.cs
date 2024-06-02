@@ -81,6 +81,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Device = DeviceViewModel.DeviceNameComboBox,
                 Model = DeviceViewModel.ModelNameComboBox,
                 ToDo = DescriptionViewModel.ToDoSelectedItems.ToList(),
+                Cost = SumCost(DescriptionViewModel.ToDoSelectedItems.ToList()),
                 Description = DescriptionViewModel.DescriptionTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
@@ -93,6 +94,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             Clear();
         }
 
+        private decimal SumCost(List<ToDoDto> toDo)
+        {
+            decimal sum = 0;
+            foreach (ToDoDto dto in toDo)
+            {
+                sum += dto.Prize;
+            }
+            return sum;
+        }
         private void AddDeviceIfNotExist()
         {
             if (string.IsNullOrEmpty(DeviceViewModel.DeviceStateSelectedItem))

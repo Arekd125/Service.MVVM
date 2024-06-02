@@ -12,6 +12,7 @@ namespace Service.ViewModel.Dtos
         public string Model { get; set; } = default!;
         public string? Description { get; set; } = default!;
         public List<ToDoDto> ToDo { get; set; } = new List<ToDoDto>();
+        public decimal Cost { get; set; } = default!;
         public string? Accessories { get; set; } = default!;
     }
 }
