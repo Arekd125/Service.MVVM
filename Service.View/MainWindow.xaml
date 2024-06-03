@@ -8,8 +8,9 @@
     xmlns:views="clr-namespace:Service.View.Views"
 
     Title="Zlecenia"
-    MinWidth="1200"
+    MinWidth="900"
     MinHeight="870"
+    SizeToContent="Width"
     BorderThickness="1"
 
     Icon="/Images/main_icon.png"
@@ -26,9 +27,9 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
             <!--  DATA GRID  -->
