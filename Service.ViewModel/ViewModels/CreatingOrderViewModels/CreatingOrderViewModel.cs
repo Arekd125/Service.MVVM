@@ -2,11 +2,13 @@
 using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using MediatR;
+using Service.Model.Entity;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Commands.CreatingOrderCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateOrder;
+using Service.ViewModel.Service.Queries.GetOrder;
 using Service.ViewModel.Stores;
 using Servis.Models.OrderModels;
 using System.Collections.ObjectModel;
@@ -55,6 +57,22 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
             SaveButton = new SaveOrderCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleCommand(this);
+            _orderStore.OrderEdited += OnOrderEdited;
+        }
+
+        private void OnOrderEdited(string OrderName)
+        {
+            var EditOrder = _mediator.Send(new GetOrderQuery(OrderName)).Result;
+
+            NameOrderViewModel.OrderNameTextBlock = EditOrder.OrderName;
+            ContactViewModel.ContactNameComboBox = EditOrder.ContactName;
+            ContactViewModel.ContactPhoneNumberComboBox = EditOrder.ContactPhoneNumber;
+            DeviceViewModel.DeviceNameComboBox = EditOrder.Device;
+            DeviceViewModel.ModelNameComboBox = EditOrder.Model;
+            DescriptionViewModel.AddItemsToDoSelectedItems(EditOrder.ToDo);
+
+            DescriptionViewModel.DescriptionTextBox = EditOrder.Description;
+            DescriptionViewModel.AccessoriesTexBox = EditOrder.Accessories;
         }
 
         public void Clear()
@@ -103,6 +121,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
             return sum;
         }
+
         private void AddDeviceIfNotExist()
         {
             if (string.IsNullOrEmpty(DeviceViewModel.DeviceStateSelectedItem))

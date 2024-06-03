@@ -19,6 +19,7 @@ namespace Service.ViewModel.ViewModels
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
         public ICommand DeleteOrderButton { get; }
+        public ICommand EditOrderButton { get; }
 
         public IEnumerable<DisplayOrderDto> OrdersViewModelCollection => _ordersViewModelCollection;
 
@@ -44,6 +45,7 @@ namespace Service.ViewModel.ViewModels
             _mediator = mediator;
             _orderStore.OrderCreated += OnOrderCreated;
             _dialogCoordinator = dialogCoordinator;
+            EditOrderButton = new EditOrderButton(this, _orderStore);
             DeleteOrderButton = new DeleteOrderCommand(this);
 
             AllOrders();
@@ -66,7 +68,7 @@ namespace Service.ViewModel.ViewModels
             _ordersViewModelCollection.Insert(0, displayOrderDto);
         }
 
-        private DisplayOrderDto GetOrderByIndex(int index)
+        public DisplayOrderDto GetOrderByIndex(int index)
         {
             return _ordersViewModelCollection[index];
         }

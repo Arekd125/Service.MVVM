@@ -20,7 +20,7 @@
                 mah:TextBoxHelper.UseFloatingWatermark="True"
                 mah:TextBoxHelper.Watermark="Usługi"
                 ItemsSource="{Binding ToDoItemSource}"
-                mah:MultiSelectorHelper.SelectedItems="{Binding ToDoSelectedItems}"
+                mah:MultiSelectorHelper.SelectedItems="{Binding ToDoSelectedItems, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
 
                 SelectedItemContainerStyle="{DynamicResource MahApps.Styles.MultiSelectionComboBoxSelectedItem.Removable}">
                 <mah:MultiSelectionComboBox.ItemTemplate>

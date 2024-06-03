@@ -16,7 +16,7 @@ namespace Service.ViewModel.Mapping
                 {
                     Name = src.ContactName,
                     PhoneNumber = src.ContactPhoneNumber
-                }));
+                })).ReverseMap();
             CreateMap<Order, DisplayOrderDto>()
                 .ForMember(m => m.ContactName, c => c.MapFrom(s => s.Contact.Name))
                 .ForMember(m => m.ContactPhoneNumber, c => c.MapFrom(s => s.Contact.PhoneNumber))
@@ -35,7 +35,6 @@ namespace Service.ViewModel.Mapping
 
             CreateMap<ToDoStateDto, CreateToDoStateCommand>();
             CreateMap<ToDoStateDto, UpdateToDoStateCommand>();
-
         }
     }
 }

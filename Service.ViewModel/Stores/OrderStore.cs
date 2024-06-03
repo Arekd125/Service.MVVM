@@ -10,9 +10,16 @@ namespace Service.ViewModel.Stores
     {
         public event Action OrderCreated;
 
+        public event Action<string> OrderEdited;
+
         public void AddLastOrder()
         {
             OrderCreated?.Invoke();
+        }
+
+        public void EditOrder(string orderName)
+        {
+            OrderEdited?.Invoke(orderName);
         }
     }
 }

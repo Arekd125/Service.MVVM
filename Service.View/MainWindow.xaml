@@ -6,15 +6,13 @@
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:Service.View.Views"
-
     Title="Zlecenia"
     MinWidth="900"
     MinHeight="870"
-    SizeToContent="Width"
     BorderThickness="1"
-
     Icon="/Images/main_icon.png"
     ResizeMode="CanResizeWithGrip"
+    SizeToContent="Width"
     TitleCharacterCasing="Normal"
     TitleForeground="Black"
     mc:Ignorable="d">
@@ -33,21 +31,23 @@
             </Grid.ColumnDefinitions>
 
             <!--  DATA GRID  -->
-            <views:OrdersListingView  Grid.Column="0" DataContext="{Binding ordersListingViewModel}" />
+            <views:OrdersListingView Grid.Column="0" DataContext="{Binding ordersListingViewModel}" />
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <!-- TODOLIST DATA GRID -->
-                <views:ToDoListView Grid.Row="0" DataContext="{Binding toDoListViewModel}"
-                                    AddNewToDo="{Binding AddNewToDoCommand}"
-                                    DeleteToDo="{Binding DeleteToDoCommand}" />
+                <!--  TODOLIST DATA GRID  -->
+                <views:ToDoListView
+                    Grid.Row="0"
+                    AddNewToDo="{Binding AddNewToDoCommand}"
+                    DataContext="{Binding toDoListViewModel}"
+                    DeleteToDo="{Binding DeleteToDoCommand}" />
             </Grid>
 
             <!--  ADD DATA  -->
-            <views:CreatingOrderView  Grid.Column="2" DataContext="{Binding creatingOrderViewModel}" />
+            <views:CreatingOrderView Grid.Column="2" DataContext="{Binding creatingOrderViewModel}" />
         </Grid>
 
         <!--  STATUSBAR  -->
