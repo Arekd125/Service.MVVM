@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using ControlzEx.Theming;
+using MahApps.Metro.Controls.Dialogs;
+using MediatR;
 using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
@@ -12,6 +14,7 @@ namespace Service.ViewModel.ViewModels
 {
     public class OrdersListingViewModel : ViewModelBase
     {
+        public IDialogCoordinator _dialogCoordinator;
         private ObservableCollection<DisplayOrderDto> _ordersViewModelCollection;
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
@@ -19,8 +22,7 @@ namespace Service.ViewModel.ViewModels
 
         public IEnumerable<DisplayOrderDto> OrdersViewModelCollection => _ordersViewModelCollection;
 
-
-        private int _ordersViewModelSelectedIndex= -1;
+        private int _ordersViewModelSelectedIndex = -1;
 
         public int OrdersViewModelSelectedIndex
         {
@@ -35,21 +37,13 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-
-        public void DeleteOrder(int index)
-        {
-            if(index!=-1)
-            _ordersViewModelCollection.RemoveAt(index);
-        }
-
-
-        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator)
+        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator)
         {
             _ordersViewModelCollection = new ObservableCollection<DisplayOrderDto>();
             _orderStore = orderStore;
             _mediator = mediator;
             _orderStore.OrderCreated += OnOrderCreated;
-
+            _dialogCoordinator = dialogCoordinator;
             DeleteOrderButton = new DeleteOrderCommand(this);
 
             AllOrders();
@@ -72,6 +66,11 @@ namespace Service.ViewModel.ViewModels
             _ordersViewModelCollection.Insert(0, displayOrderDto);
         }
 
+        private DisplayOrderDto GetOrderByIndex(int index)
+        {
+            return _ordersViewModelCollection[index];
+        }
+
         private void AllOrders()
         {
             var getAllOrders = _mediator.Send(new GetAllOrdersQuery()).Result;
@@ -86,6 +85,45 @@ namespace Service.ViewModel.ViewModels
         {
             _orderStore.OrderCreated -= OnOrderCreated;
             base.Dispose();
+        }
+
+        public void DeleteOrder(int index)
+        {
+            if (index != -1)
+            {
+                var selectedOrder = GetOrderByIndex(index);
+                ShowMessage(selectedOrder, index);
+            }
+        }
+
+        public async void ShowMessage(DisplayOrderDto displayOrderDto, int index)
+        {
+            var themes = ThemeManager.Current.DetectTheme().Resources;
+            themes["Theme.ThemeInstance"] = ThemeManager.Current.GetTheme("Light.Red");
+
+            var mySettings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Tak",
+                NegativeButtonText = "Anuluj",
+                CustomResourceDictionary = themes,
+                ColorScheme = MetroDialogColorScheme.Accented
+            };
+
+            var title = $"Usunąć Zlecenie {displayOrderDto.OrderName}?";
+            //  var models = string.Join(", ", ModelStateNameItemSorce);
+            var message = $"Zostaną również usunięte następujące modele: ";
+
+            MessageDialogResult result = await _dialogCoordinator.ShowMessageAsync(
+                                            this,
+                                            title,
+                                            message,
+                                            MessageDialogStyle.AffirmativeAndNegative,
+                                            mySettings);
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                _ordersViewModelCollection.RemoveAt(index);
+            }
         }
     }
 }

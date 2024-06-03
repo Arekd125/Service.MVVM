@@ -26,7 +26,7 @@ namespace Service.View
                     services.AddDbConnection(hostContext.Configuration);
                     services.AddModel();
                     services.AddViewModel();
-                    services.AddSingleton<IDialogCoordinator>(s => DialogCoordinator.Instance);
+                    services.AddScoped<IDialogCoordinator>(s => DialogCoordinator.Instance);
 
                     services.AddSingleton(s => new MainWindow()
                     {
