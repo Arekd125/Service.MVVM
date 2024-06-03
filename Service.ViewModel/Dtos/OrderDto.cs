@@ -2,10 +2,11 @@
 
 namespace Service.ViewModel.Dtos
 {
-    public class CreateOrderDto
+    public class OrderDto
     {
         public int OrderNo { get; set; } = default!;
         public string OrderName { get; set; } = default!;
+        public string? StartDate { get; set; } = default!;
         public string? ContactName { get; set; } = default!;
         public string ContactPhoneNumber { get; set; } = default!;
         public string Device { get; set; } = default!;

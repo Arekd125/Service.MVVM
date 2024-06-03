@@ -4,11 +4,11 @@ using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
-    public class AddModelCommand : CommandBase
+    public class AddModelButtonnCommand : CommandBase
     {
         private readonly DeviceViewModel _deviceViewModel;
 
-        public AddModelCommand(DeviceViewModel deviceViewModel)
+        public AddModelButtonnCommand(DeviceViewModel deviceViewModel)
         {
             _deviceViewModel = deviceViewModel;
             _deviceViewModel.PropertyChanged += OnViewModelPropertyChanged;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Service.Queries.GetAllOrders
 {
-    public class GetAllOrdersQuery : IRequest<IEnumerable<DisplayOrderDto>>
+    public class GetAllOrdersQuery : IRequest<IEnumerable<OrderDto>>
     {
     }
 }

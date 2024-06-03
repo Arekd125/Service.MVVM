@@ -131,10 +131,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _dialogCoordinator = dialogCoordinator;
             _flyoutVewModel = flayoutVewModel;
 
-            AddDeviceButton = new AddDeviceCommand(this, mediator);
-            DeleteDeviceButton = new DeleteDeviceCommand(this);
-            AddModelButton = new AddModelCommand(this);
-            DeleteModelButton = new DeleteModelCommand(this);
+            AddDeviceButton = new AddDeviceButtonCommand(this, mediator);
+            DeleteDeviceButton = new DeleteDeviceButtonCommand(this);
+            AddModelButton = new AddModelButtonnCommand(this);
+            DeleteModelButton = new DeleteModelButtonCommand(this);
             DeviceStateNameItemsSource = _mediator.Send(new GetAllDeviceNameQuery()).Result;
         }
 

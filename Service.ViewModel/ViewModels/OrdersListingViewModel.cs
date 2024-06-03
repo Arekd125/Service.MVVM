@@ -1,11 +1,12 @@
-﻿using ControlzEx.Theming;
+﻿using AutoMapper;
+using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using MediatR;
 using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
+using Service.ViewModel.Service.Commands.DeleteOrder;
 using Service.ViewModel.Service.Queries.GetAllOrders;
-using Service.ViewModel.Service.Queries.GetLastOrder;
 using Service.ViewModel.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -15,13 +16,14 @@ namespace Service.ViewModel.ViewModels
     public class OrdersListingViewModel : ViewModelBase
     {
         public IDialogCoordinator _dialogCoordinator;
-        private ObservableCollection<DisplayOrderDto> _ordersViewModelCollection;
+        private ObservableCollection<OrderDto> _ordersViewModelCollection;
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
         public ICommand DeleteOrderButton { get; }
         public ICommand EditOrderButton { get; }
 
-        public IEnumerable<DisplayOrderDto> OrdersViewModelCollection => _ordersViewModelCollection;
+        public IEnumerable<OrderDto> OrdersViewModelCollection => _ordersViewModelCollection;
 
         private int _ordersViewModelSelectedIndex = -1;
 
@@ -38,40 +40,31 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator)
+        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper)
         {
-            _ordersViewModelCollection = new ObservableCollection<DisplayOrderDto>();
+            _ordersViewModelCollection = new ObservableCollection<OrderDto>();
             _orderStore = orderStore;
             _mediator = mediator;
             _orderStore.OrderCreated += OnOrderCreated;
             _dialogCoordinator = dialogCoordinator;
-            EditOrderButton = new EditOrderButton(this, _orderStore);
-            DeleteOrderButton = new DeleteOrderCommand(this);
-
+            EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
+            DeleteOrderButton = new DeleteOrderButtonCommand(this);
+            _mapper = mapper;
             AllOrders();
+            
         }
 
-        private void OnOrderCreated()
+        private void OnOrderCreated(OrderDto orderDto)
         {
-            AddLast();
+            Add(orderDto);
         }
 
-        public void AddLast()
+        private void Add(OrderDto orderDto)
         {
-            var displayOrderDto = _mediator.Send(new GetLastOrderQuery()).Result;
-
-            Add(displayOrderDto);
+            _ordersViewModelCollection.Insert(0, orderDto);
         }
 
-        private void Add(DisplayOrderDto displayOrderDto)
-        {
-            _ordersViewModelCollection.Insert(0, displayOrderDto);
-        }
-
-        public DisplayOrderDto GetOrderByIndex(int index)
-        {
-            return _ordersViewModelCollection[index];
-        }
+       
 
         private void AllOrders()
         {
@@ -89,11 +82,7 @@ namespace Service.ViewModel.ViewModels
             base.Dispose();
         }
 
-        public void DeleteOrder(int index, string OrderName)
-        {
-            _ordersViewModelCollection.RemoveAt(index);
-            _mediator.Send(new Service.Commands.DeleteOrder.DeleteOrderCommand(OrderName));
-        }
+       
 
         public async void ShowMessage(int index)
         {
@@ -123,6 +112,17 @@ namespace Service.ViewModel.ViewModels
             {
                 DeleteOrder(index, selectedOrder.OrderName);
             }
+
+           
+        }
+        public OrderDto GetOrderByIndex(int index)
+        {
+            return _ordersViewModelCollection[index];
+        }
+        public void DeleteOrder(int index, string OrderName)
+        {
+            _ordersViewModelCollection.RemoveAt(index);
+            _mediator.Send(new DeleteOrderCommand(OrderName));
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Service.ViewModelTests.Service
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(new OrderMappingProfile()));
             var mapper = configuration.CreateMapper();
 
-            CreateOrderDto Dto = new()
+            OrderDto Dto = new()
             {
                 ContactName = "Contact Name",
                 ContactPhoneNumber = "999 999 999"
@@ -64,17 +64,17 @@ namespace Service.ViewModelTests.Service
 
             // act
 
-            var result = mapper.Map<DisplayOrderDto>(order);
+            var result = mapper.Map<OrderDto>(order);
 
             // assert
 
             result.Should().NotBeNull();
             result.ContactName.Should().NotBeNull();
             result.ContactPhoneNumber.Should().NotBeNull();
-            result.StartData.Should().NotBeNull();
+            result.StartDate.Should().NotBeNull();
             result.ContactName.Should().Be(order.Contact.Name);
             result.ContactPhoneNumber.Should().Be(order.Contact.PhoneNumber);
-            result.StartData.Should().Be(DateString);
+            result.StartDate.Should().Be(DateString);
         }
 
         [Fact()]

@@ -6,12 +6,12 @@ using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
-    public class AddDeviceCommand : CommandBase
+    public class AddDeviceButtonCommand : CommandBase
     {
         private readonly DeviceViewModel _deviceViewModel;
         private readonly IMediator _mediator;
 
-        public AddDeviceCommand(DeviceViewModel deviceViewModel, IMediator mediator)
+        public AddDeviceButtonCommand(DeviceViewModel deviceViewModel, IMediator mediator)
         {
             _deviceViewModel = deviceViewModel;
             _mediator = mediator;

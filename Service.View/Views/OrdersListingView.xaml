@@ -26,7 +26,7 @@
 
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Path=OrderName}" Header="nr zlecenie" />
-            <DataGridTextColumn Binding="{Binding Path=StartData}" Header="Data" />
+            <DataGridTextColumn Binding="{Binding Path=StartDate}" Header="Data" />
             <DataGridTextColumn Binding="{Binding Path=ContactName}" Header="Imię i nazwisko" />
             <DataGridTextColumn Binding="{Binding Path=ContactPhoneNumber}" Header="telefon" />
             <DataGridTextColumn Binding="{Binding Path=Device}" Header="marka" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.ViewModel.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,16 @@ namespace Service.ViewModel.Stores
 {
     public class OrderStore
     {
-        public event Action OrderCreated;
+        public event Action<OrderDto> OrderCreated;
 
-        public event Action<string> OrderEdited;
+        public event Action<OrderDto> OrderEdited;
 
-        public void AddLastOrder()
+        public void AddLastOrder(OrderDto orderDto)
         {
-            OrderCreated?.Invoke();
+            OrderCreated?.Invoke(orderDto);
         }
 
-        public void EditOrder(string orderName)
+        public void EditOrder(OrderDto orderName)
         {
             OrderEdited?.Invoke(orderName);
         }

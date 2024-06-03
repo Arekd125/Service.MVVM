@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Service.Model.Repositories;
 using Service.ViewModel.Service.Commands.DeleteToDoState;
+using Servis.Models.OrderModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,25 +15,27 @@ namespace Service.ViewModel.Service.Commands.DeleteOrder
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IContactRepository _contactRepository;
+        private readonly IMapper _mapper;
 
-        public DeleteOrderCommandHandler(IOrderRepository orderRepository, IContactRepository contactRepository)
+        public DeleteOrderCommandHandler(IOrderRepository orderRepository, IContactRepository contactRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _contactRepository = contactRepository;
+            _mapper = mapper;
         }
 
         public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
         {
-            var Order = await _orderRepository.GetOrderByOrderName(request.OrderName);
+            var order = await _orderRepository.GetOrderByOrderName(request.OrderName);
 
-            if (Order == null)
+            if (order == null)
             {
                 return Unit.Value;
             }
 
-            var contactToDelet = Order.Contact;
+            var contactToDelet = order.Contact;
 
-            await _orderRepository.Delete(Order);
+            await _orderRepository.Delete(order);
 
             var otherOrdersWithSameContact = await _orderRepository.AnyOrderWithContactId(contactToDelet.Id);
 

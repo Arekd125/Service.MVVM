@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Service.Commands.CreateOrder
 {
-    public class CreateOrderCommand : CreateOrderDto, IRequest
+    public class CreateOrderCommand : OrderDto, IRequest
     {
     }
 }

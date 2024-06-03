@@ -7,13 +7,13 @@ using System.ComponentModel;
 
 namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
-    public class SaveOrderCommand : CommandBase
+    public class SaveOrderButtonCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
         private readonly ContactViewModel _contactViewModel;
         private readonly DeviceViewModel _deviceViewModel;
 
-        public SaveOrderCommand(CreatingOrderViewModel creatingOrderViewModel, ContactViewModel contactViewModel, DeviceViewModel deviceViewModel)
+        public SaveOrderButtonCommand(CreatingOrderViewModel creatingOrderViewModel, ContactViewModel contactViewModel, DeviceViewModel deviceViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
             _contactViewModel = contactViewModel;

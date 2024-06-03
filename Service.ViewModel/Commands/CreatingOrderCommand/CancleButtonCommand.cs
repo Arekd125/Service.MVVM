@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
-    public class CancleCommand : CommandBase
+    public class CancleButtonCommand : CommandBase
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
-        public CancleCommand(CreatingOrderViewModel creatingOrderViewModel)
+        public CancleButtonCommand(CreatingOrderViewModel creatingOrderViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
         }

@@ -28,6 +28,8 @@ namespace Service.ViewModel.Service.Commands.CreateOrder
         {
             var order = _mapper.Map<Order>(request);
 
+            order.StartDate = DateTime.Now;
+            
             var existingContact = await _contactRepository.GetContact(order);
 
             if (existingContact != null)

@@ -46,7 +46,6 @@ namespace Service.Model.Repositories
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
                 Order? order = await dbContext.Orders
-                    .Include(o => o.Contact)
                     .OrderByDescending(o => o.Id)
                     .FirstOrDefaultAsync();
 

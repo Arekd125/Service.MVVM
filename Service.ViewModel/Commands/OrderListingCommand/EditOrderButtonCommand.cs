@@ -1,4 +1,5 @@
-﻿using Service.ViewModel.ViewModels;
+﻿using Service.ViewModel.Stores;
+using Service.ViewModel.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands.OrderListingCommand
 {
-    public class DeleteOrderCommand : CommandBase
+    public class EditOrderButtonCommand : CommandBase
     {
         private readonly OrdersListingViewModel _ordersListingViewModel;
+        private readonly OrderStore _orderStore;
 
-        public DeleteOrderCommand(OrdersListingViewModel ordersListingViewModel)
+        public EditOrderButtonCommand(OrdersListingViewModel ordersListingViewModel, OrderStore orderStore)
         {
             _ordersListingViewModel = ordersListingViewModel;
+            _orderStore = orderStore;
         }
 
         public override void Execute(object? parameter)
         {
+          
             var index = _ordersListingViewModel.OrdersViewModelSelectedIndex;
-            if (index != -1)
-            {
-                _ordersListingViewModel.ShowMessage(index);
-                _ordersListingViewModel.OrdersViewModelSelectedIndex = -1;
-            }
+            var OrderToEdit = _ordersListingViewModel.GetOrderByIndex(index);
+            _orderStore.EditOrder(OrderToEdit);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     {
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
         public FlyoutVewModel FlyoutVewModel { get; }
         public NameOrderViewModel NameOrderViewModel { get; }
@@ -43,8 +44,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel deviceViewModel,
             DescriptionViewModel descriptionViewModel,
             OrderStore orderStore,
-            IMediator mediator
-
+            IMediator mediator,
+            IMapper mapper
             )
         {
             _orderStore = orderStore;
@@ -55,14 +56,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel = deviceViewModel;
             DescriptionViewModel = descriptionViewModel;
 
-            SaveButton = new SaveOrderCommand(this, ContactViewModel, DeviceViewModel);
-            CancleButton = new CancleCommand(this);
+            SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
+            CancleButton = new CancleButtonCommand(this);
             _orderStore.OrderEdited += OnOrderEdited;
+            _mapper = mapper;
         }
 
-        private void OnOrderEdited(string OrderName)
+        private void OnOrderEdited(OrderDto EditOrder)
         {
-            var EditOrder = _mediator.Send(new GetOrderQuery(OrderName)).Result;
+           // var EditOrder = _mediator.Send(new GetOrderQuery(OrderName)).Result;
 
             NameOrderViewModel.OrderNameTextBlock = EditOrder.OrderName;
             ContactViewModel.ContactNameComboBox = EditOrder.ContactName;
@@ -90,7 +92,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void SaveOrder()
         {
-            CreateOrderCommand command = new()
+
+            OrderDto orderDto = new()
             {
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
@@ -104,11 +107,14 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
 
+            
+            CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(orderDto);
+
             _mediator.Send(command);
 
             FlyoutVewModel.ShowFlyout("Dodano zlecenie");
             AddDeviceIfNotExist();
-            _orderStore.AddLastOrder();
+            _orderStore.AddLastOrder(orderDto);
             Clear();
         }
 
