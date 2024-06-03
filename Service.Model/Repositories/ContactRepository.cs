@@ -35,5 +35,14 @@ namespace Service.Model.Repositories
                 return contacts;
             }
         }
+
+        public async Task Delete(Contact contact)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                dbContext.Contacts.Remove(contact);
+                await dbContext.SaveChangesAsync();
+            }
+        }
     }
 }

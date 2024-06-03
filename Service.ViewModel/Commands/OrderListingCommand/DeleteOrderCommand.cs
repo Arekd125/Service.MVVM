@@ -15,13 +15,15 @@ namespace Service.ViewModel.Commands.OrderListingCommand
         {
             _ordersListingViewModel = ordersListingViewModel;
         }
+
         public override void Execute(object? parameter)
         {
-
             var index = _ordersListingViewModel.OrdersViewModelSelectedIndex;
-            _ordersListingViewModel.DeleteOrder(index);
-            _ordersListingViewModel.OrdersViewModelSelectedIndex = -1;
-
+            if (index != -1)
+            {
+                _ordersListingViewModel.ShowMessage(index);
+                _ordersListingViewModel.OrdersViewModelSelectedIndex = -1;
+            }
         }
     }
 }

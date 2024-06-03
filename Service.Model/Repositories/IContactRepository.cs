@@ -12,5 +12,7 @@ namespace Service.Model.Repositories
         public Task<Contact?> GetContact(Order order);
 
         public Task<IEnumerable<Contact>> GetAllContacts();
+
+        public Task Delete(Contact contact);
     }
 }

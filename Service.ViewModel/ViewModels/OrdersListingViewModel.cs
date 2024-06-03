@@ -87,16 +87,13 @@ namespace Service.ViewModel.ViewModels
             base.Dispose();
         }
 
-        public void DeleteOrder(int index)
+        public void DeleteOrder(int index, string OrderName)
         {
-            if (index != -1)
-            {
-                var selectedOrder = GetOrderByIndex(index);
-                ShowMessage(selectedOrder, index);
-            }
+            _ordersViewModelCollection.RemoveAt(index);
+            _mediator.Send(new Service.Commands.DeleteOrder.DeleteOrderCommand(OrderName));
         }
 
-        public async void ShowMessage(DisplayOrderDto displayOrderDto, int index)
+        public async void ShowMessage(int index)
         {
             var themes = ThemeManager.Current.DetectTheme().Resources;
             themes["Theme.ThemeInstance"] = ThemeManager.Current.GetTheme("Light.Red");
@@ -108,10 +105,10 @@ namespace Service.ViewModel.ViewModels
                 CustomResourceDictionary = themes,
                 ColorScheme = MetroDialogColorScheme.Accented
             };
-
-            var title = $"Usunąć Zlecenie {displayOrderDto.OrderName}?";
+            var selectedOrder = GetOrderByIndex(index);
+            var title = $"Usunąć Zlecenie {selectedOrder.OrderName}?";
             //  var models = string.Join(", ", ModelStateNameItemSorce);
-            var message = $"Zostaną również usunięte następujące modele: ";
+            var message = $"Imię i Nazwisko: {selectedOrder.ContactName}\nTelefone: {selectedOrder.ContactPhoneNumber}\nMarka i Model: {selectedOrder.Device} {selectedOrder.Model}";
 
             MessageDialogResult result = await _dialogCoordinator.ShowMessageAsync(
                                             this,
@@ -122,7 +119,7 @@ namespace Service.ViewModel.ViewModels
 
             if (result == MessageDialogResult.Affirmative)
             {
-                _ordersViewModelCollection.RemoveAt(index);
+                DeleteOrder(index, selectedOrder.OrderName);
             }
         }
     }

@@ -22,6 +22,15 @@ namespace Service.Model.Repositories
             }
         }
 
+        public async Task Delete(Order order)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                dbContext.Orders.Remove(order);
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
         public async Task<IEnumerable<Order>> GetAllOrders()
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -42,6 +51,24 @@ namespace Service.Model.Repositories
                     .FirstOrDefaultAsync();
 
                 return order;
+            }
+        }
+
+        public async Task<Order?> GetOrderByOrderName(string OrderName)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                var order = await dbContext.Orders.Include(o => o.Contact).FirstOrDefaultAsync(p => p.OrderName == OrderName);
+
+                return order;
+            }
+        }
+
+        public async Task<bool> AnyOrderWithContactId(int contactId)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                return await dbContext.Orders.AnyAsync(o => o.ContactId == contactId);
             }
         }
     }

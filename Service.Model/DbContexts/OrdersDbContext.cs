@@ -21,7 +21,8 @@ namespace Service.Model.DbContexts
             modelBuilder.Entity<Order>()
                 .HasOne(ed => ed.Contact)
                 .WithMany(ec => ec.Order)
-                .HasForeignKey(ed => ed.ContactId);
+                .HasForeignKey(ed => ed.ContactId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Contact>()
               .Property(x => x.PhoneNumber)
