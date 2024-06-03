@@ -25,7 +25,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
     {
         public IDialogCoordinator _dialogCoordinator;
-        private readonly FlyoutVewModel _flayoutVewModel;
+        private readonly FlyoutVewModel _flyoutVewModel;
         private readonly IMediator _mediator;
 
         public ICommand AddDeviceButton { get; }
@@ -129,7 +129,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             _mediator = mediator;
             _dialogCoordinator = dialogCoordinator;
-            _flayoutVewModel = flayoutVewModel;
+            _flyoutVewModel = flayoutVewModel;
 
             AddDeviceButton = new AddDeviceCommand(this, mediator);
             DeleteDeviceButton = new DeleteDeviceCommand(this);
@@ -175,7 +175,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceStateSelectedItem = null;
             DeviceStateNameItemsSource = _mediator.Send(new GetAllDeviceNameQuery()).Result;
 
-            await _flayoutVewModel.ShowFlyout(message, Colors.Red);
+            await _flyoutVewModel.ShowFlyout(message, Colors.Red);
         }
 
         public async void DeleteModel()
@@ -186,7 +186,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ModelStateNameItemSorce = _mediator.Send(new GetAllModelNameQuery(DeviceStateSelectedItem)).Result;
 
             await
-                _flayoutVewModel.ShowFlyout(message, Colors.Red);
+                _flyoutVewModel.ShowFlyout(message, Colors.Red);
         }
 
         public IEnumerable<string> AllModelStateName()
@@ -206,7 +206,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceStateSelectedItem = DeviceNameComboBox;
 
             var message = $"Dodano markę:\n{DeviceNameComboBox}";
-            await _flayoutVewModel.ShowFlyout(message);
+            await _flyoutVewModel.ShowFlyout(message);
         }
 
         public async Task SaveModelState()
@@ -222,7 +222,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ModelStateSelectedItem = ModelNameComboBox;
 
             var message = $"Dodano model:\n{ModelNameComboBox}";
-            await _flayoutVewModel.ShowFlyout(message);
+            await _flyoutVewModel.ShowFlyout(message);
         }
     }
 }
