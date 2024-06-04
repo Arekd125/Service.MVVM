@@ -4,6 +4,7 @@ using Service.ViewModel.Dtos;
 using Service.ViewModel.Service.Commands.CreateOrder;
 using Service.ViewModel.Service.Commands.CreateToDoState;
 using Service.ViewModel.Service.Commands.DeleteOrder;
+using Service.ViewModel.Service.Commands.EditOrder;
 using Service.ViewModel.Service.Commands.UpdateToDoState;
 using Servis.Models.OrderModels;
 
@@ -25,6 +26,13 @@ namespace Service.ViewModel.Mapping
                 .ForMember(m => m.StartDate, c => c.MapFrom(s => s.StartDate.ToString("d")));
 
             CreateMap<OrderDto, CreateOrderCommand>();
+            CreateMap<OrderDto, EditOrderCommand>();
+            CreateMap<EditOrderCommand, Order>()
+                .ForMember(dest => dest.Contact, opt => opt.MapFrom(src => new Contact
+                {
+                    Name = src.ContactName,
+                    PhoneNumber = src.ContactPhoneNumber
+                }));
 
             CreateMap<Contact, ContactDto>()
                 .ForMember(c => c.ContactName, z => z.MapFrom(s => s.Name));

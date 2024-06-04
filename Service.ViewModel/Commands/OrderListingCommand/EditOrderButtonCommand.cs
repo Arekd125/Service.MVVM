@@ -22,9 +22,9 @@ namespace Service.ViewModel.Commands.OrderListingCommand
         public override void Execute(object? parameter)
         {
           
-            var index = _ordersListingViewModel.OrdersViewModelSelectedIndex;
-            var OrderToEdit = _ordersListingViewModel.GetOrderByIndex(index);
-            _orderStore.EditOrder(OrderToEdit);
+            _ordersListingViewModel.EditOrderIndex  = _ordersListingViewModel.OrdersViewModelSelectedIndex;
+            var OrderToEdit = _ordersListingViewModel.GetOrderByIndex(_ordersListingViewModel.EditOrderIndex);
+            _orderStore.OrderToEdit(OrderToEdit);
         }
     }
 }

@@ -5,9 +5,11 @@ using MediatR;
 using Service.Model.Entity;
 using Service.ViewModel.Commands;
 using Service.ViewModel.Commands.CreatingOrderCommand;
+using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateOrder;
+using Service.ViewModel.Service.Commands.EditOrder;
 using Service.ViewModel.Service.Queries.GetOrder;
 using Service.ViewModel.Stores;
 using Servis.Models.OrderModels;
@@ -58,7 +60,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
             SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleButtonCommand(this);
-            _orderStore.OrderEdited += OnOrderEdited;
+            _orderStore.OrderSentToEdit += OnOrderEdited;
             _mapper = mapper;
         }
 
@@ -109,13 +111,32 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
 
+
+
+            if (orderDto.Id == 0)
+            { 
             CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(orderDto);
 
             _mediator.Send(command);
 
-            FlyoutVewModel.ShowFlyout("Dodano zlecenie");
+            FlyoutVewModel.ShowFlyout("Dodano zlecenie \n{orderDto.OrderName}");
             AddDeviceIfNotExist();
             _orderStore.AddLastOrder(orderDto);
+            }
+
+            else
+            {
+                EditOrderCommand command = _mapper.Map<EditOrderCommand>(orderDto);
+
+                _mediator.Send(command);
+
+                FlyoutVewModel.ShowFlyout($"Edytowano zlecenie \n{orderDto.OrderName}");
+
+                AddDeviceIfNotExist();
+                _orderStore.OrderChanged(orderDto);
+            }
+
+
             Clear();
         }
 

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper.Execution;
+using MediatR;
 using Service.Model.Entity;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
@@ -25,10 +26,15 @@ namespace Service.ViewModel.Commands.ToDoListCommand
 
         public override void Execute(object? parameter)
         {
-            ToDoStateDto toDoDto = (ToDoStateDto)parameter;
-            _mediator.Send(new DeleteToDoStateCommand(toDoDto.Id));
 
-            _toDoStore.DeleteTodo();
+            
+                
+                ToDoStateDto toDoDto = (ToDoStateDto)parameter;
+                _mediator.Send(new DeleteToDoStateCommand(toDoDto.Id));
+
+                _toDoStore.DeleteTodo();
+            
+            
         }
     }
 }

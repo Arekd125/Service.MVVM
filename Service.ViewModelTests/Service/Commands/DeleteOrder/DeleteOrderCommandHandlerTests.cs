@@ -10,6 +10,7 @@ using MediatR;
 using Moq;
 using Service.Model.Repositories;
 using Servis.Models.OrderModels;
+using AutoMapper;
 
 namespace Service.ViewModel.Service.Commands.DeleteOrder.Tests
 {
@@ -18,14 +19,17 @@ namespace Service.ViewModel.Service.Commands.DeleteOrder.Tests
         private readonly Mock<IOrderRepository> _orderRepositoryMock;
         private readonly Mock<IContactRepository> _contactRepositoryMock;
         private readonly DeleteOrderCommandHandler _handler;
+        private readonly Mock<IMapper> _mapperMock;
 
         public DeleteOrderCommandHandlerTests()
         {
             _orderRepositoryMock = new Mock<IOrderRepository>();
             _contactRepositoryMock = new Mock<IContactRepository>();
-            _handler = new DeleteOrderCommandHandler(_orderRepositoryMock.Object, _contactRepositoryMock.Object);
-        }
+            _mapperMock = new Mock<IMapper>();
 
+            _handler = new DeleteOrderCommandHandler(_orderRepositoryMock.Object, _contactRepositoryMock.Object, _mapperMock.Object);
+
+        }
         [Fact]
         public async Task Handle_OrderDoesNotExist_ReturnsUnitValue()
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Service.Model.DbContexts;
+using Service.Model.Entity;
 using Servis.Models.OrderModels;
 
 namespace Service.Model.Repositories
@@ -68,6 +69,15 @@ namespace Service.Model.Repositories
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
                 return await dbContext.Orders.AnyAsync(o => o.ContactId == contactId);
+            }
+        }
+
+        public async Task UpDate(Order order)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                dbContext.Orders.Update(order);
+                await dbContext.SaveChangesAsync();
             }
         }
     }

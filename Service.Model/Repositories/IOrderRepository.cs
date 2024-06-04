@@ -15,5 +15,6 @@ namespace Service.Model.Repositories
         public Task Delete(Order order);
 
         public Task<bool> AnyOrderWithContactId(int contactId);
+        public Task UpDate (Order order);
     }
 }
