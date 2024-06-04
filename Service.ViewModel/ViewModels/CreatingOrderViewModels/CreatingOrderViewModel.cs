@@ -64,7 +64,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         private void OnOrderEdited(OrderDto EditOrder)
         {
-           // var EditOrder = _mediator.Send(new GetOrderQuery(OrderName)).Result;
+            // var EditOrder = _mediator.Send(new GetOrderQuery(OrderName)).Result;
 
             NameOrderViewModel.OrderNameTextBlock = EditOrder.OrderName;
             ContactViewModel.ContactNameComboBox = EditOrder.ContactName;
@@ -92,11 +92,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void SaveOrder()
         {
-
             OrderDto orderDto = new()
             {
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
+                StartDate = DateTime.Now.ToString("d"),
                 ContactName = ContactViewModel.ContactNameComboBox,
                 ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
                 Device = DeviceViewModel.DeviceNameComboBox,
@@ -107,7 +107,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
 
-            
             CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(orderDto);
 
             _mediator.Send(command);
