@@ -62,17 +62,18 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _mapper = mapper;
         }
 
+        private int OrderId { get; set; }
+
         private void OnOrderEdited(OrderDto EditOrder)
         {
-            // var EditOrder = _mediator.Send(new GetOrderQuery(OrderName)).Result;
-
+            Clear();
+            OrderId = EditOrder.Id;
             NameOrderViewModel.OrderNameTextBlock = EditOrder.OrderName;
             ContactViewModel.ContactNameComboBox = EditOrder.ContactName;
             ContactViewModel.ContactPhoneNumberComboBox = EditOrder.ContactPhoneNumber;
             DeviceViewModel.DeviceNameComboBox = EditOrder.Device;
             DeviceViewModel.ModelNameComboBox = EditOrder.Model;
             DescriptionViewModel.AddItemsToDoSelectedItems(EditOrder.ToDo);
-
             DescriptionViewModel.DescriptionTextBox = EditOrder.Description;
             DescriptionViewModel.AccessoriesTexBox = EditOrder.Accessories;
         }
@@ -94,6 +95,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             OrderDto orderDto = new()
             {
+                Id = OrderId,
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
                 StartDate = DateTime.Now.ToString("d"),

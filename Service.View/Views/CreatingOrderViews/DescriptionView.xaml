@@ -16,13 +16,13 @@
 
             <mah:MultiSelectionComboBox
                 Margin="3"
-                SelectionMode="Multiple"
+                mah:MultiSelectorHelper.SelectedItems="{Binding ToDoSelectedItems, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 mah:TextBoxHelper.UseFloatingWatermark="True"
                 mah:TextBoxHelper.Watermark="Usługi"
-                ItemsSource="{Binding ToDoItemSource}"
-                mah:MultiSelectorHelper.SelectedItems="{Binding ToDoSelectedItems, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-
-                SelectedItemContainerStyle="{DynamicResource MahApps.Styles.MultiSelectionComboBoxSelectedItem.Removable}">
+                ItemsSource="{Binding ToDoItemSource, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                SelectedItemContainerStyle="{DynamicResource MahApps.Styles.MultiSelectionComboBoxSelectedItem.Removable}"
+                SelectionMode="Multiple">
                 <mah:MultiSelectionComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -31,13 +31,16 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding ToDoName}" />
-                            <TextBlock HorizontalAlignment="Right" Grid.Column="1" Text="{Binding Prize, StringFormat= \{0:C\}}" />
+                            <TextBlock
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                Text="{Binding Prize, StringFormat=\{0:C\}}" />
                         </Grid>
                     </DataTemplate>
                 </mah:MultiSelectionComboBox.ItemTemplate>
                 <mah:MultiSelectionComboBox.SelectedItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding ToDoName}" />
+                        <TextBlock Text="{Binding ToDoName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </DataTemplate>
                 </mah:MultiSelectionComboBox.SelectedItemTemplate>
             </mah:MultiSelectionComboBox>

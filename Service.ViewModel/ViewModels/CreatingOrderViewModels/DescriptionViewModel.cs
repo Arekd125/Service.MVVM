@@ -30,18 +30,18 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string _toDo = string.Empty;
+        private int _selectedIndex = -1;
 
-        public string ToDoTextBox
+        public int SelectedIndex
         {
             get
             {
-                return _toDo;
+                return _selectedIndex;
             }
             set
             {
-                _toDo = value;
-                OnPropertyChanged(nameof(ToDoTextBox));
+                _selectedIndex = value;
+                OnPropertyChanged(nameof(SelectedIndex));
             }
         }
 
@@ -76,8 +76,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         }
 
         private string _accessories = string.Empty;
-        private readonly IMediator _mediator;
-        private readonly ToDoStore _toDoStore;
 
         public string AccessoriesTexBox
         {
@@ -91,6 +89,9 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 OnPropertyChanged(nameof(AccessoriesTexBox));
             }
         }
+
+        private readonly IMediator _mediator;
+        private readonly ToDoStore _toDoStore;
 
         public DescriptionViewModel(IMediator mediator, ToDoStore toDoStore)
         {

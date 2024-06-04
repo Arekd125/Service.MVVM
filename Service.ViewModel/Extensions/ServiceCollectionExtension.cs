@@ -27,7 +27,7 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<NameOrderViewModel>();
             services.AddSingleton<ContactViewModel>();
             services.AddSingleton<DeviceViewModel>();
-            services.AddSingleton<DescriptionViewModel>();
+            services.AddScoped<DescriptionViewModel>();
             services.AddScoped<FlyoutVewModel>();
             services.AddSingleton<OrderStore>();
             services.AddSingleton<ToDoStore>();

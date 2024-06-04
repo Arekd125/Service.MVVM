@@ -4,6 +4,7 @@ namespace Service.ViewModel.Dtos
 {
     public class OrderDto
     {
+        public int Id { get; set; }
         public int OrderNo { get; set; } = default!;
         public string OrderName { get; set; } = default!;
         public string? StartDate { get; set; } = default!;

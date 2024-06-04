@@ -19,6 +19,7 @@
             mah:TextBoxHelper.Watermark="Imię i Nazwisko"
             IsEditable="True"
             IsTextSearchEnabled="True"
+
             ItemsSource="{Binding ContactNameItemSource, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding ContactNameSelectedItem}"
             Text="{Binding ContactNameComboBox, UpdateSourceTrigger=LostFocus}" />

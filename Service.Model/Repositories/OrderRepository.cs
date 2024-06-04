@@ -35,7 +35,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                IEnumerable<Order> orders = await dbContext.Orders.Include(o => o.Contact).ToListAsync();
+                IEnumerable<Order> orders = await dbContext.Orders.Include(o => o.Contact).Include(t => t.ToDo).ToListAsync();
 
                 return orders;
             }
