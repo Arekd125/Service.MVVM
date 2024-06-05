@@ -76,6 +76,10 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
+                var orderToUpdate = await GetOrderByOrderName(order.OrderName);
+
+                orderToUpdate.ToDo.Clear();
+                dbContext.Orders.Update(orderToUpdate);
                 dbContext.Orders.Update(order);
                 await dbContext.SaveChangesAsync();
             }
