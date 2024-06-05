@@ -43,8 +43,18 @@
                 Grid.Column="0"
                 Margin="0,2,3,4"
                 mah:ControlsHelper.ContentCharacterCasing="Upper"
+                Visibility="{Binding SaveButtonVisibility}"
                 Command="{Binding Path=SaveButton}"
                 Content="Zapisz"
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+            <Button x:Name="editButton"
+                Grid.Column="0"
+                Margin="0,2,3,4"
+                Visibility="{Binding EditButtonVisibility}"
+                mah:ControlsHelper.ContentCharacterCasing="Upper"
+                Command="{Binding Path=EditButton}"
+                Content="Edytuj"
+                Background="Green"
                 Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
             <Button
                 Grid.Column="1"
