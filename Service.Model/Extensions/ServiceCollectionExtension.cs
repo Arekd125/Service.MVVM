@@ -24,6 +24,7 @@ namespace Service.Model.Extensions
             services.AddScoped<IDeviceStateRepository, DeviceStateRepository>();
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IToDoStateRepository, ToDoStateRepository>();
+            services.AddScoped<IToDoRepository, ToDoRepository>();
         }
     }
 }
