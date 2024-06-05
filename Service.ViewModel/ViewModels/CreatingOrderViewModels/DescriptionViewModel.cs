@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {
@@ -102,8 +103,13 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _toDoSelectedItems = new ObservableCollection<ToDoDto>();
         }
 
-        public void AddItemsToDoSelectedItems(List<ToDoDto> items)
+        public void AddItemsToDoSelectedItems(IEnumerable<ToDoDto> items)
         {
+            var list1 = items;
+            var lista2 = _mediator.Send(new GetAllToDoQuery()).Result;
+
+            ToDoItemSource = list1.Concat(lista2);
+
             foreach (var item in items)
             {
                 ToDoSelectedItems.Add(item);
@@ -119,6 +125,15 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         {
             _toDoStore.ToDoAction -= OnToDoAction;
             base.Dispose();
+        }
+
+        public void Clear()
+        {
+            DescriptionTextBox = string.Empty;
+            AccessoriesTexBox = string.Empty;
+            SelectedIndex = -1;
+            ToDoItemSource = _mediator.Send(new GetAllToDoQuery()).Result;
+            ToDoSelectedItems.Clear();
         }
     }
 }

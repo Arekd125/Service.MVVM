@@ -122,9 +122,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             SaveButtonVisibility = Visibility.Visible;
             DeviceViewModel.DeviceNameComboBox = string.Empty;
             DeviceViewModel.ModelNameComboBox = string.Empty;
-            DescriptionViewModel.DescriptionTextBox = string.Empty;
-            DescriptionViewModel.ToDoSelectedItems.Clear();
-            DescriptionViewModel.AccessoriesTexBox = string.Empty;
+            DescriptionViewModel.Clear();
             ContactViewModel.RefreshContactsItemSorce();
             ContactViewModel.ContactNameComboBox = string.Empty;
             ContactViewModel.ContactPhoneNumberComboBox = string.Empty;
@@ -184,6 +182,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             FlyoutVewModel.ShowFlyout($"Dodano zlecenie \n{orderDto.OrderName}");
             AddDeviceIfNotExist();
             _orderStore.AddLastOrder(orderDto);
+            Clear();
         }
 
         private decimal SumCost(List<ToDoDto> toDo)
