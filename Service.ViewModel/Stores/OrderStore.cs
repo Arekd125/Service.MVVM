@@ -12,7 +12,10 @@ namespace Service.ViewModel.Stores
         public event Action<OrderDto> OrderCreated;
 
         public event Action<OrderDto> OrderSentToEdit;
+
         public event Action<OrderDto> OrderEdited;
+
+        public event Action<OrderDto> OrderDetails;
 
         public void AddLastOrder(OrderDto orderDto)
         {
@@ -23,9 +26,15 @@ namespace Service.ViewModel.Stores
         {
             OrderSentToEdit?.Invoke(orderName);
         }
+
         public void OrderChanged(OrderDto orderDto)
         {
             OrderEdited?.Invoke(orderDto);
+        }
+
+        public void OrderToDisplay(OrderDto orderDto)
+        {
+            OrderDetails?.Invoke(orderDto);
         }
     }
 }

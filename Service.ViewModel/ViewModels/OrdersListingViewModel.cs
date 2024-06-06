@@ -40,6 +40,8 @@ namespace Service.ViewModel.ViewModels
             {
                 _ordersViewModelSelectedIndex = value;
                 OnPropertyChanged(nameof(OrdersViewModelSelectedIndex));
+                if (_ordersViewModelSelectedIndex != -1)
+                    ChangeDetailsView(_ordersViewModelSelectedIndex);
             }
         }
 
@@ -55,23 +57,22 @@ namespace Service.ViewModel.ViewModels
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
             _mapper = mapper;
             AllOrders();
-            
         }
 
         private void OnOrderCreated(OrderDto orderDto)
         {
             Add(orderDto);
         }
-        private void OnOrderEdited(OrderDto orderDto) 
+
+        private void OnOrderEdited(OrderDto orderDto)
         {
             _ordersViewModelCollection[EditOrderIndex] = orderDto;
         }
+
         private void Add(OrderDto orderDto)
         {
             _ordersViewModelCollection.Insert(0, orderDto);
         }
-
-       
 
         private void AllOrders()
         {
@@ -86,10 +87,9 @@ namespace Service.ViewModel.ViewModels
         public override void Dispose()
         {
             _orderStore.OrderCreated -= OnOrderCreated;
+            _orderStore.OrderEdited -= OnOrderEdited;
             base.Dispose();
         }
-
-       
 
         public async void ShowMessage(int index)
         {
@@ -119,17 +119,24 @@ namespace Service.ViewModel.ViewModels
             {
                 DeleteOrder(index, selectedOrder.OrderName);
             }
-
-           
         }
+
         public OrderDto GetOrderByIndex(int index)
         {
             return _ordersViewModelCollection[index];
         }
+
         public void DeleteOrder(int index, string OrderName)
         {
             _ordersViewModelCollection.RemoveAt(index);
             _mediator.Send(new DeleteOrderCommand(OrderName));
+        }
+
+        private void ChangeDetailsView(int index)
+        {
+            var orderDto = GetOrderByIndex(index);
+
+            _orderStore.OrderToDisplay(orderDto);
         }
     }
 }

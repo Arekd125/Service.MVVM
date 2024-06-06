@@ -22,6 +22,7 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<OrdersListingViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();
             services.AddSingleton<ToDoListViewModel>();
+            services.AddSingleton<OrderDetailsViewModel>();
             services.AddScoped<MainWindowViewModel>();
 
             services.AddSingleton<NameOrderViewModel>();
