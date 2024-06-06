@@ -27,18 +27,29 @@ namespace Service.ViewModel.Service.Commands.EditOrder
 
         public async Task<Unit> Handle(EditOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = _mapper.Map<Order>(request);
+            var NewOrder = _mapper.Map<Order>(request);
+            var OldOrder = await _orderRepository.GetOrderByOrderName(request.OrderName);
 
-            var existingContact = await _contactRepository.GetContact(order);
+            var contactToDelet = OldOrder.Contact;
+
+            var existingContact = await _contactRepository.GetContact(NewOrder);
 
             if (existingContact != null)
             {
-                order.ContactId = existingContact.Id;
-                order.Contact = null;
+                NewOrder.ContactId = existingContact.Id;
+                NewOrder.Contact = null;
             }
 
-            await _todoRepository.Remove(order.Id);
-            await _orderRepository.UpDate(order);
+            await _todoRepository.Remove(NewOrder.Id);
+            await _orderRepository.UpDate(NewOrder);
+
+            var otherOrdersWithSameContact = await _orderRepository.AnyOrderWithContactId(contactToDelet.Id);
+
+            if (!otherOrdersWithSameContact)
+            {
+                contactToDelet.Order = null;
+                await _contactRepository.Delete(contactToDelet);
+            }
 
             return Unit.Value;
         }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Service.Model.DbContexts;
-using Service.Model.Entity;
 using Servis.Models.OrderModels;
 
 namespace Service.Model.Repositories
@@ -77,7 +76,17 @@ namespace Service.Model.Repositories
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
                 var orderToUpdate = await GetOrderByOrderName(order.OrderName);
-                dbContext.Orders.Update(order);
+
+                orderToUpdate.Contact = order.Contact;
+                orderToUpdate.ContactId = order.ContactId;
+                orderToUpdate.Device = order.Device;
+                orderToUpdate.Model = order.Model;
+                orderToUpdate.Description = order.Description;
+                orderToUpdate.ToDo = order.ToDo;
+                orderToUpdate.Accessories = order.Accessories;
+                orderToUpdate.Cost = order.Cost;
+
+                dbContext.Orders.Update(orderToUpdate);
                 await dbContext.SaveChangesAsync();
             }
         }
