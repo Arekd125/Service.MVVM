@@ -35,13 +35,15 @@
 
             <Grid Grid.Column="1">
                 <StackPanel Orientation="Vertical">
-                    <views:OrderDetailsView DataContext="{Binding orderDetailsViewModel}" />
+                   
                     <!--  TODOLIST DATA GRID  -->
                     <views:ToDoListView
 
                     AddNewToDo="{Binding AddNewToDoCommand}"
                     DataContext="{Binding toDoListViewModel}"
                     DeleteToDo="{Binding DeleteToDoCommand}" />
+
+                    <views:OrderDetailsView DataContext="{Binding orderDetailsViewModel}" />
                 </StackPanel>
             </Grid>
 
