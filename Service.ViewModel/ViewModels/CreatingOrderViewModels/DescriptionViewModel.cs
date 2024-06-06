@@ -105,10 +105,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void AddItemsToDoSelectedItems(IEnumerable<ToDoDto> items)
         {
-            var list1 = items;
-            var lista2 = _mediator.Send(new GetAllToDoQuery()).Result;
+            var list1 = items.ToList();
+            var list2 = _mediator.Send(new GetAllToDoQuery()).Result.ToList();
 
-            ToDoItemSource = list1.Concat(lista2);
+            ToDoItemSource = list1.Concat(list2).Distinct(new ToDoComparer());
 
             foreach (var item in items)
             {
