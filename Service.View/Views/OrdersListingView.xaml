@@ -68,64 +68,67 @@
             <!--  RowDetails  -->
             <DataTemplate>
                 <Grid Background="White">
-                    <StackPanel  Orientation="Vertical" HorizontalAlignment="Left">
-                        <!-- OPIS USTERKI-->
-                        <WrapPanel Margin="5" Visibility="{Binding Path=Description, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
-                            <TextBlock
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            Text="Opis usterki: " />
-                            <TextBlock Foreground="Black" Text="{Binding Path=Description}" />
-                        </WrapPanel>
-                        <!-- AKCESORIA-->
-                        <WrapPanel Margin="5" Visibility="{Binding Path=Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
-                            <TextBlock
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            Text="Dołączone akcesoria: " />
-                            <TextBlock Foreground="Black" Text="{Binding Path=Accessories}" />
-                        </WrapPanel>
-                        <!-- KOSZT-->
-                        <StackPanel Visibility="{Binding Path=ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <!--  KOSZT  -->
+                        <StackPanel Margin="10,5,10,5" Visibility="{Binding Path=ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
                             <WrapPanel>
-                                <TextBlock Margin="5"
+                                <TextBlock
+
+                                    FontWeight="Bold"
+                                    Foreground="Black"
+                                    Text="Usługi: " />
+                            </WrapPanel>
+                            <!--  USŁUGI  -->
+
+                            <DataGrid
+                                Width="auto"
+                                AutoGenerateColumns="False"
+                                CanUserDeleteRows="False"
+                                GridLinesVisibility="Horizontal"
+                                HeadersVisibility="None"
+                                IsEnabled="False"
+                                ItemsSource="{Binding Path=ToDo, UpdateSourceTrigger=PropertyChanged}"
+                                SelectionMode="Single"
+                                Visibility="{Binding Path=ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn
+                                        Width="auto"
+                                        Binding="{Binding Path=ToDoName}"
+                                        Foreground="Black"
+                                        Header="Usługi" />
+                                    <DataGridTextColumn
+                                        Width="80"
+                                        Binding="{Binding Path=Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
+                                        Foreground="Black"
+                                        Header="Cena">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock Margin="5" Foreground="Black" FontWeight="Bold"  Text="{Binding Path=Cost, StringFormat=Szacowany Koszt: \{0:C2\}}" />
+                        </StackPanel>
+
+                        <!--  OPIS USTERKI  -->
+                        <StackPanel Margin="10,5,10,5" Visibility="{Binding Path=Description, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+                            <TextBlock
                                 FontWeight="Bold"
                                 Foreground="Black"
-                                Text="Szacowany kosz: " />
-                                <TextBlock  Foreground="Black" Text="{Binding Path=Cost,  StringFormat=\{0:C2\} }" />
-                            </WrapPanel>
+                                Text="Opis usterki: " />
+                            <TextBlock Foreground="Black" Text="{Binding Path=Description}" />
                         </StackPanel>
-                        <!-- USŁUGI-->
-                        <DataGrid
-                        Width="auto"
-                        AutoGenerateColumns="False"
-                        CanUserDeleteRows="False"
-                        GridLinesVisibility="Horizontal"
-                        HeadersVisibility="None"
-                        IsEnabled="False"
-                        ItemsSource="{Binding Path=ToDo, UpdateSourceTrigger=PropertyChanged}"
-                        SelectionMode="Single"
-                        Visibility="{Binding Path=ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
-
-                            <DataGrid.Columns>
-                                <DataGridTextColumn
-                                Width="auto"
-                                Binding="{Binding Path=ToDoName}"
+                        <!--  AKCESORIA  -->
+                        <StackPanel Margin="10,5,10,5" Visibility="{Binding Path=Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+                            <TextBlock
+                                FontWeight="Bold"
                                 Foreground="Black"
-                                Header="Usługi" />
-                                <DataGridTextColumn
-                                Width="80"
-                                Binding="{Binding Path=Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
-                                Foreground="Black"
-                                Header="Cena">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="HorizontalAlignment" Value="Right" />
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                Text="Dołączone akcesoria: " />
+                            <TextBlock Foreground="Black" Text="{Binding Path=Accessories}" />
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </DataTemplate>
