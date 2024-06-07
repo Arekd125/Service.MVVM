@@ -29,6 +29,16 @@
         SelectedIndex="{Binding OrdersViewModelSelectedIndex}"
         SelectionMode="Single">
 
+        <DataGrid.Resources>
+            <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MahApps.Styles.DataGrid}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="SelectedItem" Value="Null" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.Resources>
+
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Path=OrderName}" Header="nr zlecenie" />
             <DataGridTextColumn Binding="{Binding Path=StartDate}" Header="Data" />
@@ -65,6 +75,7 @@
             </DataGridTemplateColumn>
         </DataGrid.Columns>
         <DataGrid.RowDetailsTemplate>
+
             <!--  RowDetails  -->
             <DataTemplate>
                 <Grid Background="White">
