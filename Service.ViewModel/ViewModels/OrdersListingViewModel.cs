@@ -19,14 +19,13 @@ namespace Service.ViewModel.ViewModels
         private ObservableCollection<OrderDto> _ordersViewModelCollection;
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
 
         public int EditOrderIndex { get; set; }
 
         public ICommand DeleteOrderButton { get; }
         public ICommand EditOrderButton { get; }
 
-        public IEnumerable<OrderDto> OrdersViewModelCollection => _ordersViewModelCollection;
+        public ObservableCollection<OrderDto> OrdersViewModelCollection => _ordersViewModelCollection;
 
         private int _ordersViewModelSelectedIndex = -1;
 
@@ -40,8 +39,6 @@ namespace Service.ViewModel.ViewModels
             {
                 _ordersViewModelSelectedIndex = value;
                 OnPropertyChanged(nameof(OrdersViewModelSelectedIndex));
-                if (_ordersViewModelSelectedIndex != -1)
-                    ChangeDetailsView(_ordersViewModelSelectedIndex);
             }
         }
 
@@ -55,7 +52,6 @@ namespace Service.ViewModel.ViewModels
             _dialogCoordinator = dialogCoordinator;
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
-            _mapper = mapper;
             AllOrders();
         }
 
@@ -130,13 +126,6 @@ namespace Service.ViewModel.ViewModels
         {
             _ordersViewModelCollection.RemoveAt(index);
             _mediator.Send(new DeleteOrderCommand(OrderName));
-        }
-
-        private void ChangeDetailsView(int index)
-        {
-            var orderDto = GetOrderByIndex(index);
-
-            _orderStore.OrderToDisplay(orderDto);
         }
     }
 }

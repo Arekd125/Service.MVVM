@@ -119,15 +119,15 @@
                                 FontWeight="Bold"
                                 Foreground="Black"
                                 Text="Opis usterki: " />
-                            <TextBlock Foreground="Black" Text="{Binding Path=Description}" />
+                            <TextBlock Foreground="Black" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <!--  AKCESORIA  -->
-                        <StackPanel Margin="10,5,10,5" Visibility="{Binding Path=Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+                        <StackPanel Margin="10,5,10,5" Visibility="{Binding Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
                             <TextBlock
                                 FontWeight="Bold"
                                 Foreground="Black"
                                 Text="Dołączone akcesoria: " />
-                            <TextBlock Foreground="Black" Text="{Binding Path=Accessories}" />
+                            <TextBlock Foreground="Black" Text="{Binding Accessories}" />
                         </StackPanel>
                     </StackPanel>
                 </Grid>
