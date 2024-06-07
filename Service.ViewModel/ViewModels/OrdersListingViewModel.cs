@@ -62,7 +62,8 @@ namespace Service.ViewModel.ViewModels
 
         private void OnOrderEdited(OrderDto orderDto)
         {
-            _ordersViewModelCollection[EditOrderIndex] = orderDto;
+            _ordersViewModelCollection.RemoveAt(EditOrderIndex);
+            _ordersViewModelCollection.Insert(EditOrderIndex, orderDto);
         }
 
         private void Add(OrderDto orderDto)
