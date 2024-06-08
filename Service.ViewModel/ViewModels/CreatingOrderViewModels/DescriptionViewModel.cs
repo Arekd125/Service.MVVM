@@ -108,7 +108,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             var list1 = items.ToList();
             var list2 = _mediator.Send(new GetAllToDoQuery()).Result.ToList();
 
-            ToDoItemSource = list1.Concat(list2).Distinct(new ToDoComparer());
+            ToDoItemSource = list1.Union(list2);
 
             foreach (var item in items)
             {
