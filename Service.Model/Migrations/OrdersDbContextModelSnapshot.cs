@@ -148,6 +148,9 @@ namespace Service.Model.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsFinished")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -157,9 +160,6 @@ namespace Service.Model.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("OrderNo")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("OrderStatus")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("StartDate")

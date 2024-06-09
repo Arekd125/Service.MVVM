@@ -11,5 +11,15 @@ namespace Service.View.Views
         {
             InitializeComponent();
         }
+
+        private void ToggleButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void ToggleButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

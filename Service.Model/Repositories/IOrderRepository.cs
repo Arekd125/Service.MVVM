@@ -16,5 +16,6 @@ namespace Service.Model.Repositories
 
         public Task<bool> AnyOrderWithContactId(int contactId);
         public Task UpDate (Order order);
+        public Task UpDateStatus (string orderName);
     }
 }

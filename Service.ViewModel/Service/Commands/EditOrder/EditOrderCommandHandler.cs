@@ -39,6 +39,7 @@ namespace Service.ViewModel.Service.Commands.EditOrder
                 NewOrder.ContactId = existingContact.Id;
                 NewOrder.Contact = null;
             }
+            NewOrder.IsFinished = OldOrder.IsFinished;
 
             await _todoRepository.Remove(NewOrder.Id);
             await _orderRepository.UpDate(NewOrder);

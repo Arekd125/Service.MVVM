@@ -5,7 +5,7 @@
 namespace Service.Model.Migrations
 {
     /// <inheritdoc />
-    public partial class addOrderStatus : Migration
+    public partial class addIsFinished : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,12 +14,12 @@ namespace Service.Model.Migrations
                 name: "FK_Orders_Contacts_ContactId",
                 table: "Orders");
 
-            migrationBuilder.AddColumn<int>(
-                name: "OrderStatus",
+            migrationBuilder.AddColumn<bool>(
+                name: "IsFinished",
                 table: "Orders",
                 type: "INTEGER",
-                nullable: false,
-                defaultValue: 0);
+                nullable: false,  
+                defaultValue: false);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Orders_Contacts_ContactId",
@@ -38,7 +38,7 @@ namespace Service.Model.Migrations
                 table: "Orders");
 
             migrationBuilder.DropColumn(
-                name: "OrderStatus",
+                name: "IsFinished",
                 table: "Orders");
 
             migrationBuilder.AddForeignKey(

@@ -55,7 +55,10 @@
             <DataGridTemplateColumn Header="Status">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <ToggleButton HorizontalAlignment="Stretch" Foreground="White" >
+                        <ToggleButton IsChecked="{Binding IsFinished}" HorizontalAlignment="Stretch" Foreground="White" 
+                                      Unchecked="ToggleButton_Unchecked"
+                                      Checked="ToggleButton_Checked"
+                                        Command="{Binding DataContext.EditStatusButton, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                             <ToggleButton.Style>
                                 <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MahApps.Styles.Button.Win10}"  >
                                     <Style.Triggers>

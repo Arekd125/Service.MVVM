@@ -6,6 +6,7 @@ using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.DeleteOrder;
+using Service.ViewModel.Service.Commands.EditOrderStatus;
 using Service.ViewModel.Service.Queries.GetAllOrders;
 using Service.ViewModel.Stores;
 using System.Collections.ObjectModel;
@@ -22,6 +23,7 @@ namespace Service.ViewModel.ViewModels
 
         public int EditOrderIndex { get; set; }
 
+        public ICommand EditStatusButton { get; }
         public ICommand DeleteOrderButton { get; }
         public ICommand EditOrderButton { get; }
 
@@ -50,6 +52,7 @@ namespace Service.ViewModel.ViewModels
             _orderStore.OrderCreated += OnOrderCreated;
             _orderStore.OrderEdited += OnOrderEdited;
             _dialogCoordinator = dialogCoordinator;
+            EditStatusButton = new EditStatusButtonCommand(this);
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
             AllOrders();
@@ -60,9 +63,20 @@ namespace Service.ViewModel.ViewModels
             Add(orderDto);
         }
 
+        public void EditStatusOrder()
+        {
+          
+            var OrderToEdit = GetOrderByIndex(OrdersViewModelSelectedIndex);
+           _ordersViewModelCollection[EditOrderIndex].IsFinished = !_ordersViewModelCollection[EditOrderIndex].IsFinished;
+            _mediator.Send(new EditOrderStatusCommand(OrderToEdit.OrderName));
+          
+        }
+
         private void OnOrderEdited(OrderDto orderDto)
         {
+            var isFinished = _ordersViewModelCollection[EditOrderIndex].IsFinished;
             _ordersViewModelCollection.RemoveAt(EditOrderIndex);
+            orderDto.IsFinished = isFinished;
             _ordersViewModelCollection.Insert(EditOrderIndex, orderDto);
         }
 

@@ -16,6 +16,6 @@ namespace Service.ViewModel.Dtos
         public List<ToDoDto> ToDo { get; set; } = new List<ToDoDto>();
         public decimal Cost { get; set; } = default!;
         public string? Accessories { get; set; } = default!;
-        public StatusDto OrderStatus { get; set; }
+        public bool IsFinished { get; set; }
     }
 }

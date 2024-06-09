@@ -41,7 +41,8 @@
 
                     AddNewToDo="{Binding AddNewToDoCommand}"
                     DataContext="{Binding toDoListViewModel}"
-                    DeleteToDo="{Binding DeleteToDoCommand}" />
+                    DeleteToDo="{Binding DeleteToDoCommand}" 
+                    />
                 </StackPanel>
             </Grid>
 

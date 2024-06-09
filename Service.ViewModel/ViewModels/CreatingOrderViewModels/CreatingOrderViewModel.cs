@@ -144,7 +144,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 ToDo = DescriptionViewModel.ToDoSelectedItems.ToList(),
                 Cost = SumCost(DescriptionViewModel.ToDoSelectedItems.ToList()),
                 Description = DescriptionViewModel.DescriptionTextBox,
-                Accessories = DescriptionViewModel.AccessoriesTexBox
+                Accessories = DescriptionViewModel.AccessoriesTexBox,
+               
             };
             EditOrderCommand command = _mapper.Map<EditOrderCommand>(orderDto);
 
