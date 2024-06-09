@@ -16,5 +16,6 @@ namespace Servis.Models.OrderModels
         public List<ToDo> ToDo { get; set; } = new List<ToDo>();
         public string? Accessories { get; set; } = default!;
         public decimal? Cost { get; set; } = default!;
+        public Status OrderStatus { get; set; } = Status.started;
     }
 }
