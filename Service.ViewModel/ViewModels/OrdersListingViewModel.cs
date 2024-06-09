@@ -74,7 +74,7 @@ namespace Service.ViewModel.ViewModels
 
         private void OnOrderEdited(OrderDto orderDto)
         {
-            var isFinished = _ordersViewModelCollection[EditOrderIndex].IsFinished;
+           var isFinished = _ordersViewModelCollection[EditOrderIndex].IsFinished;
             _ordersViewModelCollection.RemoveAt(EditOrderIndex);
             orderDto.IsFinished = isFinished;
             _ordersViewModelCollection.Insert(EditOrderIndex, orderDto);

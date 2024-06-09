@@ -85,8 +85,6 @@ namespace Service.Model.Repositories
                 orderToUpdate.ToDo = order.ToDo;
                 orderToUpdate.Accessories = order.Accessories;
                 orderToUpdate.Cost = order.Cost;
-              //  orderToUpdate.IsFinished = order.IsFinished;
-
                 dbContext.Orders.Update(orderToUpdate);
                 await dbContext.SaveChangesAsync();
             }
