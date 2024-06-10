@@ -131,22 +131,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void EditOrder()
         {
-            OrderDto orderDto = new()
-            {
-                Id = OrderId,
-                OrderNo = NameOrderViewModel.OrderNo,
-                OrderName = NameOrderViewModel.OrderNameTextBlock,
-                StartDate = DateTime.Now.ToString("d"),
-                ContactName = ContactViewModel.ContactNameComboBox,
-                ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
-                Device = DeviceViewModel.DeviceNameComboBox,
-                Model = DeviceViewModel.ModelNameComboBox,
-                ToDo = DescriptionViewModel.ToDoSelectedItems.ToList(),
-                Cost = SumCost(DescriptionViewModel.ToDoSelectedItems.ToList()),
-                Description = DescriptionViewModel.DescriptionTextBox,
-                Accessories = DescriptionViewModel.AccessoriesTexBox
-               
-            };
+            OrderDto orderDto = CreateOrderDto();
+
             EditOrderCommand command = _mapper.Map<EditOrderCommand>(orderDto);
 
             _mediator.Send(command);
@@ -160,7 +146,21 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public void SaveOrder()
         {
-            OrderDto orderDto = new()
+            OrderDto orderDto = CreateOrderDto();
+
+            CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(orderDto);
+
+            _mediator.Send(command);
+
+            FlyoutVewModel.ShowFlyout($"Dodano zlecenie \n{orderDto.OrderName}");
+            AddDeviceIfNotExist();
+            _orderStore.AddLastOrder(orderDto);
+            Clear();
+        }
+
+        private OrderDto CreateOrderDto()
+        {
+            return new OrderDto
             {
                 Id = OrderId,
                 OrderNo = NameOrderViewModel.OrderNo,
@@ -175,25 +175,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Description = DescriptionViewModel.DescriptionTextBox,
                 Accessories = DescriptionViewModel.AccessoriesTexBox
             };
-
-            CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(orderDto);
-
-            _mediator.Send(command);
-
-            FlyoutVewModel.ShowFlyout($"Dodano zlecenie \n{orderDto.OrderName}");
-            AddDeviceIfNotExist();
-            _orderStore.AddLastOrder(orderDto);
-            Clear();
         }
 
-        private decimal SumCost(List<ToDoDto> toDo)
+        private decimal SumCost(IEnumerable<ToDoDto> toDoItems)
         {
-            decimal sum = 0;
-            foreach (ToDoDto dto in toDo)
-            {
-                sum += dto.Prize;
-            }
-            return sum;
+            return toDoItems.Sum(item => item.Prize);
         }
 
         private void AddDeviceIfNotExist()
