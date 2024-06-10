@@ -33,19 +33,8 @@
                 <!--  PANEL CONTRONL  -->
                 <views:PanelControlView  DataContext="{Binding panelControlViewModel}" />
 
-                <!--  DATA GRID  -->
-                <TabControl mah:TabControlHelper.Underlined="TabPanel"
-                            mah:TabControlHelper.UnderlinePlacement="Bottom">
-                    <TabItem  Header="Otwarte">
-                        <views:OrdersListingView  DataContext="{Binding ordersListingViewModel}" />
-                    </TabItem>
-                    <TabItem  Header="Zrealizowane">
-                        <views:OrdersListingView  DataContext="{Binding ordersListingViewModel}" />
-                    </TabItem>
-                    <TabItem  Header="Wszystkie">
-                        <views:OrdersListingView  DataContext="{Binding ordersListingViewModel}" />
-                    </TabItem>
-                </TabControl>
+                <!--  TABCONTROL  -->
+                <views:OrderStatsTabControlView DataContext="{Binding}" />
             </StackPanel>
 
             <Grid Grid.Column="1">

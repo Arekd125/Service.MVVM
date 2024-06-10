@@ -21,6 +21,21 @@ namespace Service.ViewModel.ViewModels
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
 
+        private string _filtrStatus;
+
+        public string FiltrStatus
+        {
+            get
+            {
+                return _filtrStatus;
+            }
+            set
+            {
+                _filtrStatus = value;
+                OnPropertyChanged(nameof(FiltrStatus));
+            }
+        }
+
         public int EditOrderIndex { get; set; }
 
         public ICommand EditStatusButton { get; }
