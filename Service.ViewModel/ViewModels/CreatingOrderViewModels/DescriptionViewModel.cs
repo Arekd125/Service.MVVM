@@ -103,12 +103,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _toDoSelectedItems = new ObservableCollection<ToDoDto>();
         }
 
-        public void AddItemsToDoSelectedItems(IEnumerable<ToDoDto> items)
+        public void SetToDoItems(IEnumerable<ToDoDto> items)
         {
-            var list1 = items.ToList();
             var list2 = _mediator.Send(new GetAllToDoQuery()).Result.ToList();
 
-            ToDoItemSource = list1.Union(list2);
+            ToDoItemSource = items.Union(list2, new ToDoComparer());
 
             foreach (var item in items)
             {

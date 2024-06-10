@@ -102,7 +102,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private void OnOrderEdited(OrderDto EditOrder)
         {
             Clear();
-
             SaveButtonVisibility = Visibility.Collapsed;
             EditButtonVisibility = Visibility.Visible;
             OrderId = EditOrder.Id;
@@ -111,7 +110,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ContactViewModel.ContactPhoneNumberComboBox = EditOrder.ContactPhoneNumber;
             DeviceViewModel.DeviceNameComboBox = EditOrder.Device;
             DeviceViewModel.ModelNameComboBox = EditOrder.Model;
-            DescriptionViewModel.AddItemsToDoSelectedItems(EditOrder.ToDo);
+            DescriptionViewModel.SetToDoItems(EditOrder.ToDo);
             DescriptionViewModel.DescriptionTextBox = EditOrder.Description;
             DescriptionViewModel.AccessoriesTexBox = EditOrder.Accessories;
         }
