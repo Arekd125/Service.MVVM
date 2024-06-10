@@ -4,20 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Service.View.Views"
-    xmlns:core="clr-namespace:System;assembly=mscorlib"
+    xmlns:conv="clr-namespace:Service.View.Converters"
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xml:lang="pl-PL"
     Dialog:DialogParticipation.Register="{Binding}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    
+
     mc:Ignorable="d">
     <UserControl.Resources>
-        <local:StringNullOrEmptyToVisibilityConverter x:Key="stringNullOrEmptyToVisibilityConverter" />
-        <local:EmptyToDoVisibiltyConverter x:Key="emptyToDoVisibiltyConverter" />
-    
+        <conv:StringNullOrEmptyToVisibilityConverter x:Key="stringNullOrEmptyToVisibilityConverter" />
+        <conv:EmptyToDoVisibiltyConverter x:Key="emptyToDoVisibiltyConverter" />
     </UserControl.Resources>
     <DataGrid
         Grid.Column="1"
@@ -49,18 +47,18 @@
             <DataGridTextColumn Binding="{Binding Path=ContactPhoneNumber}" Header="telefon" />
             <DataGridTextColumn Binding="{Binding Path=Device}" Header="marka" />
             <DataGridTextColumn Binding="{Binding Path=Model}" Header="model" />
- 
-            <!--STATUS -->              
+
+            <!--STATUS -->
 
             <DataGridTemplateColumn Header="Status">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <ToggleButton IsChecked="{Binding IsFinished}" HorizontalAlignment="Stretch" Foreground="White" 
+                        <ToggleButton IsChecked="{Binding IsFinished}" HorizontalAlignment="Stretch" Foreground="White"
                                       Unchecked="ToggleButton_Unchecked"
                                       Checked="ToggleButton_Checked"
                                         Command="{Binding DataContext.EditStatusButton, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                             <ToggleButton.Style>
-                                <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MahApps.Styles.Button.Win10}"  >
+                                <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource MahApps.Styles.Button.Win10}">
                                     <Style.Triggers>
                                         <Trigger Property="IsChecked" Value="False">
                                             <Setter Property="Content" Value="Otwarte"></Setter>

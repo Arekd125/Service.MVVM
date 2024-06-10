@@ -18,7 +18,7 @@ namespace Service.ViewModel.Extensions
         {
             services.AddAutoMapper(typeof(OrderMappingProfile));
             services.AddMediatR(typeof(CreateDeviceCommand));
-
+            services.AddSingleton<PanelControlViewModel>();
             services.AddSingleton<OrdersListingViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();
             services.AddSingleton<ToDoListViewModel>();

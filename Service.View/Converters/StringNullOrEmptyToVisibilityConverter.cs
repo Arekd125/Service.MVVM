@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Service.View.Views
+namespace Service.View.Converters
 {
     public class StringNullOrEmptyToVisibilityConverter : IValueConverter
     {

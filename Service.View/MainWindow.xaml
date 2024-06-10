@@ -29,9 +29,13 @@
                 <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
+            <StackPanel>
+                <!--  PANEL CONTRONL  -->
+                <views:PanelControlView  DataContext="{Binding panelControlViewModel}" />
 
-            <!--  DATA GRID  -->
-            <views:OrdersListingView Grid.Column="0" DataContext="{Binding ordersListingViewModel}" />
+                <!--  DATA GRID  -->
+                <views:OrdersListingView Grid.Column="0" DataContext="{Binding ordersListingViewModel}" />
+            </StackPanel>
 
             <Grid Grid.Column="1">
                 <StackPanel Orientation="Vertical">
@@ -41,8 +45,7 @@
 
                     AddNewToDo="{Binding AddNewToDoCommand}"
                     DataContext="{Binding toDoListViewModel}"
-                    DeleteToDo="{Binding DeleteToDoCommand}" 
-                    />
+                    DeleteToDo="{Binding DeleteToDoCommand}" />
                 </StackPanel>
             </Grid>
 
