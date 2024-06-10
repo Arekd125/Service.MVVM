@@ -224,5 +224,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             var message = $"Dodano model:\n{ModelNameComboBox}";
             await _flyoutVewModel.ShowFlyout(message);
         }
+
+        public void Clear()
+        {
+            DeviceNameComboBox = string.Empty;
+            ModelNameComboBox = string.Empty;
+        }
     }
 }

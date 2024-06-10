@@ -180,5 +180,12 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
             return formattedNumber;
         }
+
+        public void Clear()
+        {
+            RefreshContactsItemSorce();
+            ContactNameComboBox = string.Empty;
+            ContactPhoneNumberComboBox = string.Empty;
+        }
     }
 }

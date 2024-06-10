@@ -93,6 +93,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             EditButton = new SaveEditedOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleButtonCommand(this);
+
             _orderStore.OrderSentToEdit += OnOrderEdited;
             _mapper = mapper;
         }
@@ -113,19 +114,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DescriptionViewModel.SetToDoItems(EditOrder.ToDo);
             DescriptionViewModel.DescriptionTextBox = EditOrder.Description;
             DescriptionViewModel.AccessoriesTexBox = EditOrder.Accessories;
-        }
-
-        public void Clear()
-        {
-            EditButtonVisibility = Visibility.Collapsed;
-            SaveButtonVisibility = Visibility.Visible;
-            DeviceViewModel.DeviceNameComboBox = string.Empty;
-            DeviceViewModel.ModelNameComboBox = string.Empty;
-            DescriptionViewModel.Clear();
-            ContactViewModel.RefreshContactsItemSorce();
-            ContactViewModel.ContactNameComboBox = string.Empty;
-            ContactViewModel.ContactPhoneNumberComboBox = string.Empty;
-            NameOrderViewModel.SetNextOrderName();
         }
 
         public void EditOrder()
@@ -152,9 +140,20 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             _mediator.Send(command);
 
             FlyoutVewModel.ShowFlyout($"Dodano zlecenie \n{orderDto.OrderName}");
+
             AddDeviceIfNotExist();
             _orderStore.AddLastOrder(orderDto);
             Clear();
+        }
+
+        public void Clear()
+        {
+            EditButtonVisibility = Visibility.Collapsed;
+            SaveButtonVisibility = Visibility.Visible;
+            DeviceViewModel.Clear();
+            DescriptionViewModel.Clear();
+            ContactViewModel.Clear();
+            NameOrderViewModel.SetNextOrderName();
         }
 
         private OrderDto CreateOrderDto()
