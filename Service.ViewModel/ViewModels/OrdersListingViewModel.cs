@@ -21,9 +21,9 @@ namespace Service.ViewModel.ViewModels
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
 
-        private string _filtrStatus;
+        private int _filtrStatus;
 
-        public string FiltrStatus
+        public int FiltrStatus
         {
             get
             {
@@ -33,6 +33,7 @@ namespace Service.ViewModel.ViewModels
             {
                 _filtrStatus = value;
                 OnPropertyChanged(nameof(FiltrStatus));
+                SlelectFiltr(FiltrStatus);
             }
         }
 
@@ -72,7 +73,7 @@ namespace Service.ViewModel.ViewModels
             EditStatusButton = new EditStatusButtonCommand(this);
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
-            LoadAllOrders();
+            LoadOpenOrders();
         }
 
         private void OnOrderCreated(OrderDto orderDto)
@@ -85,6 +86,7 @@ namespace Service.ViewModel.ViewModels
             var OrderToEdit = GetOrderByIndex(OrdersViewModelSelectedIndex);
             _ordersCollection[EditOrderIndex].IsFinished = !_ordersCollection[EditOrderIndex].IsFinished;
             _mediator.Send(new EditOrderStatusCommand(OrderToEdit.OrderName));
+            SlelectFiltr(FiltrStatus);
         }
 
         private void OnOrderEdited(OrderDto orderDto)
@@ -108,6 +110,37 @@ namespace Service.ViewModel.ViewModels
             {
                 AddOrder(o);
             }
+        }
+
+        private void LoadEndOrders()
+        {
+            var getAllOrders = _mediator.Send(new GetAllOrdersQuery()).Result.Where(o => o.IsFinished == true);
+
+            foreach (var o in getAllOrders)
+            {
+                AddOrder(o);
+            }
+        }
+
+        private void LoadOpenOrders()
+        {
+            var getAllOrders = _mediator.Send(new GetAllOrdersQuery()).Result.Where(o => o.IsFinished == false);
+
+            foreach (var o in getAllOrders)
+            {
+                AddOrder(o);
+            }
+        }
+
+        private void SlelectFiltr(int filtr)
+        {
+            _ordersCollection.Clear();
+            if (filtr == 0)
+                LoadOpenOrders();
+            if (filtr == 1)
+                LoadEndOrders();
+            if (filtr == 2)
+                LoadAllOrders();
         }
 
         public override void Dispose()
