@@ -21,22 +21,6 @@ namespace Service.ViewModel.ViewModels
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
 
-        private int _filtrStatus;
-
-        public int FiltrStatus
-        {
-            get
-            {
-                return _filtrStatus;
-            }
-            set
-            {
-                _filtrStatus = value;
-                OnPropertyChanged(nameof(FiltrStatus));
-                SlelectFiltr(FiltrStatus);
-            }
-        }
-
         public int EditOrderIndex { get; set; }
 
         public ICommand EditStatusButton { get; }
@@ -86,7 +70,7 @@ namespace Service.ViewModel.ViewModels
             var OrderToEdit = GetOrderByIndex(OrdersViewModelSelectedIndex);
             _ordersCollection[EditOrderIndex].IsFinished = !_ordersCollection[EditOrderIndex].IsFinished;
             _mediator.Send(new EditOrderStatusCommand(OrderToEdit.OrderName));
-            SlelectFiltr(FiltrStatus);
+            //   SlelectFiltr(FiltrStatus);
         }
 
         private void OnOrderEdited(OrderDto orderDto)
@@ -132,7 +116,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        private void SlelectFiltr(int filtr)
+        public void SlelectFiltr(int filtr)
         {
             _ordersCollection.Clear();
             if (filtr == 0)

@@ -96,11 +96,23 @@ namespace Service.Model.Repositories
             {
                 var orderToUpdate = await GetOrderByOrderName(orderName);
 
-
                 orderToUpdate.IsFinished = !orderToUpdate.IsFinished;
 
                 dbContext.Orders.Update(orderToUpdate);
                 await dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Order>> GetOrdersByDate(DateTime startDate, DateTime endDate)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                IEnumerable<Order> orders = await dbContext.Orders
+                    .Include(o => o.Contact)
+                    .Include(t => t.ToDo)
+                    .Where(o => o.StartDate <= startDate && o.StartDate >= endDate).ToListAsync();
+
+                return orders;
             }
         }
     }

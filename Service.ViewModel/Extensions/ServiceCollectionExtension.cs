@@ -20,6 +20,7 @@ namespace Service.ViewModel.Extensions
             services.AddMediatR(typeof(CreateDeviceCommand));
             services.AddSingleton<PanelControlViewModel>();
             services.AddSingleton<OrdersListingViewModel>();
+            services.AddSingleton<OrderStatusTabControlViewModel>();
             services.AddSingleton<CreatingOrderViewModel>();
             services.AddSingleton<ToDoListViewModel>();
             services.AddScoped<MainWindowViewModel>();

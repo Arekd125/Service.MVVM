@@ -34,7 +34,7 @@
                 <views:PanelControlView  DataContext="{Binding panelControlViewModel}" />
 
                 <!--  TABCONTROL  -->
-                <views:OrderStatsTabControlView DataContext="{Binding ordersListingViewModel}" />
+                <views:OrderStatusTabControlView DataContext="{Binding orderStatusTabControlViewModel}" />
             </StackPanel>
 
             <Grid Grid.Column="1">

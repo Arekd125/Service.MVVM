@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Service.View.Views
 {
     /// <summary>
-    /// Interaction logic for OrderStatsTabControlView.xaml
+    /// Interaction logic for OrderStatusTabControlView.xaml
     /// </summary>
-    public partial class OrderStatsTabControlView : UserControl
+    public partial class OrderStatusTabControlView : UserControl
     {
-        public OrderStatsTabControlView()
+        public OrderStatusTabControlView()
         {
             InitializeComponent();
         }

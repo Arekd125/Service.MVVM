@@ -15,7 +15,11 @@ namespace Service.Model.Repositories
         public Task Delete(Order order);
 
         public Task<bool> AnyOrderWithContactId(int contactId);
-        public Task UpDate (Order order);
-        public Task UpDateStatus (string orderName);
+
+        public Task UpDate(Order order);
+
+        public Task UpDateStatus(string orderName);
+
+        public Task<IEnumerable<Order>> GetOrdersByDate(DateTime startDate, DateTime endDate);
     }
 }
