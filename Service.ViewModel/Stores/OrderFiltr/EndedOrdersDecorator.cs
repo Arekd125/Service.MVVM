@@ -15,7 +15,7 @@ namespace Service.ViewModel.Stores.OrderFiltr
 
         public override IEnumerable<OrderDto> GetOrderDtos()
         {
-            return base.GetOrderDtos().Where(o => o.IsFinished == false);
+            return base.GetOrderDtos().Where(o => o.IsFinished == true);
         }
     }
 }

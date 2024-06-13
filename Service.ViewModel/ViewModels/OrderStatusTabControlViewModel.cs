@@ -1,4 +1,8 @@
-﻿using System;
+﻿using MediatR;
+using Service.ViewModel.Dtos;
+using Service.ViewModel.Stores;
+using Service.ViewModel.Stores.OrderFiltr;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +12,8 @@ namespace Service.ViewModel.ViewModels
 {
     public class OrderStatusTabControlViewModel : ViewModelBase
     {
+        private readonly OrdersFilter _ordersFilter;
+
         private int _filtrStatus;
 
         public int FiltrStatus
@@ -20,15 +26,16 @@ namespace Service.ViewModel.ViewModels
             {
                 _filtrStatus = value;
                 OnPropertyChanged(nameof(FiltrStatus));
-                ordersListingViewModel.SlelectFiltr(FiltrStatus);
+                _ordersFilter.SelectFiltr(FiltrStatus);
             }
         }
 
         public OrdersListingViewModel ordersListingViewModel { get; }
 
-        public OrderStatusTabControlViewModel(OrdersListingViewModel ordersListingViewModel)
+        public OrderStatusTabControlViewModel(OrdersListingViewModel ordersListingViewModel, OrdersFilter ordersFilter, IMediator mediator)
         {
             this.ordersListingViewModel = ordersListingViewModel;
+            _ordersFilter = ordersFilter;
         }
     }
 }

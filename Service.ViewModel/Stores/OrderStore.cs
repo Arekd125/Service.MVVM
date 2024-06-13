@@ -15,6 +15,8 @@ namespace Service.ViewModel.Stores
 
         public event Action<OrderDto> OrderEdited;
 
+        public event Action FiltringChanged;
+
         public void AddLastOrder(OrderDto orderDto)
         {
             OrderCreated?.Invoke(orderDto);
@@ -28,6 +30,11 @@ namespace Service.ViewModel.Stores
         public void OrderChanged(OrderDto orderDto)
         {
             OrderEdited?.Invoke(orderDto);
+        }
+
+        public void RefreshOrders()
+        {
+            FiltringChanged?.Invoke();
         }
     }
 }

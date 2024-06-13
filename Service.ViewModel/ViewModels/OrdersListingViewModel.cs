@@ -9,6 +9,7 @@ using Service.ViewModel.Service.Commands.DeleteOrder;
 using Service.ViewModel.Service.Commands.EditOrderStatus;
 using Service.ViewModel.Service.Queries.GetAllOrders;
 using Service.ViewModel.Stores;
+using Service.ViewModel.Stores.OrderFiltr;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -19,6 +20,7 @@ namespace Service.ViewModel.ViewModels
         public IDialogCoordinator _dialogCoordinator;
         private ObservableCollection<OrderDto> _ordersCollection;
         private readonly OrderStore _orderStore;
+        private readonly OrdersFilter _ordersFilter;
         private readonly IMediator _mediator;
 
         public int EditOrderIndex { get; set; }
@@ -44,33 +46,24 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper)
+        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper, OrdersFilter ordersFilter)
         {
             _ordersCollection = new ObservableCollection<OrderDto>();
             _orderStore = orderStore;
             _mediator = mediator;
             _dialogCoordinator = dialogCoordinator;
+            _ordersFilter = ordersFilter;
 
             _orderStore.OrderCreated += OnOrderCreated;
             _orderStore.OrderEdited += OnOrderEdited;
+            _orderStore.FiltringChanged += OnFiltringChanged;
 
             EditStatusButton = new EditStatusButtonCommand(this);
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
-            LoadOpenOrders();
-        }
 
-        private void OnOrderCreated(OrderDto orderDto)
-        {
-            AddOrder(orderDto);
-        }
-
-        public void EditStatusOrder()
-        {
-            var OrderToEdit = GetOrderByIndex(OrdersViewModelSelectedIndex);
-            _ordersCollection[EditOrderIndex].IsFinished = !_ordersCollection[EditOrderIndex].IsFinished;
-            _mediator.Send(new EditOrderStatusCommand(OrderToEdit.OrderName));
-            //   SlelectFiltr(FiltrStatus);
+            var OrderToLoad = _ordersFilter.SendtOrderDtos();
+            LoadOrders(OrderToLoad);
         }
 
         private void OnOrderEdited(OrderDto orderDto)
@@ -81,56 +74,46 @@ namespace Service.ViewModel.ViewModels
             _ordersCollection.Insert(EditOrderIndex, orderDto);
         }
 
+        private void OnOrderCreated(OrderDto orderDto)
+        {
+            AddOrder(orderDto);
+        }
+
+        private void OnFiltringChanged()
+        {
+            var OrderToLoad = _ordersFilter.SendtOrderDtos();
+            LoadOrders(OrderToLoad);
+        }
+
+        public void EditStatusOrder()
+        {
+            var OrderToEdit = GetOrderByIndex(OrdersViewModelSelectedIndex);
+            _ordersCollection[EditOrderIndex].IsFinished = !_ordersCollection[EditOrderIndex].IsFinished;
+            _mediator.Send(new EditOrderStatusCommand(OrderToEdit.OrderName));
+            var OrderToLoad = _ordersFilter.SendtOrderDtos();
+            LoadOrders(OrderToLoad);
+        }
+
         private void AddOrder(OrderDto orderDto)
         {
             _ordersCollection.Insert(0, orderDto);
         }
 
-        private void LoadAllOrders()
-        {
-            var getAllOrders = _mediator.Send(new GetAllOrdersQuery()).Result;
-
-            foreach (var o in getAllOrders)
-            {
-                AddOrder(o);
-            }
-        }
-
-        private void LoadEndOrders()
-        {
-            var getAllOrders = _mediator.Send(new GetAllOrdersQuery()).Result.Where(o => o.IsFinished == true);
-
-            foreach (var o in getAllOrders)
-            {
-                AddOrder(o);
-            }
-        }
-
-        private void LoadOpenOrders()
-        {
-            var getAllOrders = _mediator.Send(new GetAllOrdersQuery()).Result.Where(o => o.IsFinished == false);
-
-            foreach (var o in getAllOrders)
-            {
-                AddOrder(o);
-            }
-        }
-
-        public void SlelectFiltr(int filtr)
+        public void LoadOrders(IEnumerable<OrderDto> orderDtos)
         {
             _ordersCollection.Clear();
-            if (filtr == 0)
-                LoadOpenOrders();
-            if (filtr == 1)
-                LoadEndOrders();
-            if (filtr == 2)
-                LoadAllOrders();
+
+            foreach (var o in orderDtos)
+            {
+                AddOrder(o);
+            }
         }
 
         public override void Dispose()
         {
             _orderStore.OrderCreated -= OnOrderCreated;
             _orderStore.OrderEdited -= OnOrderEdited;
+            _orderStore.FiltringChanged -= OnFiltringChanged;
             base.Dispose();
         }
 

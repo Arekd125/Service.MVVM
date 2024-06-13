@@ -22,7 +22,7 @@ namespace Service.ViewModel.Stores.OrderFiltr
 
         public IEnumerable<OrderDto> GetOrderDtos()
         {
-            return _mediator.Send(new GetOrderByDateQuery(DateTime.Now,DateTime.Now)).Result;
+            return _mediator.Send(new GetOrderByDateQuery(DateTime.Now, DateTime.Now.AddDays(-1))).Result;
         }
     }
 }

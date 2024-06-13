@@ -6,6 +6,7 @@ using Service.ViewModel.Mapping;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateDevice;
 using Service.ViewModel.Stores;
+using Service.ViewModel.Stores.OrderFiltr;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
@@ -32,6 +33,7 @@ namespace Service.ViewModel.Extensions
             services.AddScoped<FlyoutVewModel>();
             services.AddSingleton<OrderStore>();
             services.AddSingleton<ToDoStore>();
+            services.AddSingleton<OrdersFilter>();
         }
     }
 }
