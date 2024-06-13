@@ -71,12 +71,13 @@ namespace Service.ViewModel.ViewModels
             var isFinished = _ordersCollection[EditOrderIndex].IsFinished;
             _ordersCollection.RemoveAt(EditOrderIndex);
             orderDto.IsFinished = isFinished;
-            _ordersCollection.Insert(EditOrderIndex, orderDto);
+            _ordersCollection.Insert(EditOrderIndex, orderDto);       
         }
 
         private void OnOrderCreated(OrderDto orderDto)
         {
             AddOrder(orderDto);
+            OnFiltringChanged();
         }
 
         private void OnFiltringChanged()
