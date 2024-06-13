@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Service.ViewModel.Dtos;
+using Service.ViewModel.Stores.Converstes;
 using Service.ViewModel.Stores.OrderFiltr;
+using Service.ViewModel.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace Service.ViewModel.Stores
     {
         private readonly IMediator _mediator;
         private readonly OrderStore _orderStore;
-
+        public int SelectedFiltrBuffor {  get; set; }
         public IFilter StatusFilter { get; set; }
         public IFilter DateFiler { get; set; }
 
@@ -21,7 +23,7 @@ namespace Service.ViewModel.Stores
         {
             _mediator = mediator;
             _orderStore = orderStore;
-            DateFiler = new TodayOrdersFiltr(_mediator);
+            DateFiler = new TodayOrdersFiilter(_mediator);
             StatusFilter = new OpenOrdersDecorator(DateFiler);
         }
 
@@ -29,7 +31,32 @@ namespace Service.ViewModel.Stores
         {
             return StatusFilter.GetOrderDtos();
         }
-
+        public void SelectDateFilter (DateFilerEnum dateFilerEnum)    
+        {
+            switch (dateFilerEnum)
+            {
+                case DateFilerEnum.today:
+                    DateFiler = new TodayOrdersFiilter(_mediator);
+                    SelectFiltr(SelectedFiltrBuffor);
+                    break;
+                case DateFilerEnum.yesterday:
+                    DateFiler = new YesterdayOrdersFilter(_mediator);
+                    SelectFiltr(SelectedFiltrBuffor);
+                    break;
+                case DateFilerEnum.week:
+                    break;
+                case DateFilerEnum.month:
+                    break;
+                case DateFilerEnum.last_30Days:
+                    break;
+                case DateFilerEnum.from_the_beginning:
+                    DateFiler = new FromTheBeginingOrdersFilter(_mediator);
+                    SelectFiltr(SelectedFiltrBuffor);
+                    break;
+                default:
+                    break;
+            }
+        }
         public void SelectFiltr(int filtr)
         {
             if (filtr == 0)
@@ -47,6 +74,9 @@ namespace Service.ViewModel.Stores
                 StatusFilter = new AllOrdersDecorator(DateFiler);
                 _orderStore.RefreshOrders();
             }
+            SelectedFiltrBuffor = filtr;
         }
+
+        
     }
 }
