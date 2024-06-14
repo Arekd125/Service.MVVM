@@ -18,9 +18,7 @@ namespace Service.ViewModel.Stores.OrderFiltr.SearchFilter
 
         public override IEnumerable<OrderDto> GetOrderDtos()
         {
-            if (string.IsNullOrEmpty(_searchText))
-                return base.GetOrderDtos();
-
+            
             return base.GetOrderDtos().Where(o => !string.IsNullOrEmpty(o.ContactName) 
             && o.ContactName.Contains(_searchText)
             || o.ContactPhoneNumber.Contains(_searchText)

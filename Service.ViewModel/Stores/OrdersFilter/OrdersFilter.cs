@@ -91,7 +91,15 @@ namespace Service.ViewModel.Stores.OrdersFilter
 
         public void Search(string text)
         {
-            SeachFilter = new SearchOrderDecorator(StatusFilter, text);
+            if (!string.IsNullOrEmpty(text))
+            {
+                SeachFilter = new SearchOrderDecorator(StatusFilter, text);
+            }
+            else
+            {
+                SeachFilter = StatusFilter;
+            }
+           
             _orderStore.RefreshOrders();
             SerchTextBuffor = text;
         }
