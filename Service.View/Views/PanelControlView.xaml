@@ -21,10 +21,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBox
+                Text="{Binding SearchTextBox, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Column="0"
                 Width="200"
                 Margin="3"
                 mah:TextBoxHelper.Watermark="Szukaj" />
+
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Label Margin="3" Content="Szukaj w całej bazie"></Label>
 

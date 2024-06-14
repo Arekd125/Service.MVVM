@@ -32,6 +32,22 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
+        private string _searachTextBox;
+
+        public string SearchTextBox
+        {
+            get
+            {
+                return _searachTextBox;
+            }
+            set
+            {
+                _searachTextBox = value;
+                OnPropertyChanged(nameof(SearchTextBox));
+                _ordersFilter.Search(_searachTextBox);
+            }
+        }
+
         public PanelControlViewModel(OrdersFilter ordersFilter, OrderStore orderStore)
         {
             _ordersFilter = ordersFilter;

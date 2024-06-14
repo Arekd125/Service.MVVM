@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Service.ViewModel.Stores
 {
@@ -16,9 +17,11 @@ namespace Service.ViewModel.Stores
         private readonly IMediator _mediator;
         private readonly OrderStore _orderStore;
 
-        public int SelectedFiltrBuffor { get; set; }
+        public int SelectedFiltrBuffor { get; set; } = 0;
+        private string? SerchTextBuffor { get; set; }
         public IFilter StatusFilter { get; set; }
         public IFilter DateFiler { get; set; }
+        public IFilter SeachFilter { get; set; }
 
         public OrdersFilter(IMediator mediator, OrderStore orderStore)
         {
@@ -27,7 +30,7 @@ namespace Service.ViewModel.Stores
             SelectDateFilter(DateFilerEnum.month);
         }
 
-        public IEnumerable<OrderDto> SendOrderDtos() => StatusFilter.GetOrderDtos();
+        public IEnumerable<OrderDto> SendOrderDtos() => SeachFilter.GetOrderDtos();
 
         public void SelectDateFilter(DateFilerEnum dateFilerEnum)
         {
@@ -68,19 +71,26 @@ namespace Service.ViewModel.Stores
             if (filtr == 0)
             {
                 StatusFilter = new OpenOrdersDecorator(DateFiler);
-                _orderStore.RefreshOrders();
+                Search(SerchTextBuffor);
             }
             if (filtr == 1)
             {
                 StatusFilter = new EndedOrdersDecorator(DateFiler);
-                _orderStore.RefreshOrders();
+                Search(SerchTextBuffor);
             }
             if (filtr == 2)
             {
                 StatusFilter = new AllOrdersDecorator(DateFiler);
-                _orderStore.RefreshOrders();
+                Search(SerchTextBuffor);
             }
             SelectedFiltrBuffor = filtr;
+        }
+
+        public void Search(string text)
+        {
+            SeachFilter = new SearchOrdersDecorator(StatusFilter, text);
+            _orderStore.RefreshOrders();
+            SerchTextBuffor = text;
         }
     }
 }
