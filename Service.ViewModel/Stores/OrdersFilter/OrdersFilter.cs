@@ -91,7 +91,7 @@ namespace Service.ViewModel.Stores.OrdersFilter
 
         public void Search(string text)
         {
-            SeachFilter = new SearchContactNameDecorator(StatusFilter, text);
+            SeachFilter = new SearchOrderDecorator(StatusFilter, text);
             _orderStore.RefreshOrders();
             SerchTextBuffor = text;
         }

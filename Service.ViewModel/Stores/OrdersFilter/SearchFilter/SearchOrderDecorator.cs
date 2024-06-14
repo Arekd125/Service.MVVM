@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.Stores.OrderFiltr.SearchFilter
 {
-    public class SearchContactNameDecorator : FiltrDecorator
+    public class SearchOrderDecorator : FiltrDecorator
     {
         private string _searchText { get; }
 
-        public SearchContactNameDecorator(IFilter filter, string searchText) : base(filter)
+        public SearchOrderDecorator(IFilter filter, string searchText) : base(filter)
         {
             _searchText = searchText;
         }
@@ -21,7 +21,12 @@ namespace Service.ViewModel.Stores.OrderFiltr.SearchFilter
             if (string.IsNullOrEmpty(_searchText))
                 return base.GetOrderDtos();
 
-            return base.GetOrderDtos().Where(order => !string.IsNullOrEmpty(order.ContactName) && order.ContactName.ToLower().Contains(_searchText.ToLower())).ToList();
+            return base.GetOrderDtos().Where(o => !string.IsNullOrEmpty(o.ContactName) 
+            && o.ContactName.Contains(_searchText)
+            || o.ContactPhoneNumber.Contains(_searchText)
+            || o.Device.Contains(_searchText)
+            || o.Model.Contains(_searchText)
+            || o.OrderName.Contains(_searchText)).ToList();
         }
     }
 }
