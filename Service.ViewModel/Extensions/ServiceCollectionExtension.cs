@@ -7,6 +7,7 @@ using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateDevice;
 using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.OrderFiltr;
+using Service.ViewModel.Stores.OrdersFilter;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 

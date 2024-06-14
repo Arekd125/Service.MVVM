@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.ViewModel.Stores.OrderFiltr
+namespace Service.ViewModel.Stores.OrderFiltr.StatusFilter
 {
-    public class EndedOrdersDecorator : FiltrDecorator
+    public class OpenOrdersDecorator : FiltrDecorator
     {
-        public EndedOrdersDecorator(IFilter filter) : base(filter)
+        public OpenOrdersDecorator(IFilter filter) : base(filter)
         {
         }
 
         public override IEnumerable<OrderDto> GetOrderDtos()
         {
-            return base.GetOrderDtos().Where(o => o.IsFinished == true);
+            return base.GetOrderDtos().Where(o => o.IsFinished == false);
         }
     }
 }

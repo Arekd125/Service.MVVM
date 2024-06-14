@@ -10,6 +10,7 @@ using Service.ViewModel.Service.Commands.EditOrderStatus;
 using Service.ViewModel.Service.Queries.GetAllOrders;
 using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.OrderFiltr;
+using Service.ViewModel.Stores.OrdersFilter;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -71,12 +72,13 @@ namespace Service.ViewModel.ViewModels
             var isFinished = _ordersCollection[EditOrderIndex].IsFinished;
             _ordersCollection.RemoveAt(EditOrderIndex);
             orderDto.IsFinished = isFinished;
-            _ordersCollection.Insert(EditOrderIndex, orderDto);
+            _ordersCollection.Insert(EditOrderIndex, orderDto);       
         }
 
         private void OnOrderCreated(OrderDto orderDto)
         {
             AddOrder(orderDto);
+            OnFiltringChanged();
         }
 
         private void OnFiltringChanged()

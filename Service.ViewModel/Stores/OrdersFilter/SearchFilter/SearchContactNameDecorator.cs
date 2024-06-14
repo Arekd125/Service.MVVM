@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.ViewModel.Stores.OrderFiltr
+namespace Service.ViewModel.Stores.OrderFiltr.SearchFilter
 {
-    public class SearchOrdersDecorator : FiltrDecorator
+    public class SearchContactNameDecorator : FiltrDecorator
     {
         private string _searchText { get; }
 
-        public SearchOrdersDecorator(IFilter filter, string searchText) : base(filter)
+        public SearchContactNameDecorator(IFilter filter, string searchText) : base(filter)
         {
             _searchText = searchText;
         }

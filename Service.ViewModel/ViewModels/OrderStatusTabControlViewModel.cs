@@ -2,6 +2,7 @@
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.OrderFiltr;
+using Service.ViewModel.Stores.OrdersFilter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
