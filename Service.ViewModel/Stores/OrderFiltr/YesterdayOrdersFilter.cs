@@ -8,20 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Service.ViewModel.Stores.OrderFiltr
-{  
-        public class YesterdayOrdersFilter : IFilter
+{
+    public class YesterdayOrdersFilter : IFilter
+    {
+        private readonly IMediator _mediator;
+
+        public YesterdayOrdersFilter(IMediator mediator)
         {
-            private readonly IMediator _mediator;
-
-            public YesterdayOrdersFilter(IMediator mediator)
-            {
-                _mediator = mediator;
-            }
-
-            public IEnumerable<OrderDto> GetOrderDtos()
-            {
-                return _mediator.Send(new GetOrderByDateQuery(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-2))).Result;
-            }
+            _mediator = mediator;
         }
-   
+
+        public IEnumerable<OrderDto> GetOrderDtos()
+        {
+            return _mediator.Send(new GetOrderByDateQuery(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1))).Result;
+        }
+    }
 }

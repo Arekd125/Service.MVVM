@@ -62,7 +62,7 @@ namespace Service.ViewModel.ViewModels
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
 
-            var OrderToLoad = _ordersFilter.SendtOrderDtos();
+            var OrderToLoad = _ordersFilter.SendOrderDtos();
             LoadOrders(OrderToLoad);
         }
 
@@ -71,18 +71,17 @@ namespace Service.ViewModel.ViewModels
             var isFinished = _ordersCollection[EditOrderIndex].IsFinished;
             _ordersCollection.RemoveAt(EditOrderIndex);
             orderDto.IsFinished = isFinished;
-            _ordersCollection.Insert(EditOrderIndex, orderDto);       
+            _ordersCollection.Insert(EditOrderIndex, orderDto);
         }
 
         private void OnOrderCreated(OrderDto orderDto)
         {
             AddOrder(orderDto);
-            OnFiltringChanged();
         }
 
         private void OnFiltringChanged()
         {
-            var OrderToLoad = _ordersFilter.SendtOrderDtos();
+            var OrderToLoad = _ordersFilter.SendOrderDtos();
             LoadOrders(OrderToLoad);
         }
 
@@ -91,7 +90,7 @@ namespace Service.ViewModel.ViewModels
             var OrderToEdit = GetOrderByIndex(OrdersViewModelSelectedIndex);
             _ordersCollection[EditOrderIndex].IsFinished = !_ordersCollection[EditOrderIndex].IsFinished;
             _mediator.Send(new EditOrderStatusCommand(OrderToEdit.OrderName));
-            var OrderToLoad = _ordersFilter.SendtOrderDtos();
+            var OrderToLoad = _ordersFilter.SendOrderDtos();
             LoadOrders(OrderToLoad);
         }
 

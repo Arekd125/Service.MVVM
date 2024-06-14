@@ -11,15 +11,12 @@ using System.Threading.Tasks;
 
 namespace Service.ViewModel.ViewModels
 {
-   
-
     public class PanelControlViewModel : ViewModelBase
     {
-        private readonly OrdersFilter _ordersFilter;  
+        private readonly OrdersFilter _ordersFilter;
         public IEnumerable<DateFilerEnum> DateFilerItemSource => Enum.GetValues<DateFilerEnum>();
 
-
-        private DateFilerEnum _dateFilerSelectedIndex ;
+        private DateFilerEnum _dateFilerSelectedIndex = DateFilerEnum.month;
 
         public int DateFilerSelectedIndex
         {
@@ -34,12 +31,10 @@ namespace Service.ViewModel.ViewModels
                 _ordersFilter.SelectDateFilter(_dateFilerSelectedIndex);
             }
         }
+
         public PanelControlViewModel(OrdersFilter ordersFilter)
         {
             _ordersFilter = ordersFilter;
         }
-
-        
-
     }
 }

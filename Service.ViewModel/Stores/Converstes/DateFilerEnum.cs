@@ -12,17 +12,17 @@ namespace Service.ViewModel.Stores.Converstes
     {
         [Description("Dzisja")]
         today,
+
         [Description("Wczoraj")]
         yesterday,
-        [Description("Tyedzień")]
+
+        [Description("Tydzień")]
         week,
+
         [Description("Miesiąc")]
         month,
-        [Description("Ostatnie 30 dni")]
-        last_30Days,
+
         [Description("Od początku")]
         from_the_beginning,
-
     };
-
 }

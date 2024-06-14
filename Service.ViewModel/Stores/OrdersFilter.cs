@@ -15,7 +15,8 @@ namespace Service.ViewModel.Stores
     {
         private readonly IMediator _mediator;
         private readonly OrderStore _orderStore;
-        public int SelectedFiltrBuffor {  get; set; }
+
+        public int SelectedFiltrBuffor { get; set; }
         public IFilter StatusFilter { get; set; }
         public IFilter DateFiler { get; set; }
 
@@ -23,15 +24,12 @@ namespace Service.ViewModel.Stores
         {
             _mediator = mediator;
             _orderStore = orderStore;
-            DateFiler = new TodayOrdersFiilter(_mediator);
-            StatusFilter = new OpenOrdersDecorator(DateFiler);
+            SelectDateFilter(DateFilerEnum.month);
         }
 
-        public IEnumerable<OrderDto> SendtOrderDtos()
-        {
-            return StatusFilter.GetOrderDtos();
-        }
-        public void SelectDateFilter (DateFilerEnum dateFilerEnum)    
+        public IEnumerable<OrderDto> SendOrderDtos() => StatusFilter.GetOrderDtos();
+
+        public void SelectDateFilter(DateFilerEnum dateFilerEnum)
         {
             switch (dateFilerEnum)
             {
@@ -39,24 +37,32 @@ namespace Service.ViewModel.Stores
                     DateFiler = new TodayOrdersFiilter(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
+
                 case DateFilerEnum.yesterday:
                     DateFiler = new YesterdayOrdersFilter(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
+
                 case DateFilerEnum.week:
+                    DateFiler = new LastWeekOrdersFilter(_mediator);
+                    SelectFiltr(SelectedFiltrBuffor);
                     break;
+
                 case DateFilerEnum.month:
+                    DateFiler = new LastMonth(_mediator);
+                    SelectFiltr(SelectedFiltrBuffor);
                     break;
-                case DateFilerEnum.last_30Days:
-                    break;
+
                 case DateFilerEnum.from_the_beginning:
                     DateFiler = new FromTheBeginingOrdersFilter(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
+
                 default:
                     break;
             }
         }
+
         public void SelectFiltr(int filtr)
         {
             if (filtr == 0)
@@ -76,7 +82,5 @@ namespace Service.ViewModel.Stores
             }
             SelectedFiltrBuffor = filtr;
         }
-
-        
     }
 }

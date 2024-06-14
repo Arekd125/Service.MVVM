@@ -110,7 +110,7 @@ namespace Service.Model.Repositories
                 IEnumerable<Order> orders = await dbContext.Orders
                     .Include(o => o.Contact)
                     .Include(t => t.ToDo)
-                    .Where(o => o.StartDate <= startDate && o.StartDate >= endDate).ToListAsync();
+                    .Where(o => o.StartDate.Date <= startDate.Date && o.StartDate.Date >= endDate.Date).ToListAsync();
 
                 return orders;
             }
