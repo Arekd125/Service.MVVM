@@ -1,19 +1,19 @@
-﻿using Service.ViewModel.Stores;
+﻿using Service.ViewModel.Commands.PanelControlCommand;
+using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.Converstes;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Service.ViewModel.ViewModels
 {
     public class PanelControlViewModel : ViewModelBase
     {
         private readonly OrdersFilter _ordersFilter;
+
+        public int BufforDateFilerSelectedIndex { get; set; }
+
+        public ICommand OnToggleButton { get; }
+        public ICommand OffToggleButton { get; }
+
         public IEnumerable<DateFilerEnum> DateFilerItemSource => Enum.GetValues<DateFilerEnum>();
 
         private DateFilerEnum _dateFilerSelectedIndex = DateFilerEnum.month;
@@ -32,9 +32,11 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        public PanelControlViewModel(OrdersFilter ordersFilter)
+        public PanelControlViewModel(OrdersFilter ordersFilter, OrderStore orderStore)
         {
             _ordersFilter = ordersFilter;
+            OnToggleButton = new ToggleSwitchOnCommand(this, orderStore);
+            OffToggleButton = new ToggleSwitchOffCommand(this);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Service.ViewModel.ViewModels
     public class OrderStatusTabControlViewModel : ViewModelBase
     {
         private readonly OrdersFilter _ordersFilter;
+        private readonly OrderStore _orderStore;
 
         private int _filtrStatus;
 
@@ -32,10 +33,17 @@ namespace Service.ViewModel.ViewModels
 
         public OrdersListingViewModel ordersListingViewModel { get; }
 
-        public OrderStatusTabControlViewModel(OrdersListingViewModel ordersListingViewModel, OrdersFilter ordersFilter, IMediator mediator)
+        public OrderStatusTabControlViewModel(OrdersListingViewModel ordersListingViewModel, OrdersFilter ordersFilter, IMediator mediator, OrderStore orderStore)
         {
             this.ordersListingViewModel = ordersListingViewModel;
             _ordersFilter = ordersFilter;
+            _orderStore = orderStore;
+            orderStore.ChangeFiltrOrders += OnChangeFiltrOrders;
+        }
+
+        private void OnChangeFiltrOrders()
+        {
+            FiltrStatus = 2;
         }
     }
 }

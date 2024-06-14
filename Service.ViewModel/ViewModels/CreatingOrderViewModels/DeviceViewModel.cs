@@ -1,21 +1,13 @@
 ﻿using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using MediatR;
-using Service.ViewModel.Commands;
 using Service.ViewModel.Commands.CreatingOrderCommand;
 using Service.ViewModel.Dtos;
-using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateDevice;
 using Service.ViewModel.Service.Commands.CreateModelDevice;
 using Service.ViewModel.Service.Commands.DeleteModelDevice;
 using Service.ViewModel.Service.Queries.GetAllDeviceName;
 using Service.ViewModel.Service.Queries.GettAllModelName;
-using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 

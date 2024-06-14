@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,8 @@ namespace Service.ViewModel.Stores
         public event Action<OrderDto> OrderEdited;
 
         public event Action FiltringChanged;
+
+        public event Action ChangeFiltrOrders;
 
         public void AddLastOrder(OrderDto orderDto)
         {
@@ -35,6 +38,11 @@ namespace Service.ViewModel.Stores
         public void RefreshOrders()
         {
             FiltringChanged?.Invoke();
+        }
+
+        public void SetFiltrAllOrders()
+        {
+            ChangeFiltrOrders?.Invoke();
         }
     }
 }
