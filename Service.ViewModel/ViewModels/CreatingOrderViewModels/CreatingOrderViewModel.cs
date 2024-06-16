@@ -29,6 +29,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        public IShowDialog showDialog;
 
         private Visibility _saveButtonVisibility = Visibility.Visible;
 
@@ -80,7 +81,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             OrderStore orderStore,
             IMediator mediator,
             IMapper mapper
-            )
+,
+            IShowDialog showDialog)
         {
             _orderStore = orderStore;
             _mediator = mediator;
@@ -94,9 +96,14 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             EditButton = new SaveEditedOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleButtonCommand(this);
 
+            CreateOrderAndPrintButton = new CreateAndPrintOrderButtonCommand(this);
+
             _orderStore.OrderSentToEdit += OnOrderEdited;
             _mapper = mapper;
+            this.showDialog = showDialog;
         }
+
+
 
         private int OrderId { get; set; }
 

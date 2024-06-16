@@ -35,6 +35,7 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<OrderStore>();
             services.AddSingleton<ToDoStore>();
             services.AddSingleton<OrdersFilter>();
+           // services.AddScoped<>
         }
     }
 }

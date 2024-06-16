@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
 using Service.Model.Extensions;
+using Service.View.Serv;
 using Service.ViewModel.Extensions;
+using Service.ViewModel.Stores;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using System.Windows;
@@ -27,7 +29,7 @@ namespace Service.View
                     services.AddModel();
                     services.AddViewModel();
                     services.AddScoped<IDialogCoordinator>(s => DialogCoordinator.Instance);
-
+                    services.AddScoped<IShowDialog, CreateAndPrintDialog>();
                     services.AddSingleton(s => new MainWindow()
                     {
                         DataContext = s.GetRequiredService<MainWindowViewModel>()
