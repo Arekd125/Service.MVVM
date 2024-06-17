@@ -85,6 +85,14 @@
                             <Button
                                 Margin="2,0,2,0"
                                 mah:ControlsHelper.ContentCharacterCasing="Upper"
+                                Background="Green"
+                                Command="{Binding DataContext.PrintOrderButton, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                                <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE749;" />
+                            </Button>
+                            <Button
+                                Margin="2,0,2,0"
+                                mah:ControlsHelper.ContentCharacterCasing="Upper"
                                 Command="{Binding DataContext.EditOrderButton, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
                                 <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE70F;" />

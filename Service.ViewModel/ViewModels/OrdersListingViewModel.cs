@@ -2,11 +2,14 @@
 using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using MediatR;
+using Service.ViewModel.Commands.CreatingOrderCommand;
 using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
+using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.DeleteOrder;
 using Service.ViewModel.Service.Commands.EditOrderStatus;
 using Service.ViewModel.Stores;
+using Service.ViewModel.ViewModels.PrintOrderViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -23,8 +26,9 @@ namespace Service.ViewModel.ViewModels
         public int EditOrderIndex { get; set; }
 
         public ICommand EditStatusButton { get; }
-        public ICommand DeleteOrderButton { get; }
+        public ICommand PrintOrderButton { get; }
         public ICommand EditOrderButton { get; }
+        public ICommand DeleteOrderButton { get; }
 
         public ObservableCollection<OrderDto> OrdersViewModelCollection => _ordersCollection;
 
@@ -43,7 +47,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper, OrdersFilter ordersFilter)
+        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper, OrdersFilter ordersFilter, IDialogService dialogService, PrintOrderViewModel printOrderViewModel)
         {
             _ordersCollection = new ObservableCollection<OrderDto>();
             _orderStore = orderStore;
@@ -56,6 +60,7 @@ namespace Service.ViewModel.ViewModels
             _orderStore.FiltringChanged += OnFiltringChanged;
 
             EditStatusButton = new EditStatusButtonCommand(this);
+            PrintOrderButton = new PrintButtonCommand(dialogService, printOrderViewModel);
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
 
