@@ -66,7 +66,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         public DeviceViewModel DeviceViewModel { get; }
         public DescriptionViewModel DescriptionViewModel { get; }
 
-        public ICommand CreateOrderAndPrintButton { get; }
+        public ICommand PrintButton { get; }
         public ICommand SaveButton { get; }
         public ICommand EditButton { get; }
         public ICommand CancleButton { get; }
@@ -79,7 +79,8 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DescriptionViewModel descriptionViewModel,
             OrderStore orderStore,
             IMediator mediator,
-            IMapper mapper
+            IMapper mapper,
+            IDialogService dialogService
             )
         {
             _orderStore = orderStore;
@@ -93,6 +94,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             EditButton = new SaveEditedOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleButtonCommand(this);
+            PrintButton = new PrintButtonCommand(dialogService);
 
             _orderStore.OrderSentToEdit += OnOrderEdited;
             _mapper = mapper;

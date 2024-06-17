@@ -29,7 +29,7 @@
             Height="60"
             Margin="0,3,10,0"
             mah:ControlsHelper.ContentCharacterCasing="Upper"
-            Command="{Binding CreateOrderAndPrintButton}"
+            Command="{Binding PrintButton}"
             Content="Zapisz i drukuj"
             Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
 
