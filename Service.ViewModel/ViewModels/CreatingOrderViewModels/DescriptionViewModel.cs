@@ -1,16 +1,8 @@
 ﻿using MediatR;
-using Service.Model.Entity;
 using Service.ViewModel.Dtos;
-using Service.ViewModel.Service;
 using Service.ViewModel.Service.Queries.GetAllToDo;
 using Service.ViewModel.Stores;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {

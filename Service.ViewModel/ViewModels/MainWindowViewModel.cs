@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls.Dialogs;
-using Service.ViewModel.ViewModels.CreatingOrderViewModels;
+﻿using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
 namespace Service.ViewModel.ViewModels;
 

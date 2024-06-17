@@ -1,9 +1,4 @@
 ﻿using Service.ViewModel.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands.OrderListingCommand
 {
@@ -21,7 +16,7 @@ namespace Service.ViewModel.Commands.OrderListingCommand
             var index = _ordersListingViewModel.OrdersViewModelSelectedIndex;
             if (index != -1)
             {
-                
+
                 _ordersListingViewModel.ShowMessage(index);
                 _ordersListingViewModel.OrdersViewModelSelectedIndex = -1;
             }

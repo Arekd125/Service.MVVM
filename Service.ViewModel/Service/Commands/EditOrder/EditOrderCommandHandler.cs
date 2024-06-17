@@ -2,11 +2,6 @@
 using MediatR;
 using Service.Model.Repositories;
 using Servis.Models.OrderModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Service.Commands.EditOrder
 {
@@ -39,7 +34,7 @@ namespace Service.ViewModel.Service.Commands.EditOrder
                 NewOrder.ContactId = existingContact.Id;
                 NewOrder.Contact = null;
             }
-         
+
 
             await _todoRepository.Remove(NewOrder.Id);
             await _orderRepository.UpDate(NewOrder);

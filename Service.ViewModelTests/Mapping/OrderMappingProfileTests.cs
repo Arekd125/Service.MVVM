@@ -1,16 +1,8 @@
-﻿using Xunit;
-using Service.ViewModel.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Service.ViewModel.Dtos;
-using ControlzEx.Standard;
-using Servis.Models.OrderModels;
+﻿using AutoMapper;
 using FluentAssertions;
-using System.ComponentModel.DataAnnotations;
+using Service.ViewModel.Dtos;
+using Servis.Models.OrderModels;
+using Xunit;
 
 namespace Service.ViewModel.Mapping.Tests
 {
@@ -96,7 +88,7 @@ namespace Service.ViewModel.Mapping.Tests
 
             // assert
 
-            result.Should().NotBeNull();        
+            result.Should().NotBeNull();
             result.PhoneNumber.Should().NotBeNull();
             result.PhoneNumber.Should().Be(contact.PhoneNumber);
         }

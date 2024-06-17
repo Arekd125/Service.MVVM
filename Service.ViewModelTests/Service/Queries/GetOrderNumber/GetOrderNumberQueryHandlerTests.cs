@@ -1,15 +1,8 @@
-﻿using Xunit;
-using Service.ViewModel.Service.Queries.GetOrderNumber;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentAssertions;
 using Moq;
 using Service.Model.Repositories;
 using Servis.Models.OrderModels;
-using FluentAssertions;
-using System.Data;
+using Xunit;
 
 namespace Service.ViewModel.Service.Queries.GetOrderNumber.Tests
 {
@@ -18,17 +11,17 @@ namespace Service.ViewModel.Service.Queries.GetOrderNumber.Tests
         private readonly Mock<IOrderRepository> _orderRepositoryMock;
         private readonly GetOrderNumberQueryHandler _handler;
 
-       public GetOrderNumberQueryHandlerTests()
+        public GetOrderNumberQueryHandlerTests()
         {
             _orderRepositoryMock = new Mock<IOrderRepository>();
-            _handler = new GetOrderNumberQueryHandler( _orderRepositoryMock.Object );
+            _handler = new GetOrderNumberQueryHandler(_orderRepositoryMock.Object);
         }
 
 
         [Fact()]
         public async Task Handle_ShouldReturnOrderNumber_One_WhenOrderDoesNotExist()
         {
-           //Arrange
+            //Arrange
             var query = new GetOrderNumberQuery();
 
             _orderRepositoryMock.Setup(s => s.GetLastOrder()).ReturnsAsync((Order)null);
@@ -52,7 +45,7 @@ namespace Service.ViewModel.Service.Queries.GetOrderNumber.Tests
                 StartDate = DateTime.Now,
 
             };
-             
+
             _orderRepositoryMock.Setup(s => s.GetLastOrder()).ReturnsAsync(order);
 
             //Act

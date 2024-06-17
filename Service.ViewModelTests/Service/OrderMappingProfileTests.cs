@@ -1,16 +1,9 @@
-﻿using Xunit;
-using Service.ViewModel.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Service.ViewModel.Dtos;
-using ControlzEx.Standard;
-using Servis.Models.OrderModels;
+﻿using AutoMapper;
 using FluentAssertions;
-using System.ComponentModel.DataAnnotations;
+using Service.ViewModel.Dtos;
+using Service.ViewModel.Mapping;
+using Servis.Models.OrderModels;
+using Xunit;
 
 namespace Service.ViewModelTests.Service
 {
@@ -87,8 +80,8 @@ namespace Service.ViewModelTests.Service
 
             Contact contact = new Contact
             {
-                  Name = "Test",
-                 PhoneNumber = "111 111 111"
+                Name = "Test",
+                PhoneNumber = "111 111 111"
             };
 
             // act

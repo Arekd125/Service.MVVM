@@ -1,12 +1,8 @@
-﻿using MahApps.Metro.Controls.Dialogs;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Service.ViewModel.Commands;
 using Service.ViewModel.Mapping;
-using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateDevice;
 using Service.ViewModel.Stores;
-using Service.ViewModel.Stores.OrderFiltr;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Service.ViewModel.ViewModels.PrintOrderViewModels;

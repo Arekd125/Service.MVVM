@@ -1,9 +1,4 @@
-﻿using Service.ViewModel.Dtos;
-using Service.ViewModel.Service;
-using Service.ViewModel.ViewModels;
-using Service.ViewModel.ViewModels.CreatingOrderViewModels;
-using Servis.Models.OrderModels;
-using System.ComponentModel;
+﻿using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
 namespace Service.ViewModel.Commands.CreatingOrderCommand
 {

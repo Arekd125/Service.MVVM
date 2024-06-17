@@ -1,17 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using Service.ViewModel.Dtos;
-using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateToDoState;
 using Service.ViewModel.Service.Commands.UpdateToDoState;
 using Service.ViewModel.Stores;
-using Service.ViewModel.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Service.ViewModel.Commands.ToDoListCommand
 {

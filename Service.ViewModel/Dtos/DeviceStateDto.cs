@@ -1,6 +1,4 @@
-﻿using Servis.Models.OrderModels;
-
-namespace Service.ViewModel.Dtos
+﻿namespace Service.ViewModel.Dtos
 {
     public class DeviceStateDto
     {

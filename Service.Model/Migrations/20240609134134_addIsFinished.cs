@@ -18,7 +18,7 @@ namespace Service.Model.Migrations
                 name: "IsFinished",
                 table: "Orders",
                 type: "INTEGER",
-                nullable: false,  
+                nullable: false,
                 defaultValue: false);
 
             migrationBuilder.AddForeignKey(

@@ -4,12 +4,9 @@ using MahApps.Metro.Controls.Dialogs;
 using MediatR;
 using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
-using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.DeleteOrder;
 using Service.ViewModel.Service.Commands.EditOrderStatus;
-using Service.ViewModel.Service.Queries.GetAllOrders;
 using Service.ViewModel.Stores;
-using Service.ViewModel.Stores.OrderFiltr;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 

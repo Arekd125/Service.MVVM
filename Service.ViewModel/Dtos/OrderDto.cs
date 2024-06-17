@@ -1,6 +1,4 @@
-﻿using Service.Model.Entity;
-
-namespace Service.ViewModel.Dtos
+﻿namespace Service.ViewModel.Dtos
 {
     public class OrderDto
     {

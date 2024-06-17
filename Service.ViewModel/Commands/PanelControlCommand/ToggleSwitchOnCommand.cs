@@ -1,11 +1,6 @@
 ﻿using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.Converstes;
 using Service.ViewModel.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands.PanelControlCommand
 {

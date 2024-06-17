@@ -1,16 +1,10 @@
-﻿using Xunit;
-using Service.ViewModel.Service.Commands.DeleteOrder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Moq;
 using Service.Model.Repositories;
 using Servis.Models.OrderModels;
-using AutoMapper;
+using Xunit;
 
 namespace Service.ViewModel.Service.Commands.DeleteOrder.Tests
 {

@@ -1,26 +1,14 @@
 ﻿using AutoMapper;
-using ControlzEx.Theming;
-using MahApps.Metro.Controls.Dialogs;
 using MediatR;
-using Service.Model.Entity;
-using Service.ViewModel.Commands;
 using Service.ViewModel.Commands.CreatingOrderCommand;
-using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.CreateOrder;
 using Service.ViewModel.Service.Commands.EditOrder;
-using Service.ViewModel.Service.Queries.GetOrder;
 using Service.ViewModel.Stores;
 using Service.ViewModel.ViewModels.PrintOrderViewModels;
-using Servis.Models.OrderModels;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 {

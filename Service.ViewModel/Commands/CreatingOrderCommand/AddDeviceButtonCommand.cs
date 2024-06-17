@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Service.ViewModel.Service;
 using Service.ViewModel.Service.Queries.GetAllDeviceName;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
-using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.Commands.CreatingOrderCommand
 {

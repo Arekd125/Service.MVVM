@@ -1,6 +1,4 @@
-﻿using Service.ViewModel.Service;
-using Service.ViewModel.ViewModels.CreatingOrderViewModels;
-using Servis.Models.OrderModels;
+﻿using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 
 namespace Service.ViewModel.Commands.CreatingOrderCommand
 {

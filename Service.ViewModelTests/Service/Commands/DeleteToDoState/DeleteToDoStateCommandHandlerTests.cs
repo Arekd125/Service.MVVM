@@ -1,16 +1,9 @@
-﻿using Xunit;
-using Service.ViewModel.Service.Commands.DeleteToDoState;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using Service.Model.Repositories;
-using Service.Model.Entity;
-using Service.ViewModel.Commands.ToDoListCommand;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MediatR;
+using Moq;
+using Service.Model.Entity;
+using Service.Model.Repositories;
+using Xunit;
 
 namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
 {
@@ -19,7 +12,7 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
         private readonly Mock<IToDoStateRepository> _todoStateRepositoryMock;
         private readonly DeleteToDoStateCommandHandler _handle;
 
-       public   DeleteToDoStateCommandHandlerTests()
+        public DeleteToDoStateCommandHandlerTests()
         {
             _todoStateRepositoryMock = new Mock<IToDoStateRepository>();
             _handle = new DeleteToDoStateCommandHandler(_todoStateRepositoryMock.Object);
@@ -44,7 +37,7 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
             // Act
 
 
-            var result =await _handle.Handle(command, CancellationToken.None);
+            var result = await _handle.Handle(command, CancellationToken.None);
 
 
             // Assert
@@ -61,7 +54,7 @@ namespace Service.ViewModel.Service.Commands.DeleteToDoState.Tests
 
             var command = new DeleteToDoStateCommand(1);
 
-            _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync((ToDoState) null);
+            _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync((ToDoState)null);
             _todoStateRepositoryMock.Setup(s => s.Remove(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
 
             // Act

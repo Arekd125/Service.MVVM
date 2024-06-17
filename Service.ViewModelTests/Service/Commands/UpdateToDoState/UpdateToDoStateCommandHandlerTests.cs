@@ -1,18 +1,9 @@
-﻿using Xunit;
-using Service.ViewModel.Service.Commands.UpdateToDoState;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using Service.Model.Repositories;
-using Service.ViewModel.Service.Commands.DeleteToDoState;
-using AutoMapper;
-using Service.Model.Entity;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MediatR;
-using Service.ViewModel.Stores;
+using Moq;
+using Service.Model.Entity;
+using Service.Model.Repositories;
+using Xunit;
 
 namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
 {
@@ -62,7 +53,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             toDoState.ToDoName.Should().Be(command.ToDoName);
             toDoState.Prize.Should().Be(command.Prize);
             _todoStateRepositoryMock.Verify(ver => ver.UpDate(toDoState), Times.Once());
-            
+
         }
         [Fact()]
         public async Task Handle_ShouldDosNotUpdateToDoState_WhenToDoStateDosNotExist()
@@ -75,7 +66,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
                 Prize = 23
             };
 
-                _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync((ToDoState) null);
+            _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync((ToDoState)null);
             _todoStateRepositoryMock.Setup(s => s.UpDate(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
 
             // Act
@@ -84,9 +75,9 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
 
             // Assert
 
-            result.Should().Be(Unit.Value);          
+            result.Should().Be(Unit.Value);
             _todoStateRepositoryMock.Verify(ver => ver.UpDate(It.IsAny<ToDoState>()), Times.Never());
-        
+
         }
         [Fact()]
         public async Task Handle_ShouldDosNotUpdateToDoState_WhenToDoStateToDoNameIsNull()
@@ -96,11 +87,11 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             var command = new UpdateToDoStateCommand()
             {
 
-                Id= 2
+                Id = 2
             };
 
             ToDoState toDoState = new ToDoState();
-          
+
 
             _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync(toDoState);
             _todoStateRepositoryMock.Setup(s => s.UpDate(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);

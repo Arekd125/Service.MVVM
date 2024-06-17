@@ -3,7 +3,6 @@ using Service.Model.Entity;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service.Commands.CreateOrder;
 using Service.ViewModel.Service.Commands.CreateToDoState;
-using Service.ViewModel.Service.Commands.DeleteOrder;
 using Service.ViewModel.Service.Commands.EditOrder;
 using Service.ViewModel.Service.Commands.UpdateToDoState;
 using Servis.Models.OrderModels;

@@ -1,14 +1,8 @@
-﻿using Xunit;
-using Service.ViewModel.Service.Queries.GettAllModelName;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentAssertions;
 using Moq;
 using Service.Model.Repositories;
 using Servis.Models.OrderModels;
-using FluentAssertions;
+using Xunit;
 
 namespace Service.ViewModel.Service.Queries.GettAllModelName.Tests
 {
@@ -19,7 +13,7 @@ namespace Service.ViewModel.Service.Queries.GettAllModelName.Tests
 
         public GetAllModelNameQueryHandlerTests()
         {
-            _deviceStateRepositoryMock= new Mock<IDeviceStateRepository>();
+            _deviceStateRepositoryMock = new Mock<IDeviceStateRepository>();
             _handler = new GetAllModelNameQueryHandler(_deviceStateRepositoryMock.Object);
         }
 
@@ -36,7 +30,7 @@ namespace Service.ViewModel.Service.Queries.GettAllModelName.Tests
                  new() { Name="Model2"},
                  new() { Name="Model3"}
             };
-            
+
             DeviceState device = new DeviceState()
             {
                 Name = "Device",
@@ -46,12 +40,12 @@ namespace Service.ViewModel.Service.Queries.GettAllModelName.Tests
             _deviceStateRepositoryMock.Setup(s => s.GetDevice(It.IsAny<string>())).ReturnsAsync(device);
 
             // Act
-            var result = await _handler.Handle(query,CancellationToken.None);
+            var result = await _handler.Handle(query, CancellationToken.None);
 
             // Assert
 
-            _deviceStateRepositoryMock.Verify(ver=>ver.GetDevice(It.IsAny<string>()), Times.Once());
-            result.Should().Equal(modelList.Select(p=>p.Name));
+            _deviceStateRepositoryMock.Verify(ver => ver.GetDevice(It.IsAny<string>()), Times.Once());
+            result.Should().Equal(modelList.Select(p => p.Name));
 
         }
 
@@ -94,7 +88,7 @@ namespace Service.ViewModel.Service.Queries.GettAllModelName.Tests
 
 
             GetAllModelNameQuery query = new(null);
-          
+
             List<ModelState> modelList = new()
             {
                  new() { Name="Model1"},

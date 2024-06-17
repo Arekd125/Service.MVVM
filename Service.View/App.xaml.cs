@@ -8,7 +8,6 @@ using Service.View.Views.PrintOrderViews;
 using Service.ViewModel.Extensions;
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
-using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using System.Windows;
 
 namespace Service.View

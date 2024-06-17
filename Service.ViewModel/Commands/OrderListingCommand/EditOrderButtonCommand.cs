@@ -1,10 +1,5 @@
 ﻿using Service.ViewModel.Stores;
 using Service.ViewModel.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.Commands.OrderListingCommand
 {
@@ -21,8 +16,8 @@ namespace Service.ViewModel.Commands.OrderListingCommand
 
         public override void Execute(object? parameter)
         {
-          
-            _ordersListingViewModel.EditOrderIndex  = _ordersListingViewModel.OrdersViewModelSelectedIndex;
+
+            _ordersListingViewModel.EditOrderIndex = _ordersListingViewModel.OrdersViewModelSelectedIndex;
             var OrderToEdit = _ordersListingViewModel.GetOrderByIndex(_ordersListingViewModel.EditOrderIndex);
             _orderStore.OrderToEdit(OrderToEdit);
         }

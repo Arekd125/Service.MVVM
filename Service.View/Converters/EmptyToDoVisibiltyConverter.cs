@@ -1,12 +1,5 @@
-﻿using Service.Model.Entity;
-using Service.ViewModel.Dtos;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using Service.ViewModel.Dtos;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 

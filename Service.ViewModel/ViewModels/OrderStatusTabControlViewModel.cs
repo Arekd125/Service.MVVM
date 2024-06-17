@@ -1,12 +1,5 @@
 ﻿using MediatR;
-using Service.ViewModel.Dtos;
 using Service.ViewModel.Stores;
-using Service.ViewModel.Stores.OrderFiltr;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ViewModel.ViewModels
 {
