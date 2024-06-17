@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
 using Service.Model.Extensions;
+using Service.View.Views.PrintOrderViews;
 using Service.ViewModel.Extensions;
+using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using System.Windows;
@@ -27,6 +29,7 @@ namespace Service.View
                     services.AddModel();
                     services.AddViewModel();
                     services.AddScoped<IDialogCoordinator>(s => DialogCoordinator.Instance);
+                    services.AddSingleton<IDialogService, DialogService>();
 
                     services.AddSingleton(s => new MainWindow()
                     {
