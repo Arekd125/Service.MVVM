@@ -9,6 +9,7 @@ using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.OrderFiltr;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
+using Service.ViewModel.ViewModels.PrintOrderViewModels;
 
 namespace Service.ViewModel.Extensions
 {
@@ -25,6 +26,8 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<CreatingOrderViewModel>();
             services.AddSingleton<ToDoListViewModel>();
             services.AddScoped<MainWindowViewModel>();
+            services.AddScoped<PrintOrderViewModel>();
+            services.AddScoped<PrintViewModel>();
 
             services.AddSingleton<NameOrderViewModel>();
             services.AddSingleton<ContactViewModel>();

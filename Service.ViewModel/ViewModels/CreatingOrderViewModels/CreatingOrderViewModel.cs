@@ -12,6 +12,7 @@ using Service.ViewModel.Service.Commands.CreateOrder;
 using Service.ViewModel.Service.Commands.EditOrder;
 using Service.ViewModel.Service.Queries.GetOrder;
 using Service.ViewModel.Stores;
+using Service.ViewModel.ViewModels.PrintOrderViewModels;
 using Servis.Models.OrderModels;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -78,6 +79,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel deviceViewModel,
             DescriptionViewModel descriptionViewModel,
             OrderStore orderStore,
+            PrintOrderViewModel printOrderViewModel,
             IMediator mediator,
             IMapper mapper,
             IDialogService dialogService
@@ -94,7 +96,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             EditButton = new SaveEditedOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleButtonCommand(this);
-            PrintButton = new PrintButtonCommand(dialogService);
+            PrintButton = new PrintButtonCommand(dialogService, printOrderViewModel);
 
             _orderStore.OrderSentToEdit += OnOrderEdited;
             _mapper = mapper;
