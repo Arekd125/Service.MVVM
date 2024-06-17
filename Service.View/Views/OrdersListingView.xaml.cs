@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Service.View.Views
 {
@@ -12,14 +13,11 @@ namespace Service.View.Views
             InitializeComponent();
         }
 
-        private void ToggleButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        public void Row_DoubleClick(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void ToggleButton_Checked(object sender, System.Windows.RoutedEventArgs e)
-        {
-
+            var row = (DataGridRow)sender;
+            row.DetailsVisibility = row.DetailsVisibility == Visibility.Collapsed ?
+               Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

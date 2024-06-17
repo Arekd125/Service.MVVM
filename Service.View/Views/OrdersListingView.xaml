@@ -17,6 +17,7 @@
         <conv:EmptyToDoVisibiltyConverter x:Key="emptyToDoVisibiltyConverter" />
     </UserControl.Resources>
     <DataGrid
+        RowDetailsVisibilityMode="Collapsed"
         Margin="0,10,0,0"
         HorizontalAlignment="Left"
         AutoGenerateColumns="False"
@@ -28,15 +29,11 @@
         SelectedIndex="{Binding OrdersViewModelSelectedIndex}"
         SelectionMode="Single">
 
-        <!--<DataGrid.Resources>
-            <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MahApps.Styles.DataGrid}">
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="SelectedItem" Value="Null" />
-                    </Trigger>
-                </Style.Triggers>
+        <DataGrid.RowStyle>
+            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
+                <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick" />
             </Style>
-        </DataGrid.Resources>-->
+        </DataGrid.RowStyle>
 
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Path=OrderName}" Header="nr zlecenie" />
@@ -53,11 +50,9 @@
                     <DataTemplate>
                         <ToggleButton
                             HorizontalAlignment="Stretch"
-                            Checked="ToggleButton_Checked"
                             Command="{Binding DataContext.EditStatusButton, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                             Foreground="White"
-                            IsChecked="{Binding IsFinished}"
-                            Unchecked="ToggleButton_Unchecked">
+                            IsChecked="{Binding IsFinished}">
                             <ToggleButton.Style>
                                 <Style BasedOn="{StaticResource MahApps.Styles.Button.Win10}" TargetType="{x:Type ToggleButton}">
                                     <Style.Triggers>
