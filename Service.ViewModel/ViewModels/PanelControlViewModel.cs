@@ -1,6 +1,7 @@
 ﻿using Service.ViewModel.Commands.PanelControlCommand;
 using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.Converstes;
+using Service.ViewModel.Stores.OrdersFilter;
 using System.Windows.Input;
 
 namespace Service.ViewModel.ViewModels

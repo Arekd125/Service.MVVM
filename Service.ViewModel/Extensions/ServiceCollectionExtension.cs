@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service.Commands.CreateDevice;
 using Service.ViewModel.Stores;
+using Service.ViewModel.Stores.OrdersFilter;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Service.ViewModel.ViewModels.PrintOrderViewModels;

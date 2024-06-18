@@ -2,20 +2,20 @@
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service.Queries.GetOrderByDate;
 
-namespace Service.ViewModel.Stores.OrderFiltr
+namespace Service.ViewModel.Stores.OrderFiltr.DateFilter
 {
-    public class LastMonth : IFilter
+    public class YesterdayOrdersFilter : IFilter
     {
         private readonly IMediator _mediator;
 
-        public LastMonth(IMediator mediator)
+        public YesterdayOrdersFilter(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         public IEnumerable<OrderDto> GetOrderDtos()
         {
-            return _mediator.Send(new GetOrderByDateQuery(DateTime.Now, DateTime.Now.AddDays(-30))).Result;
+            return _mediator.Send(new GetOrderByDateQuery(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(-1))).Result;
         }
     }
 }

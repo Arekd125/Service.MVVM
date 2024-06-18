@@ -2,8 +2,11 @@
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Stores.Converstes;
 using Service.ViewModel.Stores.OrderFiltr;
+using Service.ViewModel.Stores.OrderFiltr.DateFilter;
+using Service.ViewModel.Stores.OrderFiltr.SearchFilter;
+using Service.ViewModel.Stores.OrderFiltr.StatusFilter;
 
-namespace Service.ViewModel.Stores
+namespace Service.ViewModel.Stores.OrdersFilter
 {
     public class OrdersFilter
     {
@@ -13,7 +16,7 @@ namespace Service.ViewModel.Stores
         public int SelectedFiltrBuffor { get; set; } = 0;
         private string? SerchTextBuffor { get; set; }
         public IFilter StatusFilter { get; set; }
-        public IFilter DateFiler { get; set; }
+        public IFilter DateFilter { get; set; }
         public IFilter SeachFilter { get; set; }
 
         public OrdersFilter(IMediator mediator, OrderStore orderStore)
@@ -30,27 +33,27 @@ namespace Service.ViewModel.Stores
             switch (dateFilerEnum)
             {
                 case DateFilerEnum.today:
-                    DateFiler = new TodayOrdersFiilter(_mediator);
+                    DateFilter = new TodayOrdersFiilter(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
 
                 case DateFilerEnum.yesterday:
-                    DateFiler = new YesterdayOrdersFilter(_mediator);
+                    DateFilter = new YesterdayOrdersFilter(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
 
                 case DateFilerEnum.week:
-                    DateFiler = new LastWeekOrdersFilter(_mediator);
+                    DateFilter = new LastWeekOrdersFilter(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
 
                 case DateFilerEnum.month:
-                    DateFiler = new LastMonth(_mediator);
+                    DateFilter = new LastMonth(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
 
                 case DateFilerEnum.from_the_beginning:
-                    DateFiler = new FromTheBeginingOrdersFilter(_mediator);
+                    DateFilter = new FromTheBeginingOrdersFilter(_mediator);
                     SelectFiltr(SelectedFiltrBuffor);
                     break;
 
@@ -63,17 +66,17 @@ namespace Service.ViewModel.Stores
         {
             if (filtr == 0)
             {
-                StatusFilter = new OpenOrdersDecorator(DateFiler);
+                StatusFilter = new OpenOrdersDecorator(DateFilter);
                 Search(SerchTextBuffor);
             }
             if (filtr == 1)
             {
-                StatusFilter = new EndedOrdersDecorator(DateFiler);
+                StatusFilter = new EndedOrdersDecorator(DateFilter);
                 Search(SerchTextBuffor);
             }
             if (filtr == 2)
             {
-                StatusFilter = new AllOrdersDecorator(DateFiler);
+                StatusFilter = new AllOrdersDecorator(DateFilter);
                 Search(SerchTextBuffor);
             }
             SelectedFiltrBuffor = filtr;
@@ -81,7 +84,15 @@ namespace Service.ViewModel.Stores
 
         public void Search(string text)
         {
-            SeachFilter = new SearchOrdersDecorator(StatusFilter, text);
+            if (!string.IsNullOrEmpty(text))
+            {
+                SeachFilter = new SearchOrderDecorator(StatusFilter, text);
+            }
+            else
+            {
+                SeachFilter = StatusFilter;
+            }
+
             _orderStore.RefreshOrders();
             SerchTextBuffor = text;
         }

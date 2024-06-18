@@ -10,6 +10,7 @@ using Service.ViewModel.Service.Commands.DeleteOrder;
 using Service.ViewModel.Service.Commands.EditOrderStatus;
 using Service.ViewModel.Stores;
 using Service.ViewModel.ViewModels.PrintOrderViewModels;
+using Service.ViewModel.Stores.OrdersFilter;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -79,6 +80,7 @@ namespace Service.ViewModel.ViewModels
         private void OnOrderCreated(OrderDto orderDto)
         {
             AddOrder(orderDto);
+            OnFiltringChanged();
         }
 
         private void OnFiltringChanged()
