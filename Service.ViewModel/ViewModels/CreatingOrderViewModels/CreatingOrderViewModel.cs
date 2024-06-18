@@ -85,7 +85,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             EditButton = new SaveEditedOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
             CancleButton = new CancleButtonCommand(this);
-            PrintButton = new PrintButtonCommand(dialogService, printOrderViewModel);
+            PrintButton = new PrintButtonCommand(this, ContactViewModel, DeviceViewModel, dialogService, printOrderViewModel);
 
             _orderStore.OrderSentToEdit += OnOrderEdited;
             _mapper = mapper;
@@ -149,7 +149,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             NameOrderViewModel.SetNextOrderName();
         }
 
-        private OrderDto CreateOrderDto()
+        public OrderDto CreateOrderDto()
         {
             return new OrderDto
             {

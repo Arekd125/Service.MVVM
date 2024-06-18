@@ -6,33 +6,33 @@ namespace Service.ViewModel.Stores
     {
         public event Action<OrderDto> OrderCreated;
 
-        public event Action<OrderDto> OrderSentToEdit;
-
-        public event Action<OrderDto> OrderEdited;
-
-        public event Action FiltringChanged;
-
-        public event Action ChangeFiltrOrders;
-
         public void AddLastOrder(OrderDto orderDto)
         {
             OrderCreated?.Invoke(orderDto);
         }
+
+        public event Action<OrderDto> OrderSentToEdit;
 
         public void OrderToEdit(OrderDto orderName)
         {
             OrderSentToEdit?.Invoke(orderName);
         }
 
+        public event Action<OrderDto> OrderEdited;
+
         public void OrderChanged(OrderDto orderDto)
         {
             OrderEdited?.Invoke(orderDto);
         }
 
+        public event Action FiltringChanged;
+
         public void RefreshOrders()
         {
             FiltringChanged?.Invoke();
         }
+
+        public event Action ChangeFiltrOrders;
 
         public void SetFiltrAllOrders()
         {

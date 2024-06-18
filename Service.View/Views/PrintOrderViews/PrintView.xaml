@@ -1,11 +1,123 @@
-﻿<UserControl x:Class="Service.View.Views.PrintOrderViews.PrintView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid DataContext="{Binding PrintViewModel}">
-        <Label Content="{Binding Path=tekst2}"></Label>
+﻿<UserControl
+    x:Class="Service.View.Views.PrintOrderViews.PrintView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:Service.View.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    xml:lang="pl-PL"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <conv:StringNullOrEmptyToVisibilityConverter x:Key="stringNullOrEmptyToVisibilityConverter" />
+        <conv:EmptyToDoVisibiltyConverter x:Key="emptyToDoVisibiltyConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="10" DataContext="{Binding PrintViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <!--  STOPKA  -->
+        <StackPanel Margin="10"
+            Grid.Row="0"
+            Grid.Column="0"
+            Orientation="Vertical">
+            <TextBlock Text="{Binding inprint.Name}" />
+            <TextBlock Text="{Binding inprint.Street}" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding inprint.Zipcode}" />
+                <TextBlock Margin="3,0,0,0" Text="{Binding inprint.City}" />
+            </StackPanel>
+            <TextBlock Text="{Binding inprint.PhoneNumner1}" />
+            <TextBlock Text="{Binding inprint.PhoneNumner2}" />
+            <TextBlock Text="{Binding inprint.Mail}" />
+        </StackPanel>
+
+        <!--  DETLE  -->
+        <Grid Grid.Row="1" DataContext="{Binding Order}">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <!--  KOSZT  -->
+                <StackPanel Margin="10,5,10,5" Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+                    <WrapPanel>
+                        <TextBlock
+                            FontWeight="Bold"
+                            Foreground="Black"
+                            Text="Usługi: " />
+                    </WrapPanel>
+                    <!--  USŁUGI  -->
+
+                    <DataGrid
+                        Width="auto"
+                        AutoGenerateColumns="False"
+                        CanUserDeleteRows="False"
+                        GridLinesVisibility="Horizontal"
+                        HeadersVisibility="None"
+                        IsEnabled="False"
+                        ItemsSource="{Binding ToDo, UpdateSourceTrigger=PropertyChanged}"
+                        SelectionMode="Single"
+                        Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="auto"
+                                Binding="{Binding ToDoName}"
+                                Foreground="Black"
+                                Header="Usługi" />
+                            <DataGridTextColumn
+                                Width="80"
+                                Binding="{Binding Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
+                                Foreground="Black"
+                                Header="Cena">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock
+                        Margin="5"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="{Binding Cost, StringFormat=Szacowany Koszt: \{0:C2\}}" />
+                </StackPanel>
+
+                <!--  OPIS USTERKI  -->
+                <StackPanel Margin="10,5,10,5" Visibility="{Binding Description, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+                    <TextBlock
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="Opis usterki: " />
+                    <TextBlock Foreground="Black" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+                <!--  AKCESORIA  -->
+                <StackPanel Margin="10,5,10,5" Visibility="{Binding Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+                    <TextBlock
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="Dołączone akcesoria: " />
+                    <TextBlock Foreground="Black" Text="{Binding Accessories}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

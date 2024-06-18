@@ -2,11 +2,11 @@
 {
     public class PrintOrderViewModel
     {
+        public PrintViewModel PrintViewModel { get; }
+
         public PrintOrderViewModel(PrintViewModel printViewModel)
         {
             PrintViewModel = printViewModel;
         }
-
-        public PrintViewModel PrintViewModel { get; }
     }
 }
