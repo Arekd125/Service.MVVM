@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Service.ViewModel.Stores;
+using Service.ViewModel.Stores.OrdersFilter;
 
 namespace Service.ViewModel.ViewModels
 {
     public class OrderStatusTabControlViewModel : ViewModelBase
     {
         private readonly OrdersFilter _ordersFilter;
-        private readonly OrderStore _orderStore;
 
         private int _filtrStatus;
 
@@ -26,11 +26,10 @@ namespace Service.ViewModel.ViewModels
 
         public OrdersListingViewModel ordersListingViewModel { get; }
 
-        public OrderStatusTabControlViewModel(OrdersListingViewModel ordersListingViewModel, OrdersFilter ordersFilter, IMediator mediator, OrderStore orderStore)
+        public OrderStatusTabControlViewModel(OrdersListingViewModel ordersListingViewModel, OrdersFilter ordersFilter, OrderStore orderStore)
         {
             this.ordersListingViewModel = ordersListingViewModel;
             _ordersFilter = ordersFilter;
-            _orderStore = orderStore;
             orderStore.ChangeFiltrOrders += OnChangeFiltrOrders;
         }
 

@@ -1,6 +1,6 @@
 ﻿using Service.ViewModel.Dtos;
 
-namespace Service.ViewModel.Stores.OrderFiltr
+namespace Service.ViewModel.Stores.OrderFiltr.StatusFilter
 {
     public class OpenOrdersDecorator : FiltrDecorator
     {

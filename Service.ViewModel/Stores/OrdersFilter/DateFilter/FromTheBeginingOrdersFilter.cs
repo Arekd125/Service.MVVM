@@ -2,7 +2,7 @@
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service.Queries.GetAllOrders;
 
-namespace Service.ViewModel.Stores.OrderFiltr
+namespace Service.ViewModel.Stores.OrderFiltr.DateFilter
 {
     public class FromTheBeginingOrdersFilter : IFilter
     {
