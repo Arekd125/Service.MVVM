@@ -17,7 +17,7 @@ namespace Service.View.Views.PrintOrderViews
         {
             try
             {
-                this.IsEnabled = false;
+                this.IsEnabled = true;
                 this.PrintButton.Visibility = System.Windows.Visibility.Hidden;
                 this.CloseButton.Visibility = System.Windows.Visibility.Hidden;
                 PrintDialog printDialog = new PrintDialog();
@@ -27,7 +27,7 @@ namespace Service.View.Views.PrintOrderViews
                 }
             }
             finally
-            {
+            {      
                 this.IsEnabled = true;
                 this.PrintButton.Visibility = System.Windows.Visibility.Visible;
                 this.CloseButton.Visibility = System.Windows.Visibility.Visible;

@@ -54,20 +54,20 @@
             <!--CONTACT-->
             <StackPanel Margin="10" Grid.Column="0">
                 <TextBlock Text="Klient:" FontWeight="Bold" />
-                <TextBlock Text="{Binding Order.ContactName}" />
-                <TextBlock Text="{Binding Order.ContactPhoneNumber, StringFormat=tel. {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactName}" />
+                <TextBlock Margin="10,0,0,0" Text="{Binding Order.ContactPhoneNumber, StringFormat=tel. {0}}" />
             </StackPanel>
 
             <!--DEVICE-->
             <StackPanel Margin="10" Grid.Column="1">
                 <TextBlock Text="Urządznie:" FontWeight="Bold" />
-                <TextBlock Text="{Binding Order.Device, StringFormat=Marka {0}}" />
-                <TextBlock Text="{Binding Order.Model, StringFormat=Model {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Device, StringFormat=Marka {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Model, StringFormat=Model {0}}" />
             </StackPanel>
         </Grid>
         <Separator />
 
-        <!--  DETLE  -->
+        <!--  DETALE  -->
 
         <StackPanel DataContext="{Binding Order}" HorizontalAlignment="Left" Orientation="Horizontal">
             <!--  KOSZT  -->
@@ -86,7 +86,7 @@
                         CanUserDeleteRows="False"
                         GridLinesVisibility="Horizontal"
                         HeadersVisibility="None"
-                        IsEnabled="False"
+                        IsEnabled="False"                       
                         ItemsSource="{Binding ToDo, UpdateSourceTrigger=PropertyChanged}"
                         SelectionMode="Single"
                         Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
