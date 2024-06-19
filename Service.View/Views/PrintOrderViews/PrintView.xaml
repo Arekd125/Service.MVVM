@@ -66,6 +66,7 @@
             </StackPanel>
         </Grid>
         <Separator />
+
         <!--  DETLE  -->
 
         <StackPanel DataContext="{Binding Order}" HorizontalAlignment="Left" Orientation="Horizontal">
@@ -138,5 +139,6 @@
             </StackPanel>
         </StackPanel>
         <Separator />
+        <TextBlock  Text="{Binding rodo}" TextWrapping="WrapWithOverflow" FontSize="10"></TextBlock>
     </StackPanel>
 </UserControl>
