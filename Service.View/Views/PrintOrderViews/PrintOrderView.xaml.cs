@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using System.Windows.Controls;
 
 namespace Service.View.Views.PrintOrderViews
 {
@@ -10,6 +11,23 @@ namespace Service.View.Views.PrintOrderViews
         public PrintOrderView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                this.IsEnabled = false;
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(print, "Zlecenie");
+                }
+            }
+            finally
+            {
+                this.IsEnabled = true;
+            }
         }
     }
 }

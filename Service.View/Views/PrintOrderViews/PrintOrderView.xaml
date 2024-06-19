@@ -5,14 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:view="clr-namespace:Service.View.Views.PrintOrderViews"
-        mc:Ignorable="d" Height="891" Width="630"
+        mc:Ignorable="d" Height="29.7cm" Width="21cm"
         Title="PrintOrderView" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        <StackPanel Margin="10"  Orientation="Vertical">
+    <Grid x:Name="print">
+        <StackPanel  Margin="10"  Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <view:PrintView />
-            <Line Margin="0,10,0,10" StrokeDashArray="1,2"  Stroke="Black" StrokeThickness="2" X1="0" X2="630"  HorizontalAlignment="Stretch" />
+            <Line Margin="0,10,0,10" StrokeDashArray="1,2"  Stroke="Black" StrokeThickness="2" X1="0" X2="21cm"  HorizontalAlignment="Stretch" />
             <view:PrintView />
         </StackPanel>
+        <Button
+        Width="100"
+        Height="40"
+        Margin="20"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Bottom"
+        Content="Drukuj"
+            Click="Button_Click" />
     </Grid>
 </mah:MetroWindow>
