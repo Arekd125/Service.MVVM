@@ -1,26 +1,51 @@
-﻿<mah:MetroWindow x:Class="Service.View.Views.PrintOrderViews.PrintOrderView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:view="clr-namespace:Service.View.Views.PrintOrderViews"
-        mc:Ignorable="d" Height="29.7cm" Width="21cm"
-        Title="PrintOrderView" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+﻿<mah:MetroWindow
+    x:Class="Service.View.Views.PrintOrderViews.PrintOrderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:view="clr-namespace:Service.View.Views.PrintOrderViews"
+    Title="PrintOrderView"
+    Width="21cm"
+    Height="29.7cm"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid x:Name="print">
-        <StackPanel  Margin="10"  Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <StackPanel
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
             <view:PrintView />
-            <Line Margin="0,10,0,10" StrokeDashArray="1,2"  Stroke="Black" StrokeThickness="2" X1="0" X2="21cm"  HorizontalAlignment="Stretch" />
+            <Line
+                Margin="0,10,0,10"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Stroke="Black"
+                StrokeDashArray="1,2"
+                StrokeThickness="2"
+                X1="0"
+                X2="21cm" />
             <view:PrintView />
         </StackPanel>
-        <Button x:Name="PrintButton"
-        Width="100"
-        Height="40"
-        Margin="20"
-        HorizontalAlignment="Right"
-        VerticalAlignment="Bottom"
-        Content="Drukuj"
-            Click="Button_Click" />
+        <StackPanel
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal" />
+        <Button
+            x:Name="PrintButton"
+            Width="100"
+            Height="40"
+            Margin="20"
+            Click="Button_Click"
+            Content="Drukuj" />
+        <Button
+            x:Name="CloseButton"
+            Width="100"
+            Height="40"
+            Margin="20"
+            Content="Zamknij" />
     </Grid>
 </mah:MetroWindow>
