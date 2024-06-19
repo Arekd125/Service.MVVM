@@ -107,7 +107,9 @@
                         FontWeight="Bold"
                         Foreground="Black"
                         Text="Opis usterki: " />
-                    <TextBlock Foreground="Black" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Foreground="Black"
+                               MaxWidth="200"
+                               TextWrapping="WrapWithOverflow" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <!--  AKCESORIA  -->
                 <StackPanel Margin="10,5,10,5" Visibility="{Binding Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">

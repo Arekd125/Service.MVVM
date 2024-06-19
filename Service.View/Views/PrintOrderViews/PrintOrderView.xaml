@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:view="clr-namespace:Service.View.Views.PrintOrderViews"
-        mc:Ignorable="d"
-        Title="PrintOrderView" Height="450" Width="800"
+        mc:Ignorable="d" Height="891" Width="630"
+        Title="PrintOrderView" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <StackPanel Margin="10"  Orientation="Vertical">
             <view:PrintView />
 
             <view:PrintView />
