@@ -50,14 +50,14 @@
                 mah:TextBoxHelper.UseFloatingWatermark="True"
                 mah:TextBoxHelper.Watermark="Opis usterki"
                 AcceptsReturn="True"
-                Text="{Binding DescriptionTextBox}" />
+                Text="{Binding DescriptionTextBox, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox
                 Height="40"
                 Margin="3"
                 mah:TextBoxHelper.ClearTextButton="False"
                 mah:TextBoxHelper.UseFloatingWatermark="True"
                 mah:TextBoxHelper.Watermark="Dołączone akcesoria"
-                Text="{Binding AccessoriesTexBox}" />
+                Text="{Binding AccessoriesTexBox, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </GroupBox>
 </UserControl>

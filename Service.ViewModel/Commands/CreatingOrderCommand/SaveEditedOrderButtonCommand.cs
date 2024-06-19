@@ -6,7 +6,10 @@ namespace Service.ViewModel.Commands.CreatingOrderCommand
     {
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
-        public SaveEditedOrderButtonCommand(CreatingOrderViewModel creatingOrderViewModel, ContactViewModel contactViewModel, DeviceViewModel deviceViewModel) : base(creatingOrderViewModel, contactViewModel, deviceViewModel)
+        public SaveEditedOrderButtonCommand(CreatingOrderViewModel creatingOrderViewModel,
+            ContactViewModel contactViewModel,
+            DeviceViewModel deviceViewModel, DescriptionViewModel descriptionViewModel) :
+            base(creatingOrderViewModel, contactViewModel, deviceViewModel, descriptionViewModel)
         {
             _creatingOrderViewModel = creatingOrderViewModel;
         }

@@ -82,10 +82,10 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             DeviceViewModel = deviceViewModel;
             DescriptionViewModel = descriptionViewModel;
 
-            SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
-            EditButton = new SaveEditedOrderButtonCommand(this, ContactViewModel, DeviceViewModel);
+            SaveButton = new SaveOrderButtonCommand(this, ContactViewModel, DeviceViewModel, descriptionViewModel);
+            EditButton = new SaveEditedOrderButtonCommand(this, ContactViewModel, DeviceViewModel, descriptionViewModel);
             CancleButton = new CancleButtonCommand(this);
-            PrintButton = new PrintButtonCommand(this, ContactViewModel, DeviceViewModel, dialogService, printOrderViewModel);
+            PrintButton = new PrintButtonCommand(this, ContactViewModel, DeviceViewModel, dialogService, printOrderViewModel, descriptionViewModel);
 
             _orderStore.OrderSentToEdit += OnOrderEdited;
             _mapper = mapper;

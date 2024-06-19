@@ -27,7 +27,10 @@ namespace Service.ViewModel.Commands
                 e.PropertyName == nameof(DeviceViewModel.ModelStateSelectedItem) ||
                 e.PropertyName == nameof(DeviceViewModel.ModelNameComboBox) ||
                 e.PropertyName == nameof(DeviceViewModel.DeviceNameComboBox) ||
-                e.PropertyName == nameof(ContactViewModel.ContactPhoneNumberComboBox))
+                e.PropertyName == nameof(ContactViewModel.ContactPhoneNumberComboBox) ||
+                e.PropertyName == nameof(DescriptionViewModel.SelectedIndex) ||
+                e.PropertyName == nameof(DescriptionViewModel.AccessoriesTexBox) ||
+                e.PropertyName == nameof(DescriptionViewModel.DescriptionTextBox))
             {
                 OnCanExecutedChanged();
             }
