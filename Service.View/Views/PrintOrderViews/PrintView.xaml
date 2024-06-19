@@ -54,20 +54,20 @@
             <!--CONTACT-->
             <StackPanel Margin="10" Grid.Column="0">
                 <TextBlock Text="Klient:" FontWeight="Bold" />
-                <TextBlock Text="{Binding Order.ContactName}" />
-                <TextBlock Text="{Binding Order.ContactPhoneNumber, StringFormat=tel. {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactName}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactPhoneNumber, StringFormat=tel. {0}}" />
             </StackPanel>
 
             <!--DEVICE-->
             <StackPanel Margin="10" Grid.Column="1">
                 <TextBlock Text="Urządznie:" FontWeight="Bold" />
-                <TextBlock Text="{Binding Order.Device, StringFormat=Marka {0}}" />
-                <TextBlock Text="{Binding Order.Model, StringFormat=Model {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Device, StringFormat=Marka {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Model, StringFormat=Model {0}}" />
             </StackPanel>
         </Grid>
         <Separator />
 
-        <!--  DETLE  -->
+        <!--  DETALE  -->
 
         <StackPanel DataContext="{Binding Order}" HorizontalAlignment="Left" Orientation="Horizontal">
             <!--  KOSZT  -->
@@ -140,5 +140,36 @@
         </StackPanel>
         <Separator />
         <TextBlock  Text="{Binding rodo}" TextWrapping="WrapWithOverflow" FontSize="10"></TextBlock>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Line Grid.Column="0"
+         Margin="0,60,0,0"
+         HorizontalAlignment="Center"
+
+         Stroke="Black"
+         StrokeDashArray="1,2"
+         StrokeThickness="2"
+         X1="0"
+         X2="200" />
+            <Line Grid.Column="1"
+         Margin="0,60,0,0"
+         HorizontalAlignment="Center"
+
+         Stroke="Black"
+         StrokeDashArray="1,2"
+         StrokeThickness="2"
+         X1="0"
+         X2="200" />
+
+            <TextBlock Grid.Row="1"  Text="Serwis" HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Klient" HorizontalAlignment="Center" />
+        </Grid>
     </StackPanel>
 </UserControl>

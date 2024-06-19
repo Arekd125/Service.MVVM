@@ -13,11 +13,10 @@ namespace Service.ViewModel.ViewModels.PrintOrderViewModels
         public PrintViewModel()
         {
             inprint = new Inprint("AD-KOMP Arkadius Dominiak",
-             "ul. Szarych Szeregów 3", "Konin", "62-500", "534 078 017", "534 078 018", null);
+             "Szarych Szeregów 3", "Konin", "62-500", "534 078 017", "534 078 018", null);
 
             rodo = @$"W związku z realizacją niniejszego zlecenia, informujemy,że w celu jego wykonania niezbędne jest przetwarzanie Państwa danych osobowych.
 Administratorem danych osobowych jest {inprint.Name} z siedzibą w {inprint.City}ie {inprint.Street}.
-
 Ja, niżej podpisany/a, wyrażam zgodę na przetwarzanie moich danych osobowych przez {inprint.Name} z siedzibą w {inprint.City}ie w celu realizacji zlecenia.";
         }
 
