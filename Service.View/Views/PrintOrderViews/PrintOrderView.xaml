@@ -14,7 +14,7 @@
             <Line Margin="0,10,0,10" StrokeDashArray="1,2"  Stroke="Black" StrokeThickness="2" X1="0" X2="21cm"  HorizontalAlignment="Stretch" />
             <view:PrintView />
         </StackPanel>
-        <Button
+        <Button x:Name="PrintButton"
         Width="100"
         Height="40"
         Margin="20"

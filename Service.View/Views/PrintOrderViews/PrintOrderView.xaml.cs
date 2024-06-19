@@ -18,6 +18,7 @@ namespace Service.View.Views.PrintOrderViews
             try
             {
                 this.IsEnabled = false;
+                this.PrintButton.Visibility = System.Windows.Visibility.Hidden;
                 PrintDialog printDialog = new PrintDialog();
                 if (printDialog.ShowDialog() == true)
                 {
@@ -27,6 +28,7 @@ namespace Service.View.Views.PrintOrderViews
             finally
             {
                 this.IsEnabled = true;
+                this.PrintButton.Visibility = System.Windows.Visibility.Visible;
             }
         }
     }
