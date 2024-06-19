@@ -28,9 +28,10 @@
         <Button
             Height="60"
             Margin="0,3,10,0"
+            Background="Green"
             mah:ControlsHelper.ContentCharacterCasing="Upper"
             Command="{Binding PrintButton}"
-            Content="Zapisz i drukuj"
+            Content="Drukuj"
             Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
 
         <Grid>
@@ -52,7 +53,6 @@
                 Grid.Column="0"
                 Margin="0,2,3,4"
                 mah:ControlsHelper.ContentCharacterCasing="Upper"
-                Background="Green"
                 Command="{Binding Path=EditButton}"
                 Content="Edytuj"
                 Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
