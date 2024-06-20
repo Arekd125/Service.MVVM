@@ -39,35 +39,34 @@
                 X1="0"
                 X2="21cm" />
             <view:PrintView Grid.Row="2" />
-
-            <StackPanel
-                Grid.Row="2"
-                Margin="3"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Orientation="Horizontal">
-                <Button
-                    x:Name="PrintButton"
-                    Width="100"
-                    Height="40"
-                    mah:ControlsHelper.ContentCharacterCasing="Upper"
-                    Background="Green"
-                    Click="Button_Click"
-                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
-                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE749;" />
-                </Button>
-                <Button
-                    x:Name="CloseButton"
-                    Width="100"
-                    Height="40"
-                    Margin="10,0,0,0"
-                    mah:ControlsHelper.ContentCharacterCasing="Upper"
-                    Background="Red"
-                    IsCancel="True"
-                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
-                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
-                </Button>
-            </StackPanel>
+            <!--BUTTONS-->
         </Grid>
+        <StackPanel
+          Margin="0,60,20,0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Top"
+          Orientation="Horizontal">
+            <Button
+              x:Name="PrintButton"
+              Width="100"
+              Height="40"
+              mah:ControlsHelper.ContentCharacterCasing="Upper"
+              Background="Green"
+              Click="Button_Click"
+              Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE749;" />
+            </Button>
+            <Button
+              x:Name="CloseButton"
+              Width="100"
+              Height="40"
+              Margin="10,0,0,0"
+              mah:ControlsHelper.ContentCharacterCasing="Upper"
+              Background="Red"
+              IsCancel="True"
+              Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
+            </Button>
+        </StackPanel>
     </Grid>
 </mah:MetroWindow>
