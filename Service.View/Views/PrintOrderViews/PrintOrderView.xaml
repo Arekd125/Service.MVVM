@@ -6,60 +6,68 @@
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="clr-namespace:Service.View.Views.PrintOrderViews"
-    Title="PrintOrderView"
-    Width="21cm"
-    Height="29.7cm"
+    Title="Zlecenie"
+    SizeToContent="WidthAndHeight"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid x:Name="print" Margin="15" >
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-
-        </Grid.RowDefinitions>
-            <view:PrintView Grid.Row="0"/>
-        <Line Grid.Row="1" 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.8" ScaleY="0.8" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid  LayoutTransform="{StaticResource windowScaleTransform}">
+        <Grid
+            x:Name="print"
+            Width="21cm"
+            Height="29.7cm"
+            Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <view:PrintView Grid.Row="0" />
+            <Line
+                Grid.Row="1"
                 Margin="0,10,0,10"
-                HorizontalAlignment="Stretch"  
+                HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 Stroke="Black"
                 StrokeDashArray="1,2"
                 StrokeThickness="2"
                 X1="0"
                 X2="21cm" />
-            <view:PrintView Grid.Row="2"/>
-      
-        <StackPanel Margin="3" Grid.Row="2"
-                    
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            Orientation="Horizontal" >
-            <Button
-            x:Name="PrintButton"
-            Width="100"
-            Height="40"          
-            Click="Button_Click"
-            mah:ControlsHelper.ContentCharacterCasing="Upper"
-            Background="Green"
-            Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
-            <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE749;" />
+            <view:PrintView Grid.Row="2" />
 
-            </Button>
-            <Button
-            x:Name="CloseButton"
-            Width="100"
-            Height="40"
-            Margin="10,0,0,0"
-           
-            IsCancel="True"
-            mah:ControlsHelper.ContentCharacterCasing="Upper"
-            Background="Red"
-            Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
-            <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
-            </Button>
-        </StackPanel>
-        
+            <StackPanel
+                Grid.Row="2"
+                Margin="3"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="PrintButton"
+                    Width="100"
+                    Height="40"
+                    mah:ControlsHelper.ContentCharacterCasing="Upper"
+                    Background="Green"
+                    Click="Button_Click"
+                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE749;" />
+                </Button>
+                <Button
+                    x:Name="CloseButton"
+                    Width="100"
+                    Height="40"
+                    Margin="10,0,0,0"
+                    mah:ControlsHelper.ContentCharacterCasing="Upper"
+                    Background="Red"
+                    IsCancel="True"
+                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}">
+                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8BB;" />
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </mah:MetroWindow>

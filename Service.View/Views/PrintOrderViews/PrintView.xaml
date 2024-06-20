@@ -83,7 +83,7 @@
 
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
             <!--  KOSZT  -->
-            <StackPanel DataContext="{Binding Order}" Margin="10,5,10,5" Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+            <StackPanel Margin="10,5,10,5" Visibility="{Binding ToDo1, Converter={StaticResource emptyToDoVisibiltyConverter}}">
                 <WrapPanel>
                     <TextBlock
                         FontWeight="Bold"
@@ -99,9 +99,9 @@
                     GridLinesVisibility="Horizontal"
                     HeadersVisibility="None"
                     IsEnabled="False"
-                        ItemsSource="{Binding ToDo, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding ToDo1, UpdateSourceTrigger=PropertyChanged}"
                     SelectionMode="Single"
-                        Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+                        Visibility="{Binding ToDo1, Converter={StaticResource emptyToDoVisibiltyConverter}}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
@@ -123,7 +123,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <TextBlock
+                <TextBlock DataContext="{Binding Order}"
                     Margin="5"
                     FontWeight="Bold"
                     Foreground="Black"

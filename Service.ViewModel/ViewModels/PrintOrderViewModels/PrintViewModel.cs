@@ -24,6 +24,21 @@ namespace Service.ViewModel.ViewModels.PrintOrderViewModels
             }
         }
 
+        private IEnumerable<ToDoDto> _todo1;
+
+        public IEnumerable<ToDoDto> ToDo1
+        {
+            get
+            {
+                return _todo1;
+            }
+            set
+            {
+                _todo1 = value;
+                OnPropertyChanged(nameof(ToDo1));
+            }
+        }
+
         private IEnumerable<ToDoDto> _todo2;
 
         public IEnumerable<ToDoDto> ToDo2
@@ -54,8 +69,12 @@ Ja, niżej podpisany/a, wyrażam zgodę na przetwarzanie moich danych osobowych 
             _todo2 = new List<ToDoDto>();
             if (Order.ToDo.Count() > 5)
             {
+                ToDo1 = _orderDto.ToDo.Take(5).ToList();
                 ToDo2 = _orderDto.ToDo.Skip(5).ToList();
-                Order.ToDo = _orderDto.ToDo.Take(5).ToList();
+            }
+            else
+            {
+                ToDo1 = _orderDto.ToDo;
             }
         }
     }
