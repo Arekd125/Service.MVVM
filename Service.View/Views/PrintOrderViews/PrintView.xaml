@@ -20,8 +20,11 @@
         Background="White"
         DataContext="{Binding PrintViewModel}"
         Orientation="Vertical">
-        <!--DATE-->
-        <TextBlock Text="{Binding Order.StartDate}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <!--  DATE  -->
+        <TextBlock
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Text="{Binding Order.StartDate}" />
 
         <!--  ZLECENIE  -->
         <StackPanel Grid.Column="1" Orientation="Vertical">
@@ -30,7 +33,8 @@
                 FontSize="23"
                 FontWeight="Bold"
                 Text="Zlecenie" />
-            <TextBlock Margin="0,0,0,10"
+            <TextBlock
+                Margin="0,0,0,10"
                 HorizontalAlignment="Center"
                 FontSize="25"
                 Text="{Binding Order.OrderName}" />

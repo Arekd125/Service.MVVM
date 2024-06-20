@@ -25,7 +25,7 @@ namespace Service.ViewModel.Extensions
             services.AddScoped<MainWindowViewModel>();
             services.AddScoped<PrintOrderViewModel>();
             services.AddScoped<PrintViewModel>();
-
+            services.AddSingleton<StatusBarViewModel>();
             services.AddSingleton<NameOrderViewModel>();
             services.AddSingleton<ContactViewModel>();
             services.AddSingleton<DeviceViewModel>();
