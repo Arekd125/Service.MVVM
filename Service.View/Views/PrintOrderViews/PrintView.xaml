@@ -75,7 +75,7 @@
 
         <Separator />
 
-        <!--  DETALE  -->
+        <!--  DETLE  -->
 
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
             <!--  KOSZT  -->
