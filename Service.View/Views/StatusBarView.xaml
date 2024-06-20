@@ -10,9 +10,8 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <StatusBar>
-        <StatusBarItem FontSize="16">Text</StatusBarItem>
         <StatusBarItem>
-            <TextBlock FontSize="16" Text=" TextBlockText" />
+            <TextBlock FontSize="20" Text="{Binding OpenedOrders, StringFormat=Liczba zleceń oczekujących na realizację: {0} }" />
         </StatusBarItem>
 
         <StatusBarItem HorizontalAlignment="Right">

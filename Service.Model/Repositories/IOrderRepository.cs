@@ -21,5 +21,7 @@ namespace Service.Model.Repositories
         public Task UpDateStatus(string orderName);
 
         public Task<IEnumerable<Order>> GetOrdersByDate(DateTime startDate, DateTime endDate);
+
+        public Task<int> GetNumberOpenedOrders();
     }
 }
