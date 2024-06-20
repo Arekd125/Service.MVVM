@@ -14,7 +14,12 @@
         <conv:EmptyToDoVisibiltyConverter x:Key="emptyToDoVisibiltyConverter" />
     </UserControl.Resources>
 
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="10" DataContext="{Binding PrintViewModel}" Background="White">
+    <StackPanel
+        Margin="10"
+        HorizontalAlignment="Stretch"
+        Background="White"
+        DataContext="{Binding PrintViewModel}"
+        Orientation="Vertical">
 
         <Grid>
 
@@ -25,10 +30,10 @@
 
             <!--  STOPKA  -->
             <StackPanel
-            Grid.Column="0"
-            Margin="10"
-            Orientation="Vertical">
-                <TextBlock  Text="{Binding inprint.Name}" />
+                Grid.Column="0"
+                Margin="10"
+                Orientation="Vertical">
+                <TextBlock Text="{Binding inprint.Name}" />
                 <TextBlock Text="{Binding inprint.Street}" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding inprint.Zipcode}" />
@@ -40,8 +45,15 @@
             </StackPanel>
 
             <!--  ZLECENIE  -->
-            <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" Text="Zlecenie" FontSize="20" FontWeight="Bold" />
+            <StackPanel
+                Grid.Column="1"
+                Margin="10"
+                Orientation="Vertical">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Text="Zlecenie" />
                 <TextBlock HorizontalAlignment="Center" Text="{Binding Order.OrderName}" />
             </StackPanel>
         </Grid>
@@ -51,16 +63,16 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <!--CONTACT-->
-            <StackPanel Margin="10" Grid.Column="0">
-                <TextBlock Text="Klient:" FontWeight="Bold" />
+            <!--  CONTACT  -->
+            <StackPanel Grid.Column="0" Margin="10">
+                <TextBlock FontWeight="Bold" Text="Klient:" />
                 <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactName}" />
                 <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactPhoneNumber, StringFormat=tel. {0}}" />
             </StackPanel>
 
-            <!--DEVICE-->
-            <StackPanel Margin="10" Grid.Column="1">
-                <TextBlock Text="Urządznie:" FontWeight="Bold" />
+            <!--  DEVICE  -->
+            <StackPanel Grid.Column="1" Margin="10">
+                <TextBlock FontWeight="Bold" Text="Urządznie:" />
                 <TextBlock Margin="15,0,0,0" Text="{Binding Order.Device, StringFormat=Marka {0}}" />
                 <TextBlock Margin="15,0,0,0" Text="{Binding Order.Model, StringFormat=Model {0}}" />
             </StackPanel>
@@ -69,39 +81,39 @@
 
         <!--  DETALE  -->
 
-        <StackPanel DataContext="{Binding Order}" HorizontalAlignment="Left" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
             <!--  KOSZT  -->
-            <StackPanel Margin="10,5,10,5" Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+            <StackPanel DataContext="{Binding Order}" Margin="10,5,10,5" Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
                 <WrapPanel>
                     <TextBlock
-                            FontWeight="Bold"
-                            Foreground="Black"
-                            Text="Usługi: " />
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="Usługi: " />
                 </WrapPanel>
                 <!--  USŁUGI  -->
 
                 <DataGrid
-                        Width="auto"
-                        AutoGenerateColumns="False"
-                        CanUserDeleteRows="False"
-                        GridLinesVisibility="Horizontal"
-                        HeadersVisibility="None"
-                        IsEnabled="False"
+                    Width="auto"
+                    AutoGenerateColumns="False"
+                    CanUserDeleteRows="False"
+                    GridLinesVisibility="Horizontal"
+                    HeadersVisibility="None"
+                    IsEnabled="False"
                         ItemsSource="{Binding ToDo, UpdateSourceTrigger=PropertyChanged}"
-                        SelectionMode="Single"
+                    SelectionMode="Single"
                         Visibility="{Binding ToDo, Converter={StaticResource emptyToDoVisibiltyConverter}}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                                Width="auto"
+                            Width="auto"
                                 Binding="{Binding ToDoName}"
-                                Foreground="Black"
-                                Header="Usługi" />
+                            Foreground="Black"
+                            Header="Usługi" />
                         <DataGridTextColumn
-                                Width="80"
+                            Width="80"
                                 Binding="{Binding Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
-                                Foreground="Black"
-                                Header="Cena">
+                            Foreground="Black"
+                            Header="Cena">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="HorizontalAlignment" Value="Right" />
@@ -110,36 +122,72 @@
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+
                 <TextBlock
-                        Margin="5"
-                        FontWeight="Bold"
-                        Foreground="Black"
+                    Margin="5"
+                    FontWeight="Bold"
+                    Foreground="Black"
                         Text="{Binding Cost, StringFormat=Szacowany Koszt: \{0:C2\}}" />
             </StackPanel>
+            <DataGrid
+
+                Margin="0,21,0,0"
+                Width="auto"
+                AutoGenerateColumns="False"
+                CanUserDeleteRows="False"
+                GridLinesVisibility="Horizontal"
+                HeadersVisibility="None"
+                IsEnabled="False"
+                ItemsSource="{Binding Path=ToDo2, UpdateSourceTrigger=PropertyChanged}"
+                SelectionMode="Single"
+                Visibility="{Binding Path=ToDo2, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding ToDoName}"
+                        Foreground="Black"
+                        Header="Usługi" />
+                    <DataGridTextColumn
+                        Width="80"
+                        Binding="{Binding Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
+                        Foreground="Black"
+                        Header="Cena">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
 
             <!--  OPIS USTERKI  -->
-            <StackPanel Margin="10,5,10,5" Visibility="{Binding Description, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+            <StackPanel  DataContext="{Binding Order}"  Margin="10,5,10,5" Visibility="{Binding Description, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
                 <TextBlock
-                        FontWeight="Bold"
-                        Foreground="Black"
-                        Text="Opis usterki: " />
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="Opis usterki: " />
                 <TextBlock
-                        MaxWidth="200"
-                        Foreground="Black"
-                        Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                        TextWrapping="WrapWithOverflow" />
+                    MaxWidth="200"
+                    Foreground="Black"
+                    Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="WrapWithOverflow" />
             </StackPanel>
             <!--  AKCESORIA  -->
-            <StackPanel Margin="10,5,10,5" Visibility="{Binding Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+            <StackPanel  DataContext="{Binding Order}" Margin="10,5,10,5" Visibility="{Binding Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
                 <TextBlock
-                        FontWeight="Bold"
-                        Foreground="Black"
-                        Text="Dołączone akcesoria: " />
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="Dołączone akcesoria: " />
                 <TextBlock Foreground="Black" Text="{Binding Accessories}" />
             </StackPanel>
         </StackPanel>
         <Separator />
-        <TextBlock  Text="{Binding rodo}" TextWrapping="WrapWithOverflow" FontSize="10"></TextBlock>
+        <TextBlock
+            FontSize="10"
+            Text="{Binding rodo}"
+            TextWrapping="WrapWithOverflow" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -149,27 +197,34 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Line Grid.Column="0"
-         Margin="0,60,0,0"
-         HorizontalAlignment="Center"
+            <Line
+                Grid.Column="0"
+                Margin="0,60,0,0"
+                HorizontalAlignment="Center"
+                Stroke="Black"
+                StrokeDashArray="1,2"
+                StrokeThickness="2"
+                X1="0"
+                X2="200" />
+            <Line
+                Grid.Column="1"
+                Margin="0,60,0,0"
+                HorizontalAlignment="Center"
+                Stroke="Black"
+                StrokeDashArray="1,2"
+                StrokeThickness="2"
+                X1="0"
+                X2="200" />
 
-         Stroke="Black"
-         StrokeDashArray="1,2"
-         StrokeThickness="2"
-         X1="0"
-         X2="200" />
-            <Line Grid.Column="1"
-         Margin="0,60,0,0"
-         HorizontalAlignment="Center"
-
-         Stroke="Black"
-         StrokeDashArray="1,2"
-         StrokeThickness="2"
-         X1="0"
-         X2="200" />
-
-            <TextBlock Grid.Row="1"  Text="Serwis" HorizontalAlignment="Center" />
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="Klient" HorizontalAlignment="Center" />
+            <TextBlock
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                Text="Serwis" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Text="Klient" />
         </Grid>
     </StackPanel>
 </UserControl>
