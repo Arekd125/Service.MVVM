@@ -15,15 +15,31 @@
     </UserControl.Resources>
 
     <StackPanel
-        Margin="10"
+        Margin="20"
         HorizontalAlignment="Stretch"
         Background="White"
         DataContext="{Binding PrintViewModel}"
         Orientation="Vertical">
+        <!--DATE-->
+        <TextBlock Text="{Binding Order.StartDate}" HorizontalAlignment="Right" VerticalAlignment="Top" />
+
+        <!--  ZLECENIE  -->
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="23"
+                FontWeight="Bold"
+                Text="Zlecenie" />
+            <TextBlock Margin="0,0,0,10"
+                HorizontalAlignment="Center"
+                FontSize="25"
+                Text="{Binding Order.OrderName}" />
+        </StackPanel>
 
         <Grid>
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
@@ -31,7 +47,7 @@
             <!--  STOPKA  -->
             <StackPanel
                 Grid.Column="0"
-                Margin="10"
+                HorizontalAlignment="Center"
                 Orientation="Vertical">
                 <TextBlock Text="{Binding inprint.Name}" />
                 <TextBlock Text="{Binding inprint.Street}" />
@@ -43,40 +59,20 @@
                 <TextBlock Text="{Binding inprint.PhoneNumner2}" />
                 <TextBlock Text="{Binding inprint.Mail}" />
             </StackPanel>
-
-            <!--  ZLECENIE  -->
-            <StackPanel
-                Grid.Column="1"
-                Margin="10"
-                Orientation="Vertical">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="Zlecenie" />
-                <TextBlock HorizontalAlignment="Center" Text="{Binding Order.OrderName}" />
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <!--  CONTACT  -->
-            <StackPanel Grid.Column="0" Margin="10">
-                <TextBlock FontWeight="Bold" Text="Klient:" />
-                <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactName}" />
-                <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactPhoneNumber, StringFormat=tel. {0}}" />
-            </StackPanel>
-
             <!--  DEVICE  -->
-            <StackPanel Grid.Column="1" Margin="10">
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
                 <TextBlock FontWeight="Bold" Text="Urządznie:" />
                 <TextBlock Margin="15,0,0,0" Text="{Binding Order.Device, StringFormat=Marka {0}}" />
                 <TextBlock Margin="15,0,0,0" Text="{Binding Order.Model, StringFormat=Model {0}}" />
             </StackPanel>
+            <!--  KLIENT  -->
+            <StackPanel Grid.Column="2" HorizontalAlignment="Left">
+                <TextBlock FontWeight="Bold" Text="Klient:" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactName}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.ContactPhoneNumber, StringFormat=tel. {0}}" />
+            </StackPanel>
         </Grid>
+
         <Separator />
 
         <!--  DETALE  -->
@@ -99,19 +95,19 @@
                     GridLinesVisibility="Horizontal"
                     HeadersVisibility="None"
                     IsEnabled="False"
-                        ItemsSource="{Binding ToDo1, UpdateSourceTrigger=PropertyChanged}"
+                    ItemsSource="{Binding ToDo1, UpdateSourceTrigger=PropertyChanged}"
                     SelectionMode="Single"
-                        Visibility="{Binding ToDo1, Converter={StaticResource emptyToDoVisibiltyConverter}}">
+                    Visibility="{Binding ToDo1, Converter={StaticResource emptyToDoVisibiltyConverter}}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="auto"
-                                Binding="{Binding ToDoName}"
+                            Binding="{Binding ToDoName}"
                             Foreground="Black"
                             Header="Usługi" />
                         <DataGridTextColumn
                             Width="80"
-                                Binding="{Binding Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
+                            Binding="{Binding Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
                             Foreground="Black"
                             Header="Cena">
                             <DataGridTextColumn.ElementStyle>
@@ -123,16 +119,16 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <TextBlock DataContext="{Binding Order}"
+                <TextBlock
                     Margin="5"
+                    DataContext="{Binding Order}"
                     FontWeight="Bold"
                     Foreground="Black"
-                        Text="{Binding Cost, StringFormat=Szacowany Koszt: \{0:C2\}}" />
+                    Text="{Binding Cost, StringFormat=Szacowany Koszt: \{0:C2\}}" />
             </StackPanel>
             <DataGrid
-
-                Margin="0,21,0,0"
                 Width="auto"
+                Margin="0,21,0,0"
                 AutoGenerateColumns="False"
                 CanUserDeleteRows="False"
                 GridLinesVisibility="Horizontal"
@@ -163,7 +159,10 @@
             </DataGrid>
 
             <!--  OPIS USTERKI  -->
-            <StackPanel  DataContext="{Binding Order}"  Margin="10,5,10,5" Visibility="{Binding Description, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+            <StackPanel
+                Margin="10,5,10,5"
+                DataContext="{Binding Order}"
+                Visibility="{Binding Description, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
                 <TextBlock
                     FontWeight="Bold"
                     Foreground="Black"
@@ -175,7 +174,10 @@
                     TextWrapping="WrapWithOverflow" />
             </StackPanel>
             <!--  AKCESORIA  -->
-            <StackPanel  DataContext="{Binding Order}" Margin="10,5,10,5" Visibility="{Binding Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
+            <StackPanel
+                Margin="10,5,10,5"
+                DataContext="{Binding Order}"
+                Visibility="{Binding Accessories, Converter={StaticResource stringNullOrEmptyToVisibilityConverter}}">
                 <TextBlock
                     FontWeight="Bold"
                     Foreground="Black"
