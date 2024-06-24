@@ -7,6 +7,7 @@ using Service.ViewModel.Stores.OrdersFilter;
 using Service.ViewModel.ViewModels;
 using Service.ViewModel.ViewModels.CreatingOrderViewModels;
 using Service.ViewModel.ViewModels.PrintOrderViewModels;
+using Service.ViewModel.ViewModels.StatusBarViewVModels;
 
 namespace Service.ViewModel.Extensions
 {

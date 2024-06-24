@@ -48,7 +48,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper, OrdersFilter ordersFilter, IDialogService dialogService, PrintOrderViewModel printOrderViewModel)
+        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper, OrdersFilter ordersFilter, IPrintDialogService dialogService, PrintOrderViewModel printOrderViewModel)
         {
             _ordersCollection = new ObservableCollection<OrderDto>();
             _orderStore = orderStore;

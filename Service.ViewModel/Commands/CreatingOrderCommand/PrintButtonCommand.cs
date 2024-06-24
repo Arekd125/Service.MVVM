@@ -6,14 +6,14 @@ namespace Service.ViewModel.Commands.CreatingOrderCommand
 {
     public class PrintButtonCommand : SaveOrderButtonCommand
     {
-        private readonly IDialogService _dialogService;
+        private readonly IPrintDialogService _dialogService;
         private readonly PrintOrderViewModel _printOrderViewModel;
         private readonly CreatingOrderViewModel _creatingOrderViewModel;
 
         public PrintButtonCommand(CreatingOrderViewModel creatingOrderViewModel,
             ContactViewModel contactViewModel,
             DeviceViewModel deviceViewModel,
-            IDialogService dialogService,
+            IPrintDialogService dialogService,
             PrintOrderViewModel printOrderViewModel,
             DescriptionViewModel descriptionViewModel) :
             base(creatingOrderViewModel, contactViewModel, deviceViewModel, descriptionViewModel)

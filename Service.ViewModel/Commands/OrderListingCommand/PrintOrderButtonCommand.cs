@@ -12,12 +12,12 @@ namespace Service.ViewModel.Commands.OrderListingCommand
 {
     public class PrintOrderButtonCommand : CommandBase
     {
-        private readonly IDialogService _dialogService;
+        private readonly IPrintDialogService _dialogService;
         private readonly PrintOrderViewModel _printOrderViewModel;
         private readonly OrderStore _orderStore;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public PrintOrderButtonCommand(IDialogService dialogService, PrintOrderViewModel printOrderViewModel, OrderStore orderStore, OrdersListingViewModel ordersListingViewModel)
+        public PrintOrderButtonCommand(IPrintDialogService dialogService, PrintOrderViewModel printOrderViewModel, OrderStore orderStore, OrdersListingViewModel ordersListingViewModel)
         {
             _dialogService = dialogService;
             _printOrderViewModel = printOrderViewModel;

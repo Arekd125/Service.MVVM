@@ -24,6 +24,7 @@
                     HorizontalAlignment="Right"
                     BorderBrush="White"
                     Foreground="White"
+                   Command="{Binding SettingsButton}"
                     Style="{DynamicResource MahApps.Styles.Button.Circle}">
                     <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE713;" />
                 </Button>
@@ -34,6 +35,7 @@
                     Padding="1,0,1,0"
                     BorderBrush="White"
                     Foreground="White"
+                    Command="{Binding InfoButton}"
                     Style="{DynamicResource MahApps.Styles.Button.Circle}">
                     <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF13F;" />
                 </Button>

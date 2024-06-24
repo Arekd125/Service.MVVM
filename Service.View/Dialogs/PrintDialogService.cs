@@ -1,9 +1,10 @@
-﻿using Service.ViewModel.Service;
+﻿using Service.View.Views.PrintOrderViews;
+using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels.PrintOrderViewModels;
 
-namespace Service.View.Views.PrintOrderViews
+namespace Service.View.Dialogs
 {
-    public class DialogService : IDialogService
+    public class PrintDialogService : IPrintDialogService
     {
         public void ShowDialog(PrintOrderViewModel printOrderViewModel)
         {

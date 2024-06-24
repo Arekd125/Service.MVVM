@@ -1,16 +1,22 @@
 ﻿using MediatR;
+using Service.ViewModel.Commands.StatusBarCommand;
+using Service.ViewModel.Service;
 using Service.ViewModel.Service.Queries.GetNumberOpenedOrders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace Service.ViewModel.ViewModels
+namespace Service.ViewModel.ViewModels.StatusBarViewVModels
 {
     public class StatusBarViewModel : ViewModelBase
     {
         private readonly IMediator _mediator;
+
+        public ICommand InfoButton { get; }
+        public ICommand SettingsButton { get; }
         private int _openedOrders;
 
         public int OpenedOrders
@@ -27,9 +33,11 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        public StatusBarViewModel(IMediator mediator)
+        public StatusBarViewModel(IMediator mediator, IDialogService dialogService)
         {
             _mediator = mediator;
+            InfoButton = new InfoButtonCommand(dialogService);
+            SettingsButton = new SettingsButtonCommand(dialogService);
         }
 
         public int GetNumberOpenedOrders()

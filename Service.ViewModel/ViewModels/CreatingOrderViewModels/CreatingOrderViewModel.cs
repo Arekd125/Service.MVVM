@@ -71,7 +71,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             PrintOrderViewModel printOrderViewModel,
             IMediator mediator,
             IMapper mapper,
-            IDialogService dialogService
+            IPrintDialogService dialogService
             )
         {
             _orderStore = orderStore;
