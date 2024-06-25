@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Service.Model.DbContexts;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service.Commands.CreateDevice;
 using Service.ViewModel.Stores;
@@ -37,6 +39,15 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<OrdersFilter>();
             services.AddScoped<InfoViewModel>();
             services.AddScoped<SettingsViewModel>();
+        }
+
+        public static void AddConfigurations(this IServiceCollection services, IConfiguration configuration)
+
+        {
+            var aboutInfo = new AboutInfo();
+            configuration.GetSection("AboutInfo").Bind(aboutInfo);
+
+            services.AddSingleton(aboutInfo);
         }
     }
 }

@@ -29,11 +29,11 @@ namespace Service.View
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddDbConnection(hostContext.Configuration);
+                    services.AddConfigurations(hostContext.Configuration);
                     services.AddModel();
                     services.AddViewModel();
                     services.AddScoped<IDialogCoordinator>(s => DialogCoordinator.Instance);
                     services.AddSingleton<IDialogService, DialogService>();
-
                     services.AddSingleton(s => new MainWindow()
                     {
                         DataContext = s.GetRequiredService<MainWindowViewModel>()
