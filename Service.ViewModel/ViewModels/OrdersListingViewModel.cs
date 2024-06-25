@@ -48,7 +48,7 @@ namespace Service.ViewModel.ViewModels
             }
         }
 
-        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper, OrdersFilter ordersFilter, IPrintDialogService dialogService, PrintOrderViewModel printOrderViewModel)
+        public OrdersListingViewModel(OrderStore orderStore, IMediator mediator, IDialogCoordinator dialogCoordinator, IMapper mapper, OrdersFilter ordersFilter, IDialogService dialogService, PrintOrderViewModel printOrderViewModel)
         {
             _ordersCollection = new ObservableCollection<OrderDto>();
             _orderStore = orderStore;
@@ -61,7 +61,7 @@ namespace Service.ViewModel.ViewModels
             _orderStore.FiltringChanged += OnFiltringChanged;
 
             EditStatusButton = new EditStatusButtonCommand(this);
-            PrintOrderButton = new PrintOrderButtonCommand(dialogService, printOrderViewModel, orderStore, this);
+            PrintOrderButton = new PrintOrderButtonCommand(dialogService, printOrderViewModel, this);
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
 

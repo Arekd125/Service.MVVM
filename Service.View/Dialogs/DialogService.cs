@@ -18,7 +18,7 @@ namespace Service.View.Dialogs
             _mappings.Add(typeof(TViewModel), typeof(TView));
         }
 
-        public void ShowDialog<ViewModel>()
+        public void ShowDialog<ViewModel>(ViewModel viewModel)
         {
             var type = _mappings[typeof(ViewModel)];
             var VmType = typeof(ViewModel);
@@ -27,9 +27,7 @@ namespace Service.View.Dialogs
             var Content = Activator.CreateInstance(type);
             if (VmType != null)
             {
-                var vm = Activator.CreateInstance(VmType);
-
-                (Content as FrameworkElement).DataContext = vm;
+                (Content as FrameworkElement).DataContext = viewModel;
             }
 
             dialog.Content = Content;

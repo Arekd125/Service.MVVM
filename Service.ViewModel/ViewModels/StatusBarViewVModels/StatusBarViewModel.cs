@@ -33,11 +33,11 @@ namespace Service.ViewModel.ViewModels.StatusBarViewVModels
             }
         }
 
-        public StatusBarViewModel(IMediator mediator, IDialogService dialogService)
+        public StatusBarViewModel(IMediator mediator, IDialogService dialogService, InfoViewModel infoViewModel, SettingsViewModel settingsViewModel)
         {
             _mediator = mediator;
-            InfoButton = new InfoButtonCommand(dialogService);
-            SettingsButton = new SettingsButtonCommand(dialogService);
+            InfoButton = new InfoButtonCommand(dialogService, infoViewModel);
+            SettingsButton = new SettingsButtonCommand(dialogService, settingsViewModel);
         }
 
         public int GetNumberOpenedOrders()

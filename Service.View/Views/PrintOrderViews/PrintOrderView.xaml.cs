@@ -6,7 +6,7 @@ namespace Service.View.Views.PrintOrderViews
     /// <summary>
     /// Interaction logic for PrintOrderView.xaml
     /// </summary>
-    public partial class PrintOrderView : MetroWindow
+    public partial class PrintOrderView : UserControl
     {
         public PrintOrderView()
         {
@@ -17,7 +17,6 @@ namespace Service.View.Views.PrintOrderViews
         {
             try
             {
-                this.IsEnabled = true;
                 this.PrintButton.Visibility = System.Windows.Visibility.Hidden;
                 this.CloseButton.Visibility = System.Windows.Visibility.Hidden;
                 PrintDialog printDialog = new PrintDialog();
@@ -27,8 +26,7 @@ namespace Service.View.Views.PrintOrderViews
                 }
             }
             finally
-            {      
-                this.IsEnabled = true;
+            {
                 this.PrintButton.Visibility = System.Windows.Visibility.Visible;
                 this.CloseButton.Visibility = System.Windows.Visibility.Visible;
             }

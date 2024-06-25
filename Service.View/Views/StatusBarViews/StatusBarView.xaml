@@ -11,7 +11,7 @@
     mc:Ignorable="d">
     <StatusBar>
         <StatusBarItem>
-            <TextBlock FontSize="20" Text="{Binding OpenedOrders, StringFormat=Liczba zleceń oczekujących na realizację: {0} }" />
+            <TextBlock FontSize="20" Text="{Binding OpenedOrders, StringFormat=Liczba zleceń oczekujących na realizację: {0}}" />
         </StatusBarItem>
 
         <StatusBarItem HorizontalAlignment="Right">
@@ -23,8 +23,8 @@
                     Height="32"
                     HorizontalAlignment="Right"
                     BorderBrush="White"
+                    Command="{Binding SettingsButton}"
                     Foreground="White"
-                   Command="{Binding SettingsButton}"
                     Style="{DynamicResource MahApps.Styles.Button.Circle}">
                     <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE713;" />
                 </Button>
@@ -34,8 +34,8 @@
                     Margin="10,0,5,0"
                     Padding="1,0,1,0"
                     BorderBrush="White"
-                    Foreground="White"
                     Command="{Binding InfoButton}"
+                    Foreground="White"
                     Style="{DynamicResource MahApps.Styles.Button.Circle}">
                     <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF13F;" />
                 </Button>

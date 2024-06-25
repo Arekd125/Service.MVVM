@@ -5,10 +5,12 @@ using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
 using Service.Model.Extensions;
 using Service.View.Dialogs;
+using Service.View.Views.PrintOrderViews;
 using Service.View.Views.StatusBarViews;
 using Service.ViewModel.Extensions;
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
+using Service.ViewModel.ViewModels.PrintOrderViewModels;
 using Service.ViewModel.ViewModels.StatusBarViewVModels;
 using System.Windows;
 
@@ -30,7 +32,6 @@ namespace Service.View
                     services.AddModel();
                     services.AddViewModel();
                     services.AddScoped<IDialogCoordinator>(s => DialogCoordinator.Instance);
-                    services.AddSingleton<IPrintDialogService, PrintDialogService>();
                     services.AddSingleton<IDialogService, DialogService>();
 
                     services.AddSingleton(s => new MainWindow()
@@ -42,10 +43,10 @@ namespace Service.View
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            _host.Start();
             DialogService.RegisterDialog<InfoView, InfoViewModel>();
             DialogService.RegisterDialog<SettingsView, SettingsViewModel>();
-            _host.Start();
-
+            DialogService.RegisterDialog<PrintOrderView, PrintOrderViewModel>();
             OrdersDbContextFactory _ordersDbContextFactory = _host.Services.GetRequiredService<OrdersDbContextFactory>();
             using (OrdersDbContext dbContext = _ordersDbContextFactory.CreateDbContext())
             {

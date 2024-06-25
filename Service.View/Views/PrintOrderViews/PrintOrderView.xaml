@@ -1,4 +1,4 @@
-﻿<mah:MetroWindow
+﻿<UserControl
     x:Class="Service.View.Views.PrintOrderViews.PrintOrderView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,16 +6,13 @@
     xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="clr-namespace:Service.View.Views.PrintOrderViews"
-    Title="Zlecenie"
-    SizeToContent="WidthAndHeight"
-    ResizeMode="NoResize"
-    WindowStartupLocation="CenterScreen"
+
     mc:Ignorable="d">
-    <Window.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ScaleTransform x:Key="windowScaleTransform" ScaleX="0.8" ScaleY="0.8" />
         </ResourceDictionary>
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid  LayoutTransform="{StaticResource windowScaleTransform}">
         <Grid
             x:Name="print"
@@ -31,7 +28,7 @@
             <Line
                 Grid.Row="1"
                 Margin="0,10,0,10"
-                HorizontalAlignment="Stretch"  
+                HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 Stroke="Black"
                 StrokeDashArray="1,2"
@@ -69,4 +66,4 @@
             </Button>
         </StackPanel>
     </Grid>
-</mah:MetroWindow>
+</UserControl>
