@@ -11,9 +11,5 @@ namespace Service.View
         {
             InitializeComponent();
         }
-
-        private void ButtonsAlignment_SelectedColorChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
-        {
-        }
     }
 }

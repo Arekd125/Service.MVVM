@@ -16,7 +16,6 @@ namespace Service.ViewModel.ViewModels.StatusBarViewVModels
         public string License { get; set; }
         public string SupportInfo { get; set; }
         public string UpdateHistory { get; set; }
-        public string Acknowledgements { get; set; }
         public string Contact { get; set; }
     }
 }

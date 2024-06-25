@@ -1,22 +1,44 @@
-﻿<UserControl x:Class="Service.View.Views.StatusBarViews.InfoView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Service.View.Views.StatusBarViews"
-             mc:Ignorable="d"
-
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel DataContext="{Binding AboutInfo}">
-        <TextBlock Text="{Binding ProgramName}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding Version}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding MainFeatures}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding Developers}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding License}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding SupportInfo}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding UpdateHistory}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding Acknowledgements}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-        <TextBlock Text="{Binding Contact}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+﻿<UserControl
+    x:Class="Service.View.Views.StatusBarViews.InfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Service.View.Views.StatusBarViews"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="Hedders" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        <Style x:Key="Texts" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="20,10,10,10" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="30" DataContext="{Binding AboutInfo}">
+        <TextBlock HorizontalAlignment="Center"
+            FontSize="26"
+            FontWeight="Bold"
+            Text="About" />
+        <TextBlock Style="{StaticResource Hedders}" Text="{Binding ProgramName, StringFormat=Nazwa Programu: {0}}" />
+        <TextBlock Style="{StaticResource Hedders}" Text="{Binding Version, StringFormat=Wersjia: {0}}" />
+        <TextBlock Style="{StaticResource Hedders}" Text="Opis Programu" />
+        <TextBlock Style="{StaticResource Texts}" Text="{Binding Description}" />
+        <TextBlock Style="{StaticResource Hedders}" Text="Główne Funkcje" />
+        <TextBlock Style="{StaticResource Texts}" Text="{Binding MainFeatures}" />
+        <TextBlock Style="{StaticResource Hedders}" Text="Twórca" />
+        <TextBlock Style="{StaticResource Texts}" Text="{Binding Developers}" />
+        <TextBlock Style="{StaticResource Hedders}" Text="Licencja" />
+        <TextBlock Style="{StaticResource Texts}" Text="{Binding License}" />
+        <TextBlock Style="{StaticResource Hedders}" Text="Wsparcie Techniczne" />
+        <TextBlock Style="{StaticResource Texts}" Text="{Binding SupportInfo}" />
+        <TextBlock Style="{StaticResource Hedders}" Text="Aktualizacje i Historia Wersji" />
+        <TextBlock Style="{StaticResource Texts}" Text="{Binding UpdateHistory}" />
+        <TextBlock Style="{StaticResource Hedders}"  FontSize="24" Text="Kontakt" />
+        <TextBlock Style="{StaticResource Texts}" Text="{Binding Contact}" />
     </StackPanel>
 </UserControl>
