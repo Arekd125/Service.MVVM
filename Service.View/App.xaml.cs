@@ -4,10 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.Model.DbContexts;
 using Service.Model.Extensions;
+using Service.View.Dialogs;
 using Service.View.Views.PrintOrderViews;
+using Service.View.Views.StatusBarViews;
 using Service.ViewModel.Extensions;
 using Service.ViewModel.Service;
 using Service.ViewModel.ViewModels;
+using Service.ViewModel.ViewModels.PrintOrderViewModels;
+using Service.ViewModel.ViewModels.StatusBarViewVModels;
 using System.Windows;
 
 namespace Service.View
@@ -25,11 +29,11 @@ namespace Service.View
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddDbConnection(hostContext.Configuration);
+                    services.AddConfigurations(hostContext.Configuration);
                     services.AddModel();
                     services.AddViewModel();
                     services.AddScoped<IDialogCoordinator>(s => DialogCoordinator.Instance);
                     services.AddSingleton<IDialogService, DialogService>();
-
                     services.AddSingleton(s => new MainWindow()
                     {
                         DataContext = s.GetRequiredService<MainWindowViewModel>()
@@ -40,7 +44,9 @@ namespace Service.View
         protected override void OnStartup(StartupEventArgs e)
         {
             _host.Start();
-
+            DialogService.RegisterDialog<InfoView, InfoViewModel>();
+            DialogService.RegisterDialog<SettingsView, SettingsViewModel>();
+            DialogService.RegisterDialog<PrintOrderView, PrintOrderViewModel>();
             OrdersDbContextFactory _ordersDbContextFactory = _host.Services.GetRequiredService<OrdersDbContextFactory>();
             using (OrdersDbContext dbContext = _ordersDbContextFactory.CreateDbContext())
             {

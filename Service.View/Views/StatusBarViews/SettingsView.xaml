@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="Service.View.Views.StatusBarViews.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+    mc:Ignorable="d">
+
+    <GroupBox Margin="30" Header="Dane Serwisu">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel DataContext="{Binding Inpritn}">
+                <TextBox
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Nazwa serwsu"
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Ulica"
+                    Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Miasto"
+                    Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Kod pocztowy"
+                    Text="{Binding Zipcode, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Numer Telefonu"
+                    Text="{Binding PhoneNumner1, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBox
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Numer Telefonu"
+                    Text="{Binding PhoneNumner2, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    mah:TextBoxHelper.UseFloatingWatermark="True"
+                    mah:TextBoxHelper.Watermark="Adres e-mail"
+                    Text="{Binding Mail, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <Button
+                Height="10"
+                Margin="0,10,0,0"
+                mah:ControlsHelper.ContentCharacterCasing="Upper"
+                Command="{Binding SaveInprintButton}"
+                Content="Zapisz Zmiany"
+                Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />
+        </StackPanel>
+    </GroupBox>
+</UserControl>

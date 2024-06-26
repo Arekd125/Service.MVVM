@@ -61,7 +61,7 @@ namespace Service.ViewModel.ViewModels
             _orderStore.FiltringChanged += OnFiltringChanged;
 
             EditStatusButton = new EditStatusButtonCommand(this);
-            PrintOrderButton = new PrintOrderButtonCommand(dialogService, printOrderViewModel, orderStore, this);
+            PrintOrderButton = new PrintOrderButtonCommand(dialogService, printOrderViewModel, this);
             EditOrderButton = new EditOrderButtonCommand(this, _orderStore);
             DeleteOrderButton = new DeleteOrderButtonCommand(this);
 

@@ -115,5 +115,13 @@ namespace Service.Model.Repositories
                 return orders;
             }
         }
+
+        public async Task<int> GetNumberOpenedOrders()
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                return await dbContext.Orders.Where(o => o.IsFinished == false).CountAsync();
+            }
+        }
     }
 }

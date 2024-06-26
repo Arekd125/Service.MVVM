@@ -28,8 +28,8 @@
         <Button
             Height="60"
             Margin="0,3,10,0"
-            Background="Green"
             mah:ControlsHelper.ContentCharacterCasing="Upper"
+            Background="Green"
             Command="{Binding PrintButton}"
             Content="Drukuj"
             Style="{StaticResource MahApps.Styles.Button.Square.Accent}" />

@@ -14,14 +14,12 @@ namespace Service.ViewModel.Commands.OrderListingCommand
     {
         private readonly IDialogService _dialogService;
         private readonly PrintOrderViewModel _printOrderViewModel;
-        private readonly OrderStore _orderStore;
         private readonly OrdersListingViewModel _ordersListingViewModel;
 
-        public PrintOrderButtonCommand(IDialogService dialogService, PrintOrderViewModel printOrderViewModel, OrderStore orderStore, OrdersListingViewModel ordersListingViewModel)
+        public PrintOrderButtonCommand(IDialogService dialogService, PrintOrderViewModel printOrderViewModel, OrdersListingViewModel ordersListingViewModel)
         {
             _dialogService = dialogService;
             _printOrderViewModel = printOrderViewModel;
-            _orderStore = orderStore;
             _ordersListingViewModel = ordersListingViewModel;
         }
 
@@ -31,7 +29,6 @@ namespace Service.ViewModel.Commands.OrderListingCommand
             var OrderToPrint = _ordersListingViewModel.GetOrderByIndex(_ordersListingViewModel.EditOrderIndex);
 
             _printOrderViewModel.PrintViewModel.Order = OrderToPrint;
-            // _orderStore.OrderToPrint(OrderToPrint);
             _dialogService.ShowDialog(_printOrderViewModel);
         }
     }

@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="Service.View.Views.StatusBarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Service.View.Views"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <StatusBar>
+        <StatusBarItem>
+            <TextBlock FontSize="20" Text="{Binding OpenedOrders, StringFormat=Liczba zleceń oczekujących na realizację: {0}}" />
+        </StatusBarItem>
+
+        <StatusBarItem HorizontalAlignment="Right">
+
+            <WrapPanel>
+
+                <Button
+                    Width="32"
+                    Height="32"
+                    HorizontalAlignment="Right"
+                    BorderBrush="White"
+                    Command="{Binding SettingsButton}"
+                    Foreground="White"
+                    Style="{DynamicResource MahApps.Styles.Button.Circle}">
+                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE713;" />
+                </Button>
+                <Button
+                    Width="32"
+                    Height="32"
+                    Margin="10,0,5,0"
+                    Padding="1,0,1,0"
+                    BorderBrush="White"
+                    Command="{Binding InfoButton}"
+                    Foreground="White"
+                    Style="{DynamicResource MahApps.Styles.Button.Circle}">
+                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF13F;" />
+                </Button>
+            </WrapPanel>
+        </StatusBarItem>
+    </StatusBar>
+</UserControl>
