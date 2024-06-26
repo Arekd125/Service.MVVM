@@ -54,10 +54,10 @@ namespace Service.ViewModel.ViewModels.PrintOrderViewModels
             }
         }
 
-        public PrintViewModel()
+        public PrintViewModel(Inprint inprint)
         {
-            inprint = new Inprint("AD-KOMP Arkadius Dominiak",
-             "Szarych Szeregów 3", "Konin", "62-500", "534 078 017", "534 078 018", null);
+            this.inprint = inprint;
+            //  new Inprint("AD-KOMP Arkadius Dominiak","Szarych Szeregów 3", "Konin", "62-500", "534 078 017", "534 078 018", null);
 
             rodo = @$"W związku z realizacją niniejszego zlecenia, informujemy,że w celu jego wykonania niezbędne jest przetwarzanie Państwa danych osobowych.
 Administratorem danych osobowych jest {inprint.Name} z siedzibą w {inprint.City}ie {inprint.Street}.

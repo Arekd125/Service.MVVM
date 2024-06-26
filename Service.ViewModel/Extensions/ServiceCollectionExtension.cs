@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 using Service.Model.DbContexts;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service.Commands.CreateDevice;
@@ -48,6 +49,39 @@ namespace Service.ViewModel.Extensions
             configuration.GetSection("AboutInfo").Bind(aboutInfo);
 
             services.AddSingleton(aboutInfo);
+
+            var inprint = new Inprint();
+            configuration.GetSection("InprintInfo").Bind(inprint);
+
+            services.AddSingleton(inprint);
+        }
+
+        public static class AppSettingsHelper
+        {
+            private static readonly string AppSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+
+            public static void UpdateInprintSettings(Inprint inprint)
+            {
+                var json = File.ReadAllText(AppSettingsPath);
+                var jsonObj = JObject.Parse(json);
+                var inprintSection = jsonObj["InprintInfo"];
+
+                if (inprintSection == null)
+                {
+                    inprintSection = new JObject();
+                    jsonObj["InprintInfo"] = inprintSection;
+                }
+
+                inprintSection["Name"] = inprint.Name;
+                inprintSection["Street"] = inprint.Street;
+                inprintSection["City"] = inprint.City;
+                inprintSection["Zipcode"] = inprint.Zipcode;
+                inprintSection["PhoneNumner1"] = inprint.PhoneNumner1;
+                inprintSection["PhoneNumner2"] = inprint.PhoneNumner2;
+                inprintSection["Mail"] = inprint.Mail;
+
+                File.WriteAllText(AppSettingsPath, jsonObj.ToString());
+            }
         }
     }
 }
