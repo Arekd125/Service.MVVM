@@ -21,7 +21,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState
             if (isEditable)
             {
                 toDoStateUpdate.ToDoName = request.ToDoName;
-                toDoStateUpdate.Prize = request.Prize;
+                toDoStateUpdate.Price = request.Prize;
                 await _toDoStateRepository.UpDate(toDoStateUpdate);
             }
             return Unit.Value;

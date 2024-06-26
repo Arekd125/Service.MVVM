@@ -35,7 +35,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                IEnumerable<Order> orders = await dbContext.Orders.Include(o => o.Contact).Include(t => t.ToDo).ToListAsync();
+                IEnumerable<Order> orders = await dbContext.Orders.AsNoTracking().Include(o => o.Contact).Include(t => t.ToDo).ToListAsync();
 
                 return orders;
             }
@@ -45,7 +45,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                Order? order = await dbContext.Orders
+                Order? order = await dbContext.Orders.AsNoTracking()
                     .OrderByDescending(o => o.Id)
                     .FirstOrDefaultAsync();
 
@@ -57,7 +57,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                var order = await dbContext.Orders.Include(o => o.Contact).FirstOrDefaultAsync(p => p.OrderName == OrderName);
+                var order = await dbContext.Orders.AsNoTracking().Include(o => o.Contact).FirstOrDefaultAsync(p => p.OrderName == OrderName);
 
                 return order;
             }
@@ -67,7 +67,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                return await dbContext.Orders.AnyAsync(o => o.ContactId == contactId);
+                return await dbContext.Orders.AsNoTracking().AnyAsync(o => o.ContactId == contactId);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                IEnumerable<Order> orders = await dbContext.Orders
+                IEnumerable<Order> orders = await dbContext.Orders.AsNoTracking()
                     .Include(o => o.Contact)
                     .Include(t => t.ToDo)
                     .Where(o => o.StartDate.Date <= startDate.Date && o.StartDate.Date >= endDate.Date).ToListAsync();
@@ -120,7 +120,7 @@ namespace Service.Model.Repositories
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                return await dbContext.Orders.Where(o => o.IsFinished == false).CountAsync();
+                return await dbContext.Orders.AsNoTracking().Where(o => o.IsFinished == false).CountAsync();
             }
         }
     }

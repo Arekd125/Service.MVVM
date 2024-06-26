@@ -19,6 +19,7 @@
     <DataGrid
         RowDetailsVisibilityMode="Collapsed"
         Margin="0,10,0,0"
+        Height="630"
         HorizontalAlignment="Left"
         AutoGenerateColumns="False"
         BorderThickness="1"

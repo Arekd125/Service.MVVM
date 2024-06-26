@@ -40,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataGenerator\DataGenerator.csproj" />
     <ProjectReference Include="..\Service.ViewModel\Service.ViewModel.csproj" />
   </ItemGroup>
 

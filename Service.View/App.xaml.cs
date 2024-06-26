@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using DataGenerator;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -52,6 +53,7 @@ namespace Service.View
             {
                 dbContext.Database.Migrate();
             }
+            Generator.Seed(_ordersDbContextFactory);
 
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
 

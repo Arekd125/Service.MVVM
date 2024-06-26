@@ -35,7 +35,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             ToDoState toDoState = new ToDoState()
             {
                 ToDoName = "Test",
-                Prize = 12,
+                Price = 12,
 
             };
 
@@ -51,7 +51,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             result.Should().Be(Unit.Value);
             toDoState.Should().NotBeNull();
             toDoState.ToDoName.Should().Be(command.ToDoName);
-            toDoState.Prize.Should().Be(command.Prize);
+            toDoState.Price.Should().Be(command.Prize);
             _todoStateRepositoryMock.Verify(ver => ver.UpDate(toDoState), Times.Once());
 
         }

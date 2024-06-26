@@ -22,7 +22,6 @@ namespace Service.Model.DbContexts
                 .HasOne(ed => ed.Contact)
                 .WithMany(ec => ec.Order)
                 .HasForeignKey(ed => ed.ContactId);
-            //  .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Contact>()
               .Property(x => x.PhoneNumber)
@@ -37,24 +36,6 @@ namespace Service.Model.DbContexts
                 .HasOne(x => x.Order)
                 .WithMany(k => k.ToDo)
                 .HasForeignKey(k => k.OrderId);
-
-            var lenovo = new ModelState()
-            {
-                Id = 1,
-                Name = "G503",
-                DeviceStateId = 2
-            };
-
-            var Lenovo = new DeviceState()
-            {
-                Id = 2,
-                Name = "Lenovo"
-            };
-
-            modelBuilder.Entity<ModelState>()
-            .HasData(lenovo);
-            modelBuilder.Entity<DeviceState>()
-             .HasData(Lenovo);
         }
     }
 }
