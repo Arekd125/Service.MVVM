@@ -15,6 +15,7 @@ namespace DataGenerator
     public class Generator
     {
         private static bool _disposed = false;
+        private static int _numberGenerate = 1200;
 
         public static void Seed(OrdersDbContextFactory dbContextFactory)
         {
@@ -39,9 +40,9 @@ namespace DataGenerator
                         .RuleFor(o => o.IsFinished, f => f.Random.Bool())
                         .RuleFor(o => o.Contact, f => contactGenerator.Generate())
                         .RuleFor(o => o.ToDo, f => ToDoGenerator.Generate(6))
-                        .RuleFor(o => o.StartDate, f => f.Date.Past(60));
+                        .RuleFor(o => o.StartDate, f => f.Date.Past(1));
 
-                    var orders = orderGenerator.Generate(10000);
+                    var orders = orderGenerator.Generate(_numberGenerate);
 
                     dbContext.AddRange(orders);
 
