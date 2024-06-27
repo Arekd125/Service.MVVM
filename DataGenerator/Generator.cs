@@ -14,7 +14,7 @@ namespace DataGenerator
 {
     public class Generator
     {
-        private static bool _disposed = true;
+        private static bool _disposed = false;
 
         public static void Seed(OrdersDbContextFactory dbContextFactory)
         {
@@ -26,14 +26,14 @@ namespace DataGenerator
 
                     var contactGenerator = new Faker<Contact>(locale)
                               .RuleFor(c => c.Name, f => f.Person.FullName)
-                              .RuleFor(c => c.PhoneNumber, new Randomizer().Replace("### ### ###"));
+                              .RuleFor(c => c.PhoneNumber, f => f.Random.Replace("### ### ###"));
 
                     var ToDoGenerator = new Faker<ToDo>(locale)
                         .RuleFor(t => t.ToDoName, f => f.Hacker.IngVerb())
                         .RuleFor(t => t.Price, (f, t) => f.Random.Decimal(0.01M, 100M));
 
                     var orderGenerator = new Faker<Order>(locale)
-                        .RuleFor(o => o.OrderName, f => f.Finance.CreditCardCvv())
+                        .RuleFor(o => o.OrderName, f => f.Random.Replace("Z/**********"))
                         .RuleFor(o => o.Device, f => f.Vehicle.Manufacturer())
                         .RuleFor(o => o.Model, f => f.Vehicle.Model())
                         .RuleFor(o => o.IsFinished, f => f.Random.Bool())
