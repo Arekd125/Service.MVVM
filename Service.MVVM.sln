@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.ViewModelTests", "S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{51DF1D68-7089-430C-904F-6578D1D25035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{B4CB6DBC-94F3-460E-8279-169B516D0199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{B4CB6DBC-94F3-460E-8279-169B516D0199}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generator", "Generator", "{FF3918EB-6CF7-4D77-932E-F9705993D1D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Benchmark", "Service.Benchmark\Service.Benchmark.csproj", "{33401B40-ADFC-4BD4-8AD0-F3BCFF69913B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +45,18 @@ Global
 		{B4CB6DBC-94F3-460E-8279-169B516D0199}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4CB6DBC-94F3-460E-8279-169B516D0199}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4CB6DBC-94F3-460E-8279-169B516D0199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33401B40-ADFC-4BD4-8AD0-F3BCFF69913B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33401B40-ADFC-4BD4-8AD0-F3BCFF69913B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33401B40-ADFC-4BD4-8AD0-F3BCFF69913B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33401B40-ADFC-4BD4-8AD0-F3BCFF69913B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8E156586-5FA9-4479-B21C-68D62E78BA8A} = {51DF1D68-7089-430C-904F-6578D1D25035}
+		{B4CB6DBC-94F3-460E-8279-169B516D0199} = {FF3918EB-6CF7-4D77-932E-F9705993D1D7}
+		{33401B40-ADFC-4BD4-8AD0-F3BCFF69913B} = {51DF1D68-7089-430C-904F-6578D1D25035}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DF518C97-82F1-47FF-9B64-6057A39D6355}
