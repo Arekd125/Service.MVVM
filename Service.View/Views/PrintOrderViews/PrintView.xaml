@@ -111,7 +111,7 @@
                             Header="Usługi" />
                         <DataGridTextColumn
                             Width="80"
-                            Binding="{Binding Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
+                            Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
                             Foreground="Black"
                             Header="Cena">
                             <DataGridTextColumn.ElementStyle>
@@ -150,7 +150,7 @@
                         Header="Usługi" />
                     <DataGridTextColumn
                         Width="80"
-                        Binding="{Binding Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
+                        Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
                         Foreground="Black"
                         Header="Cena">
                         <DataGridTextColumn.ElementStyle>

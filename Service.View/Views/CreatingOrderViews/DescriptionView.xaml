@@ -34,7 +34,7 @@
                             <TextBlock
                                 Grid.Column="1"
                                 HorizontalAlignment="Right"
-                                Text="{Binding Prize, StringFormat=\{0:C\}}" />
+                                Text="{Binding Price, StringFormat=\{0:C\}}" />
                         </Grid>
                     </DataTemplate>
                 </mah:MultiSelectionComboBox.ItemTemplate>

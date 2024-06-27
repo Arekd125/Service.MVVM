@@ -141,7 +141,7 @@
                                         Header="Usługi" />
                                     <DataGridTextColumn
                                         Width="80"
-                                        Binding="{Binding Path=Prize, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
+                                        Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C2\}}"
                                         Foreground="Black"
                                         Header="Cena">
                                         <DataGridTextColumn.ElementStyle>

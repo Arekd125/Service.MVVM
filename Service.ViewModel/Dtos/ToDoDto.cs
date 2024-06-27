@@ -3,6 +3,6 @@
     public class ToDoDto
     {
         public string ToDoName { get; set; } = default!;
-        public decimal Prize { get; set; } = default!;
+        public decimal Price { get; set; } = default!;
     }
 }

@@ -9,13 +9,13 @@ namespace Service.ViewModel.Stores
         {
             if (x == null && y == null)
                 return false;
-            return x.ToDoName == y.ToDoName && x.Prize == y.Prize;
+            return x.ToDoName == y.ToDoName && x.Price == y.Price;
         }
 
         public int GetHashCode([DisallowNull] ToDoDto obj)
         {
             if (obj == null) return 0;
-            return obj.ToDoName.GetHashCode() ^ obj.Prize.GetHashCode();
+            return obj.ToDoName.GetHashCode() ^ obj.Price.GetHashCode();
         }
     }
 }

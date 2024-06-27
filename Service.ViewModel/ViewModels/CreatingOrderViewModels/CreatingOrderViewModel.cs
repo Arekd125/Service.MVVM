@@ -170,7 +170,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         private decimal SumCost(IEnumerable<ToDoDto> toDoItems)
         {
-            return toDoItems.Sum(item => item.Prize);
+            return toDoItems.Sum(item => item.Price);
         }
 
         private void AddDeviceIfNotExist()

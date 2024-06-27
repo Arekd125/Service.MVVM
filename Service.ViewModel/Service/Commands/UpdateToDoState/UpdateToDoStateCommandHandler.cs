@@ -10,7 +10,6 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState
         public UpdateToDoStateCommandHandler(IToDoStateRepository toDoStateRepository)
         {
             _toDoStateRepository = toDoStateRepository;
-
         }
 
         public async Task<Unit> Handle(UpdateToDoStateCommand request, CancellationToken cancellationToken)
@@ -21,7 +20,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState
             if (isEditable)
             {
                 toDoStateUpdate.ToDoName = request.ToDoName;
-                toDoStateUpdate.Price = request.Prize;
+                toDoStateUpdate.Price = request.Price;
                 await _toDoStateRepository.UpDate(toDoStateUpdate);
             }
             return Unit.Value;

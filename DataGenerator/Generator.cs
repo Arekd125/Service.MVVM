@@ -31,7 +31,7 @@ namespace DataGenerator
 
                     var ToDoGenerator = new Faker<ToDo>(locale)
                         .RuleFor(t => t.ToDoName, f => f.Hacker.IngVerb())
-                        .RuleFor(t => t.Price, (f, t) => f.Random.Decimal(0.01M, 100M));
+                        .RuleFor(t => t.Price, (f, t) => f.Random.Decimal(0.01m, 100m));
 
                     var orderGenerator = new Faker<Order>(locale)
                         .RuleFor(o => o.OrderName, f => f.Random.Replace("Z/**********"))
