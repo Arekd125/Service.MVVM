@@ -6,10 +6,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\main_icon.png" />
+	  <None Remove="Images\main_icon.png" />
   </ItemGroup>
 
 
@@ -42,6 +43,12 @@
   <ItemGroup>
     <ProjectReference Include="..\DataGenerator\DataGenerator.csproj" />
     <ProjectReference Include="..\Service.ViewModel\Service.ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\main_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
