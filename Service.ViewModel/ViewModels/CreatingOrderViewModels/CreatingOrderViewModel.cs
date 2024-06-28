@@ -151,6 +151,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
 
         public OrderDto CreateOrderDto()
         {
+            NameOrderViewModel.SetNextOrderName();
             return new OrderDto
             {
                 Id = OrderId,

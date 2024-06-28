@@ -13,6 +13,8 @@ using Service.ViewModel.ViewModels.PrintOrderViewModels;
 using Service.ViewModel.Stores.OrdersFilter;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace Service.ViewModel.ViewModels
 {
@@ -24,8 +26,6 @@ namespace Service.ViewModel.ViewModels
         private readonly OrdersFilter _ordersFilter;
         private readonly IMediator _mediator;
 
-        public int EditOrderIndex { get; set; }
-
         public ICommand EditStatusButton { get; }
         public ICommand PrintOrderButton { get; }
         public ICommand EditOrderButton { get; }
@@ -33,18 +33,18 @@ namespace Service.ViewModel.ViewModels
 
         public ObservableCollection<OrderDto> OrdersViewModelCollection => _ordersCollection;
 
-        private int _ordersViewModelSelectedIndex = -1;
+        private OrderDto _ordersViewModelSelectedItem;
 
-        public int OrdersViewModelSelectedIndex
+        public OrderDto OrdersViewModelSelectedItem
         {
             get
             {
-                return _ordersViewModelSelectedIndex;
+                return _ordersViewModelSelectedItem;
             }
             set
             {
-                _ordersViewModelSelectedIndex = value;
-                OnPropertyChanged(nameof(OrdersViewModelSelectedIndex));
+                _ordersViewModelSelectedItem = value;
+                OnPropertyChanged(nameof(OrdersViewModelSelectedItem));
             }
         }
 
@@ -71,10 +71,11 @@ namespace Service.ViewModel.ViewModels
 
         private void OnOrderEdited(OrderDto orderDto)
         {
-            var isFinished = _ordersCollection[EditOrderIndex].IsFinished;
-            _ordersCollection.RemoveAt(EditOrderIndex);
+            var isFinished = OrdersViewModelSelectedItem.IsFinished;
+            _ordersCollection.Remove(OrdersViewModelSelectedItem);
             orderDto.IsFinished = isFinished;
-            _ordersCollection.Insert(EditOrderIndex, orderDto);
+            orderDto.StartDate = DateTime.Now.ToString("d");
+            _ordersCollection.Add(orderDto);
         }
 
         private void OnOrderCreated(OrderDto orderDto)
@@ -91,8 +92,8 @@ namespace Service.ViewModel.ViewModels
 
         public void EditStatusOrder()
         {
-            var OrderToEdit = GetOrderByIndex(OrdersViewModelSelectedIndex);
-            _ordersCollection[EditOrderIndex].IsFinished = !_ordersCollection[EditOrderIndex].IsFinished;
+            var OrderToEdit = _ordersViewModelSelectedItem;
+            OrdersViewModelSelectedItem.IsFinished = !OrdersViewModelSelectedItem.IsFinished;
             _mediator.Send(new EditOrderStatusCommand(OrderToEdit.OrderName));
             var OrderToLoad = _ordersFilter.SendOrderDtos();
             LoadOrders(OrderToLoad);
@@ -100,7 +101,7 @@ namespace Service.ViewModel.ViewModels
 
         private void AddOrder(OrderDto orderDto)
         {
-            _ordersCollection.Insert(0, orderDto);
+            _ordersCollection.Add(orderDto);
         }
 
         public void LoadOrders(IEnumerable<OrderDto> orderDtos)
@@ -121,7 +122,7 @@ namespace Service.ViewModel.ViewModels
             base.Dispose();
         }
 
-        public async void ShowMessage(int index)
+        public async void ShowMessage()
         {
             var themes = ThemeManager.Current.DetectTheme().Resources;
             themes["Theme.ThemeInstance"] = ThemeManager.Current.GetTheme("Light.Red");
@@ -133,7 +134,7 @@ namespace Service.ViewModel.ViewModels
                 CustomResourceDictionary = themes,
                 ColorScheme = MetroDialogColorScheme.Accented
             };
-            var selectedOrder = GetOrderByIndex(index);
+            var selectedOrder = _ordersViewModelSelectedItem;
             var title = $"Usunąć Zlecenie {selectedOrder.OrderName}?";
             var message = $"Imię i Nazwisko: {selectedOrder.ContactName}\nTelefone: {selectedOrder.ContactPhoneNumber}\nMarka i Model: {selectedOrder.Device} {selectedOrder.Model}";
 
@@ -146,19 +147,14 @@ namespace Service.ViewModel.ViewModels
 
             if (result == MessageDialogResult.Affirmative)
             {
-                DeleteOrder(index);
+                DeleteOrder(_ordersViewModelSelectedItem);
             }
         }
 
-        public OrderDto GetOrderByIndex(int index)
+        public void DeleteOrder(OrderDto orderToDelete)
         {
-            return _ordersCollection[index];
-        }
+            _ordersCollection.Remove(orderToDelete);
 
-        public void DeleteOrder(int index)
-        {
-            var orderToDelete = GetOrderByIndex(index);
-            _ordersCollection.RemoveAt(index);
             _mediator.Send(new DeleteOrderCommand(orderToDelete.OrderName));
         }
     }

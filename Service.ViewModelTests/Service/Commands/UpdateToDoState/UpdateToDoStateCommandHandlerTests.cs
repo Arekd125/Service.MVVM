@@ -18,8 +18,6 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             _handle = new UpdateToDoStateCommandHandler(_todoStateRepositoryMock.Object);
         }
 
-
-
         [Fact()]
         public async Task Handle_ShouldUpdateToDoState_WhenToDoStateExistAndToDoNameIsNotNullOrEmpty()
         {
@@ -29,14 +27,13 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             {
                 Id = 2,
                 ToDoName = "Test command",
-                Prize = 23
+                Price = 23
             };
 
             ToDoState toDoState = new ToDoState()
             {
                 ToDoName = "Test",
                 Price = 12,
-
             };
 
             _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync(toDoState);
@@ -51,10 +48,10 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             result.Should().Be(Unit.Value);
             toDoState.Should().NotBeNull();
             toDoState.ToDoName.Should().Be(command.ToDoName);
-            toDoState.Price.Should().Be(command.Prize);
+            toDoState.Price.Should().Be(command.Price);
             _todoStateRepositoryMock.Verify(ver => ver.UpDate(toDoState), Times.Once());
-
         }
+
         [Fact()]
         public async Task Handle_ShouldDosNotUpdateToDoState_WhenToDoStateDosNotExist()
         {
@@ -63,7 +60,7 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             var command = new UpdateToDoStateCommand()
             {
                 ToDoName = "Test command",
-                Prize = 23
+                Price = 23
             };
 
             _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync((ToDoState)null);
@@ -77,8 +74,8 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
 
             result.Should().Be(Unit.Value);
             _todoStateRepositoryMock.Verify(ver => ver.UpDate(It.IsAny<ToDoState>()), Times.Never());
-
         }
+
         [Fact()]
         public async Task Handle_ShouldDosNotUpdateToDoState_WhenToDoStateToDoNameIsNull()
         {
@@ -86,12 +83,10 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
 
             var command = new UpdateToDoStateCommand()
             {
-
                 Id = 2
             };
 
             ToDoState toDoState = new ToDoState();
-
 
             _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync(toDoState);
             _todoStateRepositoryMock.Setup(s => s.UpDate(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
@@ -105,8 +100,8 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             result.Should().Be(Unit.Value);
             toDoState.ToDoName.Should().BeNull();
             _todoStateRepositoryMock.Verify(ver => ver.UpDate(It.IsAny<ToDoState>()), Times.Never());
-
         }
+
         [Fact]
         public async Task Handle_ShouldDosNotUpdateToDoState_WhenToDoStateToDoNameIsEmpty()
         {
@@ -114,7 +109,6 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
 
             var command = new UpdateToDoStateCommand()
             {
-
                 Id = 2
             };
 
@@ -122,7 +116,6 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             {
                 ToDoName = "",
             };
-
 
             _todoStateRepositoryMock.Setup(s => s.GetById(command.Id)).ReturnsAsync(toDoState);
             _todoStateRepositoryMock.Setup(s => s.UpDate(It.IsAny<ToDoState>())).Returns(Task.CompletedTask);
@@ -136,8 +129,6 @@ namespace Service.ViewModel.Service.Commands.UpdateToDoState.Tests
             result.Should().Be(Unit.Value);
             toDoState.ToDoName.Should().BeEmpty();
             _todoStateRepositoryMock.Verify(ver => ver.UpDate(It.IsAny<ToDoState>()), Times.Never());
-
         }
     }
-
 }

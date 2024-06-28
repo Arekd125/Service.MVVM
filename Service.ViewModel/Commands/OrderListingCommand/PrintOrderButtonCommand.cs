@@ -25,8 +25,7 @@ namespace Service.ViewModel.Commands.OrderListingCommand
 
         public override void Execute(object? parameter)
         {
-            _ordersListingViewModel.EditOrderIndex = _ordersListingViewModel.OrdersViewModelSelectedIndex;
-            var OrderToPrint = _ordersListingViewModel.GetOrderByIndex(_ordersListingViewModel.EditOrderIndex);
+            var OrderToPrint = _ordersListingViewModel.OrdersViewModelSelectedItem;
 
             _printOrderViewModel.PrintViewModel.Order = OrderToPrint;
             _dialogService.ShowDialog(_printOrderViewModel);

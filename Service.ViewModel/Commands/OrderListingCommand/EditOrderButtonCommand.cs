@@ -16,9 +16,7 @@ namespace Service.ViewModel.Commands.OrderListingCommand
 
         public override void Execute(object? parameter)
         {
-
-            _ordersListingViewModel.EditOrderIndex = _ordersListingViewModel.OrdersViewModelSelectedIndex;
-            var OrderToEdit = _ordersListingViewModel.GetOrderByIndex(_ordersListingViewModel.EditOrderIndex);
+            var OrderToEdit = _ordersListingViewModel.OrdersViewModelSelectedItem;
             _orderStore.OrderToEdit(OrderToEdit);
         }
     }

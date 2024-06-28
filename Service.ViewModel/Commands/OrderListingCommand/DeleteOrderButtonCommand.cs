@@ -13,13 +13,7 @@ namespace Service.ViewModel.Commands.OrderListingCommand
 
         public override void Execute(object? parameter)
         {
-            var index = _ordersListingViewModel.OrdersViewModelSelectedIndex;
-            if (index != -1)
-            {
-
-                _ordersListingViewModel.ShowMessage(index);
-                _ordersListingViewModel.OrdersViewModelSelectedIndex = -1;
-            }
+            _ordersListingViewModel.ShowMessage();
         }
     }
 }

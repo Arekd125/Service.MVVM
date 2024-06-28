@@ -2,6 +2,7 @@
 using MediatR;
 using Service.Model.Repositories;
 using Servis.Models.OrderModels;
+using System.Windows.Controls;
 
 namespace Service.ViewModel.Service.Commands.EditOrder
 {
@@ -35,6 +36,7 @@ namespace Service.ViewModel.Service.Commands.EditOrder
                 NewOrder.Contact = null;
             }
 
+            NewOrder.StartDate = DateTime.Now;
 
             await _todoRepository.Remove(NewOrder.Id);
             await _orderRepository.UpDate(NewOrder);

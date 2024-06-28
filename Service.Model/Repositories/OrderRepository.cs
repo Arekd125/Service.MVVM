@@ -96,6 +96,7 @@ namespace Service.Model.Repositories
             {
                 var orderToUpdate = await GetOrderByOrderName(orderName);
 
+                orderToUpdate.StartDate = DateTime.Now;
                 orderToUpdate.IsFinished = !orderToUpdate.IsFinished;
 
                 dbContext.Orders.Update(orderToUpdate);
