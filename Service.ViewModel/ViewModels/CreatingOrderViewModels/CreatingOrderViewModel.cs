@@ -156,7 +156,7 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 Id = OrderId,
                 OrderNo = NameOrderViewModel.OrderNo,
                 OrderName = NameOrderViewModel.OrderNameTextBlock,
-                StartDate = DateTime.Now.ToString("d"),
+                StartDate = DateTime.Now,
                 ContactName = ContactViewModel.ContactNameComboBox,
                 ContactPhoneNumber = ContactViewModel.ContactPhoneNumberComboBox,
                 Device = DeviceViewModel.DeviceNameComboBox,

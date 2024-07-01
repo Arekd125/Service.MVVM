@@ -74,7 +74,7 @@ namespace Service.ViewModel.ViewModels
             var isFinished = OrdersViewModelSelectedItem.IsFinished;
             _ordersCollection.Remove(OrdersViewModelSelectedItem);
             orderDto.IsFinished = isFinished;
-            orderDto.StartDate = DateTime.Now.ToString("d");
+            orderDto.StartDate = DateTime.Now;
             _ordersCollection.Add(orderDto);
         }
 

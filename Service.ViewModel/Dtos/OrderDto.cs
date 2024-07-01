@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public int OrderNo { get; set; } = default!;
         public string OrderName { get; set; } = default!;
-        public string? StartDate { get; set; } = default!;
+        public DateTime StartDate { get; set; } = default!;
         public string? ContactName { get; set; } = default!;
         public string ContactPhoneNumber { get; set; } = default!;
         public string Device { get; set; } = default!;

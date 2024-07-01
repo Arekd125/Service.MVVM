@@ -46,8 +46,8 @@
 
         <DataGrid.Columns>
             <DataGridTextColumn Width="auto"  Binding="{Binding Path=OrderName}"  Header="nr zlecenie" />
-            <DataGridTextColumn Width="auto" Binding="{Binding Path=StartDate}" Header="Data" />
-            <DataGridTextColumn Width="*" Binding="{Binding Path=ContactName}" Header="Imię i nazwisko" />
+            <DataGridTextColumn Width="auto" Binding="{Binding Path=StartDate, StringFormat=d}" Header="Data" />
+            <DataGridTextColumn Width="auto" Binding="{Binding Path=ContactName}" Header="Imię i nazwisko" />
             <DataGridTextColumn Width="auto" Binding="{Binding Path=ContactPhoneNumber}" Header="telefon" />
             <DataGridTextColumn Width="*" Binding="{Binding Path=Device}" Header="marka" />
             <DataGridTextColumn Width="*" Binding="{Binding Path=Model}" Header="model" />
