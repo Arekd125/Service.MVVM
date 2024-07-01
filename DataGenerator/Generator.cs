@@ -70,7 +70,8 @@ public class Generator
                             .RuleFor(o => o.ToDo, f => toDoGenerator.Generate(6))
                             .RuleFor(o => o.StartDate, f => f.Date.Past(2))
                             .RuleFor(o => o.OrderNo, f => usernumber++)
-
+                            .RuleFor(o => o.Description, f => "Coś się popsuło")
+                            .RuleFor(o => o.Accessories, f => "Kluczyki")
                             .RuleFor(o => o.OrderName, (f, o) =>
                              {
                                  string number = o.OrderNo.ToString();
