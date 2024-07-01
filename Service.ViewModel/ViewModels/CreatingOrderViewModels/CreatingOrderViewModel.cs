@@ -18,7 +18,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
         private readonly OrderStore _orderStore;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        public IShowDialog showDialog;
 
         private Visibility _saveButtonVisibility = Visibility.Visible;
 
