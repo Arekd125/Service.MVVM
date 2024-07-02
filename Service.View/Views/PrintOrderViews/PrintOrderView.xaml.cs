@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Service.View.Views.PrintOrderViews
 {

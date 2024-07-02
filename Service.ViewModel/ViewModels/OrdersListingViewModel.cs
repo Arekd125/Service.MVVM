@@ -2,19 +2,16 @@
 using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
 using MediatR;
-using Service.ViewModel.Commands.CreatingOrderCommand;
 using Service.ViewModel.Commands.OrderListingCommand;
 using Service.ViewModel.Dtos;
 using Service.ViewModel.Service;
 using Service.ViewModel.Service.Commands.DeleteOrder;
 using Service.ViewModel.Service.Commands.EditOrderStatus;
 using Service.ViewModel.Stores;
-using Service.ViewModel.ViewModels.PrintOrderViewModels;
 using Service.ViewModel.Stores.OrdersFilter;
+using Service.ViewModel.ViewModels.PrintOrderViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.ComponentModel;
-using System.Windows.Data;
 
 namespace Service.ViewModel.ViewModels
 {

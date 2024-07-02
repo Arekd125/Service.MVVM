@@ -2,7 +2,6 @@
 using MediatR;
 using Service.Model.Repositories;
 using Servis.Models.OrderModels;
-using System.Windows.Controls;
 
 namespace Service.ViewModel.Service.Commands.EditOrder
 {
