@@ -6,7 +6,7 @@ namespace Service.ViewModel.ViewModels.PrintOrderViewModels
     {
         private OrderDto _orderDto;
         public Inprint inprint { get; }
-        public string rodo { get; }
+        public string rodo { get; set; }
 
         public OrderDto Order
         {
@@ -55,11 +55,14 @@ namespace Service.ViewModel.ViewModels.PrintOrderViewModels
         public PrintViewModel(Inprint inprint)
         {
             this.inprint = inprint;
-            //  new Inprint("AD-KOMP Arkadius Dominiak","Szarych Szeregów 3", "Konin", "62-500", "534 078 017", "534 078 018", null);
+            SetRodo();
+        }
 
+        private void SetRodo()
+        {
             rodo = @$"W związku z realizacją niniejszego zlecenia, informujemy,że w celu jego wykonania niezbędne jest przetwarzanie Państwa danych osobowych.
-Administratorem danych osobowych jest {inprint.Name} z siedzibą w {inprint.City}ie {inprint.Street}.
-Ja, niżej podpisany/a, wyrażam zgodę na przetwarzanie moich danych osobowych przez {inprint.Name} z siedzibą w {inprint.City}ie w celu realizacji zlecenia.";
+Administratorem danych osobowych jest {inprint.Name} z siedzibą w {inprint.City} {inprint.Street}.
+Ja, niżej podpisany/a, wyrażam zgodę na przetwarzanie moich danych osobowych przez {inprint.Name} z siedzibą w {inprint.City} w celu realizacji zlecenia.";
         }
 
         private void ToDoSpliter()
