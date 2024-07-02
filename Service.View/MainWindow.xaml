@@ -12,9 +12,10 @@
     BorderThickness="1"
     ResizeMode="NoResize"
     Icon="/Images/main_icon.png"
+
     SizeToContent="Width"
     TitleCharacterCasing="Normal"
-    TitleForeground="Black"
+    TitleForeground="White"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
