@@ -66,8 +66,8 @@
             <!--  DEVICE  -->
             <StackPanel Grid.Column="1" HorizontalAlignment="Center">
                 <TextBlock FontWeight="Bold" Text="Urządznie:" />
-                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Device, StringFormat=Marka {0}}" />
-                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Model, StringFormat=Model {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Device, StringFormat=Marka: {0}}" />
+                <TextBlock Margin="15,0,0,0" Text="{Binding Order.Model, StringFormat=Model: {0}}" />
             </StackPanel>
             <!--  KLIENT  -->
             <StackPanel Grid.Column="2" HorizontalAlignment="Left">
