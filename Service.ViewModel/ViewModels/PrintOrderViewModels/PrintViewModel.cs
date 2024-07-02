@@ -1,6 +1,4 @@
 ﻿using Service.ViewModel.Dtos;
-using Service.ViewModel.Stores;
-using Servis.Models.OrderModels;
 
 namespace Service.ViewModel.ViewModels.PrintOrderViewModels
 {

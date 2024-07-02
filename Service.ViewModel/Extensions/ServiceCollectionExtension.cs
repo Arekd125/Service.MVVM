@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
-using Service.Model.DbContexts;
 using Service.ViewModel.Mapping;
 using Service.ViewModel.Service.Commands.CreateDevice;
 using Service.ViewModel.Stores;

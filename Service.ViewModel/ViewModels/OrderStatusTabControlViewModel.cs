@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Service.ViewModel.Stores;
+﻿using Service.ViewModel.Stores;
 using Service.ViewModel.Stores.OrdersFilter;
 
 namespace Service.ViewModel.ViewModels
