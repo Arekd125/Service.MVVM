@@ -9,23 +9,20 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
     {
         private readonly IMediator _mediator;
 
+        private string _contactNameComboBox = default!;
+        private IEnumerable<string?>? _contactNameItemSource;
+        private string? _contactNameSelectedItem;
+        private string _contactPhoneNumber = default!;
+        private IEnumerable<string>? _contactPhoneNumberItemSource;
+        private string? _contactPhoneNumberSelectedItem;
         private IEnumerable<ContactDto> AllContacts;
 
-        private void SelectContactNameSelectedItem()
+        public ContactViewModel(IMediator mediator)
         {
-            ContactNameSelectedItem = AllContacts.FirstOrDefault(p => p.PhoneNumber == ContactPhoneNumberSelectedItem)?.ContactName;
+            _mediator = mediator;
+            AllContacts = new List<ContactDto>();
+            RefreshContactsItemSorce();
         }
-
-        private void SelectContactPhoneNumberSelectedItem()
-        {
-            ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem).Select(p => p.PhoneNumber).FirstOrDefault();
-            if (ContactPhoneNumberSelectedItem != null)
-            {
-                ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
-            }
-        }
-
-        private string _contactNameComboBox = default!;
 
         public string ContactNameComboBox
         {
@@ -41,8 +38,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<string?>? _contactNameItemSource;
-
         public IEnumerable<string?>? ContactNameItemSource
         {
             get
@@ -56,8 +51,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private string? _contactNameSelectedItem;
-
         public string? ContactNameSelectedItem
         {
             get
@@ -70,8 +63,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 OnPropertyChanged(nameof(ContactNameSelectedItem));
             }
         }
-
-        private string _contactPhoneNumber = default!;
 
         public string ContactPhoneNumberComboBox
         {
@@ -88,8 +79,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        private IEnumerable<string>? _contactPhoneNumberItemSource;
-
         public IEnumerable<string>? ContactPhoneNumberItemSource
         {
             get
@@ -102,8 +91,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
                 OnPropertyChanged(nameof(ContactPhoneNumberItemSource));
             }
         }
-
-        private string? _contactPhoneNumberSelectedItem;
 
         public string? ContactPhoneNumberSelectedItem
         {
@@ -120,11 +107,11 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             }
         }
 
-        public ContactViewModel(IMediator mediator)
+        public void Clear()
         {
-            _mediator = mediator;
-            AllContacts = new List<ContactDto>();
             RefreshContactsItemSorce();
+            ContactNameComboBox = string.Empty;
+            ContactPhoneNumberComboBox = string.Empty;
         }
 
         public void RefreshContactsItemSorce()
@@ -133,25 +120,6 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             ContactNameItemSource = AllContacts.Where(p => !string.IsNullOrEmpty(p.ContactName)).Select(p => p.ContactName);
             ContactPhoneNumberItemSource = AllContacts.Select(p => p.PhoneNumber);
         }
-
-        //public string PhoneValisation(string phoneNumber)
-        //{
-        //    if (phoneNumber == null)
-        //        return "";
-        //    if (phoneNumber.Length > 11)
-        //    {
-        //        return phoneNumber[0..11];
-        //    }
-
-        //    var isNotNumber = new Regex("[^0-9 ]").IsMatch(phoneNumber);
-        //    if (isNotNumber)
-        //    {
-        //        var result = phoneNumber[0..^1];
-        //        return result;
-        //    }
-
-        //    return Regex.Replace(phoneNumber, "(\\d{3})(?=\\d)", "$1 "); ;
-        //}
 
         private string PhoneValisation(string PhoneNumber)
         {
@@ -174,11 +142,18 @@ namespace Service.ViewModel.ViewModels.CreatingOrderViewModels
             return formattedNumber;
         }
 
-        public void Clear()
+        private void SelectContactNameSelectedItem()
         {
-            RefreshContactsItemSorce();
-            ContactNameComboBox = string.Empty;
-            ContactPhoneNumberComboBox = string.Empty;
+            ContactNameSelectedItem = AllContacts.FirstOrDefault(p => p.PhoneNumber == ContactPhoneNumberSelectedItem)?.ContactName;
+        }
+
+        private void SelectContactPhoneNumberSelectedItem()
+        {
+            ContactPhoneNumberSelectedItem = AllContacts.Where(p => p.ContactName == ContactNameSelectedItem && !string.IsNullOrEmpty(ContactNameSelectedItem)).Select(p => p.PhoneNumber).FirstOrDefault();
+            if (ContactPhoneNumberSelectedItem != null)
+            {
+                ContactPhoneNumberComboBox = ContactPhoneNumberSelectedItem;
+            }
         }
     }
 }
