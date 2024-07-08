@@ -13,6 +13,14 @@ namespace Service.Model.Repositories
             _dbContextFactory = dbContextFactory;
         }
 
+        public async Task<bool> AnyOrderWithContactId(int contactId)
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                return await dbContext.Orders.AsNoTracking().AnyAsync(o => o.ContactId == contactId);
+            }
+        }
+
         public async Task Create(Order order)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
@@ -53,21 +61,34 @@ namespace Service.Model.Repositories
             }
         }
 
+        public async Task<int> GetNumberOpenedOrders()
+        {
+            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
+            {
+                return await dbContext.Orders.AsNoTracking().Where(o => o.IsFinished == false).CountAsync();
+            }
+        }
+
         public async Task<Order?> GetOrderByOrderName(string OrderName)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                var order = await dbContext.Orders.AsNoTracking().Include(o => o.Contact).FirstOrDefaultAsync(p => p.OrderName == OrderName);
+                var order = await dbContext.Orders.Include(o => o.Contact).FirstOrDefaultAsync(p => p.OrderName == OrderName);
 
                 return order;
             }
         }
 
-        public async Task<bool> AnyOrderWithContactId(int contactId)
+        public async Task<IEnumerable<Order>> GetOrdersByDate(DateTime startDate, DateTime endDate)
         {
             using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
             {
-                return await dbContext.Orders.AsNoTracking().AnyAsync(o => o.ContactId == contactId);
+                IEnumerable<Order> orders = await dbContext.Orders.AsNoTracking()
+                    .Include(o => o.Contact)
+                    .Include(t => t.ToDo)
+                    .Where(o => o.StartDate.Date <= startDate.Date && o.StartDate.Date >= endDate.Date).ToListAsync();
+
+                return orders;
             }
         }
 
@@ -101,27 +122,6 @@ namespace Service.Model.Repositories
 
                 dbContext.Orders.Update(orderToUpdate);
                 await dbContext.SaveChangesAsync();
-            }
-        }
-
-        public async Task<IEnumerable<Order>> GetOrdersByDate(DateTime startDate, DateTime endDate)
-        {
-            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
-            {
-                IEnumerable<Order> orders = await dbContext.Orders.AsNoTracking()
-                    .Include(o => o.Contact)
-                    .Include(t => t.ToDo)
-                    .Where(o => o.StartDate.Date <= startDate.Date && o.StartDate.Date >= endDate.Date).ToListAsync();
-
-                return orders;
-            }
-        }
-
-        public async Task<int> GetNumberOpenedOrders()
-        {
-            using OrdersDbContext dbContext = _dbContextFactory.CreateDbContext();
-            {
-                return await dbContext.Orders.AsNoTracking().Where(o => o.IsFinished == false).CountAsync();
             }
         }
     }
