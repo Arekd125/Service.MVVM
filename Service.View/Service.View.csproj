@@ -2,18 +2,30 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
 	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	  <StartupObject>Service.View.App</StartupObject>
+	  <ApplicationIcon>Images\icon.ico</ApplicationIcon>
+	  <UseWindowsForms>False</UseWindowsForms>
+	  <AssemblyName>Serwisant</AssemblyName>
+	  <SignAssembly>False</SignAssembly>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Images\main_icon.png" />
-  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <WarningLevel>7</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
 
   <ItemGroup>
+    <Content Include="Images\icon.ico" />
     <Content Include="Images\main_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
