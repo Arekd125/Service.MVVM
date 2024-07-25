@@ -39,6 +39,7 @@ namespace Service.ViewModel.Extensions
             services.AddSingleton<OrdersFilter>();
             services.AddScoped<InfoViewModel>();
             services.AddScoped<SettingsViewModel>();
+            services.AddSingleton<DateFilterFactrory>();
         }
 
         public static void AddConfigurations(this IServiceCollection services, IConfiguration configuration)

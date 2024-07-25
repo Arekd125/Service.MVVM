@@ -12,6 +12,7 @@ namespace Service.ViewModel.Stores.OrdersFilter
     {
         private readonly IMediator _mediator;
         private readonly OrderStore _orderStore;
+        private readonly DateFilterFactrory _dateFilterFactrory;
 
         public int SelectedFiltrBuffor { get; set; } = 0;
         private string? SerchTextBuffor { get; set; }
@@ -19,10 +20,11 @@ namespace Service.ViewModel.Stores.OrdersFilter
         public IFilter DateFilter { get; set; }
         public IFilter SeachFilter { get; set; }
 
-        public OrdersFilter(IMediator mediator, OrderStore orderStore)
+        public OrdersFilter(IMediator mediator, OrderStore orderStore, DateFilterFactrory dateFilterFactrory)
         {
             _mediator = mediator;
             _orderStore = orderStore;
+            _dateFilterFactrory = dateFilterFactrory;
             SelectDateFilter(DateFilerEnum.month);
         }
 
@@ -30,36 +32,8 @@ namespace Service.ViewModel.Stores.OrdersFilter
 
         public void SelectDateFilter(DateFilerEnum dateFilerEnum)
         {
-            switch (dateFilerEnum)
-            {
-                case DateFilerEnum.today:
-                    DateFilter = new TodayOrdersFiilter(_mediator);
-                    SelectFiltr(SelectedFiltrBuffor);
-                    break;
-
-                case DateFilerEnum.yesterday:
-                    DateFilter = new YesterdayOrdersFilter(_mediator);
-                    SelectFiltr(SelectedFiltrBuffor);
-                    break;
-
-                case DateFilerEnum.week:
-                    DateFilter = new LastWeekOrdersFilter(_mediator);
-                    SelectFiltr(SelectedFiltrBuffor);
-                    break;
-
-                case DateFilerEnum.month:
-                    DateFilter = new LastMonth(_mediator);
-                    SelectFiltr(SelectedFiltrBuffor);
-                    break;
-
-                case DateFilerEnum.from_the_beginning:
-                    DateFilter = new FromTheBeginingOrdersFilter(_mediator);
-                    SelectFiltr(SelectedFiltrBuffor);
-                    break;
-
-                default:
-                    break;
-            }
+            DateFilter = _dateFilterFactrory.CreateFilter(dateFilerEnum);
+            SelectFiltr(SelectedFiltrBuffor);
         }
 
         public void SelectFiltr(int filtr)
