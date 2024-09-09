@@ -18,7 +18,7 @@
         <conv:EmptyToDoVisibiltyConverter x:Key="emptyToDoVisibiltyConverter" />
         <CollectionViewSource Source="{Binding OrdersViewModelCollection}" x:Key="GridItems">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="OrderName" Direction="Descending" />
+                <scm:SortDescription PropertyName="Id" Direction="Descending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
