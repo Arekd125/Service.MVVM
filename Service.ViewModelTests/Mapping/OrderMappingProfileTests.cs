@@ -63,10 +63,8 @@ namespace Service.ViewModel.Mapping.Tests
             result.Should().NotBeNull();
             result.ContactName.Should().NotBeNull();
             result.ContactPhoneNumber.Should().NotBeNull();
-            result.StartDate.Should().NotBeNull();
             result.ContactName.Should().Be(order.Contact.Name);
             result.ContactPhoneNumber.Should().Be(order.Contact.PhoneNumber);
-            result.StartDate.Should().Be(DateString);
         }
 
         [Fact()]

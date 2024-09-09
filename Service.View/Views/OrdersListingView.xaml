@@ -82,7 +82,7 @@
             </DataGridTemplateColumn>
 
             <!--  Buttons  -->
-            <DataGridTemplateColumn Width="auto" Header="Edycja">
+            <DataGridTemplateColumn Width="105" Header="Edycja">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
